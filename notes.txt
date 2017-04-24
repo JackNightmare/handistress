@@ -42,3 +42,11 @@ _____________
     / Il permet de gérer les dépendances
     / Si on load une dépendance angular commme ça / <script src=".../angular-select.js"
     / Le resultat est le suivant angular.module('MonApp', [angular-select]);
+
+
+Les Routes
+_____________
+
+  -> une url = une page
+  -> Provider = permet de definir les routes de l'application
+  -> when('/nom_de_la_route', { les options que nous vous, separer par une virgule})
