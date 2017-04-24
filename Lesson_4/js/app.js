@@ -2,8 +2,9 @@ var app =  angular.module('MonApp', ['ngRoute']);
 
 app.config(function($routeProvider){
   $routeProvider
-    .when('/', {templateUrl : 'views/home.html'})
-    .when('/map', {templateUrl : 'views/map.html', controller : 'testScope'})
+    .when('/', {templateUrl : 'views/home.html'}) // Juste une view html ici
+    .when('/map', {templateUrl : 'views/map.html', controller : 'testScope'}) // On inclut un controller ici
+    .when('/test/:id', {templateUrl : 'views/test.html'}) // On y inclut un id qui dependra de l'url
     .otherwise({redirectTo : '/'});
 });
 

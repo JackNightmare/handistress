@@ -43,7 +43,6 @@ _____________
     / Si on load une dépendance angular commme ça / <script src=".../angular-select.js"
     / Le resultat est le suivant angular.module('MonApp', [angular-select]);
 
-
 Les Routes
 _____________
 
