@@ -27,3 +27,18 @@ ____________________
 
 Scope -> permet de faire la liaison entre le controller et la view
 Controller -> n'importe quel nom, par convention fini par controller, et en entré, on met $scope
+
+
+Les Modules
+_____________
+
+  -> Les modules permettent d'organiser notre application via angular js
+  -> Mettre les différentes librairies ou script dans un module que l'on peut decider de charger selon la page
+  -> app =  angular.module('MonApp', []);
+    / Permet de créer le module de l'application
+  -> Quand le module est créer, il faut bien le definir dans le ng-app
+    / ng-app="nomDuModule"
+  -> Lorsqu'on crée un module, nous avons un []
+    / Il permet de gérer les dépendances
+    / Si on load une dépendance angular commme ça / <script src=".../angular-select.js"
+    / Le resultat est le suivant angular.module('MonApp', [angular-select]);
