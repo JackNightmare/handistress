@@ -1,0 +1,22 @@
+Directive
+_________________
+
+ ng-app, ng-model
+ 	-> directive qui injective directement des elements dans le html
+ 	-> ajouter des comportement sans ajouter de javascript
+
+si directive qui commencent par "ng" -> native à angular
+ng-app -> permet de dire que nous rentrons dans une application angular
+ng-model -> on va dire que la value dans ce ng sera affichable dans une endroit du html
+ng-init -> permet d'initier les valeurs à une div
+ng-repeat -> correspond à un foreach classique php
+
+
+Les filtres
+_________________
+  -> Permet de modifier des variables, des les filtrer et de les organiser
+  -> s'applique de la facon suivante {{ variable | filtre }}
+  -> possibilité d'ajout plusieurs filtre à la suite
+  -> Pour l'order By, si "-" devant la variable, les données seront rangé dans l'ordre decroissant, et + pour ordre croissant
+  -> pour preciser le type de flitre, on ecrit un objet ou l'on definit sur qu'elle element le filtre s'applique
+      / filter : {content : query} = ici content correspondra a la valeur ng-model query

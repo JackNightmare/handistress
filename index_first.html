@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> First Angular </title>
+	</head>
+
+	<body ng-app>
+		<div>
+			<label> Name : </label>
+			<input type="text" ng-model="yourName" placeholder="Entrer votre nom"/>
+			<br>
+			<h1> Salut {{ yourName }}</h1>
+		</div>
+
+		<div>
+			<input type="text" ng-model="query" placeholder="chercher un nom"/>
+		</div>
+
+		<div>
+			<select ng-model="order">
+				<<option value="username"> Organiser par Nom</option>
+				<<option value="content"> Organiser par contenu</option>
+			</select>
+		</div>
+
+		<div ng-init="users=['Lea', 'Gaby', 'Estelle']">
+			<ul>
+				<!-- On a ici un filtrer qui s'applique sur le ng-repeat pour ne chercher que les personnes contenant la lettre e -->
+				<li ng-repeat="user in users |filter:'e'">
+					{{ user }}
+				</li>
+			</ul>
+			<!-- Permet de n'afficher que les utilisateurs contenant la lettre "L" -->
+			{{users | filter:'L'}}
+			<br>
+			<br>
+			<!-- Possible de mettre en un liste de recherche correpsondant à ce que nous avons saisie dans le input avec comme ngmodel query -->
+			<ul>
+				<li ng-repeat="user in users | filter:query">
+					{{ user }}
+				</li>
+			</ul>
+		</div>
+
+		<!-- Maitenant on va voir sous forme d'objet -->
+		<div ng-init="users2=[{'username':'Lea', 'message': 'La seule et unique'}, {'username':'Gaby', 'message': 'une fille bien etrange mais qu\'on aime'}, {'username':'Estelle', 'message': 'la sauveuse'}, {'username':'Adrien', 'message': 'Le connard que nous apprecions'}, {'username':'Totor', 'message': 'Le veritable batman !'}]">
+			<ul>
+				<li ng-repeat="user in users2 |filter:query | orderBy: +order">
+					{{user}}
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+	</body>
+</html>
