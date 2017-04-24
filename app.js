@@ -3,16 +3,16 @@ var app = angular.module('HandiStress', ['ui.bootstrap', 'ngRoute', 'leaflet-dir
 app.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
 		$routeProvider
-			.when('/', {
-				templateUrl: 'views/home.html',
-				controller: 'testController'
-			})
 			.when('/home', {
-				templateUrl: 'views/no.html',
+				templateUrl: 'views/home.html',
 				controller: 'HomeController'
 			})
+			.when('/test', {
+				templateUrl: 'views/test.html',
+				controller: 'TestController'
+			})
 			.otherwise({
-				redirectTo: '/'
+				redirectTo: '/home'
 			});
 
 		$locationProvider.html5Mode(true);
