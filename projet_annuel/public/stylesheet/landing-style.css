@@ -1,0 +1,149 @@
+/* Général */
+.landing-banner{
+    height: 90%;
+    text-align: center;
+    position: relative;
+	background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    background-image: url(../img/landing.jpg);
+}
+
+/*******************************
+*** Information pour accéder ***
+*******************************/
+.landing-access{
+	color: #ffffff;
+	padding-top: 6%;
+}
+
+.landing-access .access-line:first-child{
+	border-top: 1px solid #ffffff;
+}
+
+.landing-access .access-line:nth-child(3){
+	border-bottom: 1px solid #ffffff;
+}
+
+.landing-access .access-line .glyphicon-triangle-bottom{
+	margin-top: -5px;
+}
+
+.landing-access .access-line .glyphicon-triangle-top{
+	margin-bottom: -3px;
+}
+
+.landing-access .access-title{
+	font-size: 35px;
+	margin-top: 2%;
+}
+
+.landing-access .access-text{
+	font-size: 17px;
+	margin-top: 3%;
+}
+
+.landing-access .access-text p{
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+/*ca sera a voir */
+.landing-access .access-logo{
+    width: 70px;
+    height: 70px;
+	margin: auto;
+	color: #ffffff;
+	margin-top: 10%;
+    padding-top: 5%;
+    border-radius: 50%;
+	background-color: rgba(8, 149, 158, 0.4);
+}
+
+.landing-access .access-button{
+	margin-top: 10%;
+	border: none;
+	font-size: 25px;
+	border-radius: 5px;
+	background-color: #08959e;
+	box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.45);
+	color: #ffffff;
+}
+
+
+/**********************
+*** superieur à 992 ***
+**********************/
+
+@media (min-width: 992px) {
+	.landing-access .access-line{
+		width: 100%;
+	}
+
+	.landing-access .access-button{
+		width: 80%;
+	}
+
+	.landing-next{
+    	left: 50%;
+    	width: 3em;
+    	height: 3em;
+    	bottom: -3%;
+    	color: #000000;
+    	overflow: hidden;
+    	border-radius: 50%;
+    	position: absolute;
+    	border: 1px solid #052a57;
+    	background-color: #ffffff;
+	}
+
+	/* glyphicon */
+	.landing-next .next-section-top{
+		-webkit-transform: translate(-0%, -150%);
+		-ms-transform: translate(-0%, -150%);
+		transform: translate(-0%, -150%);
+		-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+		transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	}
+
+	.landing-next .next-section{
+		-webkit-transform: translate(0%, -65%);
+		-ms-transform: translate(0%, -65%);
+		transform: translate(0%, -65%);
+		-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+		transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	}
+
+	.landing-next:hover .next-section-top{
+		transform: translate(-0%, 45%);
+	}
+	
+	.landing-next:hover .next-section{
+		transform: translate(-0%, 110%);
+	}
+}
+
+
+/**********************
+*** inférieur à 992 ***
+**********************/
+@media (max-width: 992px) {
+	.landing-access .access-button{
+		width: 40%;
+	}
+
+	.landing-access .access-line{
+		width: 60%;
+		margin: auto;
+	}
+
+	.landing-access .access-text{
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.landing-next{
+		display: none;
+	}
+}
