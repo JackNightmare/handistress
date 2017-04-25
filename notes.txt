@@ -49,3 +49,18 @@ _____________
   -> une url = une page
   -> Provider = permet de definir les routes de l'application
   -> when('/nom_de_la_route', { les options que nous vous, separer par une virgule})
+
+
+
+Les services
+________________
+
+  -> Permet de recuperer données de fifférentes source pour l'envoyer dans le controller puis views
+  -> Factory = app.factory('nomFactory', function(){ return objet });
+    /Dans l'objet, on peut y creer des fonctions nous permettant de recuperer  ce que nous voulons de l'objet
+    / getComments : function(){...}
+    / blbla : function(params){...}
+  -> Possibilité de voir les parametres de la routes  $routeParams
+  -> Service = retourne directement la fonction
+    / Tout se gere avec un this
+    / Pas besoin de retourner l'objet ici 
