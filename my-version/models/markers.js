@@ -1,6 +1,6 @@
 app.factory('Marker', function($http, $q, $filter){
 	var deferred = $q.defer();
-	
+
 	var factory = {
 		markers : false,
 		getMarkers : function(){
@@ -12,7 +12,6 @@ app.factory('Marker', function($http, $q, $filter){
 				.error(function(data, status){
 					deferred.reject('un erreur mon con !');
 				});
-
 			return deferred.promise;
 		}
 	}
