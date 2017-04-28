@@ -1,28 +1,19 @@
-
-
 <div style="float:left;">
 	Ceci est la page Map
 	<br><br>
 	<form ng-submit="traceMap()">
-		<input type="text" placeholder="point de départ" ng-model='traceMap.start'>
-		<br>
-		<input type="text" placeholder="point d'arrivé" ng-model='traceMap.end'>
-		<br>
+		<input type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start'>
+		<datalist id="startPoint">
+			<option ng-repeat="marker in markers | filter : traceMap.start " value="{{marker.nameMarker}}"/>
+		</datalist>
+		<br><br>
+		<input type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end'>
+		<datalist id="endPoint">
+			<option ng-repeat="marker in markers | filter : traceMap.end " value="{{marker.nameMarker}}"/>
+		</datalist>
+		<br><br>
 		<input type="submit" value="envoyer">
 	</form>
-
-	<div>
-		Resultat du itinéraire :
-		<br>
-
-	</div>
-</div>
-
-
-<div>
-	Filtre Marker
-	<br><br>
-	<input type='text' ng-model='testFiltre'>
 </div>
 
 <div style="float:right; margin-right:20%; height:1000px; background-color:rgba(0, 0, 0, 0.4); overflow:hidden; overflow-y:scroll; overflow-x:hidden;">
