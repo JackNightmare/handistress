@@ -8,7 +8,6 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		});
 
 	$scope.traceMap = function(){
-		test = filterFilter($scope.markers, { 'id': '1'}, true ); // On indique, on veut que la valeur soit strictement egal à l'id
 		console.log($scope.traceMap.start);
 		console.log($scope.traceMap.end);
 	}
