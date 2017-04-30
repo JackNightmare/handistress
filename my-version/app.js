@@ -1,6 +1,6 @@
 var app = angular.module('HandiStress', ['ngRoute']);
 
-app.config(function($routeProvider){
+app.config(function($routeProvider, $locationProvider){
 	$routeProvider
 		.when('/', {
 			templateUrl : 'views/landing.html'
@@ -16,4 +16,6 @@ app.config(function($routeProvider){
 			templateUrl : 'views/sign-up.html'
 		})
 		.otherwise({redirectTo: '/'});
+
+		$locationProvider.html5Mode(true);
 });
