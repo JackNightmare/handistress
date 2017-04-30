@@ -11,4 +11,16 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		console.log($scope.traceMap.start);
 		console.log($scope.traceMap.end);
 	}
+
+	$scope.seeAll = function(){
+		console.log('test All');
+	}
+
+	$scope.seePlace = function(){
+		console.log('test Place');
+	}
+
+	$scope.seeAccess = function(){
+		console.log('test Access');
+	}
 });
