@@ -24,10 +24,10 @@
 </div>
 
 
-<div>
-	 <div ng-click='seeAll()'>All</div>
-	 <div ng-click='seePlace()'>Place</div>
-	 <div ng-click='seeAccess()'>Access</div>
+<div style="width:3%; float:left;">
+	 <div ng-click='seeAll()' ng-class="{'active-filter' : (filter == 1) }">All</div>
+	 <div ng-click='seePlace()' ng-class="{'active-filter' : (filter == 2) }">Place</div>
+	 <div ng-click='seeAccess()' ng-class="{'active-filter' : (filter == 3) }">Access</div>
 </div>
 
 <div style="float:right; margin-right:20%; height:1000px; background-color:rgba(0, 0, 0, 0.4); overflow:hidden; overflow-y:scroll; overflow-x:hidden;">

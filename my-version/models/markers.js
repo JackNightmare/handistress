@@ -3,6 +3,7 @@ app.factory('Marker', function($http, $q, $filter){
 
 	var factory = {
 		markers : false,
+
 		getMarkers : function(){
 			$http.get('json/markers.json')
 				.success(function(data, status){
@@ -13,6 +14,10 @@ app.factory('Marker', function($http, $q, $filter){
 					deferred.reject('un erreur mon con !');
 				});
 			return deferred.promise;
+		},
+
+		updateMarkers : function(){
+			return "coucou";
 		}
 	}
 
