@@ -9,7 +9,7 @@
 		<br><br>
 		<input type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end'>
 		<datalist id="endPoint">
-			<option ng-repeat="marker in markers | filter : {infoSearch : traceMap.end}  " value="{{marker.nameMarker}}"/>
+			<option ng-repeat="marker in markers | filter : {infoSearch : traceMap.end}" value="{{marker.infoSearch}}"/>
 		</datalist>
 		<br><br>
 		<input type="submit" value="envoyer">
