@@ -1,13 +1,30 @@
 app.controller('mapController', function($scope , Marker, filterFilter){
 
-	$scope.filter = 1;
+	angular.extend($scope, {
+		center : {
+			lat: 48.847319,
+			lng: 2.386581,
+			zoom: 20
+		},
+		defaults : {
+			scrollWheelZomm: false,
+			zoomControlPosition: 'topright',
+		}
+	});
 
+	// On recupere les marqueurs
 	$scope.markers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.markers = markers;
 		}, function(msg){ // Ici action en cas d'erreur
 			console.log(msg);
 		});
+
+
+	/**********************************
+	*** Fonction filtre de la carte ***
+	**********************************/
+	$scope.filter = 1;
 
 	$scope.traceMap = function(){
 		test = filterFilter($scope.markers, { 'nameMarker': 'Concosrde'}, true );
