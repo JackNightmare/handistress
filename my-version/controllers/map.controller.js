@@ -9,7 +9,18 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		defaults : {
 			scrollWheelZomm: false,
 			zoomControlPosition: 'topright',
-		}
+		},
+		events: {
+			map: {
+                enable: ['click', 'drag'], // Les evenements que nous souhaitons ecouté
+                logic: 'emit'
+            }
+        }
+	});
+
+	$scope.$on('leafletDirectiveMap.drag', function(){
+		console.log($scope.center.lat); // On get la lattitude
+		console.log($scope.center.lng); // On get la longitude
 	});
 
 	// On recupere les marqueurs
