@@ -1,5 +1,4 @@
 app.controller('mapController', function($scope , Marker, filterFilter){
-	var allMarkers = [];
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -28,39 +27,24 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		console.log($scope.center.lng); // On get la longitude
 	});
 
-
-	$scope.addMarkers = function(){
-		// angular.extend($scope, {
-		// 	markers: {
-		// 		"m1": {
-		// 			lat: 51.505,
-		// 			lng: -0.09,
-		// 			message: "I'm a static marker",
-		// 		},
-		// 		"m2": {
-		// 			lat: 51,
-		// 			lng: 0,
-		// 			message: "Hey, drag me if you want",
-		// 		}
-		// 	}
-		// })
-	}
-
 	$scope.removeMarkers = function(){
 		$scope.markers = {};
 	}
 
-	// On recupere les marqueurs
+	/********************************
+	*** Mise en place des markers ***
+	********************************/
+	var allMarkers = [];
+
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
-			test = [];
 
 			for(key in markers){
 				value = {lat : parseFloat(markers[key].latitude), lng: parseFloat(markers[key].longitude) , message: markers[key].nameMarker}
-				test.push(value);
+				allMarkers.push(value);
 			}
-			$scope.markers = test;
+			$scope.markers = allMarkers;
 
 		}, function(msg){ // Ici action en cas d'erreur
 			console.log(msg);
