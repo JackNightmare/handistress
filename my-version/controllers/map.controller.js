@@ -29,21 +29,21 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	});
 
 
-	$scope.addMarkers = function(test){
-		angular.extend($scope, {
-			markers: {
-				"m1": {
-					lat: 51.505,
-					lng: -0.09,
-					message: "I'm a static marker",
-				},
-				"m2": {
-					lat: 51,
-					lng: 0,
-					message: "Hey, drag me if you want",
-				}
-			}
-		})
+	$scope.addMarkers = function(){
+		// angular.extend($scope, {
+		// 	markers: {
+		// 		"m1": {
+		// 			lat: 51.505,
+		// 			lng: -0.09,
+		// 			message: "I'm a static marker",
+		// 		},
+		// 		"m2": {
+		// 			lat: 51,
+		// 			lng: 0,
+		// 			message: "Hey, drag me if you want",
+		// 		}
+		// 	}
+		// })
 	}
 
 	$scope.removeMarkers = function(){
@@ -54,18 +54,14 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
-			lolilol = [{
-					lat: 51.505,
-					lng: -0.09,
-					message: "I'm a static marker",
-				},
-				{
-					lat: 51,
-					lng: 0,
-					focus: true,
-					message: "Hey, drag me if you want",
-				}];
-			$scope.addMarkers(lolilol);
+			test = [];
+
+			for(key in markers){
+				value = {lat : parseFloat(markers[key].latitude), lng: parseFloat(markers[key].longitude) , message: markers[key].nameMarker}
+				test.push(value);
+			}
+			$scope.markers = test;
+
 		}, function(msg){ // Ici action en cas d'erreur
 			console.log(msg);
 		});
