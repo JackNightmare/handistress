@@ -28,18 +28,18 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		console.log($scope.center.lng); // On get la longitude
 	});
 
-	$scope.addMarkers = function(){
+
+	$scope.addMarkers = function(test){
 		angular.extend($scope, {
 			markers: {
-				m1: {
+				"m1": {
 					lat: 51.505,
 					lng: -0.09,
 					message: "I'm a static marker",
 				},
-				m2: {
+				"m2": {
 					lat: 51,
 					lng: 0,
-					focus: true,
 					message: "Hey, drag me if you want",
 				}
 			}
@@ -54,7 +54,18 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
-			$scope.addMarkers();
+			lolilol = [{
+					lat: 51.505,
+					lng: -0.09,
+					message: "I'm a static marker",
+				},
+				{
+					lat: 51,
+					lng: 0,
+					focus: true,
+					message: "Hey, drag me if you want",
+				}];
+			$scope.addMarkers(lolilol);
 		}, function(msg){ // Ici action en cas d'erreur
 			console.log(msg);
 		});
