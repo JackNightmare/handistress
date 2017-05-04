@@ -5,11 +5,20 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	****************************************/
 	angular.extend($scope, {
 		center : {
-			lat: 48.847319,
-			lng: 2.386581,
+			lat: 48.853403,
+			lng: 2.348784,
 			zoom: 12
 		},
 		markers: {},
+		tiles : {
+			name: 'Mapbox theme',
+			url: 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamFjazE5IiwiYSI6IlFWWUxfTFkifQ.qKRrC7c1lO1V6ydol1nLsQ',
+			type: 'xyz',
+			options: {
+				apikey: 'pk.eyJ1IjoiamFjazE5IiwiYSI6IlFWWUxfTFkifQ.qKRrC7c1lO1V6ydol1nLsQ',
+				mapid: ''
+			}
+		},
 		defaults : {
 			scrollWheelZomm: false,
 			zoomControlPosition: 'topright',
@@ -39,9 +48,17 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
-
 			for(key in markers){
-				value = {lat : parseFloat(markers[key].latitude), lng: parseFloat(markers[key].longitude) , message: markers[key].nameMarker}
+				value = {
+					lat: parseFloat(markers[key].latitude), 
+					lng: parseFloat(markers[key].longitude) , 
+					message: markers[key].nameMarker,
+					icon: {
+						type: 'awesomeMarker',
+						icon : 'usd',
+						markerColor: 'blue'
+					}
+				}
 				allMarkers.push(value);
 			}
 			$scope.markers = allMarkers;
@@ -57,7 +74,7 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	$scope.filter = 1;
 
 	$scope.traceMap = function(){
-		test = filterFilter($scope.getMarkers, { 'nameMarker': 'Concosrde'}, true );
+		test = filterFilter($scope.getMarkers, { 'nameMarker': 'Concorde'}, true );
 		if(test.length != 0 ){
 			console.log('je suis dedans');
 			$scope.getMarkers = test;
@@ -70,10 +87,11 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	$scope.seeAll = function(){
 		if($scope.filter == 1){
 			$scope.filter = 0;
-			// Action à mener pour vider la carte
+			$scope.markers = {};
 		}
 		else{
 			$scope.filter = 1;
+			$scope.markers = allMarkers;
 		}
 	}
 

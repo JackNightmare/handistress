@@ -14,6 +14,12 @@
 			<br><br>
 			<input type="submit" value="envoyer">
 		</form>
+
+		<div>
+			la latitude {{ center.lat }}</span> <br>
+			la longitude {{ center.lng }}</span>
+		</div>
+
 	</div>
 	
 	<div style="margin-top:10%;">
@@ -24,12 +30,7 @@
 </div>
 
 <!-- <leaflet center="center" height="100%" width="100%" style="position:fixed; top:0; bottom:0; left:0; width:100%; height:100%;"></leaflet> -->
-<leaflet center="center" defaults="defaults" event-broadcast="events" markers="markers" height="500px" width="100%"></leaflet>
-
-<div>
-	la latitude {{ center.lat }}</span> <br>
-	la longitude {{ center.lng }}</span>
-</div>
+<leaflet center="center" tiles="tiles" defaults="defaults" event-broadcast="events" markers="markers" height="500px" width="100%"></leaflet>
 
 <!-- <div style="margin-left:20%; float:left;">
 	<input type="text" ng-model="yourName" placeholder="Entrer votre nom"/><br>
