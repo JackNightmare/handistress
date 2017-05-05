@@ -31,15 +31,6 @@ app.controller('mapController', function($scope , Marker, filterFilter){
         }
 	});
 
-	$scope.$on('leafletDirectiveMap.drag', function(){
-		console.log($scope.center.lat); // On get la latitude
-		console.log($scope.center.lng); // On get la longitude
-	});
-
-	$scope.removeMarkers = function(){
-		$scope.markers = {};
-	}
-
 	/********************************
 	*** Mise en place des markers ***
 	********************************/
@@ -55,8 +46,9 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 					message: markers[key].nameMarker,
 					icon: {
 						type: 'awesomeMarker',
-						icon : 'usd',
-						markerColor: 'blue'
+						icon : 'apple',
+						iconColor : 'white',
+						markerColor: 'black'
 					}
 				}
 				allMarkers.push(value);
@@ -68,20 +60,59 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		});
 
 
+	/**********************
+	*** Action drag map ***
+	**********************/	
+	$scope.$on('leafletDirectiveMap.drag', function(){
+		console.log($scope.center.lat); // On get la latitude
+		console.log($scope.center.lng); // On get la longitude
+	});
+
 	/**********************************
 	*** Fonction filtre de la carte ***
 	**********************************/
 	$scope.filter = 1;
 
 	$scope.traceMap = function(){
-		test = filterFilter($scope.getMarkers, { 'nameMarker': 'Concorde'}, true );
-		if(test.length != 0 ){
-			console.log('je suis dedans');
-			$scope.getMarkers = test;
-		}
+		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
+		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
+		
+		$scope.markers = {}; // On vide le markers sur la carte
+		infoTrace = []; // On vide la variable pour tracer l'itinéraire
 
-		console.log($scope.traceMap.start);
-		console.log($scope.traceMap.end);
+		if(startPoint.length != 0 && endPoint.length != 0){
+
+			valueStart = {
+							lat : parseFloat(startPoint[0]['latitude']),
+							lng : parseFloat(startPoint[0]['longitude']),
+							message : startPoint[0]['nameMarker']
+						};
+
+			valueEnd = {
+							lat : parseFloat(endPoint[0]['latitude']),
+							lng : parseFloat(endPoint[0]['longitude']),
+							message : endPoint[0]['nameMarker']
+						};
+		
+			infoTrace.push(valueStart);
+			infoTrace.push(valueEnd);
+
+			$scope.markers = infoTrace;
+		}
+	}
+
+	$scope.searchMap = function(){
+		$scope.markers = {};
+
+		theSearch = filterFilter($scope.getMarkers, { 'nameMarker': $scope.searchMap.value}, true );
+
+		$scope.markers = [
+			{
+				lat : parseFloat(theSearch[0]['latitude']),
+				lng : parseFloat(theSearch[0]['longitude']),
+				message : theSearch[0]['nameMarker']
+			}
+		];
 	}
 
 	$scope.seeAll = function(){
@@ -113,5 +144,9 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		else{
 			$scope.filter = 3;
 		}
+	}
+
+	$scope.removeMarkers = function(){
+		$scope.markers = {};
 	}
 });

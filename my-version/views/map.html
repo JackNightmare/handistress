@@ -2,19 +2,32 @@
 	Ceci est la page Map
 	<div>
 		<form ng-submit="traceMap()">
-			<input type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start'>
+			<input type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start' required>
 			<datalist id="startPoint">
-				<option ng-repeat="marker in getMarkers | filter : traceMap.start " value="{{marker.nameMarker}}"/>
+				<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.start} " value="{{marker.nameMarker}}"/>
 			</datalist>
 			<br><br>
-			<input type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end'>
+			<input type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end' required>
 			<datalist id="endPoint">
-				<option ng-repeat="marker in getMarkers | filter : {infoSearch : traceMap.end}  " value="{{marker.nameMarker}}"/>
+				<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.end}  " value="{{marker.nameMarker}}"/>
 			</datalist>
 			<br><br>
 			<input type="submit" value="envoyer">
 		</form>
 
+		<br><br>
+		
+		<form ng-submit="searchMap()">
+			<input type="text" placeholder="recherche" list="listMarkers" ng-model='searchMap.value' required>
+			<datalist id="listMarkers">
+				<option ng-repeat="marker in getMarkers | filter : {nameMarker : searchMap.value}  " value="{{marker.nameMarker}}"/>
+			</datalist>
+			<br><br>
+			<input type="submit" value="rechercher">
+		</form>
+
+		<br><br>
+		
 		<div>
 			la latitude {{ center.lat }}</span> <br>
 			la longitude {{ center.lng }}</span>
