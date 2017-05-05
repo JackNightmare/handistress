@@ -1,6 +1,6 @@
 <div style="float:left;">
-	<button ng-click="typeForm = 'test1' ">Form trace</button>
-	<button ng-click="typeForm = 'test2' ">Form </button>
+	<button ng-click="switchForm()">Form trace</button>
+	<button ng-click="switchForm()">Form </button>
 	<br><br>
 	<div ng-switch on="typeForm">
 		<form ng-switch-when='test1' ng-submit="traceMap()">

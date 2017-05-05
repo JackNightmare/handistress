@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope , Marker, filterFilter){
+app.controller('mapController', function($scope , Marker, filterFilter, leafletData ){
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -109,14 +109,18 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 
 		theSearch = filterFilter($scope.getMarkers, { 'infoSearch': $scope.searchMap.value});
 
-		console.log(theSearch);
-
 		if(theSearch.length > 0){
 			for (keySearch in theSearch){
 				infoResult = {
 					lat : parseFloat(theSearch[keySearch]["latitude"]),
 					lng : parseFloat(theSearch[keySearch]["longitude"]),
-					message : theSearch[keySearch]["nameMarker"]
+					message : theSearch[keySearch]["nameMarker"],
+					icon: {
+						type: 'awesomeMarker',
+						icon : 'apple',
+						iconColor : 'white',
+						markerColor: 'black'
+					}
 				};
 
 				resultSearch.push(infoResult);
@@ -154,6 +158,15 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		}
 		else{
 			$scope.filter = 3;
+		}
+	}
+
+	$scope.switchForm = function(){
+		if($scope.typeForm == 'test1'){ 
+			$scope.typeForm = 'test2';
+		}
+		else{
+			$scope.typeForm = 'test1';
 		}
 	}
 

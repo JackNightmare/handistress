@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" >
+<html lang="fr" ng-app="HandiStress">
 	<head>
 		<meta charset="utf-8"/>
 		<base href="/annuel/my-version/">
@@ -21,7 +21,7 @@
 
 	</head>
 
-	<body ng-app="HandiStress">
+	<body>
 
 		<div ng-view></div>
 
@@ -34,7 +34,11 @@
 		<!-- Map Leaflet -->
 		<script src="assets/js/leaflet.js"></script>
 		<script src="assets/js/angular-leaflet-directive.min.js"></script>
+		
+		<!-- Pour tracer des itinéraires -->
+		<script src="assets/js/leaflet-routing-machine.js"></script>
 
+		<!-- Pour les markers customiser -->
 		<script src="assets/js/leaflet.awesome-markers.js"></script>
 
 		<!-- Notre script js -->
