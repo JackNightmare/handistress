@@ -72,6 +72,8 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 	*** Fonction filtre de la carte ***
 	**********************************/
 	$scope.filter = 1;
+	$scope.typeForm = 'test1';
+
 
 	$scope.traceMap = function(){
 		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
@@ -80,7 +82,7 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 		$scope.markers = {}; // On vide le markers sur la carte
 		infoTrace = []; // On vide la variable pour tracer l'itinéraire
 
-		if(startPoint.length != 0 && endPoint.length != 0){
+		if(startPoint.length > 0 && endPoint.length > 0){
 
 			valueStart = {
 							lat : parseFloat(startPoint[0]['latitude']),
@@ -103,16 +105,25 @@ app.controller('mapController', function($scope , Marker, filterFilter){
 
 	$scope.searchMap = function(){
 		$scope.markers = {};
+		resultSearch = [];
 
-		theSearch = filterFilter($scope.getMarkers, { 'nameMarker': $scope.searchMap.value}, true );
+		theSearch = filterFilter($scope.getMarkers, { 'infoSearch': $scope.searchMap.value});
 
-		$scope.markers = [
-			{
-				lat : parseFloat(theSearch[0]['latitude']),
-				lng : parseFloat(theSearch[0]['longitude']),
-				message : theSearch[0]['nameMarker']
+		console.log(theSearch);
+
+		if(theSearch.length > 0){
+			for (keySearch in theSearch){
+				infoResult = {
+					lat : parseFloat(theSearch[keySearch]["latitude"]),
+					lng : parseFloat(theSearch[keySearch]["longitude"]),
+					message : theSearch[keySearch]["nameMarker"]
+				};
+
+				resultSearch.push(infoResult);
 			}
-		];
+		}
+
+		$scope.markers = resultSearch;
 	}
 
 	$scope.seeAll = function(){

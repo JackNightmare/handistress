@@ -1,7 +1,9 @@
 <div style="float:left;">
-	Ceci est la page Map
-	<div>
-		<form ng-submit="traceMap()">
+	<button ng-click="typeForm = 'test1' ">Form trace</button>
+	<button ng-click="typeForm = 'test2' ">Form </button>
+	<br><br>
+	<div ng-switch on="typeForm">
+		<form ng-switch-when='test1' ng-submit="traceMap()">
 			<input type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start' required>
 			<datalist id="startPoint">
 				<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.start} " value="{{marker.nameMarker}}"/>
@@ -14,26 +16,21 @@
 			<br><br>
 			<input type="submit" value="envoyer">
 		</form>
-
-		<br><br>
 		
-		<form ng-submit="searchMap()">
+		<form ng-switch-when='test2' ng-submit="searchMap()">
 			<input type="text" placeholder="recherche" list="listMarkers" ng-model='searchMap.value' required>
-			<datalist id="listMarkers">
-				<option ng-repeat="marker in getMarkers | filter : {nameMarker : searchMap.value}  " value="{{marker.nameMarker}}"/>
-			</datalist>
 			<br><br>
 			<input type="submit" value="rechercher">
 		</form>
 
-		<br><br>
-		
-		<div>
-			la latitude {{ center.lat }}</span> <br>
-			la longitude {{ center.lng }}</span>
-		</div>
-
 	</div>
+
+	<div>
+		la latitude {{ center.lat }}</span> <br>
+		la longitude {{ center.lng }}</span>
+	</div>
+
+
 	
 	<div style="margin-top:10%;">
 		<div ng-click='seeAll()' ng-class="{'active-filter' : (filter == 1) }">All</div>
