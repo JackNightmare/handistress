@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8"/>
+		<title> Second Angular </title>
+	</head>
+
+	<body ng-app>
+
+		<div ng-controller="testScope">
+			<input name="search" type="text" ng-model="query" placeholder="chercher commentaire"/>
+			<div ng-repeat="comment in comments | filter: {username : query}">
+				<p>
+					<strong>{{comment.username}}</strong>
+					<br>
+					{{ comment.message }}
+				</p>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/testScope.js"></script>
+	</body>
+</html>
