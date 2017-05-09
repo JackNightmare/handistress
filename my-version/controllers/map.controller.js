@@ -84,30 +84,48 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
+			/**************************
+			*** Version MapquestApi ***
+			**************************/
 			leafletData.getMap().then(function(map){
-				
-				map.fitBounds([
-					[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
-					[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
-				]);
+				trace = MQ.routing.directions();
 
-				L.Routing.control({
-					waypoints: [
-						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
-						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
+				trace.route({
+					locations: [
+						{ latLng: { lat: 48.54, lng: 2.54 } },
+						{ latLng: { lat: 48.60, lng: 2.60 } }
 					],
-					routeWhileDragging: true,
-					reverseWaypoints: true,
-					showAlternatives: true,
-					altLineOptions: {
-						styles: [
-							{color: 'black', opacity: 0.15, weight: 9},
-							{color: 'white', opacity: 0.8, weight: 6},
-							{color: 'blue', opacity: 0.5, weight: 2}
-						]
-					}
-				}).addTo(map);
+					options: { avoids: ['toll roads'] }
+				});
+
+				map.addLayer(MQ.routing.routeLayer({
+					directions: trace,
+					fitBounds: true
+				}));
 			});
+
+			/************************
+			*** Version with OSRM ***
+			************************/
+			// leafletData.getMap().then(function(map){
+
+			// 	map.fitBounds([
+			// 		[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
+			// 		[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
+			// 	]);
+			//
+			// 	L.Routing.control({
+			// 		waypoints: [
+			// 			L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
+			// 			L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
+			// 		],
+			// 	}).addTo(map);
+			//
+			// 	L.Routing.Itinerary({
+			// 		pointMarkerStyle : {radius: 5,color: '#03f',fillColor: 'white',opacity: 1,fillOpacity: 0.7},
+			// 		collapsible : true,
+			// 	});
+			// });
 
 			// valueStart = {
 			// 				lat : parseFloat(startPoint[0]['latitude']),
