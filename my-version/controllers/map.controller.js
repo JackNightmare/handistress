@@ -85,6 +85,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		if(startPoint.length > 0 && endPoint.length > 0){
 
 			leafletData.getMap().then(function(map){
+				
 				map.fitBounds([
 					[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
 					[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
@@ -94,7 +95,17 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
-					]
+					],
+					routeWhileDragging: true,
+					reverseWaypoints: true,
+					showAlternatives: true,
+					altLineOptions: {
+						styles: [
+							{color: 'black', opacity: 0.15, weight: 9},
+							{color: 'white', opacity: 0.8, weight: 6},
+							{color: 'blue', opacity: 0.5, weight: 2}
+						]
+					}
 				}).addTo(map);
 			});
 
