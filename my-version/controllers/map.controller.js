@@ -41,8 +41,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			$scope.getMarkers = markers;
 			for(key in markers){
 				value = {
-					lat: parseFloat(markers[key].latitude), 
-					lng: parseFloat(markers[key].longitude) , 
+					lat: parseFloat(markers[key].latitude),
+					lng: parseFloat(markers[key].longitude) ,
 					message: markers[key].nameMarker,
 					icon: {
 						type: 'awesomeMarker',
@@ -62,7 +62,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	/**********************
 	*** Action drag map ***
-	**********************/	
+	**********************/
 	$scope.$on('leafletDirectiveMap.drag', function(){
 		console.log($scope.center.lat); // On get la latitude
 		console.log($scope.center.lng); // On get la longitude
@@ -78,28 +78,42 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.traceMap = function(){
 		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
 		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
-		
+
 		$scope.markers = {}; // On vide le markers sur la carte
-		infoTrace = []; // On vide la variable pour tracer l'itinéraire
+		// infoTrace = []; // On vide la variable pour tracer l'itinéraire
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
-			valueStart = {
-							lat : parseFloat(startPoint[0]['latitude']),
-							lng : parseFloat(startPoint[0]['longitude']),
-							message : startPoint[0]['nameMarker']
-						};
+			leafletData.getMap().then(function(map){
+				map.fitBounds([
+					[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
+					[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
+				]);
 
-			valueEnd = {
-							lat : parseFloat(endPoint[0]['latitude']),
-							lng : parseFloat(endPoint[0]['longitude']),
-							message : endPoint[0]['nameMarker']
-						};
-		
-			infoTrace.push(valueStart);
-			infoTrace.push(valueEnd);
+				L.Routing.control({
+					waypoints: [
+						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
+						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
+					]
+				}).addTo(map);
+			});
 
-			$scope.markers = infoTrace;
+			// valueStart = {
+			// 				lat : parseFloat(startPoint[0]['latitude']),
+			// 				lng : parseFloat(startPoint[0]['longitude']),
+			// 				message : startPoint[0]['nameMarker']
+			// 			};
+			//
+			// valueEnd = {
+			// 				lat : parseFloat(endPoint[0]['latitude']),
+			// 				lng : parseFloat(endPoint[0]['longitude']),
+			// 				message : endPoint[0]['nameMarker']
+			// 			};
+			//
+			// infoTrace.push(valueStart);
+			// infoTrace.push(valueEnd);
+
+			// $scope.markers = infoTrace;
 		}
 	}
 
@@ -162,7 +176,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	}
 
 	$scope.switchForm = function(){
-		if($scope.typeForm == 'test1'){ 
+		if($scope.typeForm == 'test1'){
 			$scope.typeForm = 'test2';
 		}
 		else{
@@ -173,4 +187,17 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.removeMarkers = function(){
 		$scope.markers = {};
 	}
+
+	// $scope.addRouting = function(){
+		// leafletData.getMap().then(function(map){
+		// 	map.fitBounds([ [48.54, 2.54],[48.60, 2.60] ]);
+		//
+		// 	L.Routing.control({
+		// 		waypoints: [
+		// 			L.latLng(48.54, 2.54),
+		// 			L.latLng(48.60, 2.60)
+		// 		]
+		// 	}).addTo(map);
+		// });
+	// };
 });
