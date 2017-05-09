@@ -92,10 +92,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 				trace.route({
 					locations: [
-						{ latLng: { lat: 48.54, lng: 2.54 } },
-						{ latLng: { lat: 48.60, lng: 2.60 } }
+						{ latLng: { lat: parseFloat(startPoint[0]['latitude']), lng: parseFloat(startPoint[0]['longitude']) } },
+						{ latLng: { lat: parseFloat(endPoint[0]['latitude']), lng: parseFloat(endPoint[0]['longitude']) } }
 					],
-					options: { avoids: ['toll roads'] }
 				});
 
 				map.addLayer(MQ.routing.routeLayer({
