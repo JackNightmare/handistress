@@ -1,5 +1,13 @@
 app.controller('mapController', function($scope , Marker, filterFilter, leafletData ){
 
+	/*****************************************************
+	*** Variable globale pour fonctionnement de la map ***
+	*****************************************************/
+	var allMarkers = []; // Variable pour markers
+	var traceRoute; // Variable pour tracer itinéraire
+	$scope.filter = 1; // Variable pour le filtre
+	$scope.typeForm = 'test1'; // Variable pour change form
+
 	/****************************************
 	*** Mise en place de la carte leaflet ***
 	****************************************/
@@ -34,8 +42,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/********************************
 	*** Mise en place des markers ***
 	********************************/
-	var allMarkers = [];
-
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
@@ -59,7 +65,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			console.log(msg);
 		});
 
-
 	/**********************
 	*** Action drag map ***
 	**********************/
@@ -71,16 +76,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/**********************************
 	*** Fonction filtre de la carte ***
 	**********************************/
-	$scope.filter = 1;
-	$scope.typeForm = 'test1';
-
-
 	$scope.traceMap = function(){
 		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
 		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
 
 		$scope.markers = {}; // On vide le markers sur la carte
-		// infoTrace = []; // On vide la variable pour tracer l'itinéraire
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
@@ -90,17 +90,31 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			leafletData.getMap().then(function(map){
 				trace = MQ.routing.directions();
 
+				// permet de supprimer un itinéraire si existe déja
+				if(traceRoute){
+					map.removeLayer(traceRoute);
+				}
+
+				// Permet d'informer les points de départs trajet
 				trace.route({
 					locations: [
 						{ latLng: { lat: parseFloat(startPoint[0]['latitude']), lng: parseFloat(startPoint[0]['longitude']) } },
 						{ latLng: { lat: parseFloat(endPoint[0]['latitude']), lng: parseFloat(endPoint[0]['longitude']) } }
 					],
+					options: {
+						routeType: 'pedestrian',
+						// locale: 'fr_FR'
+					}
 				});
 
-				map.addLayer(MQ.routing.routeLayer({
+				// On ajoute les valeurs
+				traceRoute = MQ.routing.routeLayer({
 					directions: trace,
 					fitBounds: true
-				}));
+				});
+
+				// On ajoute à la carte les informations de l'itinéraire
+				map.addLayer(traceRoute);
 			});
 
 			/************************
@@ -216,16 +230,4 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		$scope.markers = {};
 	}
 
-	// $scope.addRouting = function(){
-		// leafletData.getMap().then(function(map){
-		// 	map.fitBounds([ [48.54, 2.54],[48.60, 2.60] ]);
-		//
-		// 	L.Routing.control({
-		// 		waypoints: [
-		// 			L.latLng(48.54, 2.54),
-		// 			L.latLng(48.60, 2.60)
-		// 		]
-		// 	}).addTo(map);
-		// });
-	// };
 });
