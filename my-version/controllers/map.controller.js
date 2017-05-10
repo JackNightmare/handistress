@@ -69,8 +69,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	*** Action drag map ***
 	**********************/
 	$scope.$on('leafletDirectiveMap.drag', function(){
-		console.log($scope.center.lat); // On get la latitude
-		console.log($scope.center.lng); // On get la longitude
+		// console.log($scope.center.lat); // On get la latitude
+		// console.log($scope.center.lng); // On get la longitude
 	});
 
 	/**********************************
@@ -81,6 +81,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
 
 		$scope.markers = {}; // On vide le markers sur la carte
+		infoTrace = [];
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
@@ -103,14 +104,15 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					],
 					options: {
 						routeType: 'pedestrian',
-						// locale: 'fr_FR'
+						locale: 'fr_FR'
 					}
 				});
 
 				// On ajoute les valeurs
 				traceRoute = MQ.routing.routeLayer({
 					directions: trace,
-					fitBounds: true
+					fitBounds: true,
+					zoom: 2,
 				});
 
 				// On ajoute à la carte les informations de l'itinéraire
@@ -121,7 +123,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			*** Version with OSRM ***
 			************************/
 			// leafletData.getMap().then(function(map){
-
+			//
 			// 	map.fitBounds([
 			// 		[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
 			// 		[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
@@ -132,11 +134,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			// 			L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
 			// 			L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
 			// 		],
+			// 		overview: 'pedestrian',
 			// 	}).addTo(map);
 			//
 			// 	L.Routing.Itinerary({
 			// 		pointMarkerStyle : {radius: 5,color: '#03f',fillColor: 'white',opacity: 1,fillOpacity: 0.7},
 			// 		collapsible : true,
+			// 		zoom : 10
 			// 	});
 			// });
 
@@ -154,7 +158,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			//
 			// infoTrace.push(valueStart);
 			// infoTrace.push(valueEnd);
-
+			//
 			// $scope.markers = infoTrace;
 		}
 	}
