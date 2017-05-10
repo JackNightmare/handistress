@@ -33,10 +33,10 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		},
 		events: {
 			map: {
-                enable: ['click', 'drag'], // Les evenements que nous souhaitons ecouté
-                logic: 'emit'
-            }
-        }
+				enable: ['click', 'drag'], // Les evenements que nous souhaitons ecouté
+				logic: 'emit'
+			}
+		}
 	});
 
 	/********************************
@@ -52,9 +52,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					message: markers[key].nameMarker,
 					icon: {
 						type: 'awesomeMarker',
-						icon : 'apple',
+						icon : ' icon-subway',
 						iconColor : 'white',
-						markerColor: 'black'
+						markerColor: 'cadetblue'
 					}
 				}
 				allMarkers.push(value);
@@ -81,6 +81,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
 
 		$scope.markers = {}; // On vide le markers sur la carte
+		$scope.filter = 0;
 		infoTrace = [];
 
 		if(startPoint.length > 0 && endPoint.length > 0){
@@ -89,7 +90,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			*** Version MapquestApi ***
 			**************************/
 			leafletData.getMap().then(function(map){
-				trace = MQ.routing.directions();
+				trace = MQ.routing.directions()
+					.on('success', function(data) {
+						console.log(data.info.messages);
+					})
+					.on('error', function(data){
+						console.log(data);
+					});
 
 				// permet de supprimer un itinéraire si existe déja
 				if(traceRoute){
@@ -167,6 +174,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		$scope.markers = {};
 		resultSearch = [];
 
+		// permet de supprimer un itinéraire si existe déja
+		if(traceRoute){
+			map.removeLayer(traceRoute);
+		}
+
 		theSearch = filterFilter($scope.getMarkers, { 'infoSearch': $scope.searchMap.value});
 
 		if(theSearch.length > 0){
@@ -191,6 +203,12 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	}
 
 	$scope.seeAll = function(){
+
+		// permet de supprimer un itinéraire si existe déja
+		if(traceRoute){
+			map.removeLayer(traceRoute);
+		}
+
 		if($scope.filter == 1){
 			$scope.filter = 0;
 			$scope.markers = {};
