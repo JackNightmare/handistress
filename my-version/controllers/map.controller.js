@@ -136,13 +136,20 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				// 	[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
 				// 	[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
 				// ]);
+				testOption = {
+					profile: 'mapbox/walking'
+				};
+
+				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', testOption);
+				console.log(mapboxRouter);
 
 				L.Routing.control({
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
 					],
-					show: true,
+					router : mapboxRouter,
+					show: false,
 					language : 'fr',
 				})
 				.addTo(map);
