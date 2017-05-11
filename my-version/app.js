@@ -10,10 +10,12 @@ app.config(function($routeProvider, $locationProvider){
 			controller : 'mapController'
 		})
 		.when('/add-marker', {
-			templateUrl : 'views/add-marker.html'
+			templateUrl : 'views/add-marker.html',
+			controller : 'addmarkerController'
 		})
 		.when('/sign-up', {
-			templateUrl : 'views/sign-up.html'
+			templateUrl : 'views/sign-up.html',
+			controller  : 'signupController'
 		})
 		.otherwise({redirectTo: '/'});
 
