@@ -1,19 +1,23 @@
-var app = angular.module('HandiStress', ['ui.bootstrap', 'ngRoute', 'leaflet-directive']);
+var app = angular.module('HandiStress', ['ngRoute', 'leaflet-directive']);
 
-app.config(['$routeProvider', '$locationProvider',
-	function($routeProvider, $locationProvider) {
-		$routeProvider
-			.when('/home', {
-				templateUrl: 'views/home.html',
-				controller: 'HomeController'
-			})
-			.when('/test', {
-				templateUrl: 'views/test.html',
-				controller: 'TestController'
-			})
-			.otherwise({
-				redirectTo: '/home'
-			});
+app.config(function($routeProvider, $locationProvider){
+	$routeProvider
+		.when('/', {
+			templateUrl : 'views/landing.html'
+		})
+		.when('/map', {
+			templateUrl : 'views/map.html',
+			controller : 'mapController'
+		})
+		.when('/add-marker', {
+			templateUrl : 'views/add-marker.html',
+			controller : 'addmarkerController'
+		})
+		.when('/sign-up', {
+			templateUrl : 'views/sign-up.html',
+			controller  : 'signupController'
+		})
+		.otherwise({redirectTo: '/'});
 
 		$locationProvider.html5Mode(true);
-}]);
+});

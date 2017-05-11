@@ -1,0 +1,64 @@
+Ceci est la page d'inscription
+<form ng-submit="signUp()">
+	<fieldset>
+		 <legend>Step 1</legend>
+		<input ng-model="register.firstname" type="text" placeholder="Prenom">
+		<br>
+		<input ng-model="register.lastname" type="text" placeholder="Nom">
+		<br>
+		<input ng-model="register.email" type="email" placeholder="Email">
+		<br>
+		<input ng-model="register.pwd" type="password" placeholder="Mot de passe">
+		<br>
+		<input ng-model="register.pwd2" type="password" placeholder="Confirmer mot de passe">
+		<br>
+		<input ng-model="register.birthDate" type="text" placeholder="jj/mm/yyyy">
+		<br>
+		<input ng-model="register.handicap" type= "radio" name="handicap" value="oui"> Oui
+		<input ng-model="register.handicap" type= "radio" name="handicap" value="non"> Non
+		<br>
+	</fieldset>
+	<fieldset>
+		<legend>Step 2</legend>
+
+		<label for="signup-stairs">Escaliers</label>
+		<input ng-model="register.accessStairs" type="checkbox" id="signup-stairs"><br>
+
+		<label for="signup-escalators">Escalators</label>
+		<input ng-model="register.accessEscalator" type="checkbox" id="signup-escalators"><br>
+
+		<!-- <label for="signup-flatEscalators">Escalators Plat</label>
+		<input ng-model="register.access" type="checkbox" id="signup-flatEscalators"><br> -->
+
+		<!-- <label for="signup-ramp">Rampe</label>
+		<input ng-model="register.access" type="checkbox" id="signup-ramp"><br> -->
+
+		<label for="signup-elevator">Ascenseur</label>
+		<input ng-model="register.accessElevator" type="checkbox" id="signup-elevator"><br>
+
+		<label for="signup-flatPavement">Trottoir Plat</label>
+		<input ng-model="register.accessPavement" type="checkbox" id="signup-flatPavement"><br>
+
+		<!-- <label for="signup-hightPavement">Trottoir Haut</label>
+		<input ng-model="register.access" type="checkbox" id="signup-hightPavement" value="7"> -->
+	</fieldset>
+
+	<fieldset>
+		<legend>Step 3</legend>
+		<label for="crutch">Béquille</label>
+		<input ng-model="equipments.crutch" type="checkbox" id="crutch"><br>
+
+		<label for="manualWheelchair">Fauteuil Roulant Manuel</label>
+		<input ng-model="equipments.manualWheelchair" type="checkbox" id="manualWheelchair"><br>
+
+		<label for="electricWheelchair">Fauteuil Roulant Électrique</label>
+		<input ng-model="equipments.electricWheelchair" type="checkbox" id="electricWheelchair"><br>
+
+		<label for="cane">Canne</label>
+		<input ng-model="equipments.cane" type="checkbox" id="cane"><br>
+
+		<label for="walker">Déambulateur</label>
+		<input ng-model="equipments.walker" type="checkbox" id="walker"><br>
+	</fieldset>
+	<input type="submit" value="Envoyer">
+</form>

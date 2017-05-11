@@ -1,30 +1,67 @@
 <!DOCTYPE html>
-<html ng-app="HandiStress">
+<html lang="fr" ng-app="HandiStress">
 	<head>
-		<base href="/annuel/">
-		<meta charset="utf-8" />
-		<title>HandiStress</title>
-		
-		<script src="assets/js/angular.min.js"></script>
-		<script src="assets/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-		<script src="assets/js/leaflet.min.js"></script>
-		<script src="assets/js/angular-leaflet-directive.min.js"></script>
-		<script src="assets/js/leaflet-geoip.js"></script>
-		
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/leaflet.css" />
-		
-		<script src="app.js"></script>
-		
-		<script src="controllers/home.controller.js"></script>
-		<script src="controllers/test.controller.js"></script>
-		
-		<script src="controllers/base/header.controller.js"></script>
+		<meta charset="utf-8"/>
+		<base href="/annuel/my-version/">
+
+		<title> Second Angular </title>
+
+
+
+		<!-- style markers -->
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/leaflet.awesome-markers.css" rel="stylesheet" type="text/css">
+
+		<!-- style de Leaflet -->
+		<link href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" rel="stylesheet" type="text/css">
+
+		<!-- style leafltet Routing -->
+		<link href="assets/css/leaflet-routing-machine.css" rel="stylesheet" type="text/css">
+		<link href='https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.css' rel='stylesheet' type='text/css' />
+
+		<!-- style personnel -->
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+		<link href="assets/css/map-style.css" rel="stylesheet" type="text/css">
+
 	</head>
+
 	<body>
+
 		<div ng-view></div>
+
+		<!-- Angular JS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
+
+		<!-- Permet de gérer les routes -->
+		<script src="https://code.angularjs.org/1.2.32/angular-route.min.js"></script>
+
+		<!-- Map Leaflet -->
+		<script src="assets/js/leaflet.js"></script>
+		<script src="assets/js/angular-leaflet-directive.min.js"></script>
+
+		<!-- Pour tracer des itinéraires ORSM -->
+		<script src="https://api.mapbox.com/mapbox.js/v3.1.0/mapbox.js"></script>
+		<script src="https://api.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.4.0/mapbox.directions.js"></script>
+		<script src="assets/js/leaflet-routing-machine.js"></script>
+
+		<!-- Via mapquestapi -->
+		<!-- <script src="https://www.mapquestapi.com/sdk/leaflet/v2.s/mq-map.js?key=0GTrMKRrjhWBjBIAnfSPAPu5atgtGgbv"></script> -->
+		<!-- <script src="https://www.mapquestapi.com/sdk/leaflet/v2.s/mq-routing.js?key=0GTrMKRrjhWBjBIAnfSPAPu5atgtGgbv"></script> -->
+
+
+		<!-- Pour les markers customiser -->
+		<script src="assets/js/leaflet.awesome-markers.js"></script>
+
+		<!-- Notre script js -->
+		<script src="app.js"></script>
+
+		<!-- Les models -->
+		<script src="models/markers.js"></script>
+		<!-- Les controllers -->
+		<script src="controllers/map.controller.js"></script>
+		<script src="controllers/signup.controller.js"></script>
+		<script src="controllers/addmarker.controller.js"></script>
+
 	</body>
 </html>
