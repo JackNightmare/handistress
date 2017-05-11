@@ -1,19 +1,53 @@
 Ceci est la page d'inscription
 <form>
-	<input type="text" placeholder="Prenom">
-	<br>
-	<input type="text" placeholder="Nom">
-	<br>
-	<input type="email" placeholder="Email">
-	<br>
-	<input type="password" placeholder="Mot de passe">
-	<br>
-	<input type="password" placeholder="Confirmer mot de passe">
-	<br>
-	<input type="text" placeholder="jj/mm/yyyy">
-	<br>
-	<input type= "radio" name="handicap" value="oui"> Oui
-	<input type= "radio" name="handicap" value="non"> Non
-	<br>
+	<fieldset>
+		 <legend>Step 1</legend>
+		<input type="text" placeholder="Prenom">
+		<br>
+		<input type="text" placeholder="Nom">
+		<br>
+		<input type="email" placeholder="Email">
+		<br>
+		<input type="password" placeholder="Mot de passe">
+		<br>
+		<input type="password" placeholder="Confirmer mot de passe">
+		<br>
+		<input type="text" placeholder="jj/mm/yyyy">
+		<br>
+		<input type= "radio" name="handicap" value="oui"> Oui
+		<input type= "radio" name="handicap" value="non"> Non
+		<br>
+	</fieldset>
+	<fieldset>
+		<legend>Step 2</legend>
+		<label for="stairs">Escaliers</label>
+		<input type="checkbox" id="stairs" value="1"><br>
+		<label for="escalators">Escalators</label>
+		<input type="checkbox" id="escalators" value="2"><br>
+		<label for="flatEscalators">Escalators Plat</label>
+		<input type="checkbox" id="flatEscalators" value="3"><br>
+		<label for="ramp">Rampe</label>
+		<input type="checkbox" id="ramp" value="4"><br>
+		<label for="elevator">Ascenseur</label>
+		<input type="checkbox" id="elevator" value="5"><br>
+		<label for="flatPavement">Trottoir Plat</label>
+		<input type="checkbox" id="flatPavement" value="6"><br>
+		<label for="hightPavement">Trottoir Haut</label>
+		<input type="checkbox" id="hightPavement" value="7">
+	</fieldset>
+
+	<fieldset>
+		<legend>Step 3</legend>
+		<label for="crutch">Béquille</label>
+		<input type="checkbox" id="crutch" value="1"><br>
+		<label for="manualWheelchair">Fauteuil Roulant Manuel</label>
+		<input type="checkbox" id="manualWheelchair" value="2"><br>
+		<label for="electricWheelchair">Fauteuil Roulant Électrique</label>
+		<input type="checkbox" id="electricWheelchair" value="3"><br>
+		<label for="cane">Canne</label>
+		<input type="checkbox" id="cane" value="4"><br>
+		<label for="walker">Déambulateur</label>
+		<input type="checkbox" id="walker" value="5"><br>
+	</fieldset>
 	<input type="submit" value="Envoyer">
 </form>
