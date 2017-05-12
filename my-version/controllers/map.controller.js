@@ -177,9 +177,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					message : theSearch[keySearch]["nameMarker"],
 					icon: {
 						type: 'awesomeMarker',
-						icon : 'apple',
+						icon : ' icon-subway',
 						iconColor : 'white',
-						markerColor: 'black'
+						markerColor: 'cadetblue'
 					}
 				};
 
