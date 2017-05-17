@@ -40,24 +40,37 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-local_parking:before {
+  content: "\e54f";
+}
+.icon-restaurant:before {
+  content: "\e904";
+}
 .icon-school:before {
   content: "\e900";
 }
-.icon-subway:before {
+.icon-plane:before {
+  content: "\f072";
+}
+.icon-bed:before {
   content: "\e901";
 }
-.icon-home:before {
+.icon-subway:before {
   content: "\e902";
 }
-.icon-loisir:before {
+.icon-newspaper:before {
+  content: "\e905";
+}
+.icon-dice:before {
   content: "\e915";
 }
-.icon-administration:before {
-  content: "\e922";
+.icon-cart:before {
+  content: "\e93a";
 }
-.icon-restaurant:before {
-  content: "\e9a3";
+.icon-airplane:before {
+  content: "\e9af";
 }
+
 
 body{
 	font-family: 'FuturaStd-Medium';
