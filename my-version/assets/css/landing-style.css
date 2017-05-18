@@ -60,13 +60,14 @@
 
 .landing-header .landing-access .landing-access-button:hover{ background-color: rgba(8, 149, 158, 1); }
 
-.landing-header .landing-access .landing-next-section{
-	position: absolute;
-	width: 100%;
+.landing-header .landing-next-section{
 	bottom: 5%;
+	width: 100%;
+	position: absolute;
+	text-align: center;
 }
 
-.landing-header .landing-access .landing-next-section a{
+.landing-header .landing-next-section a{
 	width: 90px;
 	height: 90px;
 	margin: auto;
@@ -81,10 +82,10 @@
 }
 
 
-.landing-header .landing-access .landing-next-section a .glyphicon{	font-size: 45px; }
+.landing-header .landing-next-section a .glyphicon{	font-size: 45px; }
 
 
-.landing-header .landing-access .landing-next-section .next-section-top{
+.landing-header .landing-next-section .next-section-top{
 	-webkit-transform: translate(-0%, -150%);
 	-ms-transform: translate(-0%, -150%);
 	transform: translate(-0%, -150%);
@@ -92,7 +93,7 @@
 	transition: all .6s cubic-bezier(.12, .79, .38, .99);
 }
 
-.landing-header .landing-access .landing-next-section .next-section{
+.landing-header .landing-next-section .next-section{
 	-webkit-transform: translate(0%, -65%);
 	-ms-transform: translate(0%, -65%);
 	transform: translate(0%, -65%);
@@ -101,27 +102,70 @@
 }
 
 
-.landing-header .landing-access .landing-next-section a:hover{
+.landing-header .landing-next-section a:hover{
 	background-color: rgba(34, 90, 137, 1);
 	border: 2px solid rgba(255, 255, 255, 1); 
 }
-.landing-header .landing-access .landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
-.landing-header .landing-access .landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
+.landing-header .landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
+.landing-header .landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
 
 /*****************************
 *** Section 1 Landing Page *** 
 *****************************/
 
-.landing-statistics{
+.landing-section1{
 	height: 60vh;
+	color: #ffffff;
+	text-align: center;
 	background-color: #225A89;
 }
+
+.landing-section1 .landing-section1-entitle{
+	font-size: 35px;
+	padding-top: 2%;
+}
+
+.landing-section1 .landing-section1-entitle span{
+	font-family: arial;
+}
+
+.landing-section1 .landing-section1-entitle .section1-entitle-line {
+	width: 40%;
+	height: 1px;
+	margin: auto;
+	margin-top: 3%;
+	display: block;
+	background-color: #ffffff;
+}
+
+.landing-section1 .landing-section1-statistics{ margin-top: 3%; }
+
+.landing-section1 .landing-section1-statistics p{
+	width: 50%;
+	margin: auto;
+	font-style: italic;
+	font-size: 18px;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph{
+	width: 220px;
+	height: 220px;
+	margin: auto;
+	margin-top: 5%;
+	padding-top: 80px;
+	font-size: 25px;
+	border-radius: 50%;
+	border: 5px solid #ffffff;
+	background-color: rgba(255, 255, 255, 0.4);
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph span{ font-size: 14px; display: block; }
 
 /*****************************
 *** Section 2 Landing Page *** 
 *****************************/
 
-.landing-trace{
+.landing-section2{
 	height: 60vh;
 	background-color: #ACC6D7;
 }
@@ -130,7 +174,7 @@
 /*****************************
 *** Section 3 Landing Page *** 
 *****************************/
-.landing-marker{
+.landing-section3{
 	height: 60vh;
 	background-color: #ffffff;
 }
