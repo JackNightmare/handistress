@@ -83,3 +83,44 @@ body{
 li{
   list-style: none;
 }
+
+/**************************************
+*** Bouton de connexion/inscription ***
+**************************************/
+.connect-button{
+  padding-top: 1%;
+}
+
+.connect-button .btn-connect{
+  font-size: 17px;
+  background-color: transparent;
+  border-radius: 0px;
+  width: 200px;
+  height: 40px;
+}
+
+.connect-button .btn-signUp{
+  background-color: #5896a7;
+  border: 2px solid #96d2e3;
+  color: #ffffff;
+  float: left;
+}
+
+.connect-button .btn-signIn{
+  border: 2px solid #447887;
+  color: #000000;
+  background-color: rgba(255, 255, 255, 0.5);
+  float: right;
+}
+
+
+/********************************
+*** Balek c'est pour les tests***
+********************************/
+.active-filter{
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.fuck{
+  background-color: red;
+}

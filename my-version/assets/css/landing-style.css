@@ -1,149 +1,141 @@
-/* Général */
-.landing-banner{
-    height: 90%;
-    text-align: center;
-    position: relative;
+/*********************************
+*** Style général Landing Page *** 
+*********************************/
+
+/**********************
+*** Landing Header  ***
+**********************/
+.landing-header{
+	height: 90vh;
 	background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-    background-image: url(../img/landing.jpg);
+	background-attachment: fixed;
+	background-position: center center;
+	background-image: url(../img/landing.jpg);
 }
 
-/*******************************
-*** Information pour accéder ***
-*******************************/
-.landing-access{
-	color: #ffffff;
+.landing-header .landing-access{
+	color:#ffffff;
 	padding-top: 6%;
+	text-align: center;
 }
 
-.landing-access .access-line:first-child{
-	border-top: 1px solid #ffffff;
+.landing-header .landing-access .landing-access-line{ width: 100%; }
+.landing-header .landing-access .landing-access-line:first-child{ border-top: 2px solid #ffffff }
+.landing-header .landing-access .landing-access-line:nth-child(3){ border-bottom: 2px solid #ffffff }
+
+.landing-header .landing-access .landing-access-line .glyphicon{ 
+	display: block;
+	font-size: 20px;
+}
+.landing-header .landing-access .landing-access-line .glyphicon:first-child{ margin-top: -6px; }
+.landing-header .landing-access .landing-access-line .glyphicon:last-child{ margin-bottom: -4px; }
+
+.landing-header .landing-access .landing-access-info{ 
+	font-size: 18px;
+	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
-.landing-access .access-line:nth-child(3){
-	border-bottom: 1px solid #ffffff;
+.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 35px;}
+.landing-header .landing-access .landing-access-info p { margin-top: 5%; }
+
+.landing-header .landing-access .landing-access-logo {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: rgba(8, 149, 158, 0.4);;
+	margin: auto;
+	margin-top: 10%;
+	padding-top: 6%
 }
 
-.landing-access .access-line .glyphicon-triangle-bottom{
-	margin-top: -5px;
+.landing-header .landing-access .landing-access-button{
+	background-color: rgba(33, 87, 131, 0.6);
+	color:#ffffff;
+	width: 75%;
+	margin-top: 10%;
+	font-size: 30px;
+	transition-duration: 0.5s;
 }
 
-.landing-access .access-line .glyphicon-triangle-top{
-	margin-bottom: -3px;
+.landing-header .landing-access .landing-access-button:hover{ background-color: rgba(8, 149, 158, 1); }
+
+.landing-header .landing-access .landing-next-section{
+	position: absolute;
+	width: 100%;
+	bottom: 5%;
 }
 
-.landing-access .access-title{
-	font-size: 35px;
-	margin-top: 2%;
-}
-
-.landing-access .access-text{
-	font-size: 17px;
-	margin-top: 3%;
-}
-
-.landing-access .access-text p{
-	margin-top: 2%;
-	margin-bottom: 2%;
-}
-
-/*ca sera a voir */
-.landing-access .access-logo{
-    width: 70px;
-    height: 70px;
+.landing-header .landing-access .landing-next-section a{
+	width: 90px;
+	height: 90px;
 	margin: auto;
 	color: #ffffff;
-	margin-top: 10%;
-    padding-top: 5%;
-    border-radius: 50%;
-	background-color: rgba(8, 149, 158, 0.4);
-}
-
-.landing-access .access-button{
-	margin-top: 10%;
-	border: none;
-	font-size: 25px;
-	border-radius: 5px;
-	background-color: #08959e;
-	box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.45);
-	color: #ffffff;
+	display: block;
+	overflow: hidden;
+	border-radius: 50%;
+	background-color: rgba(34, 90, 137, 0.3);
+	border: 2px solid rgba(255, 255, 255, 0.6);
+	-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	transition: all .6s cubic-bezier(.12, .79, .38, .99);
 }
 
 
-/**********************
-*** superieur à 992 ***
-**********************/
+.landing-header .landing-access .landing-next-section a .glyphicon{	font-size: 45px; }
 
-@media (min-width: 992px) {
-	.landing-access .access-line{
-		width: 100%;
-	}
 
-	.landing-access .access-button{
-		width: 80%;
-	}
+.landing-header .landing-access .landing-next-section .next-section-top{
+	-webkit-transform: translate(-0%, -150%);
+	-ms-transform: translate(-0%, -150%);
+	transform: translate(-0%, -150%);
+	-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	transition: all .6s cubic-bezier(.12, .79, .38, .99);
+}
 
-	.landing-next{
-    	left: 50%;
-    	width: 3em;
-    	height: 3em;
-    	bottom: -3%;
-    	color: #000000;
-    	overflow: hidden;
-    	border-radius: 50%;
-    	position: absolute;
-    	border: 1px solid #052a57;
-    	background-color: #ffffff;
-	}
-
-	/* glyphicon */
-	.landing-next .next-section-top{
-		-webkit-transform: translate(-0%, -150%);
-		-ms-transform: translate(-0%, -150%);
-		transform: translate(-0%, -150%);
-		-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
-		transition: all .6s cubic-bezier(.12, .79, .38, .99);
-	}
-
-	.landing-next .next-section{
-		-webkit-transform: translate(0%, -65%);
-		-ms-transform: translate(0%, -65%);
-		transform: translate(0%, -65%);
-		-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
-		transition: all .6s cubic-bezier(.12, .79, .38, .99);
-	}
-
-	.landing-next:hover .next-section-top{
-		transform: translate(-0%, 45%);
-	}
-
-	.landing-next:hover .next-section{
-		transform: translate(-0%, 110%);
-	}
+.landing-header .landing-access .landing-next-section .next-section{
+	-webkit-transform: translate(0%, -65%);
+	-ms-transform: translate(0%, -65%);
+	transform: translate(0%, -65%);
+	-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	transition: all .6s cubic-bezier(.12, .79, .38, .99);
 }
 
 
-/**********************
-*** inférieur à 992 ***
-**********************/
-@media (max-width: 992px) {
-	.landing-access .access-button{
-		width: 40%;
-	}
-
-	.landing-access .access-line{
-		width: 60%;
-		margin: auto;
-	}
-
-	.landing-access .access-text{
-		width: 60%;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.landing-next{
-		display: none;
-	}
+.landing-header .landing-access .landing-next-section a:hover{ 
+	background-color: rgba(34, 90, 137, 1);
+	border: 2px solid rgba(255, 255, 255, 1); 
 }
+.landing-header .landing-access .landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
+.landing-header .landing-access .landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
+
+/*****************************
+*** Section 1 Landing Page *** 
+*****************************/
+
+.landing-statistics{
+	height: 60vh;
+	background-color: #225A89;
+}
+
+/*****************************
+*** Section 2 Landing Page *** 
+*****************************/
+
+.landing-trace{
+	height: 60vh;
+	background-color: #ACC6D7;
+}
+
+
+/*****************************
+*** Section 3 Landing Page *** 
+*****************************/
+.landing-marker{
+	height: 60vh;
+	background-color: #ffffff;
+}
+
+
+/****************************
+*** Style spécifique size ***
+****************************/
