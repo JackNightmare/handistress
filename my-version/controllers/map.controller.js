@@ -7,6 +7,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	var traceRoute; // Variable pour tracer itinéraire
 	$scope.filter = 1; // Variable pour le filtre
 	$scope.typeForm = 'test1'; // Variable pour change form
+	$scope.routing = ''; // Variable option pour tracer itinéraire
+
+
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -82,7 +85,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 		$scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
-		infoTrace = [];
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
@@ -91,12 +93,19 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			************************/
 			leafletData.getMap().then(function(map){
 
+				// Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau
+				if($scope.routing != ''){
+					$scope.routing.setWaypoints([]);
+					$scope.routing = '';
+				}
+
 				optionRouting = {
 					profile: 'mapbox/walking'
 				};
 
 				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
-				L.Routing.control({
+
+				$scope.routing = L.Routing.control({
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
@@ -104,9 +113,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					router : mapboxRouter,
 					show: false,
 					language : 'fr',
-				})
-				.addTo(map);
+				});
 
+				$scope.routing.addTo(map);
 			});
 		}
 	}
@@ -114,11 +123,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.searchMap = function(){
 		$scope.markers = {};
 		resultSearch = [];
-
-		// permet de supprimer un itinéraire si existe déja
-		if(traceRoute){
-			map.removeLayer(traceRoute);
-		}
 
 		theSearch = filterFilter($scope.getMarkers, { 'infoSearch': $scope.searchMap.value});
 
