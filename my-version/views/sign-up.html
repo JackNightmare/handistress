@@ -61,20 +61,22 @@
 						</div>
 
 						<div class="form-input">
-							Oui<input ng-model="register.handicap" type= "radio" name="handicap" value="oui">
+							Oui<input ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="oui">
 							<br>
-							Non<input ng-model="register.handicap" type= "radio" name="handicap" value="non">
+							Non<input ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="non">
 						</div>
 					</div>
-					<div class="form-step-two">
+
+					<div class="form-step-two" ng-class="{'active-filter' : (filter == 1) }">
 						Etape 2
 					</div>
-					<div class="form-step-three">
+
+					<div class="form-step-three" ng-class="{'active-filter' : (filter == 1) }">
 						Etape 3
 					</div>
 
-					<input type="button" value="Prochaine Etape">
-					<input type="submit" value="Envoyer">
+					<input ng-if="userHandicap" type="button" value="Prochaine Etape">
+					<input ng-if="sendForm" type="submit" value="Envoyer">
 				</form>
 			</div>
 		</div>

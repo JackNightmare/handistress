@@ -1,5 +1,9 @@
 app.controller('signupController', function($scope, $http){
 
+  $scope.userHandicap = false;
+  $scope.sendForm = true;
+
+
   $scope.register = {
     firstname : '',
     lastname : '',
@@ -23,6 +27,9 @@ app.controller('signupController', function($scope, $http){
     walker : false
   }
 
+  /***************************
+  *** Envoie du formulaire ***
+  ***************************/
   $scope.signUp = function(){
     var data = angular.copy($scope.register);
     data.handicap = (data.handicap == "oui") ? true : false;
@@ -47,4 +54,17 @@ app.controller('signupController', function($scope, $http){
 		});
   }
 
+  /*****************************
+  *** Controle Handicap User ***
+  *****************************/
+  $scope.controleUserHandicap = function(){
+    if ($scope.userHandicap == false){
+      $scope.userHandicap = true;
+      $scope.sendForm = false;
+    }
+    else{
+      $scope.userHandicap = false;
+      $scope.sendForm = true;
+    }
+  }
 });
