@@ -71,7 +71,6 @@
   content: "\e9af";
 }
 
-
 body{
 	font-family: 'FuturaStd-Medium';
 }
@@ -83,3 +82,35 @@ body{
 li{
   list-style: none;
 }
+
+
+/****************************************
+*** Bouton de connexion / inscription ***
+****************************************/
+.connect-button{
+  position: absolute;
+  width: 100%;
+  margin-top: 1%;
+}
+
+.connect-button .btn-connect{
+  font-size: 16px;
+  border-radius: 0px;
+  width: 160px;
+}
+
+.connect-button .btn-signUp{
+  background-color: rgba(88, 150, 167, 0.5);
+  border: 2px solid #96d2e3;
+  color: #ffffff;
+  float: left;
+}
+
+.connect-button .btn-signIn{
+  border: 2px solid #447887;
+  color: #000000;
+  float: right;
+}
+
+.connect-button .btn-signUp:hover{ background-color: rgba(88, 150, 167, 1); }
+.connect-button .btn-signIn:hover{ background-color: rgba(255,255, 255, 0.6); }
