@@ -97,6 +97,7 @@ li{
   font-size: 16px;
   border-radius: 0px;
   width: 160px;
+  background-color: transparent;
 }
 
 .connect-button .btn-signUp{
