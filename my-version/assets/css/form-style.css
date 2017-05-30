@@ -8,25 +8,28 @@
 }
 
 .form-zone{
-	width: 60%;
+	width: 65%;
 	margin: auto;
 	background-color: rgba(255, 255, 255, 0.7);
 	border-radius: 20px;
 	color: #ffffff;
+	margin-top: 5%;
 }
 
 .form-zone .form-title{
 	color: #498da1;
 	font-size: 30px;
+	padding-top: 3%;
+	padding-bottom: 2%;
 }
 
-.form-zone .form-title b{
-	font-style: italic;
-}
+.form-zone .form-title b{ font-style: italic; }
 
 /***********************
 *** Etape non validé ***
 ***********************/
+.form-zone .form-step { padding-bottom: 2%;}
+
 .form-zone .form-step .step-zone{
 	width: 50px;
   height: 50px;
@@ -87,6 +90,12 @@
 .form-zone .form-number-step { display: none; }
 .form-zone .form-number-step.current-step { display:block; }
 
+.form-zone .step-title {
+	font-size: 16px;
+	color: #155f8b;
+	padding-bottom: 3%;
+}
+
 .form-zone .form-input { margin-bottom: 2%; }
 
 .form-zone .form-input input{
@@ -108,7 +117,95 @@
 	background-color: #155f8b;
 }
 
+.form-zone .form-input .form-question {
+	font-size: 16px;
+	color: #0b4a6f;
+	width: 51%;
+	margin: auto;
+	text-align: left;
+	text-decoration: underline;
+}
+
+.form-zone .form-input .form-question span {font-family: arial;}
+.form-zone .form-input .form-radio{ color: #0b4a6f; }
+.form-zone .form-input .form-radio input{ margin-left: 5px; }
+
+
 /**********************
-*** Hover sur imput ***
+*** Hover sur input ***
 **********************/
 .form-zone .form-input:hover .input-hover{width: 50%;}
+
+/************************
+*** checkbox to slide ***
+************************/
+.check-slide {
+	position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 13px;
+    margin: 0;
+}
+
+/* Hide default HTML checkbox */
+.check-slide input { display:none; }
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #ffffff;
+  /*background-color: #ccc;*/
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+    height: 9px;
+    width: 9px;
+    left: 2px;
+    bottom: 1px;
+    background-color: #003b54;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider { background-color: #3fc0f0; }
+
+input:focus + .slider { box-shadow: 0 0 1px #2196F3; }
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(19px);
+	-ms-transform: translateX(19px);
+	transform: translateX(19px);
+}
+
+/* Rounded sliders */
+.slider.round { border-radius: 34px; }
+
+.slider.round:before { border-radius: 50%; }
+
+/*****************************
+*** Bouton des formulaires ***
+*****************************/
+.form-zone .btn{
+	width: 25%;
+	border: none;
+	border-radius: 0px;
+	font-size: 15px;
+	margin-bottom: 5%;
+}
+
+.form-zone .btn-send{ background-color: rgba(21, 95, 139, 1); }
+.form-zone .btn-step{ background-color: rgba(7, 173, 199, 1); }
+
+/******************************
+*** Bouton formulaire hover ***
+******************************/
+.form-zone .btn:hover{ color:#ffffff;}

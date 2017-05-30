@@ -31,54 +31,136 @@
 
 				<form ng-submit="signUp()">
 					<div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
+						<div class="step-title"> Informations Générales </div>
 						<div class="form-input">
-							<input ng-model="register.firstname" type="text" placeholder="Prenom">
+							<input ng-model="register.firstname" type="text" placeholder="Prenom" required>
 							<div class="input-hover"></div>
 						</div>
 
 						<div class="form-input">
-							<input ng-model="register.lastname" type="text" placeholder="Nom">
+							<input ng-model="register.lastname" type="text" placeholder="Nom" required>
 							<div class="input-hover"></div>
 						</div>
 
 						<div class="form-input">
-							<input ng-model="register.email" type="email" placeholder="Email">
+							<input ng-model="register.email" type="email" placeholder="Email" required>
 							<div class="input-hover"></div>
 						</div>
 
 						<div class="form-input">
-							<input ng-model="register.pwd" type="password" placeholder="Mot de passe">
+							<input ng-model="register.pwd" type="password" placeholder="Mot de passe" required>
 							<div class="input-hover"></div>
 						</div>
 
 						<div class="form-input">
-							<input ng-model="register.pwd2" type="password" placeholder="Confirmer mot de passe">
+							<input ng-model="register.pwd2" type="password" placeholder="Confirmer mot de passe" required>
 							<div class="input-hover"></div>
 						</div>
 
 						<div class="form-input">
-							<input ng-model="register.birthDate" type="text" placeholder="jj/mm/yyyy">
+							<input ng-model="register.birthDate" type="text" placeholder="jj/mm/yyyy" required>
 							<div class="input-hover"></div>
 						</div>
 
 						<div class="form-input">
-							Oui<input ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="oui">
-							<br>
-							Non<input ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="non">
+							<div class="form-question"> Avez-vous un handicape physique <span>?</span> </div>
+							<div class="form-radio">
+								Oui<input ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="oui" required>
+								Non<input ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="non" required>
+							</div>
 						</div>
 					</div>
 
 					<div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
-						Etape 2
+						<div class="step-title"> Accéssibilité </div>
+
+						<div class="form-input">
+							<label for="signup-stairs">Les Escaliers</label>
+							<label class="check-slide">
+								<input ng-model="register.accessStairs" type="checkbox" id="signup-stairs">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="signup-escalators">Les Escalators</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessEscalator" id="signup-escalators"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+						<!-- <label for="signup-flatEscalators">Escalators Plat</label>
+						<input ng-model="register.access" type="checkbox" id="signup-flatEscalators"><br> -->
+
+						<!-- <label for="signup-ramp">Rampe</label>
+						<input ng-model="register.access" type="checkbox" id="signup-ramp"><br> -->
+
+						<div class="form-input">
+							<label for="signup-elevator">Ascenseur</label>
+							<label class="check-slide">
+								<input ng-model="register.accessElevator" type="checkbox" id="signup-elevator">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="signup-flatPavement">Trottoir Plat</label>
+							<label class="check-slide">
+								<input ng-model="register.accessPavement" type="checkbox" id="signup-flatPavement">
+								<div class="slider round"></div>
+							</label>
+						</div>
+						<!-- <label for="signup-hightPavement">Trottoir Haut</label>
+						<input ng-model="register.access" type="checkbox" id="signup-hightPavement" value="7"> -->
 					</div>
 
 					<div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
-						Etape 3
+						<div class="step-title"> Equipements </div>
+						<div class="form-input">
+							<label for="crutch">Béquille</label>
+							<label class="check-slide">
+								<input ng-model="equipments.crutch" type="checkbox" id="crutch">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="manualWheelchair">Fauteuil Roulant Manuel</label>
+							<label class="check-slide">
+								<input ng-model="equipments.manualWheelchair" type="checkbox" id="manualWheelchair">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="electricWheelchair">Fauteuil Roulant Électrique</label>
+							<label class="check-slide">
+								<input ng-model="equipments.electricWheelchair" type="checkbox" id="electricWheelchair">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="cane">Canne</label>
+							<label class="check-slide">
+								<input ng-model="equipments.cane" type="checkbox" id="cane">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="walker">Déambulateur</label>
+							<label class="check-slide">
+								<input ng-model="equipments.walker" type="checkbox" id="walker">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
 					</div>
 
-					<input ng-if="valuePreviousStep" ng-click="previousStep()" type="button" value="Etape Précédente">
-					<input ng-if="userHandicap && valueNextStep" ng-click="nextStep()" type="button" value="Etape Suivante">
-					<input ng-if="sendForm" type="submit" value="Envoyer">
+					<input ng-if="valuePreviousStep" ng-click="previousStep()" class="btn btn-step" type="button" value="Etape Précédente">
+					<input ng-if="userHandicap && valueNextStep" ng-click="nextStep()" class="btn btn-step" type="button" value="Etape Suivante">
+					<input ng-if="sendForm" class="btn btn-send" type="submit" value="S'inscrire">
 				</form>
 			</div>
 		</div>
