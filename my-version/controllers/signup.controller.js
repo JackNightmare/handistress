@@ -1,8 +1,10 @@
 app.controller('signupController', function($scope, $http){
 
-  $scope.userHandicap = false;
-  $scope.sendForm = true;
-
+  $scope.step = 1; // L'étape du formulaire par defaut et 1
+  $scope.valuePreviousStep = false; // Pat defaut, il n'y a pas d'étape précédente
+  $scope.userHandicap = false; // On lui dit que l'utilisateur est considerer non handicapé par defaut
+  $scope.valueNextStep = false; // Par defaut, on lui dit qu'il n'y a pas d'étape suivante
+  $scope.sendForm = true; // Par defaut, on peut envoyer le formulaire
 
   $scope.register = {
     firstname : '',
@@ -58,13 +60,46 @@ app.controller('signupController', function($scope, $http){
   *** Controle Handicap User ***
   *****************************/
   $scope.controleUserHandicap = function(){
+
+    // Si l'utilisateur n'a aucun handicap, pas d'étape suivante
     if ($scope.userHandicap == false){
-      $scope.userHandicap = true;
-      $scope.sendForm = false;
+      $scope.userHandicap = true; // Valeur à true car on peut accéder à l'étapes suivante
+      $scope.valueNextStep = true; // Valeur à true car on peut accéder à l'étape suivante
+      $scope.sendForm = false; // Valeur à false car l'envoie du formulaire n'est pas possible
     }
-    else{
-      $scope.userHandicap = false;
-      $scope.sendForm = true;
+    else{ // Si la personne est handicapé, on accede à de nouvelles étapes
+      $scope.userHandicap = false; // valeur à false car les étapes suivantes sont inutiles
+      $scope.valueNextStep = false; // valeur à false car les étapes suivantes sont inutiles
+      $scope.sendForm = true; // Valeur à true car pas besoin des étapes suivantes pour valider le formulaire
     }
   }
+
+  /****************************
+  *** Next or Previous step ***
+  ****************************/
+  $scope.nextStep = function(){
+    $scope.step ++;
+    $scope.valuePreviousStep = true; // Possibilité de retourner en arriere
+    if($scope.step == 3){
+        $scope.valueNextStep = false; // Il n'y a plus d'étape après, on met donc à false
+        $scope.sendForm = true; // On peut envoyer le formulaire
+    }
+  }
+
+  $scope.previousStep = function(){
+    $scope.step --;
+
+    // Si etape 1, le previous est forcement à false
+    if($scope.step == 1){
+      $scope.valuePreviousStep = false;
+    }
+
+    // Si on est a l'étape 2
+    if($scope.step == 2){
+      $scope.valueNextStep = true; // On revient de l'étape 3, donc il faut repasser la valueNextStep à true
+      $scope.sendForm = false; // Il est impossible à l'étape 2 d'envoyer le formulaire
+    }
+  }
+
+
 });

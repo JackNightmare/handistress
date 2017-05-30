@@ -84,6 +84,9 @@
 /*****************
 *** Zone input ***
 *****************/
+.form-zone .form-number-step { display: none; }
+.form-zone .form-number-step.current-step { display:block; }
+
 .form-zone .form-input { margin-bottom: 2%; }
 
 .form-zone .form-input input{

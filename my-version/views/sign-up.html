@@ -28,8 +28,9 @@
 						<div class="step-number step-three">3</div>
 					</div>
 				</div>
+
 				<form ng-submit="signUp()">
-					<div class="form-step-one">
+					<div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
 						<div class="form-input">
 							<input ng-model="register.firstname" type="text" placeholder="Prenom">
 							<div class="input-hover"></div>
@@ -67,15 +68,16 @@
 						</div>
 					</div>
 
-					<div class="form-step-two" ng-class="{'active-filter' : (filter == 1) }">
+					<div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
 						Etape 2
 					</div>
 
-					<div class="form-step-three" ng-class="{'active-filter' : (filter == 1) }">
+					<div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
 						Etape 3
 					</div>
 
-					<input ng-if="userHandicap" type="button" value="Prochaine Etape">
+					<input ng-if="valuePreviousStep" ng-click="previousStep()" type="button" value="Etape Précédente">
+					<input ng-if="userHandicap && valueNextStep" ng-click="nextStep()" type="button" value="Etape Suivante">
 					<input ng-if="sendForm" type="submit" value="Envoyer">
 				</form>
 			</div>
