@@ -89,11 +89,22 @@
 								<div class="slider round"></div>
 							</label>
 						</div>
-						<!-- <label for="signup-flatEscalators">Escalators Plat</label>
-						<input ng-model="register.access" type="checkbox" id="signup-flatEscalators"><br> -->
 
-						<!-- <label for="signup-ramp">Rampe</label>
-						<input ng-model="register.access" type="checkbox" id="signup-ramp"><br> -->
+						<div class="form-input">
+							<label for="signup-flatEscalators">Escalators Plat</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessFlatEscalator" id="signup-flatEscalators"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label for="signup-ramp">Rampe</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessRamp" id="signup-ramp"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
 
 						<div class="form-input">
 							<label for="signup-elevator">Ascenseur</label>
@@ -110,8 +121,14 @@
 								<div class="slider round"></div>
 							</label>
 						</div>
-						<!-- <label for="signup-hightPavement">Trottoir Haut</label>
-						<input ng-model="register.access" type="checkbox" id="signup-hightPavement" value="7"> -->
+
+						<div class="form-input">
+							<label for="signup-hightPavement">Trottoir Haut</label>
+							<label class="check-slide">
+								<input ng-model="register.accessHightPavement" type="checkbox" id="signup-hightPavement">
+								<div class="slider round"></div>
+							</label>
+						</div>
 					</div>
 
 					<div class="form-number-step" ng-class="{'current-step' : (step == 3) }">

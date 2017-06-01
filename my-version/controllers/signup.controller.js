@@ -16,8 +16,11 @@ app.controller('signupController', function($scope, $http){
     handicap : "non",
     accessStairs: false,
   	accessEscalator: false,
+  	accessFlatEscalator: false,
+  	accessRamp: false,
   	accessElevator: false,
   	accessPavement: false,
+  	accessHightPavement: false,
     equipments: []
   }
 
