@@ -91,12 +91,18 @@
 .form-zone .form-number-step.current-step { display:block; }
 
 .form-zone .step-title {
-	font-size: 16px;
+	font-size: 19px;
 	color: #155f8b;
 	padding-bottom: 3%;
 }
 
 .form-zone .form-input { margin-bottom: 2%; }
+.form-zone .form-input .label-slide{
+	color: #155f8b;
+	width: 20%;
+	text-align: left;
+	cursor: pointer;
+}
 
 .form-zone .form-input input{
 	border: none;
