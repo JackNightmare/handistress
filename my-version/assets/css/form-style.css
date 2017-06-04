@@ -94,6 +94,7 @@
 	font-size: 19px;
 	color: #155f8b;
 	padding-bottom: 3%;
+	text-decoration: underline;
 }
 
 .form-zone .form-input { margin-bottom: 2%; }
@@ -124,12 +125,11 @@
 }
 
 .form-zone .form-input .form-question {
-	font-size: 16px;
+	font-size: 15px;
 	color: #0b4a6f;
 	width: 51%;
 	margin: auto;
 	text-align: left;
-	text-decoration: underline;
 }
 
 .form-zone .form-input .form-question span {font-family: arial;}
