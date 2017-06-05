@@ -1,11 +1,19 @@
 app.controller('signupController', function($scope, $http){
+  // Permet d'afficher ou pas le bouton d'inscription
+  $scope.boutonInscription = false;
+  $scope.colorSignIn = true;
 
+  /******************************************
+  *** Varibales globales pour inscription ***
+  ******************************************/
+  /** variables pour affichage du formulaire **/
   $scope.step = 1; // L'étape du formulaire par defaut et 1
   $scope.valuePreviousStep = false; // Pat defaut, il n'y a pas d'étape précédente
   $scope.userHandicap = false; // On lui dit que l'utilisateur est considerer non handicapé par defaut
   $scope.valueNextStep = false; // Par defaut, on lui dit qu'il n'y a pas d'étape suivante
   $scope.sendForm = true; // Par defaut, on peut envoyer le formulaire
 
+  /** variables pour enregistrement d'un user **/
   $scope.register = {
     firstname : '',
     lastname : '',

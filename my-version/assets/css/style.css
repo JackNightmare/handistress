@@ -91,6 +91,7 @@ li{
   position: absolute;
   width: 100%;
   margin-top: 1%;
+  z-index: 100;
 }
 
 .connect-button .btn-connect{
@@ -113,5 +114,7 @@ li{
   float: right;
 }
 
+.connect-button .btn-signIn.correct-color{ color:#ffffff;}
+
 .connect-button .btn-signUp:hover{ background-color: rgba(88, 150, 167, 1); }
-.connect-button .btn-signIn:hover{ background-color: rgba(255,255, 255, 0.6); }
+.connect-button .btn-signIn:hover{ background-color: rgba(255,255, 255, 0.6); color:#000000; }

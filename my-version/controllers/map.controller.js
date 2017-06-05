@@ -1,4 +1,6 @@
 app.controller('mapController', function($scope , Marker, filterFilter, leafletData ){
+	// Permet d'afficher ou pas le bouton d'inscription
+  $scope.boutonInscription = true;
 
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***

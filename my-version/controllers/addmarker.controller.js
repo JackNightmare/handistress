@@ -1,9 +1,14 @@
 app.controller('addmarkerController', function($scope, $http){
+  // Permet d'afficher ou pas le bouton d'inscription et corriger couleur de la connexion
+  $scope.boutonInscription = true;
+  $scope.colorSignIn = true;
+
   /**********************************************
   *** Varibales globales pour ajout de marker ***
   **********************************************/
-  $scope.formAccess = true;
-  $scope.formPlace = false; // Par defaut, le formulaire d'ajout lieu sera visible
+  /** Variable pour affichage des formulaires **/
+  $scope.formAccess = false;
+  $scope.formPlace = true; // Par defaut, le formulaire d'ajout lieu sera visible
 
   /** Variable pour gestion des étapes **/
   $scope.step = 1; // Ppar defaut, nous sommes à l'étape numéro 1
@@ -11,6 +16,8 @@ app.controller('addmarkerController', function($scope, $http){
   $scope.valueNextStep = true;
   $scope.sendForm = false;
 
+
+  /** Variable pour envoie ajout de marker **/
   $scope.markerAccess = {
     type : 2,
     access : null,

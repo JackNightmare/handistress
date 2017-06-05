@@ -1,10 +1,13 @@
+/*************************
+*** Zone du formulaire ***
+*************************/
 .form-center{
 	position: relative;
 	background-position: center center;
 	height: 100vh;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-image: url(../img/street.jpg);
+	background-image: url(../img/test.jpg);
 }
 
 .form-zone{
@@ -13,7 +16,7 @@
 	background-color: rgba(255, 255, 255, 0.7);
 	border-radius: 20px;
 	color: #ffffff;
-	margin-top: 5%;
+	margin-top: 10%;
 }
 
 .form-zone .form-title{
@@ -24,6 +27,19 @@
 }
 
 .form-zone .form-title b{ font-style: italic; }
+
+.form-zone .form-switch-button button {
+	width: 30%;
+	border: none;
+	border-radius: 0px;
+	font-size: 17px;
+	margin-top: 2%;
+	background-color: rgba(28, 147, 166, 0.4);
+}
+
+.form-zone .form-switch-button button:first-child{ margin-right: 4%;}
+.form-zone .form-switch-button button.form-active{background-color: #155f8b;}
+
 
 /***********************
 *** Etape non validé ***
@@ -105,17 +121,25 @@
 	cursor: pointer;
 }
 
-.form-zone .form-input input{
+.form-zone .form-input input, select, textarea{
 	border: none;
 	color: #ffffff;
 	text-align: center;
 	background-color: rgba(16, 17, 17, 0.5);
 }
 
-.form-zone .form-input input[type="text"], input[type="email"], input[type="password"]{
+.form-zone .form-input input[type="text"], input[type="email"], input[type="password"], select, textarea{
 	width: 50%;
 	height: 30px;
 }
+
+.form-zone .form-input select{ text-indent: 30%; }
+
+.form-zone .form-input textarea{
+	height: 130px;
+	text-align: left;
+}
+
 
 .form-zone .form-input .input-hover{
 	width: 0%;
