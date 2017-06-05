@@ -1,97 +1,169 @@
-<form style="float:left;" ng-submit="addAccess()">
-  <select ng-model="markerAccess.access">
-    <option value="1">Escalier</option>
-    <option value="2">Escalator</option>
-    <option value="3">Escalator plat</option>
-    <option value="4">Ascenseur</option>
-    <option value="5">Rampe</option>
-    <option value="6">Trottoir plat</option>
-    <option value="7">Trottoir haut</option>
-  </select>
-  <br>
-  <input ng-model="markerAccess.entitled" type="text" placeholder="Nom de l'accès"/>
-  <br>
-  <textarea ng-model="markerAccess.description" ></textarea>
+<section class="form-center">
+  <div class="row">
+    <div class="col-xs-1 col-md-2 col-lg-2"></div>
+    <div class="col-xs-10 col-md-8 col-lg-8 text-center">
+      <div class="form-zone">
 
-  <input type="submit" value="Enregistrer"/>
-</form>
+        <div class="form-switch-button">
+          <button ng-click="seePlaceForm()"> Ajouter un lieu </button>
+          <button ng-click="seeAccessForm()"> Ajouter un accès </button>
+        </div>
 
-<form style="float:right; width:35%; margin-right:10%;" ng-submit="addPlace()">
-  <fieldset>
-    <legend>Step 1</legend>
-    <select ng-model="markerPlace.place">
-      <option value="2">Ecoles</option>
-      <option value="3">Metro</option>
-      <option value="4">Gare</option>
-      <option value="5">Aéroport</option>
-      <option value="6">Restaurant</option>
-      <option value="7">Boutique</option>
-      <option value="8">Loisir</option>
-      <option value="9">Parking</option>
-      <option value="10">Administration</option>
-      <option value="11">Hébergement</option>
-    </select>
+        <div ng-if="formAccess" class="form-add-zone">
+          <div class="form-title">Ajouter un accès </div>
+          <form ng-submit="addAccess()">
+            <div class="form-input">
+              <select ng-model="markerAccess.access">
+                <option value="1">Escalier</option>
+                <option value="2">Escalator</option>
+                <option value="3">Escalator plat</option>
+                <option value="4">Ascenseur</option>
+                <option value="5">Rampe</option>
+                <option value="6">Trottoir plat</option>
+                <option value="7">Trottoir haut</option>
+              </select>
+            </div>
+            <div class="form-input">
+              <input ng-model="markerAccess.entitled" type="text" placeholder="Nom de l'accès"/>
+            </div>
+            <div class="form-input">
+              <textarea ng-model="markerAccess.description" ></textarea>
+            </div>
+            <input class="btn btn-send" type="submit" value="Enregistrer"/>
+          </form>
+        </div>
 
-    <br><br>
-    <input ng-model="markerPlace.entitled" type="text" placeholder="nom du lieu"/>
-    <br><br>
-    <textarea ng-model="markerPlace.description"></textarea>
-  </fieldset>
+        <div ng-if="formPlace" class="form-add-zone">
+          <div class="form-title">Ajouter un lieu</div>
 
-  <fieldset>
-    <legend>Step 2</legend>
-    <label for="addmarker-stairs">Escalier</label>
-    <input ng-model="markerTypeAccess.stairs" type="checkbox" id="addmarker-stairs"/>
-    <br><br>
+          <form ng-submit="addPlace()">
+            <div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
+              <div class="form-input">
+                <select ng-model="markerPlace.place">
+                  <option value="2">Ecoles</option>
+                  <option value="3">Metro</option>
+                  <option value="4">Gare</option>
+                  <option value="5">Aéroport</option>
+                  <option value="6">Restaurant</option>
+                  <option value="7">Boutique</option>
+                  <option value="8">Loisir</option>
+                  <option value="9">Parking</option>
+                  <option value="10">Administration</option>
+                  <option value="11">Hébergement</option>
+                </select>
+              </div>
+              <div class="form-input">
+                <input ng-model="markerPlace.entitled" type="text" placeholder="nom du lieu"/>
+              </div>
+              <div class="form-input">
+                <textarea ng-model="markerPlace.description"></textarea>
+              </div>
+            </div>
 
-    <label for="addmarker-escalators">Escalator</label>
-    <input ng-model="markerTypeAccess.escalators" type="checkbox" id="addmarker-escalators"/>
-    <br><br>
+            <div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
+              <div class="form-input">
+                <label for="addmarker-stairs">Escalier</label>
+                <label class="check-slide">
+                  <input ng-model="markerTypeAccess.stairs" type="checkbox" id="addmarker-stairs"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-    <label for="addmarker-flatEscalators">Escalator plat</label>
-    <input ng-model="markerTypeAccess.flatEscalators" type="checkbox" id="addmarker-flatEscalators"/>
-    <br><br>
+              <div class="form-input">
+                <label for="addmarker-escalators">Escalator</label>
+                <label class="check-slide">
+                  <input ng-model="markerTypeAccess.escalators" type="checkbox" id="addmarker-escalators"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-    <label for="addmarker-elevator">Ascenseur</label>
-    <input ng-model="markerTypeAccess.elevator" type="checkbox" id="addmarker-elevator"/>
-    <br><br>
+              <div class="form-input">
+                <label for="addmarker-flatEscalators">Escalator plat</label>
+                <label class="check-slide">
+                  <input ng-model="markerTypeAccess.flatEscalators" type="checkbox" id="addmarker-flatEscalators"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-    <label for="addmarker-ramp">Rampe</label>
-    <input ng-model="markerTypeAccess.ramp" type="checkbox" id="addmarker-ramp"/>
-    <br><br>
+              <div class="form-input">
+                <label for="addmarker-elevator">Ascenseur</label>
+                <label class="check-slide">
+                  <input ng-model="markerTypeAccess.elevator" type="checkbox" id="addmarker-elevator"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-    <label for="addmarker-flatPavement">Trottoir plat</label>
-    <input ng-model="markerTypeAccess.flatPavement" type="checkbox" id="addmarker-flatPavement"/>
-    <br><br>
+              <div class="form-input">
+                <label for="addmarker-flatPavement">Trottoir plat</label>
+                <label class="check-slide">
+                  <input ng-model="markerTypeAccess.flatPavement" type="checkbox" id="addmarker-flatPavement"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-    <label for="addmarker-hightPavement">Trottoir haut</label>
-    <input ng-model="markerTypeAccess.hightPavement" type="checkbox" id="addmarker-hightPavement"/>
-    <br><br>
+              <div class="form-input">
+                <label for="addmarker-hightPavement">Trottoir haut</label>
+                <label class="check-slide">
+                  <input ng-model="markerTypeAccess.hightPavement" type="checkbox" id="addmarker-hightPavement"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
+            </div>
 
-  </fieldset>
+            <div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
+              <div class="form-input">
+                <textarea ng-model="markerPlace.complements.accessEnterExit">Description entrée sortie</textarea>
+              </div>
 
-  <fieldset>
-    <legend>Step 3</legend>
-    <textarea ng-model="markerPlace.complements.accessEnterExit">Description entrée sortie</textarea>
-    <br><br>
-    <label for="addmarker-toiletAdapt"> Toilettes Adaptées </label>
-    <input ng-model="markerPlace.complements.toiletAdapt" type="checkbox" id="addmarker-toiletAdapt"/>
-    <br><br>
-    <label for="addmarker-equipmentAdapt">Equipments Adaptés</label>
-    <input ng-model="markerPlace.complements.equipmentAdapt" type="checkbox" id="addmarker-equipmentAdapt"/>
-    <br><br>
-    <label for="addmarker-handicapGantry">Portique Handicapé</label>
-    <input ng-model="markerPlace.complements.handicapGantry" type="checkbox" id="addmarker-handicapGantry"/>
-    <br><br>
-    <label for="addmarker-informationOffice">Bureau d'information</label>
-    <input ng-model="markerPlace.complements.informationOffice" type="checkbox" id="addmarker-informationOffice"/>
-    <br><br>
-    <input ng-model="markerPlace.complements.exitNumber" type="text" placeholder="Numero de sortie Metro">
-    <br><br>
-    <input ng-model="markerPlace.complements.subwayLine" type="text" placeholder="Numero de ligne Metro">
-    <br><br>
+              <div class="form-input">
+                <label for="addmarker-toiletAdapt"> Toilettes Adaptées </label>
+                <label class="check-slide">
+                  <input ng-model="markerPlace.complements.toiletAdapt" type="checkbox" id="addmarker-toiletAdapt"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-  </fieldset>
+              <div class="form-input">
+                <label for="addmarker-equipmentAdapt">Equipments Adaptés</label>
+                <label class="check-slide">
+                  <input ng-model="markerPlace.complements.equipmentAdapt" type="checkbox" id="addmarker-equipmentAdapt"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
 
-  <input type="submit" value="Enregistrer"/>
-</form>
+              <div class="form-input">
+                <label for="addmarker-handicapGantry">Portique Handicapé</label>
+                <label class="check-slide">
+                  <input ng-model="markerPlace.complements.handicapGantry" type="checkbox" id="addmarker-handicapGantry"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
+
+              <div class="form-input">
+                <label for="addmarker-informationOffice">Bureau d'information</label>
+                <label class="check-slide">
+                  <input ng-model="markerPlace.complements.informationOffice" type="checkbox" id="addmarker-informationOffice"/>
+                  <div class="slider round"></div>
+                </label>
+              </div>
+
+              <div class="form-input">
+                <input ng-model="markerPlace.complements.exitNumber" type="text" placeholder="Numero de sortie Metro">
+              </div>
+
+              <div class="form-input">
+                <input ng-model="markerPlace.complements.subwayLine" type="text" placeholder="Numero de ligne Metro">
+              </div>
+
+            </div>
+          </form>
+
+          <input ng-if="valuePreviousStep" ng-click="previousStep()" class="btn btn-step" type="button" value="Etape Précédente">
+					<input ng-if="valueNextStep" ng-click="nextStep()" class="btn btn-step" type="button" value="Etape Suivante">
+          <input ng-if="sendForm" class="btn btn-send" type="submit" value="Enregistrer"/>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-1 col-md-2 col-lg-2"></div>
+  </div>
+</section>

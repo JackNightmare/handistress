@@ -64,6 +64,9 @@ app.controller('signupController', function($scope, $http){
   *****************************/
   $scope.controleUserHandicap = function(){
 
+    console.log('je veux te voir ');
+    console.log($scope.userHandicap);
+
     // Si l'utilisateur n'a aucun handicap, pas d'étape suivante
     if ($scope.userHandicap == false){
       $scope.userHandicap = true; // Valeur à true car on peut accéder à l'étapes suivante
