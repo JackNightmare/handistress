@@ -1,0 +1,36 @@
+.info-odl-markers{
+  position: fixed;
+  z-index: 50;
+  width: 20%;
+  right: 2%;
+  top: 12%;
+  bottom: 8%;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: rgba(65, 184, 204, 0.75);
+}
+
+.info-odl-markers .info-marker-title{
+  text-align: center;
+  font-size: 16px;
+  width: 70%;
+  margin: auto;
+  color: #ffffff;
+}
+
+.info-odl-markers .list-marker{
+  height: 88%;
+  overflow-y: auto;
+}
+
+.info-odl-markers .list-marker .info-marker{
+  height: 20%;
+  cursor: pointer;
+  margin-bottom: 2%;
+  padding-left: 5%;
+  padding-top: 2%;
+  border-left: 10px solid #0a486d;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+/*.info-odl-markers .list-marker .info-marker:nth-child(even){background-color: rgba(255, 255, 255, 0.7);}*/
+/*.info-odl-markers .list-marker .info-marker:nth-child(odd){background-color: rgba(199, 199, 199, 0.55);}*/
