@@ -1,5 +1,19 @@
 app.controller('signupController', function($scope, $http){
+  // Permet d'afficher ou pas le bouton d'inscription
+  $scope.boutonInscription = false;
+  $scope.colorSignIn = true;
 
+  /******************************************
+  *** Varibales globales pour inscription ***
+  ******************************************/
+  /** variables pour affichage du formulaire **/
+  $scope.step = 1; // L'étape du formulaire par defaut et 1
+  $scope.valuePreviousStep = false; // Pat defaut, il n'y a pas d'étape précédente
+  $scope.userHandicap = false; // On lui dit que l'utilisateur est considerer non handicapé par defaut
+  $scope.valueNextStep = false; // Par defaut, on lui dit qu'il n'y a pas d'étape suivante
+  $scope.sendForm = true; // Par defaut, on peut envoyer le formulaire
+
+  /** variables pour enregistrement d'un user **/
   $scope.register = {
     firstname : '',
     lastname : '',
@@ -10,8 +24,11 @@ app.controller('signupController', function($scope, $http){
     handicap : "non",
     accessStairs: false,
   	accessEscalator: false,
+  	accessFlatEscalator: false,
+  	accessRamp: false,
   	accessElevator: false,
   	accessPavement: false,
+  	accessHightPavement: false,
     equipments: []
   }
 
@@ -23,6 +40,9 @@ app.controller('signupController', function($scope, $http){
     walker : false
   }
 
+  /***************************
+  *** Envoie du formulaire ***
+  ***************************/
   $scope.signUp = function(){
     var data = angular.copy($scope.register);
     data.handicap = (data.handicap == "oui") ? true : false;
@@ -46,5 +66,54 @@ app.controller('signupController', function($scope, $http){
 			console.log(response);
 		});
   }
+
+  /*****************************
+  *** Controle Handicap User ***
+  *****************************/
+  $scope.controleUserHandicap = function(){
+
+    console.log('je veux te voir ');
+    console.log($scope.userHandicap);
+
+    // Si l'utilisateur n'a aucun handicap, pas d'étape suivante
+    if ($scope.userHandicap == false){
+      $scope.userHandicap = true; // Valeur à true car on peut accéder à l'étapes suivante
+      $scope.valueNextStep = true; // Valeur à true car on peut accéder à l'étape suivante
+      $scope.sendForm = false; // Valeur à false car l'envoie du formulaire n'est pas possible
+    }
+    else{ // Si la personne est handicapé, on accede à de nouvelles étapes
+      $scope.userHandicap = false; // valeur à false car les étapes suivantes sont inutiles
+      $scope.valueNextStep = false; // valeur à false car les étapes suivantes sont inutiles
+      $scope.sendForm = true; // Valeur à true car pas besoin des étapes suivantes pour valider le formulaire
+    }
+  }
+
+  /****************************
+  *** Next or Previous step ***
+  ****************************/
+  $scope.nextStep = function(){
+    $scope.step ++;
+    $scope.valuePreviousStep = true; // Possibilité de retourner en arriere
+    if($scope.step == 3){
+        $scope.valueNextStep = false; // Il n'y a plus d'étape après, on met donc à false
+        $scope.sendForm = true; // On peut envoyer le formulaire
+    }
+  }
+
+  $scope.previousStep = function(){
+    $scope.step --;
+
+    // Si etape 1, le previous est forcement à false
+    if($scope.step == 1){
+      $scope.valuePreviousStep = false;
+    }
+
+    // Si on est a l'étape 2
+    if($scope.step == 2){
+      $scope.valueNextStep = true; // On revient de l'étape 3, donc il faut repasser la valueNextStep à true
+      $scope.sendForm = false; // Il est impossible à l'étape 2 d'envoyer le formulaire
+    }
+  }
+
 
 });

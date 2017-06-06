@@ -1,64 +1,199 @@
-Ceci est la page d'inscription
-<form ng-submit="signUp()">
-	<fieldset>
-		 <legend>Step 1</legend>
-		<input ng-model="register.firstname" type="text" placeholder="Prenom">
-		<br>
-		<input ng-model="register.lastname" type="text" placeholder="Nom">
-		<br>
-		<input ng-model="register.email" type="email" placeholder="Email">
-		<br>
-		<input ng-model="register.pwd" type="password" placeholder="Mot de passe">
-		<br>
-		<input ng-model="register.pwd2" type="password" placeholder="Confirmer mot de passe">
-		<br>
-		<input ng-model="register.birthDate" type="text" placeholder="jj/mm/yyyy">
-		<br>
-		<input ng-model="register.handicap" type= "radio" name="handicap" value="oui"> Oui
-		<input ng-model="register.handicap" type= "radio" name="handicap" value="non"> Non
-		<br>
-	</fieldset>
-	<fieldset>
-		<legend>Step 2</legend>
+<div ng-include="'views/header/connect-header.html'" ng-controller="headerController"></div>
 
-		<label for="signup-stairs">Escaliers</label>
-		<input ng-model="register.accessStairs" type="checkbox" id="signup-stairs"><br>
+<nav class="nav-menu not-open">
+	<button class="nav-menu-button"></button>
+	<ul class="nav-menu-link">
+		<li><a href="#/"> <i class="icon-home"></i></a></li>
+		<li><a href="#/map"><i class="icon-map"></i></a></li>
+		<li><a href="#/add-marker"><i class="icon-add-marker"></i></a></li>
+	</ul>
+</nav>
 
-		<label for="signup-escalators">Escalators</label>
-		<input ng-model="register.accessEscalator" type="checkbox" id="signup-escalators"><br>
+<section>
+	<div class="row">
+		<div class="col-xs-1 col-md-2 col-lg-2"></div>
+		<div class="col-xs-10 col-md-8 col-lg-8 text-center">
+			<div class="form-zone">
+				<div class="form-title">Se créer un compte <b>Handistress</b></div>
+				<div class="form-step">
+					<div class="step-zone">
+						<div class="step-done done"></div>
+						<div class="step-number step-one">1</div>
+					</div>
 
-		<!-- <label for="signup-flatEscalators">Escalators Plat</label>
-		<input ng-model="register.access" type="checkbox" id="signup-flatEscalators"><br> -->
+					<span class="step-line">
+						<span class="step-line-progress"></span>
+					</span>
 
-		<!-- <label for="signup-ramp">Rampe</label>
-		<input ng-model="register.access" type="checkbox" id="signup-ramp"><br> -->
+					<div class="step-zone">
+						<div class="step-done"></div>
+						<div class="step-number step-two">2</div>
+					</div>
 
-		<label for="signup-elevator">Ascenseur</label>
-		<input ng-model="register.accessElevator" type="checkbox" id="signup-elevator"><br>
+					<span class="step-line">
+						<span class="step-line-progress"></span>
+					</span>
 
-		<label for="signup-flatPavement">Trottoir Plat</label>
-		<input ng-model="register.accessPavement" type="checkbox" id="signup-flatPavement"><br>
+					<div class="step-zone">
+						<div class="step-done"></div>
+						<div class="step-number step-three">3</div>
+					</div>
+				</div>
 
-		<!-- <label for="signup-hightPavement">Trottoir Haut</label>
-		<input ng-model="register.access" type="checkbox" id="signup-hightPavement" value="7"> -->
-	</fieldset>
+				<form ng-submit="signUp()">
+					<div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
+						<div class="step-title"> Informations Générales </div>
+						<div class="form-input">
+							<input ng-model="register.firstname" type="text" placeholder="Prenom" required>
+							<div class="input-hover"></div>
+						</div>
 
-	<fieldset>
-		<legend>Step 3</legend>
-		<label for="crutch">Béquille</label>
-		<input ng-model="equipments.crutch" type="checkbox" id="crutch"><br>
+						<div class="form-input">
+							<input ng-model="register.lastname" type="text" placeholder="Nom" required>
+							<div class="input-hover"></div>
+						</div>
 
-		<label for="manualWheelchair">Fauteuil Roulant Manuel</label>
-		<input ng-model="equipments.manualWheelchair" type="checkbox" id="manualWheelchair"><br>
+						<div class="form-input">
+							<input ng-model="register.email" type="email" placeholder="Email" required>
+							<div class="input-hover"></div>
+						</div>
 
-		<label for="electricWheelchair">Fauteuil Roulant Électrique</label>
-		<input ng-model="equipments.electricWheelchair" type="checkbox" id="electricWheelchair"><br>
+						<div class="form-input">
+							<input ng-model="register.pwd" type="password" placeholder="Mot de passe" required>
+							<div class="input-hover"></div>
+						</div>
 
-		<label for="cane">Canne</label>
-		<input ng-model="equipments.cane" type="checkbox" id="cane"><br>
+						<div class="form-input">
+							<input ng-model="register.pwd2" type="password" placeholder="Confirmer mot de passe" required>
+							<div class="input-hover"></div>
+						</div>
 
-		<label for="walker">Déambulateur</label>
-		<input ng-model="equipments.walker" type="checkbox" id="walker"><br>
-	</fieldset>
-	<input type="submit" value="Envoyer">
-</form>
+						<div class="form-input">
+							<input ng-model="register.birthDate" type="text" placeholder="jj/mm/yyyy" required>
+							<div class="input-hover"></div>
+						</div>
+
+						<div class="form-input">
+							<div class="form-question"> Avez-vous un handicape physique <span>?</span> </div>
+							<div class="form-radio">
+								<label for="handicapYes">Oui</label>
+								<input id="handicapYes" ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="oui" required>
+								<label for="handicapNo">Non</label>
+								<input id="handicapNo" ng-model="register.handicap" ng-click="controleUserHandicap()" type= "radio" name="handicap" value="non" required>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
+						<div class="step-title"> Accéssibilité </div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-stairs">Les Escaliers</label>
+							<label class="check-slide">
+								<input ng-model="register.accessStairs" type="checkbox" id="signup-stairs">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-escalators">Les Escalators</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessEscalator" id="signup-escalators"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-flatEscalators">Escalators Plat</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessFlatEscalator" id="signup-flatEscalators"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-ramp">Rampe</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessRamp" id="signup-ramp"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-elevator">Ascenseur</label>
+							<label class="check-slide">
+								<input ng-model="register.accessElevator" type="checkbox" id="signup-elevator">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-flatPavement">Trottoir Plat</label>
+							<label class="check-slide">
+								<input ng-model="register.accessPavement" type="checkbox" id="signup-flatPavement">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-hightPavement">Trottoir Haut</label>
+							<label class="check-slide">
+								<input ng-model="register.accessHightPavement" type="checkbox" id="signup-hightPavement">
+								<div class="slider round"></div>
+							</label>
+						</div>
+					</div>
+
+					<div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
+						<div class="step-title"> Equipements </div>
+						<div class="form-input">
+							<label class="label-slide" for="crutch">Béquille</label>
+							<label class="check-slide">
+								<input ng-model="equipments.crutch" type="checkbox" id="crutch">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="manualWheelchair">Fauteuil Roulant Manuel</label>
+							<label class="check-slide">
+								<input ng-model="equipments.manualWheelchair" type="checkbox" id="manualWheelchair">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="electricWheelchair">Fauteuil Roulant Électrique</label>
+							<label class="check-slide">
+								<input ng-model="equipments.electricWheelchair" type="checkbox" id="electricWheelchair">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="cane">Canne</label>
+							<label class="check-slide">
+								<input ng-model="equipments.cane" type="checkbox" id="cane">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="walker">Déambulateur</label>
+							<label class="check-slide">
+								<input ng-model="equipments.walker" type="checkbox" id="walker">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+					</div>
+
+					<input ng-if="valuePreviousStep" ng-click="previousStep()" class="btn btn-step" type="button" value="Etape Précédente">
+					<input ng-if="userHandicap && valueNextStep" ng-click="nextStep()" class="btn btn-step" type="button" value="Etape Suivante">
+					<input ng-if="sendForm" class="btn btn-send" type="submit" value="S'inscrire">
+				</form>
+			</div>
+		</div>
+		<div class="col-xs-1 col-md-2 col-lg-2"></div>
+	</div>
+<section>

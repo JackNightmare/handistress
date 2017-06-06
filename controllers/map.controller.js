@@ -1,4 +1,6 @@
 app.controller('mapController', function($scope , Marker, filterFilter, leafletData ){
+	// Permet d'afficher ou pas le bouton d'inscription
+  $scope.boutonInscription = true;
 
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***
@@ -7,15 +9,20 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	var traceRoute; // Variable pour tracer itinéraire
 	$scope.filter = 1; // Variable pour le filtre
 	$scope.typeForm = 'test1'; // Variable pour change form
+	$scope.routing = ''; // Variable option pour tracer itinéraire
+
+	$scope.openMenu = false; // Variable pour afficher contenu du menu ouvert
+	$scope.closeMenu = true; // Variable pour afficher contenu du menu fermé
+
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
 	****************************************/
 	angular.extend($scope, {
 		center : {
-			lat: 48.853403,
-			lng: 2.348784,
-			zoom: 12
+			lat: 48.853403, // a changer par la géolocalisation de la personne
+			lng: 2.348784, // idem
+			zoom: 16
 		},
 		markers: {},
 		tiles : {
@@ -46,15 +53,58 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
 			for(key in markers){
+				switch(markers[key].typePlaces) {
+					case "Ecole":
+						iconMarker = ' icon-school';
+						colorMarker = 'darkgreen';
+						break;
+					case "Metro":
+						iconMarker = ' icon-subway';
+						colorMarker = 'darkgreen';
+						break;
+					case "Gare":
+						iconMarker = ' icon-subway';
+						colorMarker = 'lightgreen';
+						break;
+					case "Aéroport":
+						iconMarker = ' icon-airplane';
+						colorMarker = 'darkgreen';
+						break;
+					case "Restaurant":
+						iconMarker = ' icon-restaurant';
+						colorMarker = 'darkblue';
+						break;
+					case "Boutique":
+						iconMarker = ' icon-cart';
+						colorMarker = 'darkred';
+						break;
+					case "Loisir":
+						iconMarker = ' icon-dice';
+						colorMarker = 'orange';
+						break;
+					case "Parking":
+						iconMarker = ' icon-local_parking';
+						colorMarker = 'darkgreen';
+						break;
+					case "Administration":
+						iconMarker = ' icon-newspaper';
+						colorMarker = 'gray';
+						break;
+					case "Hébergement":
+						iconMarker = ' icon-bed';
+						colorMarker = 'cadetblue';
+						break;
+				}
+
 				value = {
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
 					message: markers[key].nameMarker,
 					icon: {
 						type: 'awesomeMarker',
-						icon : ' icon-subway',
+						icon : iconMarker,
 						iconColor : 'white',
-						markerColor: 'cadetblue'
+						markerColor: colorMarker
 					}
 				}
 				allMarkers.push(value);
@@ -76,74 +126,34 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/**********************************
 	*** Fonction filtre de la carte ***
 	**********************************/
+	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
 		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
 
 		$scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
-		infoTrace = [];
 
 		if(startPoint.length > 0 && endPoint.length > 0){
-
-			/**************************
-			*** Version MapquestApi ***
-			**************************/
-			// leafletData.getMap().then(function(map){
-			// 	trace = MQ.routing.directions()
-			// 		.on('success', function(data) {
-			// 			console.log(data.info.messages);
-			// 		})
-			// 		.on('error', function(data){
-			// 			console.log(data);
-			// 		});
-			//
-			// 		console.log(startPoint[0]['latitude']+"-"+startPoint[0]['longitude']);
-			// 		console.log(endPoint[0]['latitude']+"-"+endPoint[0]['longitude']);
-			// 	// permet de supprimer un itinéraire si existe déja
-			// 	// if(traceRoute){
-			// 	// 	map.removeLayer(traceRoute);
-			// 	// }
-			//
-			// 	// Permet d'informer les points de départs trajet
-			// 	trace.route({
-			// 		locations: [
-			// 			{ latLng: { lat: parseFloat(startPoint[0]['latitude']), lng: parseFloat(startPoint[0]['longitude']) } },
-			// 			{ latLng: { lat: parseFloat(endPoint[0]['latitude']), lng: parseFloat(endPoint[0]['longitude']) } }
-			// 		],
-			// 		options: {
-			// 			routeType: 'pedestrian',
-			// 			locale: 'fr_FR'
-			// 		}
-			// 	});
-			//
-			// 	// On ajoute les valeurs
-			// 	traceRoute = MQ.routing.routeLayer({
-			// 		directions: trace,
-			// 		fitBounds: true,
-			// 		zoom: 2,
-			// 	});
-			//
-			// 	// On ajoute à la carte les informations de l'itinéraire
-			// 	map.addLayer(traceRoute);
-			// });
 
 			/************************
 			*** Version with OSRM ***
 			************************/
 			leafletData.getMap().then(function(map){
-				// map.fitBounds([
-				// 	[parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])],
-				// 	[parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])]
-				// ]);
-				testOption = {
+
+				// Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau
+				if($scope.routing != ''){
+					$scope.routing.setWaypoints([]);
+					$scope.routing = '';
+				}
+
+				optionRouting = {
 					profile: 'mapbox/walking'
 				};
 
-				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', testOption);
-				console.log(mapboxRouter);
+				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
 
-				L.Routing.control({
+				$scope.routing = L.Routing.control({
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
@@ -151,21 +161,17 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					router : mapboxRouter,
 					show: false,
 					language : 'fr',
-				})
-				.addTo(map);
+				});
 
+				$scope.routing.addTo(map);
 			});
 		}
 	}
 
+	/** Chercher marker(s) sur la map **/
 	$scope.searchMap = function(){
 		$scope.markers = {};
 		resultSearch = [];
-
-		// permet de supprimer un itinéraire si existe déja
-		if(traceRoute){
-			map.removeLayer(traceRoute);
-		}
 
 		theSearch = filterFilter($scope.getMarkers, { 'infoSearch': $scope.searchMap.value});
 
@@ -177,9 +183,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					message : theSearch[keySearch]["nameMarker"],
 					icon: {
 						type: 'awesomeMarker',
-						icon : 'apple',
+						icon : ' icon-subway',
 						iconColor : 'white',
-						markerColor: 'black'
+						markerColor: 'cadetblue'
 					}
 				};
 
@@ -190,6 +196,19 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		$scope.markers = resultSearch;
 	}
 
+	/** Ouverture et fermeture du menu **/
+	$scope.actionMenu = function(){
+		if($scope.openMenu == true && $scope.closeMenu== false){
+			$scope.openMenu = false;
+			$scope.closeMenu = true;
+		}
+		else{
+			$scope.openMenu = true;
+			$scope.closeMenu = false;
+		}
+	}
+
+	/** A améliorer **/
 	$scope.seeAll = function(){
 
 		if($scope.filter == 1){

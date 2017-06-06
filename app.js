@@ -1,9 +1,10 @@
-var app = angular.module('HandiStress', ['ngRoute', 'leaflet-directive']);
+var app = angular.module('HandiStress', ['ngRoute', 'leaflet-directive', 'ui.bootstrap']);
 
 app.config(function($routeProvider, $locationProvider){
 	$routeProvider
 		.when('/', {
-			templateUrl : 'views/landing.html'
+			templateUrl : 'views/landing.html',
+			controller : 'landingController'
 		})
 		.when('/map', {
 			templateUrl : 'views/map.html',
