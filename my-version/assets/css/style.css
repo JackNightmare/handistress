@@ -63,9 +63,11 @@ li{ list-style: none; }
 ****************************************/
 .connect-button{
   position: absolute;
-  width: 100%;
+  width: 58%;
   margin-top: 1%;
   z-index: 100;
+  right: 0;
+  margin-right: 3%;
 }
 
 .connect-button .btn-connect{

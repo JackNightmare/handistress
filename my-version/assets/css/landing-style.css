@@ -58,7 +58,7 @@
 	transition-duration: 0.5s;
 }
 
-.landing-header .landing-access .landing-access-button:hover{ background-color: rgba(8, 149, 158, 1); }
+.landing-header .landing-access .landing-access-button:hover{ background-color: rgba(36, 113, 162, 1); }
 
 .landing-header .landing-next-section{
 	bottom: 5%;
