@@ -1,43 +1,43 @@
 <div ng-include="'views/header/connect-header.html'" ng-controller="headerController"></div>
 
-<nav class="nav-menu not-open">
-	<button class="nav-menu-button">
+<nav class="nav-menu " ng-class="{'not-open':closeMenu == true, 'open':openMenu==true}">
+	<button class="nav-menu-button" ng-click="actionMenu()">
 		<span></span>
 		<span></span>
 		<span></span>
 	</button>
-	<ul class="nav-menu-link"> 
+
+	<ul ng-if="closeMenu" class="nav-menu-link">
 		<li><a href="#/"> <i class="icon-home"></i></a></li>
 		<li class="page-active"> <a href="#/map"><i class="icon-map"></i></a></li>
 		<li> <a href="#/add-marker"><i class="icon-add-marker"></i></a></li>
 	</ul>
+
+	<div ng-if="openMenu">
+		<button ng-click="switchForm()">Form trace</button>
+		<button ng-click="switchForm()">Form </button>
+		<br><br>
+		<div ng-switch on="typeForm">
+			<form ng-switch-when='test1' ng-submit="traceMap()">
+				<input type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start' required>
+				<datalist id="startPoint">
+					<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.start} " value="{{marker.nameMarker}}"/>
+				</datalist>
+				<br><br>
+				<input type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end' required>
+				<datalist id="endPoint">
+					<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.end}  " value="{{marker.nameMarker}}"/>
+				</datalist>
+				<br><br>
+				<input type="submit" value="envoyer">
+			</form>
+
+			<form ng-switch-when='test2' ng-submit="searchMap()">
+				<input type="text" placeholder="recherche" list="listMarkers" ng-model='searchMap.value' required>
+				<br><br>
+				<input type="submit" value="rechercher">
+			</form>
+		</div>
 </nav>
 
 <leaflet center="center" tiles="tiles" defaults="defaults" event-broadcast="events" markers="markers" height="100%" width="100%" class="map-center"></leaflet>
-
-
-<!-- <button ng-click="switchForm()">Form trace</button>
-	<button ng-click="switchForm()">Form </button>
-	<br><br>
-	<div ng-switch on="typeForm">
-		<form ng-switch-when='test1' ng-submit="traceMap()">
-			<input type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start' required>
-			<datalist id="startPoint">
-				<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.start} " value="{{marker.nameMarker}}"/>
-			</datalist>
-			<br><br>
-			<input type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end' required>
-			<datalist id="endPoint">
-				<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.end}  " value="{{marker.nameMarker}}"/>
-			</datalist>
-			<br><br>
-			<input type="submit" value="envoyer">
-		</form>
-
-		<form ng-switch-when='test2' ng-submit="searchMap()">
-			<input type="text" placeholder="recherche" list="listMarkers" ng-model='searchMap.value' required>
-			<br><br>
-			<input type="submit" value="rechercher">
-		</form>
-
-	</div> -->

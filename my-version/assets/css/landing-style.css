@@ -1,5 +1,5 @@
 /*********************************
-*** Style général Landing Page *** 
+*** Style général Landing Page ***
 *********************************/
 
 /**********************
@@ -23,14 +23,14 @@
 .landing-header .landing-access .landing-access-line:first-child{ border-top: 2px solid #ffffff }
 .landing-header .landing-access .landing-access-line:nth-child(3){ border-bottom: 2px solid #ffffff }
 
-.landing-header .landing-access .landing-access-line .glyphicon{ 
+.landing-header .landing-access .landing-access-line .glyphicon{
 	display: block;
 	font-size: 20px;
 }
 .landing-header .landing-access .landing-access-line .glyphicon:first-child{ margin-top: -6px; }
 .landing-header .landing-access .landing-access-line .glyphicon:last-child{ margin-bottom: -4px; }
 
-.landing-header .landing-access .landing-access-info{ 
+.landing-header .landing-access .landing-access-info{
 	font-size: 18px;
 	margin-top: 5%;
 	margin-bottom: 5%;
@@ -104,13 +104,13 @@
 
 .landing-header .landing-next-section a:hover{
 	background-color: rgba(34, 90, 137, 1);
-	border: 2px solid rgba(255, 255, 255, 1); 
+	border: 2px solid rgba(255, 255, 255, 1);
 }
 .landing-header .landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
 .landing-header .landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
 
 /*****************************
-*** Section 1 Landing Page *** 
+*** Section 1 Landing Page ***
 *****************************/
 
 .landing-section1{
@@ -245,17 +245,21 @@
 }
 
 /*****************************
-*** Section 2 Landing Page *** 
+*** Section 2 Landing Page ***
 *****************************/
 
 .landing-section2{
 	height: 60vh;
-	background-color: #ACC6D7;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-image: url('../img/encore_test.jpg');
 }
 
 
 /*****************************
-*** Section 3 Landing Page *** 
+*** Section 3 Landing Page ***
 *****************************/
 .landing-section3{
 	height: 60vh;

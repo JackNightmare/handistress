@@ -11,6 +11,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.typeForm = 'test1'; // Variable pour change form
 	$scope.routing = ''; // Variable option pour tracer itinéraire
 
+	$scope.openMenu = false; // Variable pour afficher contenu du menu ouvert
+	$scope.closeMenu = true; // Variable pour afficher contenu du menu fermé
 
 
 	/****************************************
@@ -94,8 +96,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 				}
 
-				console.log(markers[key].nameMarker);
-
 				value = {
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
@@ -126,6 +126,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/**********************************
 	*** Fonction filtre de la carte ***
 	**********************************/
+	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
 		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
@@ -167,6 +168,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}
 	}
 
+	/** Chercher marker(s) sur la map **/
 	$scope.searchMap = function(){
 		$scope.markers = {};
 		resultSearch = [];
@@ -194,6 +196,19 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		$scope.markers = resultSearch;
 	}
 
+	/** Ouverture et fermeture du menu **/
+	$scope.actionMenu = function(){
+		if($scope.openMenu == true && $scope.closeMenu== false){
+			$scope.openMenu = false;
+			$scope.closeMenu = true;
+		}
+		else{
+			$scope.openMenu = true;
+			$scope.closeMenu = false;
+		}
+	}
+
+	/** A améliorer **/
 	$scope.seeAll = function(){
 
 		if($scope.filter == 1){
