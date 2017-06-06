@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: 'FuturaStd-Medium';
-  src:  url(fonts/FuturaStd-Medium.otf) format('opentype'),
+  src:url(fonts/FuturaStd-Medium.otf) format('opentype'),
   		url(fonts/FuturaStd-Medium.ttf) format('truetype'),
   		url(fonts/FuturaStd-Medium.svg#FuturaStd-Medium) format('svg');
   font-weight: normal;
@@ -40,48 +40,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-local_parking:before {
-  content: "\e54f";
-}
-.icon-restaurant:before {
-  content: "\e904";
-}
-.icon-school:before {
-  content: "\e900";
-}
-.icon-plane:before {
-  content: "\f072";
-}
-.icon-bed:before {
-  content: "\e901";
-}
-.icon-subway:before {
-  content: "\e902";
-}
-.icon-newspaper:before {
-  content: "\e905";
-}
-.icon-dice:before {
-  content: "\e915";
-}
-.icon-cart:before {
-  content: "\e93a";
-}
-.icon-airplane:before {
-  content: "\e9af";
-}
+.icon-local_parking:before { content: "\e54f"; }
+.icon-restaurant:before { content: "\e904"; }
+.icon-school:before { content: "\e900"; }
+.icon-plane:before { content: "\f072"; }
+.icon-bed:before { content: "\e901"; }
+.icon-subway:before { content: "\e902"; }
+.icon-newspaper:before { content: "\e905"; }
+.icon-dice:before { content: "\e915"; }
+.icon-cart:before { content: "\e93a"; }
+.icon-airplane:before { content: "\e9af"; }
 
-body{
-	font-family: 'FuturaStd-Medium';
-}
+body{ font-family: 'FuturaStd-Medium';}
 
-.row{
-	margin: 0px;
-}
+.row{ margin: 0px; }
 
-li{
-  list-style: none;
-}
+li{ list-style: none; }
 
 
 /****************************************
@@ -118,3 +92,72 @@ li{
 
 .connect-button .btn-signUp:hover{ background-color: rgba(88, 150, 167, 1); }
 .connect-button .btn-signIn:hover{ background-color: rgba(255,255, 255, 0.6); color:#000000; }
+
+
+/***************************************************
+*** Filtre pour afficher formulaire de connexion ***
+***************************************************/
+.fitler{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  position: fixed;
+  background-color: rgba(0, 0 , 0, 0.6);
+}
+
+.form-zone.connect-zone{
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  margin-top: 25%;
+}
+
+.form-zone.connect-zone button{
+  border: none;
+  width: 50px;
+  height: 50px;
+  float: right;
+  color: #498da1;
+  font-size: 25px;
+  margin-top: -20px;
+  margin-right: -20px;
+  border-radius: 50%;
+  background-color: #060606;
+}
+
+.form-zone.connect-zone button:hover{
+  background-color: #498da1;
+  color: #ffffff;
+}
+.form-zone.connect-zone button span{ top:4px; }
+
+.form-zone.connect-zone .connect-zone-title{
+  clear: both;
+  margin: auto;
+  color: #498da1;
+  font-size: 30px;
+  padding-bottom: 2%;
+  margin-bottom: 5%;
+  border-bottom: 2px solid #58a2ce; 
+}
+
+.form-zone.connect-zone .connect-zone-title b{ font-style: italic; }
+
+
+.form-zone.connect-zone .form-input{ margin-bottom: 2%; }
+.form-zone.connect-zone .form-input input{ height:40px; }
+
+.form-zone.connect-zone .connect-link{
+  width: 50%;
+  margin: auto;
+  text-align: left;
+  padding-left: 5px;
+  margin-bottom: 2%;
+}
+
+.form-zone.connect-zone .connect-link span{ font-family: arial; }
+
+.form-zone.connect-zone .btn-send{ height: 40px; }
+
+
