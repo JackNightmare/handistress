@@ -221,7 +221,7 @@ li{ list-style: none; }
   font-size: 40px;
 }
 
-.nav-menu.not-open .nav-menu-link li.page-active{ border-left: 3px solid #ffffff; }
+.nav-menu.not-open .nav-menu-link li.page-active{ border-left: 3px solid #ffffff; background-color:rgba(255,255,255,0.4);}
 
 .nav-menu.not-open .nav-menu-link li a{ color:#000000; }
 .nav-menu.not-open .nav-menu-link li a:hover{
