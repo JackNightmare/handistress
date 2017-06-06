@@ -4,13 +4,13 @@ app.factory('Marker', function($http, $q, $filter){
 	var factory = {
 		markers : false,
 		getMarkers : function(){
-			$http.get('json/markers.json')
+			$http.get('json/new_markers.json')
 				.success(function(data, status){
 					factory.markers = data;
 					deferred.resolve(factory.markers);
 				})
 				.error(function(data, status){
-					deferred.reject('un erreur mon con !');
+					deferred.reject('une erreurs lors du chargement des markers');
 				});
 			return deferred.promise;
 		}

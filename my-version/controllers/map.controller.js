@@ -18,9 +18,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	****************************************/
 	angular.extend($scope, {
 		center : {
-			lat: 48.853403,
-			lng: 2.348784,
-			zoom: 12
+			lat: 48.853403, // a changer par la géolocalisation de la personne
+			lng: 2.348784, // idem
+			zoom: 16
 		},
 		markers: {},
 		tiles : {
@@ -51,15 +51,60 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 			$scope.getMarkers = markers;
 			for(key in markers){
+				switch(markers[key].typePlaces) {
+					case "Ecole":
+						iconMarker = ' icon-school';
+						colorMarker = 'darkgreen';
+						break;
+					case "Metro":
+						iconMarker = ' icon-subway';
+						colorMarker = 'darkgreen';
+						break;
+					case "Gare":
+						iconMarker = ' icon-subway';
+						colorMarker = 'lightgreen';
+						break;
+					case "Aéroport":
+						iconMarker = ' icon-airplane';
+						colorMarker = 'darkgreen';
+						break;
+					case "Restaurant":
+						iconMarker = ' icon-restaurant';
+						colorMarker = 'darkblue';
+						break;
+					case "Boutique":
+						iconMarker = ' icon-cart';
+						colorMarker = 'darkred';
+						break;
+					case "Loisir":
+						iconMarker = ' icon-dice';
+						colorMarker = 'orange';
+						break;
+					case "Parking":
+						iconMarker = ' icon-local_parking';
+						colorMarker = 'darkgreen';
+						break;
+					case "Administration":
+						iconMarker = ' icon-newspaper';
+						colorMarker = 'gray';
+						break;
+					case "Hébergement":
+						iconMarker = ' icon-bed';
+						colorMarker = 'cadetblue';
+						break;
+				}
+
+				console.log(markers[key].nameMarker);
+
 				value = {
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
 					message: markers[key].nameMarker,
 					icon: {
 						type: 'awesomeMarker',
-						icon : ' icon-subway',
+						icon : iconMarker,
 						iconColor : 'white',
-						markerColor: 'cadetblue'
+						markerColor: colorMarker
 					}
 				}
 				allMarkers.push(value);

@@ -40,16 +40,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-local_parking:before { content: "\e54f"; }
-.icon-restaurant:before { content: "\e904"; }
-.icon-school:before { content: "\e900"; }
-.icon-plane:before { content: "\f072"; }
-.icon-bed:before { content: "\e901"; }
-.icon-subway:before { content: "\e902"; }
-.icon-newspaper:before { content: "\e905"; }
+.icon-magnifier:before { content: "\e900"; }
+.icon-racing-flags:before { content: "\e901"; }
+.icon-location:before { content: "\e902"; }
+.icon-home:before { content: "\e903"; }
+.icon-newspaper:before { content: "\e904"; }
 .icon-dice:before { content: "\e915"; }
 .icon-cart:before { content: "\e93a"; }
+.icon-map:before { content: "\e94b"; }
 .icon-airplane:before { content: "\e9af"; }
+.icon-add-marker:before { content: "\e905"; }
+.icon-access:before { content: "\e906"; }
+.icon-plus-square:before { content: "\e907"; }
+.icon-subway:before { content: "\e908"; }
+.icon-bed:before { content: "\e909"; }
+.icon-school:before { content: "\e90a"; }
+.icon-restaurant:before { content: "\e90b"; }
+.icon-local-parking:before { content: "\e90c"; }
 
 body{ font-family: 'FuturaStd-Medium';}
 
@@ -163,3 +170,65 @@ li{ list-style: none; }
 .form-zone.connect-zone .btn-send{ height: 40px; }
 
 
+/*************************
+*** Menu de navigation ***
+*************************/
+
+/** Menu général **/
+.nav-menu{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  z-index: 10;
+  /*transition: all 2s;*/
+}
+
+.nav-menu ul{
+  padding: 0;
+}
+
+/** Menu non ouvert **/
+.nav-menu.not-open{
+  width: 5%;
+  background-color: rgba(73, 141, 161, 0.8);
+}
+
+.nav-menu.not-open .nav-menu-button{
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 25%;
+}
+
+.nav-menu.not-open .nav-menu-button span{
+  height: 5px;
+  width: 60px;
+  margin: auto;
+  display: block;
+  margin-top: 20%;
+  border-radius: 2px;
+  background: #000000;
+}
+
+.nav-menu.not-open .nav-menu-link li{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25%;
+  font-size: 40px;
+}
+
+.nav-menu.not-open .nav-menu-link li.page-active{ border-left: 3px solid #ffffff; }
+
+.nav-menu.not-open .nav-menu-link li a{ color:#000000; }
+.nav-menu.not-open .nav-menu-link li a:hover{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/** Menu ouvert **/
+.nav-menu.open{
+  width: 20%;
+  background-color: rgba(73, 141, 161, 0.95);
+}
