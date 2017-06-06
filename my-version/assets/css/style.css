@@ -70,11 +70,11 @@ li{ list-style: none; }
 ****************************************/
 .connect-button{
   position: absolute;
-  width: 58%;
+  width: 37%;
   margin-top: 1%;
-  z-index: 100;
+  z-index: 20;
   right: 0;
-  margin-right: 3%;
+  margin-right: 5%;
 }
 
 .connect-button .btn-connect{
@@ -89,12 +89,14 @@ li{ list-style: none; }
   border: 2px solid #96d2e3;
   color: #ffffff;
   float: left;
+  margin-left: 6%;
 }
 
 .connect-button .btn-signIn{
   border: 2px solid #447887;
   color: #000000;
   float: right;
+  margin-right: 8%;
 }
 
 .connect-button .btn-signIn.correct-color{ color:#ffffff;}
@@ -148,7 +150,7 @@ li{ list-style: none; }
   font-size: 30px;
   padding-bottom: 2%;
   margin-bottom: 5%;
-  border-bottom: 2px solid #58a2ce; 
+  border-bottom: 2px solid #58a2ce;
 }
 
 .form-zone.connect-zone .connect-zone-title b{ font-style: italic; }
