@@ -23,16 +23,16 @@
 			<div class="title-form-map"> Informations de votre trajet </div>
 			<div>
 				<label for="startPoint"><span class="icon-location"></span></label>
-				<input id="startPoint" type="text" placeholder="point de départ" list="startPoint" ng-model='traceMap.start' required>
-				<datalist id="startPoint">
+				<input id="startPoint" type="text" placeholder="point de départ" list="listStartPoint" ng-model='traceMap.start' required>
+				<datalist id="listStartPoint">
 					<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.start} " value="{{marker.nameMarker}}"/>
 				</datalist>
 			</div>
 
 			<div>
 				<label for="endPoint"><span class="icon-racing-flags"></span></label>
-				<input id="endPoint" type="text" placeholder="point d'arrivé" list="endPoint" ng-model='traceMap.end' required>
-				<datalist id="endPoint">
+				<input id="endPoint" type="text" placeholder="point d'arrivé" list="listEndPoint" ng-model='traceMap.end' required>
+				<datalist id="listEndPoint">
 					<option ng-repeat="marker in getMarkers | filter : {nameMarker : traceMap.end}  " value="{{marker.nameMarker}}"/>
 				</datalist>
 			</div>

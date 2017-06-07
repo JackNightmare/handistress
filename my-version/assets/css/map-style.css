@@ -43,13 +43,18 @@
 
 .nav-menu .form-map .title-form-map{
 	width: 62%;
-    color: #ffffff;
-    font-size: 20px;
-    padding-bottom: 2%;
-    border-bottom: 1px solid #ffffff;
+  color: #ffffff;
+  font-size: 20px;
+  padding-bottom: 2%;
+  border-bottom: 1px solid #ffffff;
 }
 
 .nav-menu .form-map label{
 	color: #75cff0;
-    font-size: 40px;
+  font-size: 40px;
+}
+
+.nav-menu .form-map .btn-send{
+  margin: auto;
+  display: block;
 }
