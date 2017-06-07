@@ -9,3 +9,47 @@
   height:100%;
   position:fixed;
 }
+
+
+/*****************************************
+*** Style pour le formulaire de la map ***
+*****************************************/
+.nav-menu .switch-form-map{
+	color: #ffffff;
+    text-align: center;
+    margin-top: 9%;
+}
+
+.nav-menu .switch-form-map button {
+	width: 145px;
+    font-size: 16px;
+    padding-top: 2%;
+    font-style: italic;
+    padding-bottom: 2%;
+    margin-bottom: 30px;
+    border: 1px solid #368093;
+    background-color: rgba(236, 236, 236, 0.3);
+    /* height: 30px; */
+    /*width: 30%;
+    border: none;
+    border-radius: 0px;
+    font-size: 17px;
+    margin-top: 2%;
+    background-color: rgba(255, 255, 255, 0.4);*/
+}
+.nav-menu .switch-form-map button.form-active{ background-color: #155f8b;}
+
+.nav-menu .form-map{ padding-left: 2%; }
+
+.nav-menu .form-map .title-form-map{
+	width: 62%;
+    color: #ffffff;
+    font-size: 20px;
+    padding-bottom: 2%;
+    border-bottom: 1px solid #ffffff;
+}
+
+.nav-menu .form-map label{
+	color: red;
+	font-size: 25px;
+}

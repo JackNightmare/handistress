@@ -6,14 +6,14 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	*** Variable globale pour fonctionnement de la map ***
 	*****************************************************/
 	var allMarkers = []; // Variable pour markers
-	var traceRoute; // Variable pour tracer itinéraire
-	$scope.filter = 1; // Variable pour le filtre
-	$scope.typeForm = 'test1'; // Variable pour change form
+	$scope.filter = 1; // Pour activer le type de filtre, all markers actuellement
 	$scope.routing = ''; // Variable option pour tracer itinéraire
 
 	$scope.openMenu = false; // Variable pour afficher contenu du menu ouvert
 	$scope.closeMenu = true; // Variable pour afficher contenu du menu fermé
 
+	$scope.activeTrace = true;
+	$scope.activeSearch = false;
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -208,7 +208,24 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}
 	}
 
-	/** A améliorer **/
+	/** Ouverture du formulaire correspondant **/
+	$scope.formTrace = function(){
+		if($scope.activeTrace == false && $scope.activeSearch == true){
+			$scope.activeTrace = true;
+			$scope.activeSearch = false;
+		}
+	}
+
+	$scope.formSearch = function(){
+		if($scope.activeTrace == true && $scope.activeSearch == false){
+			$scope.activeTrace = false;
+			$scope.activeSearch = true;
+		}
+	}
+
+	/******************
+	*** A améliorer ***
+	******************/
 	$scope.seeAll = function(){
 
 		if($scope.filter == 1){
@@ -241,15 +258,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}
 	}
 
-	$scope.switchForm = function(){
-		if($scope.typeForm == 'test1'){
-			$scope.typeForm = 'test2';
-		}
-		else{
-			$scope.typeForm = 'test1';
-		}
-	}
-
+	/** Suprresion des markers **/
 	$scope.removeMarkers = function(){
 		$scope.markers = {};
 	}
