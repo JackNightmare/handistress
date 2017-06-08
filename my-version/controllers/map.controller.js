@@ -162,7 +162,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			*** Version with OSRM ***
 			************************/
 			leafletData.getMap().then(function(map){
-				console.log("je veux te voir" + parseFloat(startPoint[0]['latitude']));
 				/** Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau **/
 				if($scope.routing != ''){
 					$scope.routing.setWaypoints([]);
@@ -171,7 +170,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 				optionRouting = {
 					profile: 'mapbox/walking',
-					language : 'fr'
+					language : 'fr',
+					// alternatives : false
 				};
 
 				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
