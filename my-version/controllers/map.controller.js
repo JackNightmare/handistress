@@ -12,8 +12,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.openMenu = false; // Variable pour afficher contenu du menu ouvert
 	$scope.closeMenu = true; // Variable pour afficher contenu du menu fermé
 
-	$scope.activeTrace = true;
-	$scope.activeSearch = false;
+	$scope.activeTrace = true; // Formulaire de trace visible
+	$scope.activeSearch = false; // Formulaire de recherche invisible
 
 
 
@@ -53,7 +53,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	***********************************************/
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
-			
+
 			/** variable globale pour les markers **/
 			$scope.markersList = markers;
 			iconColor = 'white'; // couleur de l'icon par default
@@ -62,7 +62,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				switch(markers[key].typePlaces) {
 					case "Ecole":
 						iconMarker = ' icon-school';
-						colorMarker = 'darkgreen';
+						colorMarker = 'lightgray';
 						break;
 					case "Metro":
 						iconMarker = ' icon-subway';
@@ -70,11 +70,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 					case "Gare":
 						iconMarker = ' icon-subway';
-						colorMarker = 'lightgreen';
+						colorMarker = 'darkpurple';
 						break;
 					case "Aéroport":
 						iconMarker = ' icon-airplane';
-						colorMarker = 'darkgreen';
+						colorMarker = 'lightblue';
 						break;
 					case "Restaurant":
 						iconMarker = ' icon-restaurant';
@@ -90,7 +90,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 					case "Parking":
 						iconMarker = ' icon-local_parking';
-						colorMarker = 'darkgreen';
+						colorMarker = 'blue';
 						break;
 					case "Administration":
 						iconMarker = ' icon-newspaper';
@@ -127,7 +127,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}, function(msg){ // Ici action en cas d'erreur
 			console.log(msg);
 		});
-	
+
 	/************************************
 	*** Action directement sur la map ***
 	************************************/
@@ -163,7 +163,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			************************/
 			leafletData.getMap().then(function(map){
 				console.log("je veux te voir" + parseFloat(startPoint[0]['latitude']));
-				// Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau
+				/** Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau **/
 				if($scope.routing != ''){
 					$scope.routing.setWaypoints([]);
 					$scope.routing = '';
@@ -193,7 +193,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	/** Chercher marker(s) sur la map **/
 	$scope.searchMap = function(){
-		
+
+		/** On supprime l'itinéraire si existe  **/
+		if($scope.routing != ''){
+			$scope.routing.setWaypoints([]);
+			$scope.routing = '';
+		}
+
 		/* On vide tout sur la carte */
 		$scope.markers = {};
 		resultSearch = [];
@@ -207,11 +213,10 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 		if(theSearch.length > 0){
 			for (keySearch in theSearch){
-
 				switch(theSearch[keySearch]["typePlaces"]) {
 					case "Ecole":
 						iconMarker = ' icon-school';
-						colorMarker = 'darkgreen';
+						colorMarker = 'lightgray';
 						break;
 					case "Metro":
 						iconMarker = ' icon-subway';
@@ -219,11 +224,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 					case "Gare":
 						iconMarker = ' icon-subway';
-						colorMarker = 'lightgreen';
+						colorMarker = 'darkpurple';
 						break;
 					case "Aéroport":
 						iconMarker = ' icon-airplane';
-						colorMarker = 'darkgreen';
+						colorMarker = 'lightblue';
 						break;
 					case "Restaurant":
 						iconMarker = ' icon-restaurant';
@@ -239,7 +244,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 					case "Parking":
 						iconMarker = ' icon-local_parking';
-						colorMarker = 'darkgreen';
+						colorMarker = 'blue';
 						break;
 					case "Administration":
 						iconMarker = ' icon-newspaper';
@@ -255,8 +260,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						iconColor = 'black';
 						break;
 				}
-				
-				infoResult = {			
+
+				infoResult = {
 					lat : parseFloat(theSearch[keySearch]["latitude"]),
 					lng : parseFloat(theSearch[keySearch]["longitude"]),
 					message : theSearch[keySearch]["typePlaces"]+" - "+theSearch[keySearch]["nameMarker"],
@@ -278,7 +283,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		$scope.center.lat = searchLat;
 		$scope.center.lng = searchLng;
 		$scope.center.zoom = 14;
-		
+
 		/** Résultat de la recheche sur la carte **/
 		$scope.markers = resultSearch;
 	}
@@ -312,6 +317,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	/** Permet de voir tout les markers disponibles  **/
 	$scope.seeAll = function(){
+
+		/** On supprime l'itinéraire si existe  **/
+		if($scope.routing != ''){
+			$scope.routing.setWaypoints([]);
+			$scope.routing = '';
+		}
+
 		/* On le vide obligatoirement les markers */
 		$scope.markers = {};
 		allMarkers = [];
@@ -339,7 +351,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					switch(markers[key].typePlaces) {
 						case "Ecole":
 							iconMarker = ' icon-school';
-							colorMarker = 'darkgreen';
+							colorMarker = 'lightgray';
 							break;
 						case "Metro":
 							iconMarker = ' icon-subway';
@@ -347,11 +359,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 							break;
 						case "Gare":
 							iconMarker = ' icon-subway';
-							colorMarker = 'lightgreen';
+							colorMarker = 'darkpurple';
 							break;
 						case "Aéroport":
 							iconMarker = ' icon-airplane';
-							colorMarker = 'darkgreen';
+							colorMarker = 'lightblue';
 							break;
 						case "Restaurant":
 							iconMarker = ' icon-restaurant';
@@ -367,7 +379,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 							break;
 						case "Parking":
 							iconMarker = ' icon-local_parking';
-							colorMarker = 'darkgreen';
+							colorMarker = 'blue';
 							break;
 						case "Administration":
 							iconMarker = ' icon-newspaper';
@@ -399,7 +411,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					allMarkers.push(value);
 				}
 				$scope.markers = allMarkers;
-			}, function(msg){ 
+			}, function(msg){
 				console.log(msg); // Ici action en cas d'erreur
 			});
 		}
@@ -409,6 +421,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	*** A améliorer ***
 	******************/
 	$scope.seePlace = function(){
+
+		/** On supprime l'itinéraire si existe  **/
+		if($scope.routing != ''){
+			$scope.routing.setWaypoints([]);
+			$scope.routing = '';
+		}
+
 		/* On le vide obligatoirement les markers */
 		$scope.markers = {};
 		allMarkers = [];
@@ -423,6 +442,12 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	}
 
 	$scope.seeAccess = function(){
+		/** On supprime l'itinéraire si existe  **/
+		if($scope.routing != ''){
+			$scope.routing.setWaypoints([]);
+			$scope.routing = '';
+		}
+
 		if($scope.filter == 3){
 			$scope.filter = 0;
 		}
@@ -432,8 +457,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	}
 
 	/** Suprresion des markers **/
-	$scope.removeMarkers = function(){
-		$scope.markers = {};
-	}
+	// $scope.removeMarkers = function(){
+	// 	$scope.markers = {};
+	// }
 
 });
