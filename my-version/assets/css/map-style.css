@@ -58,3 +58,44 @@
   margin: auto;
   display: block;
 }
+
+/*************************************
+*** Style pour le filtre de la map ***
+*************************************/
+.map-filter{
+  width: 59%;
+  position: absolute;
+  bottom: 3%;
+  right: 4%;
+  height: 75px;
+  background-color: rgba(16, 124, 154, 0.5);
+}
+
+.map-filter button{
+  width: 50px;
+  height: 100%;
+  border: none;
+  border-left: 5px solid #ffffff;
+  background-color: rgba(16, 124, 154, 0.5);
+  float: left;
+}
+
+.map-filter .map-filter-type{
+  width: 45%;
+  height: 100%;
+  float: left;
+  display: block;
+}
+
+.map-filter .map-filter-type .name-filter{
+  float: left;
+  height: 100%;
+  width: 33.33%;
+  font-size: 18px;
+  padding-top: 22px;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.map-filter .map-filter-type .name-filter.filter-active{ background-color: rgba(255, 255, 255, 0.5); }

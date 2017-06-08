@@ -4,7 +4,7 @@ app.factory('Marker', function($http, $q, $filter){
 	var factory = {
 		markers : false,
 		getMarkers : function(){
-			$http.get('json/new_markers.json')
+			$http.get('json/new_markers.json') // Mettre l'api pour tout charger
 				.success(function(data, status){
 					factory.markers = data;
 					deferred.resolve(factory.markers);

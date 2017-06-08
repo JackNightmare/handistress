@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope , Marker, filterFilter, leafletData ){
+app.controller('mapController', function($scope , Marker, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
   $scope.boutonInscription = true;
 
@@ -14,6 +14,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	$scope.activeTrace = true;
 	$scope.activeSearch = false;
+
+
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -46,12 +48,16 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}
 	});
 
-	/********************************
-	*** Mise en place des markers ***
-	********************************/
+	/**********************************************
+	*** Mise en place des markers au chargement ***
+	***********************************************/
 	$scope.getMarkers = Marker.getMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
-			$scope.getMarkers = markers;
+			
+			/** variable globale pour les markers **/
+			$scope.markersList = markers;
+			iconColor = 'white'; // couleur de l'icon par default
+
 			for(key in markers){
 				switch(markers[key].typePlaces) {
 					case "Ecole":
@@ -94,16 +100,23 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						iconMarker = ' icon-bed';
 						colorMarker = 'cadetblue';
 						break;
+					default :
+						iconMarker = ' icon-access';
+						colorMarker = ' white';
+						iconColor = 'black';
+						break;
 				}
 
 				value = {
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
-					message: markers[key].nameMarker,
+					message: markers[key].typePlaces+" - "+markers[key].nameMarker,
+					title: markers[key].typePlaces+" - "+markers[key].nameMarker,
+					/*enable: ,*/
 					icon: {
 						type: 'awesomeMarker',
 						icon : iconMarker,
-						iconColor : 'white',
+						iconColor : iconColor,
 						markerColor: colorMarker
 					}
 				}
@@ -114,13 +127,21 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}, function(msg){ // Ici action en cas d'erreur
 			console.log(msg);
 		});
-
-	/**********************
-	*** Action drag map ***
-	**********************/
+	
+	/************************************
+	*** Action directement sur la map ***
+	************************************/
+	/** Drag sur la map **/
 	$scope.$on('leafletDirectiveMap.drag', function(){
 		// console.log($scope.center.lat); // On get la latitude
 		// console.log($scope.center.lng); // On get la longitude
+	});
+
+	/** Clique sur un marker **/
+	$scope.$on('leafletDirectiveMarker.click', function(event, args){
+		/*Ouvrir un petit menu avec tout les informations */
+		console.log(args.model.message);
+
 	});
 
 	/**********************************
@@ -128,8 +149,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	**********************************/
 	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
-		startPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.start}, true );
-		endPoint = filterFilter($scope.getMarkers, { 'nameMarker': $scope.traceMap.end}, true );
+
+		startPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.start}, true );
+		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end}, true );
 
 		$scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
@@ -140,7 +162,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			*** Version with OSRM ***
 			************************/
 			leafletData.getMap().then(function(map){
-
+				console.log("je veux te voir" + parseFloat(startPoint[0]['latitude']));
 				// Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau
 				if($scope.routing != ''){
 					$scope.routing.setWaypoints([]);
@@ -148,7 +170,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				}
 
 				optionRouting = {
-					profile: 'mapbox/walking'
+					profile: 'mapbox/walking',
+					language : 'fr'
 				};
 
 				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
@@ -166,33 +189,100 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				$scope.routing.addTo(map);
 			});
 		}
+
+		/** On change le zoom histoire d'avoir un itinéraire plus lisible **/
+		$scope.center.zoom = 15;
 	}
 
 	/** Chercher marker(s) sur la map **/
 	$scope.searchMap = function(){
+		
+		/* On vide tout sur la carte */
 		$scope.markers = {};
 		resultSearch = [];
+		$scope.filter = 0;
 
-		theSearch = filterFilter($scope.getMarkers, { 'infoSearch': $scope.searchMap.value});
+		/* couleur de base des icones */
+		iconColor = 'white';
+
+		/* Tableau avec résultats des recherches effectuées */
+		theSearch = filterFilter($scope.markersList, { 'infoSearch': $scope.searchMap.value});
 
 		if(theSearch.length > 0){
 			for (keySearch in theSearch){
-				infoResult = {
+
+				switch(theSearch[keySearch]["typePlaces"]) {
+					case "Ecole":
+						iconMarker = ' icon-school';
+						colorMarker = 'darkgreen';
+						break;
+					case "Metro":
+						iconMarker = ' icon-subway';
+						colorMarker = 'darkgreen';
+						break;
+					case "Gare":
+						iconMarker = ' icon-subway';
+						colorMarker = 'lightgreen';
+						break;
+					case "Aéroport":
+						iconMarker = ' icon-airplane';
+						colorMarker = 'darkgreen';
+						break;
+					case "Restaurant":
+						iconMarker = ' icon-restaurant';
+						colorMarker = 'darkblue';
+						break;
+					case "Boutique":
+						iconMarker = ' icon-cart';
+						colorMarker = 'darkred';
+						break;
+					case "Loisir":
+						iconMarker = ' icon-dice';
+						colorMarker = 'orange';
+						break;
+					case "Parking":
+						iconMarker = ' icon-local_parking';
+						colorMarker = 'darkgreen';
+						break;
+					case "Administration":
+						iconMarker = ' icon-newspaper';
+						colorMarker = 'gray';
+						break;
+					case "Hébergement":
+						iconMarker = ' icon-bed';
+						colorMarker = 'cadetblue';
+						break;
+					default :
+						iconMarker = ' icon-access';
+						colorMarker = ' white';
+						iconColor = 'black';
+						break;
+				}
+				
+				infoResult = {			
 					lat : parseFloat(theSearch[keySearch]["latitude"]),
 					lng : parseFloat(theSearch[keySearch]["longitude"]),
-					message : theSearch[keySearch]["nameMarker"],
+					message : theSearch[keySearch]["typePlaces"]+" - "+theSearch[keySearch]["nameMarker"],
 					icon: {
 						type: 'awesomeMarker',
-						icon : ' icon-subway',
-						iconColor : 'white',
-						markerColor: 'cadetblue'
+						icon : iconMarker,
+						iconColor : iconColor,
+						markerColor: colorMarker
 					}
 				};
+
+				searchLat = parseFloat(theSearch[keySearch]["latitude"]);
+				searchLng =  parseFloat(theSearch[keySearch]["longitude"]);
 
 				resultSearch.push(infoResult);
 			}
 		}
-
+		/** on recentre la carte sur les dernieres coordonnées géographique trouvés  **/
+		$scope.center.lat = searchLat;
+		$scope.center.lng = searchLng;
+		$scope.center.zoom = 14;
+		
+		/** Résultat de la recheche sur la carte **/
 		$scope.markers = resultSearch;
 	}
 
@@ -223,25 +313,112 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		}
 	}
 
-	/******************
-	*** A améliorer ***
-	******************/
+	/** Permet de voir tout les markers disponibles  **/
 	$scope.seeAll = function(){
+		/* On le vide obligatoirement les markers */
+		$scope.markers = {};
+		allMarkers = [];
 
+		/** on recntre le zoom **/
+		$scope.center.zoom = 15;
+
+		/** Si on clique alors que le filtre est actif, on le désactive et plus rien n'est sur la carte **/
 		if($scope.filter == 1){
 			$scope.filter = 0;
-			$scope.markers = {};
 		}
 		else{
+
+			// Dans le cas contraire, on remets filter à 1 car le filtre est actic
 			$scope.filter = 1;
-			$scope.markers = allMarkers;
+
+			/** Ici on charge la fonction dans le models **/
+			$scope.getMarkers = Marker.getMarkers()
+			.then(function(markers){
+
+				/* Ici on definit les variables pour les markers */
+				iconColor = 'white';
+
+				for(key in markers){
+					switch(markers[key].typePlaces) {
+						case "Ecole":
+							iconMarker = ' icon-school';
+							colorMarker = 'darkgreen';
+							break;
+						case "Metro":
+							iconMarker = ' icon-subway';
+							colorMarker = 'darkgreen';
+							break;
+						case "Gare":
+							iconMarker = ' icon-subway';
+							colorMarker = 'lightgreen';
+							break;
+						case "Aéroport":
+							iconMarker = ' icon-airplane';
+							colorMarker = 'darkgreen';
+							break;
+						case "Restaurant":
+							iconMarker = ' icon-restaurant';
+							colorMarker = 'darkblue';
+							break;
+						case "Boutique":
+							iconMarker = ' icon-cart';
+							colorMarker = 'darkred';
+							break;
+						case "Loisir":
+							iconMarker = ' icon-dice';
+							colorMarker = 'orange';
+							break;
+						case "Parking":
+							iconMarker = ' icon-local_parking';
+							colorMarker = 'darkgreen';
+							break;
+						case "Administration":
+							iconMarker = ' icon-newspaper';
+							colorMarker = 'gray';
+							break;
+						case "Hébergement":
+							iconMarker = ' icon-bed';
+							colorMarker = 'cadetblue';
+							break;
+						default :
+							iconMarker = ' icon-access';
+							colorMarker = ' white';
+							iconColor = 'black';
+							break;
+					}
+
+					value = {
+						lat: parseFloat(markers[key].latitude),
+						lng: parseFloat(markers[key].longitude) ,
+						message: markers[key].nameMarker,
+						icon: {
+							type: 'awesomeMarker',
+							icon : iconMarker,
+							iconColor : iconColor,
+							markerColor: colorMarker
+						}
+					}
+					/* On mets dans le tableau les informations du marker créé */
+					allMarkers.push(value);
+				}
+				$scope.markers = allMarkers;
+			}, function(msg){ 
+				console.log(msg); // Ici action en cas d'erreur
+			});
 		}
 	}
 
+	/******************
+	*** A améliorer ***
+	******************/
 	$scope.seePlace = function(){
+		/* On le vide obligatoirement les markers */
+		$scope.markers = {};
+		allMarkers = [];
+
+		/** Si on clique alors que le filtre est actif, on le désactive et plus rien n'est sur la carte **/
 		if($scope.filter == 2){
 			$scope.filter = 0;
-			// Action à mener pour vider la carte
 		}
 		else{
 			$scope.filter = 2;
@@ -251,7 +428,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.seeAccess = function(){
 		if($scope.filter == 3){
 			$scope.filter = 0;
-			// Action à mener pour vider la carte
 		}
 		else{
 			$scope.filter = 3;
