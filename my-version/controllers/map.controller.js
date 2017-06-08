@@ -189,9 +189,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				$scope.routing.addTo(map);
 			});
 		}
-
-		/** On change le zoom histoire d'avoir un itinéraire plus lisible **/
-		$scope.center.zoom = 15;
 	}
 
 	/** Chercher marker(s) sur la map **/
