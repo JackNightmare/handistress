@@ -139,7 +139,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/** Clique sur un marker **/
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
 		/*Ouvrir un petit menu avec tout les informations */
-		console.log(args.model);
+		if($scope.markers.length > 2){
+			console.log(args.model.message);
+		}
 	});
 
 	/**********************************
@@ -151,8 +153,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		startPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.start}, true );
 		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end}, true );
 
-		console.log("destroy");
-		delete $scope.markers;
+		$scope.markers = {};
+		delete $scope.markers.value;
 
 		// $scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
@@ -173,7 +175,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					markerColor: 'darkblue'
 				}
 			};
-			
+
 			valueMarkers.push(valueStart);
 
 			valueEnd = {
@@ -439,7 +441,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					value = {
 						lat: parseFloat(markers[key].latitude),
 						lng: parseFloat(markers[key].longitude) ,
-						message: markers[key].nameMarker,
+						message: markers[key].typePlaces+" - "+markers[key].nameMarker,
 						icon: {
 							type: 'awesomeMarker',
 							icon : iconMarker,
