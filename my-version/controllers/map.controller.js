@@ -139,7 +139,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/** Clique sur un marker **/
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
 		/*Ouvrir un petit menu avec tout les informations */
-		console.log(args.model.message);
+		console.log(args.model);
 	});
 
 	/**********************************
@@ -151,10 +151,14 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		startPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.start}, true );
 		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end}, true );
 
-		$scope.markers = {}; // On vide le markers sur la carte
+		console.log("destroy");
+		delete $scope.markers;
+
+		// $scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
 		valueMarkers = [];
 
+		console.log($scope);
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
