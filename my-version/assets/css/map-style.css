@@ -10,6 +10,9 @@
   position:fixed;
 }
 
+/** permet de cacher le container d'itinéraire **/
+.leaflet-routing-container-hide{ display: none !important; }
+
 
 /*****************************************
 *** Style pour le formulaire de la map ***

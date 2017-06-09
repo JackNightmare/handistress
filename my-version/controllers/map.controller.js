@@ -51,7 +51,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/**********************************************
 	*** Mise en place des markers au chargement ***
 	***********************************************/
-	$scope.getMarkers = Marker.getMarkers()
+	$scope.getAllMarkers = Marker.getAllMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 
 			/** variable globale pour les markers **/
@@ -141,7 +141,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
 		/*Ouvrir un petit menu avec tout les informations */
 		console.log(args.model.message);
-
 	});
 
 	/**********************************
@@ -155,8 +154,41 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 		$scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
+		valueMarkers = [];
+
 
 		if(startPoint.length > 0 && endPoint.length > 0){
+
+
+			valueStart = {
+				lat: parseFloat(startPoint[0]['latitude']),
+				lng: parseFloat(startPoint[0]['longitude']),
+				message: "Depart",
+				icon: {
+					type: 'awesomeMarker',
+					iconColor : 'white',
+					markerColor: 'darkblue'
+				}
+			};
+			
+			valueMarkers.push(valueStart);
+
+			valueEnd = {
+				lat: parseFloat(endPoint[0]['latitude']),
+				lng: parseFloat(endPoint[0]['longitude']),
+				message: 'Arrivé',
+				icon: {
+					type: 'awesomeMarker',
+					iconColor : 'white',
+					markerColor: 'darkred'
+				}
+			};
+
+			valueMarkers.push(valueEnd);
+
+			$scope.markers = valueMarkers;
+
+			console.log($scope.markers);
 
 			/************************
 			*** Version with OSRM ***
@@ -165,13 +197,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				/** Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau **/
 				if($scope.routing != ''){
 					$scope.routing.setWaypoints([]);
+					$scope.routing.hide();
 					$scope.routing = '';
 				}
 
 				optionRouting = {
 					profile: 'mapbox/walking',
 					language : 'fr',
-					// alternatives : false
 				};
 
 				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
@@ -179,10 +211,12 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				$scope.routing = L.Routing.control({
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
+						L.latLng(48.866636,2.337372), // Test itinéraire optimisé
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
 					],
+					createMarker: function(){ return null; },
 					router : mapboxRouter,
-					show: false,
+					show: true,
 					language : 'fr',
 				});
 
@@ -197,6 +231,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.routing.hide();
 			$scope.routing = '';
 		}
 
@@ -321,6 +356,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.routing.hide();
 			$scope.routing = '';
 		}
 
@@ -341,7 +377,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			$scope.filter = 1;
 
 			/** Ici on charge la fonction dans le models **/
-			$scope.getMarkers = Marker.getMarkers()
+			$scope.getAllMarkers = Marker.getAllMarkers()
 			.then(function(markers){
 
 				/* Ici on definit les variables pour les markers */
@@ -425,6 +461,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.routing.hide();
 			$scope.routing = '';
 		}
 
@@ -445,6 +482,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.routing.hide();
 			$scope.routing = '';
 		}
 
@@ -455,10 +493,4 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			$scope.filter = 3;
 		}
 	}
-
-	/** Suprresion des markers **/
-	// $scope.removeMarkers = function(){
-	// 	$scope.markers = {};
-	// }
-
 });
