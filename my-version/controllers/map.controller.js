@@ -111,8 +111,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
 					message: markers[key].typePlaces+" - "+markers[key].nameMarker,
-					title: markers[key].typePlaces+" - "+markers[key].nameMarker,
-					/*enable: ,*/
+					// enable : "",
 					icon: {
 						type: 'awesomeMarker',
 						icon : iconMarker,
@@ -159,11 +158,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 		if(startPoint.length > 0 && endPoint.length > 0){
 
-
 			valueStart = {
 				lat: parseFloat(startPoint[0]['latitude']),
 				lng: parseFloat(startPoint[0]['longitude']),
 				message: "Depart",
+				title : startPoint[0]['nameMarker'],
 				icon: {
 					type: 'awesomeMarker',
 					iconColor : 'white',
@@ -177,6 +176,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				lat: parseFloat(endPoint[0]['latitude']),
 				lng: parseFloat(endPoint[0]['longitude']),
 				message: 'Arrivé',
+				title: endPoint[0]['nameMarker'],
 				icon: {
 					type: 'awesomeMarker',
 					iconColor : 'white',
