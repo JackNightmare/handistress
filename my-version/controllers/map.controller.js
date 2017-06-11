@@ -159,9 +159,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		// $scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
 		valueMarkers = [];
-
-		console.log($scope);
-
+		
 		if(startPoint.length > 0 && endPoint.length > 0){
 
 			valueStart = {
@@ -217,7 +215,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				$scope.routing = L.Routing.control({
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
-						L.latLng(48.866636,2.337372), // Test itinéraire optimisé
+						// L.latLng(48.866636,2.337372), // Test itinéraire optimisé
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
 					],
 					createMarker: function(){ return null; },
