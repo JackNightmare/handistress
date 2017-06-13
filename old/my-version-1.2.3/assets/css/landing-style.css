@@ -1,0 +1,335 @@
+/*********************************
+*** Style général Landing Page ***
+*********************************/
+
+/** Titre des session **/
+.landing-section-entitle{
+	text-align: center;
+	font-size: 30px;
+	color:#ffffff;
+	padding-top: 2%;
+}
+
+.landing-section-entitle span{ font-family: arial; }
+
+.landing-section-entitle .section-entitle-line{
+	width: 60%;
+	height: 1px;
+	margin: auto;
+	margin-top: 3%;
+	display: block;
+	background-color: #ffffff;
+}
+
+/**********************
+*** Landing Header  ***
+**********************/
+.landing-header{
+	height: 90vh;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center center;
+	background-image: url(../img/landing.jpg);
+}
+
+.landing-header .landing-access{
+	color:#ffffff;
+	padding-top: 6%;
+	text-align: center;
+}
+
+.landing-header .landing-access .landing-access-line{ width: 100%; }
+.landing-header .landing-access .landing-access-line:first-child{ border-top: 2px solid #ffffff }
+.landing-header .landing-access .landing-access-line:nth-child(3){ border-bottom: 2px solid #ffffff }
+
+.landing-header .landing-access .landing-access-line .glyphicon{
+	display: block;
+	font-size: 20px;
+}
+.landing-header .landing-access .landing-access-line .glyphicon:first-child{ margin-top: -6px; }
+.landing-header .landing-access .landing-access-line .glyphicon:last-child{ margin-bottom: -4px; }
+
+.landing-header .landing-access .landing-access-info{
+	font-size: 18px;
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+
+.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 35px;}
+.landing-header .landing-access .landing-access-info p { margin-top: 5%; }
+
+.landing-header .landing-access .landing-access-logo {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: rgba(8, 149, 158, 0.4);;
+	margin: auto;
+	margin-top: 10%;
+	padding-top: 6%
+}
+
+.landing-header .landing-access .landing-access-button{
+	background-color: rgba(33, 87, 131, 0.6);
+	color:#ffffff;
+	width: 75%;
+	margin-top: 10%;
+	font-size: 30px;
+	transition-duration: 0.5s;
+}
+
+.landing-header .landing-access .landing-access-button:hover{ background-color: rgba(36, 113, 162, 1); }
+
+.landing-header .landing-next-section{
+	bottom: 3%;
+	width: 100%;
+	position: absolute;
+	text-align: center;
+}
+
+.landing-header .landing-next-section a{
+	width: 90px;
+	height: 90px;
+	margin: auto;
+	color: #ffffff;
+	display: block;
+	overflow: hidden;
+	border-radius: 50%;
+	background-color: rgba(34, 90, 137, 0.3);
+	border: 2px solid rgba(255, 255, 255, 0.6);
+	-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	transition: all .6s cubic-bezier(.12, .79, .38, .99);
+}
+
+
+.landing-header .landing-next-section a .glyphicon{	font-size: 45px; }
+
+
+.landing-header .landing-next-section .next-section-top{
+	-webkit-transform: translate(-0%, -150%);
+	-ms-transform: translate(-0%, -150%);
+	transform: translate(-0%, -150%);
+	-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	transition: all .6s cubic-bezier(.12, .79, .38, .99);
+}
+
+.landing-header .landing-next-section .next-section{
+	-webkit-transform: translate(0%, -65%);
+	-ms-transform: translate(0%, -65%);
+	transform: translate(0%, -65%);
+	-webkit-transition: all .6s cubic-bezier(.12, .79, .38, .99);
+	transition: all .6s cubic-bezier(.12, .79, .38, .99);
+}
+
+
+.landing-header .landing-next-section a:hover{
+	background-color: rgba(34, 90, 137, 1);
+	border: 2px solid rgba(255, 255, 255, 1);
+}
+.landing-header .landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
+.landing-header .landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
+
+/*****************************
+*** Section 1 Landing Page ***
+*****************************/
+
+.landing-section1{
+	height: 45vh;
+	color: #ffffff;
+	text-align: center;
+	background-color: #225A89;
+}
+
+
+.landing-section1 .landing-section1-statistics{ margin-top: 3%; }
+
+.landing-section1 .landing-section1-statistics p{
+	width: 50%;
+	margin: auto;
+	font-style: italic;
+	font-size: 18px;
+	margin-bottom: 4%;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph{
+	position: relative;
+	width: 190px;
+	height: 190px;
+	margin: auto;
+	overflow: hidden;
+	text-align: center;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	background-color: #ffffff;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph .graph-part-1{
+	position: absolute;
+	z-index: 11;
+	background-color: #19334A;
+	width: 100%;
+	height: 100%;
+	clip: rect(0px, 110px, 110px, 110px);
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	/* Animation */
+	-webkit-animation-delay: 1.2s;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-name: right-slice;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+}
+
+
+
+.landing-section1 .landing-section1-statistics .statistics-graph .graph-part-2{
+	position: absolute;
+	z-index: 11;
+	background-color: #19334A;
+	width: 100%;
+	height: 100%;
+	clip: rect(110px, 110px, 220px, 110px);
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	/* Animation */
+	-webkit-animation-delay: 1.5s;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-name: left-slice;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-fill-mode: forwards;
+}
+
+
+.landing-section1 .landing-section1-statistics .statistics-graph .graph-information{
+    z-index: 12;
+    width: 90%;
+    height: 90%;
+	font-size: 22px;
+    margin-top: 10px;
+    margin-left: 10px;
+	padding-top: 25%;
+    position: absolute;
+    border-radius: 50%;
+	background-color: #7A9EB8;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph .graph-information span{
+	display: inline-block;
+	font-size: 16px;
+}
+
+
+/* Animation rapide pour graphique */
+@-webkit-keyframes right-slice {
+  from {
+    clip: rect(0px, 110px, 110px, 110px);
+  }
+  50% {
+    clip: rect(0px, 220px, 110px, 110px);
+  }
+  to {
+    clip: rect(0px, 220px, 220px, 110px);
+  }
+}
+
+@-webkit-keyframes left-slice {
+  from {
+    clip: rect(110px, 110px, 220px, 110px);
+  }
+  50% {
+    clip: rect(110px, 110px, 220px, 0px);
+  }
+  to {
+    clip: rect(50px, 110px, 220px, 0px);
+  }
+}
+
+/*****************************
+*** Section 2 Landing Page ***
+*****************************/
+
+.landing-section2{
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-image: url('../img/trace-section.jpg');
+}
+
+.landing-section2 .landing-section-entitle{ color: #225a89; padding-top: 7%; padding-bottom: 10%; }
+.landing-section2 .section-entitle-line { background-color: #225a89; }
+
+.trace-line span{
+	height: 2px;
+	display: block;
+	background: #69c5e8;
+	margin: auto;
+}
+
+/** Section tracer les itinéraire général **/
+
+.trace-line span:first-child,.trace-line span:last-child{
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	border: 2px solid #69c5e8;
+	background-color: transparent;
+}
+
+
+/** 1er itinéraire **/
+.trace-line.trace-1 span:nth-child(2){ width:50px; margin-top: 22px; transform: rotate(90deg); }
+.trace-line.trace-1 span:nth-child(3){ width: 85px; transform: rotate(45deg) translate(59px, 16px) }
+.trace-line.trace-1 span:nth-child(4){ width: 80px; transform: translate(99px, 81px); }
+.trace-line.trace-1 span:nth-child(5){ width: 35px; transform: rotate(-45deg) translate(60px, 154px) }
+.trace-line.trace-1 span:nth-child(6){ transform: translate(170px, 37px); }
+
+/** 2nd itinéraire **/
+.trace-line.trace-2 span:first-child{ transform: translate(50px, 0px); }
+.trace-line.trace-2 span:nth-child(2){ width: 110px; transform: rotate(-30deg) translate(-14px, 14px); }
+.trace-line.trace-2 span:nth-child(3){ width: 40px; transform: rotate(90deg) translate(65px, 52px) }
+.trace-line.trace-2 span:nth-child(4){ width: 80px; transform: rotate(-20deg) translate(-117px, 61px); }
+.trace-line.trace-2 span:nth-child(5){ transform: translate(-136px, 102px); }
+
+
+
+
+.landing-section2-information .section2-zone-text{
+	font-size: 16px;
+    line-height: 30px;
+    width: 80%;
+    background-color: rgba(7, 85, 101, 0.3);
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    margin-left: 35%;
+}
+
+.landing-section2-information .section2-zone-text strong{ font-size: 18px; }
+
+.landing-section2-information .section2-zone-text span{ font-style: italic; font-size: 13px; }
+
+.landing-section2-information .section2-map-trace{
+    width: 100%;
+    display: block;
+    padding-top: 55%;
+	background-size: cover;
+    background-position: center center;
+    background-image: url('../img/trace-section2.png');
+}
+
+/*****************************
+*** Section 3 Landing Page ***
+*****************************/
+.landing-section3{
+	height: 60vh;
+	background-color: #ffffff;
+}
+
+
+/****************************
+*** Style spécifique size ***
+***************************

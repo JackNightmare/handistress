@@ -1,0 +1,259 @@
+@font-face {
+  font-family: 'FuturaStd-Medium';
+  src: url(fonts/FuturaStd-Medium.eot) format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FuturaStd-Medium';
+  src:url(fonts/FuturaStd-Medium.otf) format('opentype'),
+  		url(fonts/FuturaStd-Medium.ttf) format('truetype'),
+  		url(fonts/FuturaStd-Medium.svg#FuturaStd-Medium) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?ue31pc');
+  src:  url('fonts/icomoon.eot?ue31pc#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?ue31pc') format('truetype'),
+    url('fonts/icomoon.woff?ue31pc') format('woff'),
+    url('fonts/icomoon.svg?ue31pc#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-magnifier:before { content: "\e900"; }
+.icon-racing-flags:before { content: "\e901"; }
+.icon-location:before { content: "\e902"; }
+.icon-home:before { content: "\e903"; }
+.icon-newspaper:before { content: "\e904"; }
+.icon-dice:before { content: "\e915"; }
+.icon-cart:before { content: "\e93a"; }
+.icon-map:before { content: "\e94b"; }
+.icon-airplane:before { content: "\e9af"; }
+.icon-add-marker:before { content: "\e905"; }
+.icon-access:before { content: "\e906"; }
+.icon-plus-square:before { content: "\e907"; }
+.icon-subway:before { content: "\e908"; }
+.icon-bed:before { content: "\e909"; }
+.icon-school:before { content: "\e90a"; }
+.icon-restaurant:before { content: "\e90b"; }
+.icon-local-parking:before { content: "\e90c"; }
+
+body{ font-family: 'FuturaStd-Medium';}
+
+.row{ margin: 0px; }
+
+li{ list-style: none; }
+
+
+/****************************************
+*** Bouton de connexion / inscription ***
+****************************************/
+.connect-button{
+  position: absolute;
+  width: 37%;
+  margin-top: 1%;
+  z-index: 20;
+  right: 0;
+  margin-right: 5%;
+}
+
+.connect-button .btn-connect{
+  font-size: 16px;
+  border-radius: 0px;
+  width: 160px;
+  background-color: transparent;
+}
+
+.connect-button .btn-signUp{
+  background-color: rgba(88, 150, 167, 0.5);
+  border: 2px solid #96d2e3;
+  color: #ffffff;
+  float: left;
+  margin-left: 6%;
+}
+
+.connect-button .btn-signIn{
+  border: 2px solid #447887;
+  color: #000000;
+  float: right;
+  margin-right: 8%;
+}
+
+.connect-button .btn-signIn.correct-color{ color:#ffffff;}
+
+.connect-button .btn-signUp:hover{ background-color: rgba(88, 150, 167, 1); }
+.connect-button .btn-signIn:hover{ background-color: rgba(255,255, 255, 0.6); color:#000000; }
+
+
+/***************************************************
+*** Filtre pour afficher formulaire de connexion ***
+***************************************************/
+.fitler{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  position: fixed;
+  background-color: rgba(0, 0 , 0, 0.6);
+}
+
+.form-zone.connect-zone{
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  margin-top: 25%;
+}
+
+.form-zone.connect-zone button{
+  width: 50px;
+  height: 50px;
+  float: right;
+  color: #498da1;
+  font-size: 25px;
+  margin-top: -20px;
+  margin-right: -20px;
+  border-radius: 50%;
+  background-color: #f9f9f9;
+  border: 2px solid #58a2ce;
+}
+
+.form-zone.connect-zone button:hover{
+  background-color: #498da1;
+  color: #ffffff;
+}
+.form-zone.connect-zone button span{ top:4px; }
+
+.form-zone.connect-zone .connect-zone-title{
+  clear: both;
+  margin: auto;
+  color: #498da1;
+  font-size: 30px;
+  padding-bottom: 2%;
+  margin-bottom: 5%;
+  border-bottom: 2px solid #58a2ce;
+}
+
+.form-zone.connect-zone .connect-zone-title b{ font-style: italic; }
+
+
+.form-zone.connect-zone .form-input{ margin-bottom: 2%; }
+.form-zone.connect-zone .form-input input{ height:40px; }
+
+.form-zone.connect-zone .connect-link{
+  width: 50%;
+  margin: auto;
+  text-align: left;
+  padding-left: 5px;
+  margin-bottom: 2%;
+}
+
+.form-zone.connect-zone .connect-link span{ font-family: arial; }
+
+.form-zone.connect-zone .btn-send{ height: 40px; }
+
+
+/*************************
+*** Menu de navigation ***
+*************************/
+
+/** Menu général **/
+.nav-menu{
+  top: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  z-index: 10;
+  /*transition: all 2s;*/
+}
+
+.nav-menu ul{
+  padding: 0;
+}
+
+/** Menu non ouvert **/
+.nav-menu.not-open{
+  width: 5%;
+  background-color: rgba(73, 141, 161, 0.8);
+}
+
+.nav-menu.not-open .nav-menu-button{
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 25%;
+  height:10%;
+}
+
+.nav-menu.not-open .nav-menu-button span{
+  height: 5px;
+  width: 60px;
+  margin: auto;
+  display: block;
+  margin-top: 20%;
+  border-radius: 2px;
+  background: #000000;
+}
+
+.nav-menu.not-open .nav-menu-link li{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25%;
+  font-size: 40px;
+}
+
+.nav-menu.not-open .nav-menu-link li.page-active{ border-left: 3px solid #ffffff; background-color:rgba(255,255,255,0.4);}
+
+.nav-menu.not-open .nav-menu-link li a{ color:#000000; }
+.nav-menu.not-open .nav-menu-link li a:hover{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/** Menu ouvert **/
+.nav-menu.open{
+  width: 20%;
+  background-color: rgba(73, 141, 161, 0.95);
+}
+
+.nav-menu.open .nav-menu-button{
+  width: 23%;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 25%;
+  height: 10%;
+  float: right;
+}
+.nav-menu.open .nav-menu-button span{
+  height: 5px;
+  width: 50px;
+  display: block;
+  margin-top: 12%;
+  border-radius: 2px;
+  background: #000000;
+}
+
+
+.nav-menu.open .nav-menu-button span:nth-child(1){transform: rotate(-45deg) translate(-7px, 8px)}
+.nav-menu.open .nav-menu-button span:nth-child(2){opacity: 0;}
+.nav-menu.open .nav-menu-button span:nth-child(3){transform: rotate(45deg) translate(-7px, -11px); }
