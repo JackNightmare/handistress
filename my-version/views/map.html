@@ -23,18 +23,26 @@
 			<div class="title-form-map"> Informations de votre trajet </div>
 			<div>
 				<label for="startPoint"><span class="icon-location"></span></label>
+				<div style="display:inline-block;">
+					<input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+				</div>
+				<!-- <label for="startPoint"><span class="icon-location"></span></label>
 				<input id="startPoint" type="text" placeholder="point de départ" list="listStartPoint" ng-model='traceMap.start' required>
 				<datalist id="listStartPoint">
 					<option ng-repeat="marker in markersList | filter : {nameMarker : traceMap.start} " value="{{marker.nameMarker}}"/>
-				</datalist>
+				</datalist> -->
 			</div>
 
 			<div>
 				<label for="endPoint"><span class="icon-racing-flags"></span></label>
+				<div style="display:inline-block;">
+					<input id="endPoint" type="text" placeholder="point d'arrivé" ng-model='traceMap.end' uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+				</div>
+				<!-- <label for="endPoint"><span class="icon-racing-flags"></span></label>
 				<input id="endPoint" type="text" placeholder="point d'arrivé" list="listEndPoint" ng-model='traceMap.end' required>
 				<datalist id="listEndPoint">
 					<option ng-repeat="marker in markersList | filter : {nameMarker : traceMap.end}  " value="{{marker.nameMarker}}"/>
-				</datalist>
+				</datalist> -->
 			</div>
 			
 			<input class="btn btn-send" type="submit" value="Tracer l'itinéraire">
@@ -49,6 +57,11 @@
 </nav>
 
 <leaflet center="center" tiles="tiles" defaults="defaults" event-broadcast="events" markers="markers" height="100%" width="100%" class="map-center"></leaflet>
+
+
+<div class="marker-information" ng-if="openPopin">
+	Test
+</div>
 
 <div class="map-filter">
 	<button>

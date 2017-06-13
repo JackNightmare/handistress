@@ -1,6 +1,6 @@
 app.controller('mapController', function($scope , Marker, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
-  $scope.boutonInscription = true;
+	$scope.boutonInscription = true;
 
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***
@@ -14,8 +14,9 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	$scope.activeTrace = true; // Formulaire de trace visible
 	$scope.activeSearch = false; // Formulaire de recherche invisible
+	$scope.functionTrace = false; // Permet de dire si l'itinéraire est tracé ou pas 
 
-
+	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -102,15 +103,22 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 					default :
 						iconMarker = ' icon-access';
-						colorMarker = ' white';
+						colorMarker = 'lightgray';
 						iconColor = 'black';
 						break;
+				}
+
+				if(markers[key].typePlaces == "NULL"){ 
+					markerMessage = "Accès - "+markers[key].nameMarker;
+				}
+				else{
+					markerMessage = markers[key].typePlaces+" - "+markers[key].nameMarker;
 				}
 
 				value = {
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
-					message: markers[key].typePlaces+" - "+markers[key].nameMarker,
+					message: markerMessage,
 					// enable : "",
 					icon: {
 						type: 'awesomeMarker',
@@ -136,10 +144,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		// console.log($scope.center.lng); // On get la longitude
 	});
 
-	/** Clique sur un marker **/
+	/** Clique sur un marker pour ouvrir un popin à gauche **/
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
-		/*Ouvrir un petit menu avec tout les informations */
-		if($scope.markers.length > 2){
+		
+		if($scope.functionTrace == false){
+			$scope.openPopin = true;
 			console.log(args.model.message);
 		}
 	});
@@ -150,18 +159,24 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 
-		startPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.start}, true );
-		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end}, true );
+		/** On recupere les valeurs du formulaires **/
+		startPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.start.nameMarker}, true );
+		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end.nameMarker}, true );
 
+		/** On cache la popin si ouverte **/
+		$scope.openPopin = false;
+
+		/** On vide les valeurs des markers **/
 		$scope.markers = {};
 		delete $scope.markers.value;
-
-		// $scope.markers = {}; // On vide le markers sur la carte
 		$scope.filter = 0;
 		valueMarkers = [];
-		
-		if(startPoint.length > 0 && endPoint.length > 0){
 
+		if(startPoint.length > 0 && endPoint.length > 0){
+			/** On dit que l'itinéraire est tracé **/
+			$scope.functionTrace = true;
+				
+			/** Mise en place des markers de départ et d'arrivé **/
 			valueStart = {
 				lat: parseFloat(startPoint[0]['latitude']),
 				lng: parseFloat(startPoint[0]['longitude']),
@@ -191,8 +206,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			valueMarkers.push(valueEnd);
 
 			$scope.markers = valueMarkers;
-
-			console.log($scope.markers);
 
 			/************************
 			*** Version with OSRM ***
@@ -231,6 +244,12 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	/** Chercher marker(s) sur la map **/
 	$scope.searchMap = function(){
+
+		/** On cache la popin si ouverte **/
+		$scope.openPopin = false;
+
+		/** L'itinéraire tracé est faux **/
+		$scope.functionTrace = false;
 
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
@@ -295,7 +314,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 					default :
 						iconMarker = ' icon-access';
-						colorMarker = ' white';
+						colorMarker = 'lightgray';
 						iconColor = 'black';
 						break;
 				}
@@ -356,6 +375,12 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 
 	/** Permet de voir tout les markers disponibles  **/
 	$scope.seeAll = function(){
+
+		/** On cache la popin si ouverte **/
+		$scope.openPopin = false;
+
+		/** L'itinéraire tracé est faux **/
+		$scope.functionTrace = false;
 
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
@@ -461,6 +486,11 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	*** A améliorer ***
 	******************/
 	$scope.seePlace = function(){
+		/** On cache la popin si ouverte **/
+		$scope.openPopin = false;
+
+		/** L'itinéraire tracé est faux **/
+		$scope.functionTrace = false;
 
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
@@ -483,6 +513,12 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 	}
 
 	$scope.seeAccess = function(){
+		/** On cache la popin si ouverte **/
+		$scope.openPopin = false;
+
+		/** L'itinéraire tracé est faux **/
+		$scope.functionTrace = false;
+
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);

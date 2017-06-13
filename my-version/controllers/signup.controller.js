@@ -70,22 +70,16 @@ app.controller('signupController', function($scope, $http){
   /*****************************
   *** Controle Handicap User ***
   *****************************/
-  $scope.controleUserHandicap = function(){
-
-    console.log('je veux te voir ');
-    console.log($scope.userHandicap);
-
-    // Si l'utilisateur n'a aucun handicap, pas d'étape suivante
-    if ($scope.userHandicap == false){
+  $scope.controleUserHandicapTrue = function(){
       $scope.userHandicap = true; // Valeur à true car on peut accéder à l'étapes suivante
       $scope.valueNextStep = true; // Valeur à true car on peut accéder à l'étape suivante
       $scope.sendForm = false; // Valeur à false car l'envoie du formulaire n'est pas possible
-    }
-    else{ // Si la personne est handicapé, on accede à de nouvelles étapes
+  }
+
+  $scope.controleUserHandicapFalse = function(){
       $scope.userHandicap = false; // valeur à false car les étapes suivantes sont inutiles
       $scope.valueNextStep = false; // valeur à false car les étapes suivantes sont inutiles
       $scope.sendForm = true; // Valeur à true car pas besoin des étapes suivantes pour valider le formulaire
-    }
   }
 
   /****************************

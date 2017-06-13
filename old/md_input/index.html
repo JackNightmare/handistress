@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="ui.bootstrap.demo">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular.js - Typeahead</title>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  
+  <div ng-controller="MainCtrl">
+    <h4>Custom templates for results</h4>
+    <pre>Model: {{selected | json}}</pre>
+    <input type="text" ng-model="selected" uib-typeahead="country as country.Name for country in names | filter:{Name:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+  <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
+  <script src="js/index.js"></script>
+
+</body>
+</html>
