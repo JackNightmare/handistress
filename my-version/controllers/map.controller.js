@@ -169,12 +169,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			
 
 			if(informations[3]){
-				if(informations[3] == "null"){
-					markerDescriptionExit = "Absence de description des sorties et entrées" ;
-				}
-				else{
-					markerDescriptionExit = informations[3];
-				}
+				markerDescriptionExit = informations[3] == "null" ? "Absence de description des sorties et entrées" : informations[3];
 			}
 			else{
 				markerDescriptionExit = "Absence Description des sorties et entrées" ;
@@ -197,36 +192,22 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			/** Controle des toilets **/
 			if(markerType != "Metro" && markerType != "Parking" && markerType != "NULL" ){
 				$scope.markerSeeToilet = true;
-				if(markerToilet == 'null' || markerToilet == "0"){
-					$scope.toilet = false;
-				}
-				else{
-					$scope.toilet = true;
-				}
-			}
 
-			console.log(markerType);
+				$scope.toilet = markerToilet == 'null' || markerToilet == "0" ? false : true ; 
+			}
 
 			/** Controle des equipements**/
 			if(markerType != "NULL" ){
 				$scope.markerSeeEquipment = true;
-				if(markerEquipment== 'null' || markerEquipment == "0"){
-					$scope.equipment = false;
-				}
-				else{
-					$scope.equipment = true;
-				}
+				
+				$scope.equipment = markerEquipment== 'null' || markerEquipment == "0" ? false : true ;
 			}
 
 			/** Controle sur portique handicape **/
 			if(markerType != "NULL" ){
 				$scope.markerSeeGantry = true;
-				if(markerGantry== 'null' || markerGantry == "0"){
-					$scope.gantry = false;
-				}
-				else{
-					$scope.gantry = true;
-				}
+				
+				$scope.gantry = markerGantry== 'null' || markerGantry == "0" ? false : true ;
 			}
 
 			/** Controle pour le metro **/
@@ -235,12 +216,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			if($scope.markerSeeMetro){
 				$scope.allExitPopin = markerSortie;
 
-				if(markerOffice == "1"){
-					$scope.office = true;
-				}
-				else{
-					$scope.office = false;
-				}
+				$scope.office = markerOffice == "1" ? true : false ;
+				$scope.linesMetros = markerSubway;
 			}
 		}
 	});
