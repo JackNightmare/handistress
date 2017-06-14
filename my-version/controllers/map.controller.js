@@ -115,11 +115,13 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					markerMessage = markers[key].typePlaces+" - "+markers[key].nameMarker;
 				}
 
+				markerEnable = markers[key].typePlaces+" - "+markers[key].nameMarker + " - "+ markers[key].accessEnterExit+" - "+markers[key].toiletAdapt+" - "+markers[key].equipmentAdapt+" - "+ markers[key].handicapGantry+" - "+ markers[key].exitNumber+" - "+ markers[key].informationOffice+" - "+ markers[key].subwayLine;
+				
 				value = {
 					lat: parseFloat(markers[key].latitude),
 					lng: parseFloat(markers[key].longitude) ,
 					message: markerMessage,
-					// enable : "",
+					enable : markerEnable,
 					icon: {
 						type: 'awesomeMarker',
 						icon : iconMarker,
@@ -149,9 +151,16 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		
 		if($scope.functionTrace == false){
 			$scope.openPopin = true;
-			console.log(args.model.message);
+
+			information = $scope.args.enable.split('-');
+			console.log(information[0]);
 		}
 	});
+
+	/** Fermeture de la popin d'information **/
+	$scope.closePopin = function(){
+		$scope.openPopin = false;
+	}
 
 	/**********************************
 	*** Fonction filtre de la carte ***
@@ -183,7 +192,8 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				message: "Depart",
 				title : startPoint[0]['nameMarker'],
 				icon: {
-					type: 'awesomeMarker',
+					type : 'awesomeMarker',
+					icon : ' icon-location',
 					iconColor : 'white',
 					markerColor: 'darkblue'
 				}
@@ -198,6 +208,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				title: endPoint[0]['nameMarker'],
 				icon: {
 					type: 'awesomeMarker',
+					icon : ' icon-racing-flags',
 					iconColor : 'white',
 					markerColor: 'darkred'
 				}
@@ -319,10 +330,20 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 						break;
 				}
 
+				if(theSearch[keySearch]["typePlaces"] == "NULL"){ 
+					markerMessage = "Accès - "+theSearch[keySearch]["nameMarker"];
+				}
+				else{
+					markerMessage = theSearch[keySearch]["typePlaces"]+" - "+theSearch[keySearch]["nameMarker"];
+				}
+
+				markerEnable = theSearch[keySearch]['typePlaces']+" - "+theSearch[keySearch]['nameMarker'] + " - "+ theSearch[keySearch]['accessEnterExit']+" - "+theSearch[keySearch]['toiletAdapt']+" - "+theSearch[keySearch]['equipmentAdapt']+" - "+ theSearch[keySearch]['handicapGantry']+" - "+ theSearch[keySearch]['exitNumber']+" - "+ theSearch[keySearch]['informationOffice']+" - "+ theSearch[keySearch]['subwayLine'];
+
 				infoResult = {
 					lat : parseFloat(theSearch[keySearch]["latitude"]),
 					lng : parseFloat(theSearch[keySearch]["longitude"]),
-					message : theSearch[keySearch]["typePlaces"]+" - "+theSearch[keySearch]["nameMarker"],
+					message : markerMessage,
+					enable : markerEnable,
 					icon: {
 						type: 'awesomeMarker',
 						icon : iconMarker,
@@ -456,15 +477,18 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 							break;
 						default :
 							iconMarker = ' icon-access';
-							colorMarker = ' white';
+							colorMarker = 'lightgray';
 							iconColor = 'black';
 							break;
 					}
 
+					markerEnable = markers[key].typePlaces+" - "+markers[key].nameMarker + " - "+ markers[key].accessEnterExit+" - "+markers[key].toiletAdapt+" - "+markers[key].equipmentAdapt+" - "+ markers[key].handicapGantry+" - "+ markers[key].exitNumber+" - "+ markers[key].informationOffice+" - "+ markers[key].subwayLine;
+				
 					value = {
 						lat: parseFloat(markers[key].latitude),
 						lng: parseFloat(markers[key].longitude) ,
 						message: markers[key].typePlaces+" - "+markers[key].nameMarker,
+						enable : markerEnable,
 						icon: {
 							type: 'awesomeMarker',
 							icon : iconMarker,

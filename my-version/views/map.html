@@ -60,7 +60,36 @@
 
 
 <div class="marker-information" ng-if="openPopin">
-	Test
+	<div class="row">
+		<div class="col-md-12 col-lg-12"> 
+			<div class="marker-title"> {{ testPopin }} 
+				<span class="glyphicon glyphicon-remove" ng-click="closePopin()"></span>
+			</div>
+			<div class="marker-informations">
+				<div class="marker-info-group">
+					<div class="info-title">Description</div>
+					<p> lorem ipsium kjdiehdie dhei idhie jdis ajdoz ha dujoz jdei  </p>
+				</div>
+				<div class="marker-info-group">
+					<div class="info-title">Toilettes Adaptés <span class="icon-checkbox-check"></span></div>
+				</div>
+				<div class="marker-info-group" ng-if="markerLoisir">
+					<div class="info-title">Equipements Adaptés <span class="icon-checkbox-check"></span></div>
+				</div>
+				<div class="marker-info-group">
+					<div class="info-title">Portiques pour handicapé <span class="icon-checkbox-unchecked"></span></div>
+				</div>
+				
+				<div class="marker-info-group" ng-if="markerMetro">
+					<div class="info-title">Bureau d'information  <span class="icon-checkbox-check"></span></div>
+				</div>
+				<div class="marker-info-group" ng-if="markerMetro">
+					<div class="info-title">Ligne de metro</div>
+					<div> Ligne de metro disponible  </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="map-filter">

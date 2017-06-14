@@ -70,9 +70,51 @@
   z-index: 200;
   right: 1%;
   top: 25%;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
   width: 20%;
 }
+
+.marker-information .row{ margin-right: -15px; margin-left: -15px; }
+
+.marker-information .marker-title{
+  font-size: 30px;
+  color: #ffffff;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+  background-color: rgba(73, 141, 161, 0.8);
+}
+
+.marker-information .marker-title span{
+  float: right;
+  margin-right: 3%;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.marker-information .marker-info-group{
+  margin-bottom: 5%;
+  padding-left: 5%;
+}
+
+.marker-information .marker-info-group .info-title{
+  font-size: 20px;
+  color: #084056;
+}
+
+.marker-information .marker-info-group p{
+  font-size: 15px;
+  font-style: italic;
+  padding-right: 5%;
+}
+
+.marker-information .marker-info-group span{
+  float: right;
+  margin-right: 25%;
+}
+
+.marker-information .marker-info-group .icon-checkbox-check{ color:#75cff0; font-size: 25px;}
+.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 26%;}
 
 /*************************************
 *** Style pour le filtre de la map ***

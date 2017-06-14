@@ -57,6 +57,8 @@
 .icon-school:before { content: "\e90a"; }
 .icon-restaurant:before { content: "\e90b"; }
 .icon-local-parking:before { content: "\e90c"; }
+.icon-checkbox-unchecked:before { content: "\ea53"; }
+.icon-checkbox-check:before { content: "\e90d"; }
 
 body{ font-family: 'FuturaStd-Medium';}
 
