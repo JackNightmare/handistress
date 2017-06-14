@@ -62,15 +62,15 @@
 <div class="marker-information" ng-if="openPopin">
 	<div class="row">
 		<div class="col-md-12 col-lg-12"> 
-			<div class="marker-title"> {{ testPopin }} 
+			<div class="marker-title"> {{ titlePopin }} 
 				<span class="glyphicon glyphicon-remove" ng-click="closePopin()"></span>
 			</div>
 			<div class="marker-informations">
 				<div class="marker-info-group">
 					<div class="info-title">Description</div>
-					<p> lorem ipsium kjdiehdie dhei idhie jdis ajdoz ha dujoz jdei  </p>
+					<p> {{ descriptionPopin }}  </p>
 				</div>
-				<div class="marker-info-group">
+				<div class="marker-info-group" ng-if="markerInfo">
 					<div class="info-title">Toilettes Adaptés <span class="icon-checkbox-check"></span></div>
 				</div>
 				<div class="marker-info-group" ng-if="markerLoisir">
