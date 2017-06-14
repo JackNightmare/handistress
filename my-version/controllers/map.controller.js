@@ -115,7 +115,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					markerMessage = markers[key].typePlaces+" - "+markers[key].nameMarker;
 				}
 
-				markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker + "/"+ markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
+				markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
 				
 				value = {
 					lat: parseFloat(markers[key].latitude),
@@ -158,16 +158,90 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 			/** On ouvre la popin **/
 			$scope.openPopin = true;
 
+			/** titre pour la popin **/
+			markerType = informations[0];
+			markerTitle = informations[1];
+
 			/** Mise en place des informations pour la popin **/
-			$scope.titlePopin = informations[0] != "NULL " ? informations[0]+" - "+informations[1] : "Accès - "+informations[1];
+			$scope.titlePopin = markerType != "NULL" ? markerType+" - "+markerTitle : "Accès - "+markerTitle;
 
-			$scope.descriptionPopin = informations[2];
+			markerDescription = informations[2] != "" ? informations[2] : "Pas de description générale";
+			
 
-			$scope.markerMetro = informations[0] == "Metro" ? true : false;
+			if(informations[3]){
+				if(informations[3] == "null"){
+					markerDescriptionExit = "Absence de description des sorties et entrées" ;
+				}
+				else{
+					markerDescriptionExit = informations[3];
+				}
+			}
+			else{
+				markerDescriptionExit = "Absence Description des sorties et entrées" ;
+			}	
 
-			$scope.markerInfo = true;
-			$scope.markerLoisir = true;
+			markerToilet = informations[4];
+			markerEquipment = informations[5];
+			markerGantry = informations[6];
+			
+			/** Information si metro **/
+			markerSortie = informations[7];
+			markerOffice = informations[8];
+			markerSubway = informations[9];
 
+
+			/** Variable de retour pour la Popin  **/
+			$scope.descriptionPopin = markerDescription
+			$scope.descriptionExit = markerDescriptionExit;
+
+			/** Controle des toilets **/
+			if(markerType != "Metro" && markerType != "Parking" && markerType != "NULL" ){
+				$scope.markerSeeToilet = true;
+				if(markerToilet == 'null' || markerToilet == "0"){
+					$scope.toilet = false;
+				}
+				else{
+					$scope.toilet = true;
+				}
+			}
+
+			console.log(markerType);
+
+			/** Controle des equipements**/
+			if(markerType != "NULL" ){
+				$scope.markerSeeEquipment = true;
+				if(markerEquipment== 'null' || markerEquipment == "0"){
+					$scope.equipment = false;
+				}
+				else{
+					$scope.equipment = true;
+				}
+			}
+
+			/** Controle sur portique handicape **/
+			if(markerType != "NULL" ){
+				$scope.markerSeeGantry = true;
+				if(markerGantry== 'null' || markerGantry == "0"){
+					$scope.gantry = false;
+				}
+				else{
+					$scope.gantry = true;
+				}
+			}
+
+			/** Controle pour le metro **/
+			$scope.markerSeeMetro = informations[0] == "Metro" ? true : false;
+
+			if($scope.markerSeeMetro){
+				$scope.allExitPopin = markerSortie;
+
+				if(markerOffice == "1"){
+					$scope.office = true;
+				}
+				else{
+					$scope.office = false;
+				}
+			}
 		}
 	});
 
@@ -351,7 +425,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 					markerMessage = theSearch[keySearch]["typePlaces"]+" - "+theSearch[keySearch]["nameMarker"];
 				}
 
-				markerEnable = theSearch[keySearch]['typePlaces']+"/"+theSearch[keySearch]['nameMarker']+"/"+theSearch[keySearch]['accessEnterExit']+"/"+theSearch[keySearch]['toiletAdapt']+"/"+theSearch[keySearch]['equipmentAdapt']+"/"+ theSearch[keySearch]['handicapGantry']+"/"+ theSearch[keySearch]['exitNumber']+"/"+ theSearch[keySearch]['informationOffice']+"/"+ theSearch[keySearch]['subwayLine'];
+				markerEnable = theSearch[keySearch]['typePlaces']+"/"+theSearch[keySearch]['nameMarker']+"/"+theSearch[keySearch]['descriptionMarker']+"/"+theSearch[keySearch]['accessEnterExit']+"/"+theSearch[keySearch]['toiletAdapt']+"/"+theSearch[keySearch]['equipmentAdapt']+"/"+ theSearch[keySearch]['handicapGantry']+"/"+ theSearch[keySearch]['exitNumber']+"/"+ theSearch[keySearch]['informationOffice']+"/"+ theSearch[keySearch]['subwayLine'];
 
 				infoResult = {
 					lat : parseFloat(theSearch[keySearch]["latitude"]),
@@ -495,7 +569,7 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 							break;
 					}
 
-					markerEnable = markers[key].typePlaces+"-"+markers[key].nameMarker+"-"+markers[key].accessEnterExit+"-"+markers[key].toiletAdapt+"-"+markers[key].equipmentAdapt+"-"+markers[key].handicapGantry+"-"+markers[key].exitNumber+"-"+markers[key].informationOffice+"-"+markers[key].subwayLine;
+					markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+markers[key].handicapGantry+"/"+markers[key].exitNumber+"/"+markers[key].informationOffice+"/"+markers[key].subwayLine;
 				
 					value = {
 						lat: parseFloat(markers[key].latitude),

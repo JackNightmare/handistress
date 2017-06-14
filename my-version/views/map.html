@@ -68,22 +68,33 @@
 			<div class="marker-informations">
 				<div class="marker-info-group">
 					<div class="info-title">Description</div>
-					<p> {{ descriptionPopin }}  </p>
+					<p> {{ descriptionPopin }}  <br> {{ descriptionExit }}</p>
 				</div>
-				<div class="marker-info-group" ng-if="markerInfo">
-					<div class="info-title">Toilettes Adaptés <span class="icon-checkbox-check"></span></div>
+				<div class="marker-info-group" ng-if="markerSeeToilet">
+					<div class="info-title">Toilettes Adaptés 
+						<span ng-class="{'icon-checkbox-check': toilet == true, 'icon-checkbox-unchecked' : toilet == false}"></span>
+					</div>
 				</div>
-				<div class="marker-info-group" ng-if="markerLoisir">
-					<div class="info-title">Equipements Adaptés <span class="icon-checkbox-check"></span></div>
+				<div class="marker-info-group" ng-if="markerSeeEquipment">
+					<div class="info-title">Equipements Adaptés 
+						<span ng-class="{'icon-checkbox-check': equipment == true, 'icon-checkbox-unchecked' : equipment == false}"></span>
+					</div>
 				</div>
-				<div class="marker-info-group">
-					<div class="info-title">Portiques pour handicapé <span class="icon-checkbox-unchecked"></span></div>
+				<div class="marker-info-group" ng-if="markerSeeGantry">
+					<div class="info-title">Portiques pour handicapé 
+						<span ng-class="{'icon-checkbox-check': gantry == true, 'icon-checkbox-unchecked' : gantry == false}"></span>
+					</div>
 				</div>
-				
-				<div class="marker-info-group" ng-if="markerMetro">
-					<div class="info-title">Bureau d'information  <span class="icon-checkbox-check"></span></div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title"> Les sorties de métros </div>
+					<p> {{ allExitPopin }} </p>
 				</div>
-				<div class="marker-info-group" ng-if="markerMetro">
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title">Bureau d'information  
+						<span ng-class="{'icon-checkbox-check': office == true, 'icon-checkbox-unchecked' : office == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
 					<div class="info-title">Ligne de metro</div>
 					<div> Ligne de metro disponible  </div>
 				</div>

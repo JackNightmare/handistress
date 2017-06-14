@@ -68,16 +68,19 @@
 .marker-information{
   position: absolute;
   z-index: 200;
-  right: 1%;
+  right: 2%;
   top: 25%;
   background: rgba(255, 255, 255, 0.8);
   width: 20%;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .marker-information .row{ margin-right: -15px; margin-left: -15px; }
 
 .marker-information .marker-title{
-  font-size: 30px;
+  font-size: 18px;
   color: #ffffff;
   padding-top: 2%;
   padding-bottom: 2%;
@@ -98,7 +101,7 @@
 }
 
 .marker-information .marker-info-group .info-title{
-  font-size: 20px;
+  font-size: 16px;
   color: #084056;
 }
 
@@ -110,11 +113,11 @@
 
 .marker-information .marker-info-group span{
   float: right;
-  margin-right: 25%;
+  margin-right: 15%;
 }
 
 .marker-information .marker-info-group .icon-checkbox-check{ color:#75cff0; font-size: 25px;}
-.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 26%;}
+.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 16%;}
 
 /*************************************
 *** Style pour le filtre de la map ***
