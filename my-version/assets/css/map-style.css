@@ -98,6 +98,9 @@
 .marker-information .marker-info-group{
   margin-bottom: 5%;
   padding-left: 5%;
+  border-bottom: 1px solid #0f8dbb;
+  padding-bottom: 4%;
+  padding-top: 2%;
 }
 
 .marker-information .marker-info-group .info-title{
@@ -117,7 +120,7 @@
 }
 
 .marker-information .marker-info-group .icon-checkbox-check{ color:#75cff0; font-size: 25px;}
-.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 16%;}
+.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 16%; font-size: 21px; }
 
 /*************************************
 *** Style pour le filtre de la map ***

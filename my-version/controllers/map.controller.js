@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope , Marker, filterFilter, leafletData, leafletMarkerEvents ){
+app.controller('mapController', function($scope, $sce , Marker, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
 
@@ -152,8 +152,6 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 		/** On recupere les informations contenu dans le markers **/ 
 		informations = args.model.enable.split('/');
 
-		console.log(informations);
-
 		if($scope.functionTrace == false){
 			/** On ouvre la popin **/
 			$scope.openPopin = true;
@@ -210,11 +208,28 @@ app.controller('mapController', function($scope , Marker, filterFilter, leafletD
 				$scope.gantry = markerGantry== 'null' || markerGantry == "0" ? false : true ;
 			}
 
+			/** Si markerType est null, alors accès, tout à false **/
+			if(markerType == "NULL"){
+				$scope.markerSeeToilet = false;
+				$scope.markerSeeEquipment = false;
+				$scope.markerSeeGantry = false;
+			}
+
 			/** Controle pour le metro **/
 			$scope.markerSeeMetro = informations[0] == "Metro" ? true : false;
 
 			if($scope.markerSeeMetro){
-				$scope.allExitPopin = markerSortie;
+				allSortie = markerSortie.split(';');
+				$scope.allExitPopin = '';
+
+				allSortie.forEach(function(element) {
+					if(element != ""){
+						infoSortie = element.split(' ** ');
+						$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
+					}
+				});
+
+				$scope.allExitPopin = $sce.trustAsHtml($scope.allExitPopin);
 
 				$scope.office = markerOffice == "1" ? true : false ;
 				$scope.linesMetros = markerSubway;

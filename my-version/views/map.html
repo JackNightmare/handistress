@@ -87,7 +87,7 @@
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeMetro">
 					<div class="info-title"> Les sorties de métros </div>
-					<p> {{ allExitPopin }} </p>
+					<p ng-bind-html="allExitPopin"></p>
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeMetro">
 					<div class="info-title">Bureau d'information  
@@ -96,7 +96,7 @@
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeMetro">
 					<div class="info-title">Ligne de metro</div>
-					<div> {{ linesMetros }}  </div>
+					<p> {{ linesMetros }}  </p>
 				</div>
 			</div>
 		</div>
