@@ -5,7 +5,7 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***
 	*****************************************************/
-	var allMarkers = []; // Variable pour markers
+	allMarkers = []; // Variable pour markers
 	$scope.filter = 1; // Pour activer le type de filtre, all markers actuellement
 	$scope.routing = ''; // Variable option pour tracer itinéraire
 
