@@ -1,15 +1,6 @@
 /*************************
 *** Zone du formulaire ***
 *************************/
-.form-center{
-	position: relative;
-	background-position: center center;
-	height: 100vh;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-image: url(../img/street.jpg);
-}
-
 .form-zone{
 	width: 65%;
 	margin: auto;

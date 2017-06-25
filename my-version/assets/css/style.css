@@ -60,7 +60,17 @@
 .icon-checkbox-unchecked:before { content: "\ea53"; }
 .icon-checkbox-check:before { content: "\e90d"; }
 
-body{ font-family: 'FuturaStd-Medium';}
+body{
+  font-family: 'FuturaStd-Medium';
+  left: 0;
+  right: 0;
+  height:auto;
+  position: absolute;
+  background-image: url(../img/street.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 
 .row{ margin: 0px; }
 

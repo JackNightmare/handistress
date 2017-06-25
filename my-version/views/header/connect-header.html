@@ -39,5 +39,9 @@
     </a>
     <button ng-click="openFilter()" type="button" class="btn btn-connect btn-signIn" ng-class="{'correct-color' : (colorSignIn == true)} ">Connexion</button>
   </div>
+  
+  <div ng-if="userData != null" class="col-xs-12 col-md-11 col-lg-11">
+    <button ng-click="logoutUser()" type="button" class="btn btn-connect btn-signIn" ng-class="{'correct-color' : (colorSignIn == true)} ">Déconnexion</button>
+  </div>
   <div class="col-md-1 col-lg-1"></div>
 </div>

@@ -80,10 +80,9 @@
 .landing-header .landing-access .landing-access-button:hover{ background-color: rgba(36, 113, 162, 1); }
 
 .landing-header .landing-next-section{
-	bottom: 3%;
 	width: 100%;
-	position: absolute;
-	text-align: center;
+    position: absolute;
+    text-align: center;
 }
 
 .landing-header .landing-next-section a{
@@ -294,8 +293,24 @@
 .trace-line.trace-2 span:nth-child(4){ width: 80px; transform: rotate(-20deg) translate(-117px, 61px); }
 .trace-line.trace-2 span:nth-child(5){ transform: translate(-136px, 102px); }
 
+/** 3me itinéraire **/
+.trace-line.trace-3 span:first-child{ transform: translate(120px, -30px); }
+.trace-line.trace-3 span:nth-child(2){ transform: rotate(45deg) translate(109px, -104px); width: 110px;}
+.trace-line.trace-3 span:nth-child(3){ transform: translate(244px, 40px); width: 250px; }
+.trace-line.trace-3 span:nth-child(4){ transform: rotate(60deg) translate(291px, -372px); width: 65px; }
+.trace-line.trace-3 span:nth-child(5){ transform: translate(524px, 92px); width: 90px; }
+.trace-line.trace-3 span:nth-child(6){ transform: translate(583px, 81px); }
 
 
+.trace-line.trace-4 span:first-child{ transform: translate(133px, 202px); }
+.trace-line.trace-4 span:nth-child(2){ transform: rotate(-20deg) translate(104px, 227px); width: 70px; }
+.trace-line.trace-4 span:nth-child(3){ transform: translate(249px, 164px); width: 210px; }
+.trace-line.trace-4 span:nth-child(4){ transform: rotate(-35deg) translate(289px, 373px); width: 80px; }
+.trace-line.trace-4 span:nth-child(5){ transform: translate(524px, 115px); width: 90px; }
+.trace-line.trace-4 span:nth-child(6){ transform: translate(583px, 104px); }
+
+
+.landing-section2-information { padding-bottom: 2%; }
 
 .landing-section2-information .section2-zone-text{
 	font-size: 16px;
@@ -326,7 +341,7 @@
 *****************************/
 .landing-section3{
 	height: 60vh;
-	background-color: #ffffff;
+	background-color: #b6dbfb;
 }
 
 

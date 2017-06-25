@@ -1,4 +1,4 @@
-app.controller('signupController', function($scope, $http){
+app.controller('signupController', function($scope, $rootScope, $http){
   // Permet d'afficher ou pas le bouton d'inscription
   $scope.boutonInscription = false;
   $scope.colorSignIn = true;
@@ -61,25 +61,35 @@ app.controller('signupController', function($scope, $http){
 			},
 			data: data
     }).then(function successCallback(response) {
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
-		});
+		if (response.data.code == 200) {
+			$rootScope.connectionUser(response.data.token, response.data.data);
+		} else {
+			
+		}
+	}, function errorCallback(response) {
+		console.log(response);
+	});
   }
 
   /*****************************
   *** Controle Handicap User ***
   *****************************/
-  $scope.controleUserHandicapTrue = function(){
+  $scope.controleUserHandicap = function(){
+
+    // console.log('je veux te voir ');
+    // console.log($scope.userHandicap);
+
+    // Si l'utilisateur n'a aucun handicap, pas d'étape suivante
+    if ($scope.userHandicap == false){
       $scope.userHandicap = true; // Valeur à true car on peut accéder à l'étapes suivante
       $scope.valueNextStep = true; // Valeur à true car on peut accéder à l'étape suivante
       $scope.sendForm = false; // Valeur à false car l'envoie du formulaire n'est pas possible
-  }
-
-  $scope.controleUserHandicapFalse = function(){
+    }
+    else{ // Si la personne est handicapé, on accede à de nouvelles étapes
       $scope.userHandicap = false; // valeur à false car les étapes suivantes sont inutiles
       $scope.valueNextStep = false; // valeur à false car les étapes suivantes sont inutiles
       $scope.sendForm = true; // Valeur à true car pas besoin des étapes suivantes pour valider le formulaire
+    }
   }
 
   /****************************

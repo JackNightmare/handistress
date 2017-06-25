@@ -1,4 +1,4 @@
-app.controller('addmarkerController', function($scope, $http){
+app.controller('addmarkerController', function($scope, $http, $rootScope){
   // Permet d'afficher ou pas le bouton d'inscription et corriger couleur de la connexion
   $scope.boutonInscription = true;
   $scope.colorSignIn = true;
@@ -20,13 +20,13 @@ app.controller('addmarkerController', function($scope, $http){
   /** Variable pour envoie ajout de marker **/
   $scope.markerAccess = {
     type : 2,
-    access : null,
+    access : 1,
     entitled : '',
     description: ''
   }
   $scope.markerPlace = {
     type : 1,
-    place: null,
+    place: 2,
     entitled: '',
     description: '',
     access: [],
@@ -40,6 +40,22 @@ app.controller('addmarkerController', function($scope, $http){
       subwayLine: ''
     }
   }
+  
+	$scope.listAccess == [];
+  
+	$http({
+		method: 'GET',
+		url: 'https://www.api.benpedia.com/handistress/access/get.php',
+		headers: {
+			'Content-Type': undefined
+		}
+    }).then(function successCallback(response) {
+		console.log(response);
+		
+		$scope.listAccess = response.data;
+	}, function errorCallback(response) {
+		console.log(response);
+	});
 
   /********************************
   *** Actions sur le formulaire ***
@@ -90,43 +106,49 @@ app.controller('addmarkerController', function($scope, $http){
   $scope.addAccess = function(){
     var data = angular.copy($scope.markerAccess);
 
-    // Bousin pour geolocalisation
+    data.token = $rootScope.readCookie('handistress_user');
 
-    data.lat = 48.60;
-    data.lng = 2.60;
+    $geolocation.getCurrentPosition().then(function(location) {
+      data.lat = location.coords.latitude;
+      data.lng = location.coords.longitude;
 
-    $http({
-      method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/markers/add.php',
-			headers: {
-			  'Content-Type': undefined
-			},
-			data: data
-    }).then(function successCallback(response) {
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
-		});
+      $http({
+        method: 'POST',
+        url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+        headers: {
+          'Content-Type': undefined
+        },
+        data: data
+      }).then(function successCallback(response) {
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log(response);
+      });
+    });
   }
 
   // Ajout d'un marker de type lieu
   $scope.addPlace = function(){
     var data = angular.copy($scope.markerPlace);
 
-    data.lat = 48.54;
-    data.lng = 2.54;
+    data.token = $rootScope.readCookie('handistress_user');
 
-    $http({
-      method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/markers/add.php',
-			headers: {
-			  'Content-Type': undefined
-			},
-			data: data
-    }).then(function successCallback(response) {
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
-		});
+    $geolocation.getCurrentPosition().then(function(location) {
+      data.lat = location.coords.latitude;
+      data.lng = location.coords.longitude;
+
+      $http({
+        method: 'POST',
+        url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+        headers: {
+          'Content-Type': undefined
+        },
+        data: data
+      }).then(function successCallback(response) {
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log(response);
+      });
+    });
   }
 });
