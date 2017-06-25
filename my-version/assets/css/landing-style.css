@@ -81,6 +81,7 @@
 
 .landing-header .landing-next-section{
 	width: 100%;
+    margin-top: 15px;
     position: absolute;
     text-align: center;
 }
@@ -249,7 +250,6 @@
 /*****************************
 *** Section 2 Landing Page ***
 *****************************/
-
 .landing-section2{
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -313,14 +313,16 @@
 .landing-section2-information { padding-bottom: 2%; }
 
 .landing-section2-information .section2-zone-text{
-	font-size: 16px;
+	width: 80%;
+    color: #000308;
+    font-size: 16px;
+    margin: auto;
+    margin-left: 30%;
     line-height: 30px;
-    width: 80%;
-    background-color: rgba(7, 85, 101, 0.3);
     padding-left: 10px;
+    border-radius: 2px;
     padding-right: 10px;
-    color: #ffffff;
-    margin-left: 35%;
+    background-color: rgba(6, 119, 142, 0.3);
 }
 
 .landing-section2-information .section2-zone-text strong{ font-size: 18px; }
@@ -339,11 +341,41 @@
 /*****************************
 *** Section 3 Landing Page ***
 *****************************/
-.landing-section3{
-	height: 60vh;
-	background-color: #b6dbfb;
+.landing-section3{ background-color: #106192; }
+
+/*.landing-section3 .landing-section-entitle{ color: #225a89; }
+.landing-section3 .section-entitle-line { background-color: #106192; }*/
+
+
+.landing-section3-information{ margin-top: 2%; padding-bottom: 2%; }
+
+.landing-section3-information .section3-map-marker{
+	width: 300px;
+    height: 300px;
+    margin: auto;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(../img/markers.png);
 }
 
+.landing-section3-information .section3-zone-text{
+    color: #ffffff;
+    margin-top: 5%;
+    font-size: 16px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: 3px solid #b0eaff;
+    border-bottom: 3px solid #b0eaff;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*************
+*** Footer ***
+**************/
+footer{ background-color: #edf1f3; }
 
 /****************************
 *** Style spécifique size ***
