@@ -250,11 +250,11 @@ li{ list-style: none; }
 
 .nav-menu.open .nav-menu-button{
   width: 23%;
-  background-color: transparent;
   border: none;
-  margin-bottom: 25%;
   height: 10%;
-  float: right;
+  left: 75%;
+  position: relative;
+  background-color: transparent;
 }
 .nav-menu.open .nav-menu-button span{
   height: 5px;

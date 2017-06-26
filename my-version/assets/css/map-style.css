@@ -20,11 +20,10 @@
 .nav-menu .switch-form-map{
 	color: #ffffff;
   text-align: center;
-  margin-top: 9%;
 }
 
 .nav-menu .switch-form-map button {
-	width: 145px;
+	width: 45%;
   font-size: 16px;
   padding-top: 2%;
   font-style: italic;
@@ -38,9 +37,9 @@
 .nav-menu .form-map{ padding-left: 5%; }
 
 .nav-menu .form-map .title-form-map{
-  width: 65%;
+  width: 90%;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 2%;
   border-bottom: 1px solid #ffffff;
 }
@@ -49,7 +48,7 @@
 .nav-menu .form-map label span{ position: relative; top: 10px; }
 
 .nav-menu .form-map .form-text{
-  width: 215px;
+  width: 100%;
   border: none;
   margin-left: 15px;
   border-radius: 0;
@@ -58,11 +57,11 @@
 }    
 
 .nav-menu .form-map .subtitle-form-map{
-  width: 70%;
+  width: 90%;
   margin-top: 5%;
   margin-bottom: 5%;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 18px;
   padding-bottom: 2%;
   border-bottom: 1px solid #ffffff;
 }
@@ -79,12 +78,17 @@
 }
 
 .nav-menu .form-map .form-input{ margin-bottom: 5%;}
-.nav-menu .form-map .form-input label{ font-size: 16px; color:#ffffff;}
+.nav-menu .form-map .form-input label{
+  font-size: 16px;
+  color: #ffffff;
+  margin-left: 10%;
+  cursor: pointer;
+}
 
 .nav-menu .form-map .btn-send{
   margin: auto;
   display: block;
-  width: 260px;
+  width: 85%;
   color: #ffffff;
   border: 1px solid #297184;
   background-color: #19607d;
@@ -167,7 +171,7 @@
 }
 
 .map-filter button{
-  width: 50px;
+  width: 10%;
   height: 100%;
   border: none;
   border-left: 5px solid #ffffff;
@@ -180,7 +184,7 @@
 *** Type de lieu ***
 ********************/
 .map-filter .map-filter-type{
-  width: 45%;
+  width: 40%;
   height: 100%;
   float: left;
   display: block;
@@ -211,7 +215,7 @@
 .map-filter .map-filter-categorie div{ float: left; }
 
 .map-filter .map-filter-categorie .title-categorie{
-  width: 25%;
+  width: 30%;
   height: 100%;
   font-size: 23px;
   padding-top: 22px;
@@ -220,13 +224,13 @@
   background-color: rgba(16, 124, 154, 0.5);
 }
 
-.map-filter .map-filter-categorie .see-categorie{ width: 75%; height: 100%; }
+.map-filter .map-filter-categorie .see-categorie{ width: 70%; height: 100%; }
 .map-filter .map-filter-categorie .see-categorie .see-categorie-select{ height: 100%; width: 50%; }
 
 .map-filter .map-filter-categorie .see-categorie .see-categorie-select select{
-  width: 90%;
+  width: 100%;
   height: 100%;
-  font-size: 18px;
+  font-size: 16px;
   padding-left: 10%;
   background-color: transparent;
   border-left: 2px solid #ffffff;
