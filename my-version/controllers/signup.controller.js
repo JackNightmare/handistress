@@ -63,9 +63,7 @@ app.controller('signupController', function($scope, $rootScope, $http){
     }).then(function successCallback(response) {
 		if (response.data.code == 200) {
 			$rootScope.connectionUser(response.data.token, response.data.data);
-		} else {
-			
-		}
+		} else {}
 	}, function errorCallback(response) {
 		console.log(response);
 	});
