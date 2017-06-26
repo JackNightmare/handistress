@@ -6,17 +6,21 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 	*** Variable globale pour fonctionnement de la map ***
 	*****************************************************/
 	allMarkers = []; // Variable pour markers
+	
+	$scope.openFilter = false; // Permet de savoir si le filtre est ouvert ou pas
 	$scope.filter = 1; // Pour activer le type de filtre, all markers actuellement
-	$scope.routing = ''; // Variable option pour tracer itinéraire
 
 	$scope.openMenu = false; // Variable pour afficher contenu du menu ouvert
 	$scope.closeMenu = true; // Variable pour afficher contenu du menu fermé
-
+	
+	$scope.routing = ''; // Variable option pour tracer itinéraire
 	$scope.activeTrace = true; // Formulaire de trace visible
 	$scope.activeSearch = false; // Formulaire de recherche invisible
 	$scope.functionTrace = false; // Permet de dire si l'itinéraire est tracé ou pas 
 
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
+
+
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -238,13 +242,12 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 	});
 
 	/** Fermeture de la popin d'information **/
-	$scope.closePopin = function(){
-		$scope.openPopin = false;
-	}
+	$scope.closePopin = function(){ $scope.openPopin = false; }
 
-	/**********************************
-	*** Fonction filtre de la carte ***
-	**********************************/
+	/*************************************
+	*** Action se situant dans le menu ***
+	*************************************/
+
 	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 
@@ -473,6 +476,16 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 			$scope.activeSearch = true;
 		}
 	}
+
+	/**********************************
+	*** Fonction filtre de la carte ***
+	**********************************/
+
+	/** Ouverture du filtre **/
+	$scope.actionFilter = function(){
+		$scope.openFilter = $scope.openFilter == true ? false : true ;
+	}
+
 
 	/** Permet de voir tout les markers disponibles  **/
 	$scope.seeAll = function(){

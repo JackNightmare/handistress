@@ -69,12 +69,13 @@
 
 .nav-menu .form-map select{
   color: #000000;
-  width: 75%;
+  width: 95%;
   padding-left: 20%;
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10%;
   height: 35px;
   background-color: rgba(255,255,255,0.5);
+
 }
 
 .nav-menu .form-map .form-input{ margin-bottom: 5%;}
@@ -162,7 +163,6 @@
 *** Style pour le filtre de la map ***
 *************************************/
 .map-filter{
-  width: 59%;
   position: absolute;
   bottom: 3%;
   right: 4%;
@@ -171,7 +171,6 @@
 }
 
 .map-filter button{
-  width: 10%;
   height: 100%;
   border: none;
   border-left: 5px solid #ffffff;
@@ -179,18 +178,32 @@
   float: left;
 }
 
+/**********************
+*** Filtre map fermé ***
+***********************/
+.map-filter {width: 7%;}
+.map-filter button{ width: 100%; }
+.map-filter .map-filter-type{ display: none;  }
+.map-filter .map-filter-categorie{ display: none; }
+
+/************************
+*** Filtre map ouvert ***
+************************/
+.map-filter.filter-open{ width: 59%; }
+.map-filter.filter-open button{ width: 10%; }
+
 
 /*******************
 *** Type de lieu ***
 ********************/
-.map-filter .map-filter-type{
+.map-filter.filter-open .map-filter-type{
   width: 40%;
   height: 100%;
   float: left;
   display: block;
 }
 
-.map-filter .map-filter-type .name-filter{
+.map-filter.filter-open .map-filter-type .name-filter{
   float: left;
   height: 100%;
   width: 33.33%;
@@ -200,21 +213,21 @@
   cursor: pointer;
 }
 
-.map-filter .map-filter-type .name-filter.filter-active{ background-color: rgba(255, 255, 255, 0.5); }
+.map-filter.filter-open .map-filter-type .name-filter.filter-active{ background-color: rgba(255, 255, 255, 0.5); }
 
 /*****************
 *** Categories ***
 *****************/
-.map-filter .map-filter-categorie{
+.map-filter.filter-open .map-filter-categorie{
   width: 50%;
   height: 100%;
   float: left;
   display: block;
 }
 
-.map-filter .map-filter-categorie div{ float: left; }
+.map-filter.filter-open .map-filter-categorie div{ float: left; }
 
-.map-filter .map-filter-categorie .title-categorie{
+.map-filter.filter-open .map-filter-categorie .title-categorie{
   width: 30%;
   height: 100%;
   font-size: 23px;
@@ -224,13 +237,13 @@
   background-color: rgba(16, 124, 154, 0.5);
 }
 
-.map-filter .map-filter-categorie .see-categorie{ width: 70%; height: 100%; }
-.map-filter .map-filter-categorie .see-categorie .see-categorie-select{ height: 100%; width: 50%; }
+.map-filter.filter-open .map-filter-categorie .see-categorie{ width: 70%; height: 100%; }
+.map-filter.filter-open .map-filter-categorie .see-categorie .see-categorie-select{ height: 100%; width: 50%; }
 
-.map-filter .map-filter-categorie .see-categorie .see-categorie-select select{
+.map-filter.filter-open .map-filter-categorie .see-categorie .see-categorie-select select{
   width: 100%;
   height: 100%;
-  font-size: 16px;
+  font-size: 18px;
   padding-left: 10%;
   background-color: transparent;
   border-left: 2px solid #ffffff;

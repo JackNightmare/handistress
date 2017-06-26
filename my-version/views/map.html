@@ -100,7 +100,7 @@
 			<div class="subtitle-form-map"> Affiner la recherche <span>(optionnel)</span> </div>
 			
 			<div class="form-select">
-				<select name="select" style="color: #000000; width: 75%; text-align: center; padding-left: 20%; margin-bottom: 10%;">
+				<select name="select">
 					<option value="valeur1" selected>Valeur 1</option> 
 					<option value="valeur2">Valeur 2</option>
 					<option value="valeur3">Valeur 3</option>
@@ -207,8 +207,8 @@
 	</div>
 </div>
 
-<div class="map-filter">
-	<button>
+<div class="map-filter" ng-class="{'filter-open' : (openFilter == true) }">
+	<button ng-click="actionFilter()">
 		<span></span>
 		<span></span>
 	</button>
