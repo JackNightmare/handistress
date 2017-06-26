@@ -32,20 +32,13 @@
   margin-bottom: 30px;
   border: 1px solid #368093;
   background-color: rgba(236, 236, 236, 0.3);
-    /* height: 30px; */
-    /*width: 30%;
-    border: none;
-    border-radius: 0px;
-    font-size: 17px;
-    margin-top: 2%;
-    background-color: rgba(255, 255, 255, 0.4);*/
 }
 .nav-menu .switch-form-map button.form-active{ background-color: #155f8b;}
 
 .nav-menu .form-map{ padding-left: 2%; }
 
 .nav-menu .form-map .title-form-map{
-	width: 62%;
+  width: 65%;
   color: #ffffff;
   font-size: 20px;
   padding-bottom: 2%;
@@ -56,6 +49,20 @@
 	color: #75cff0;
   font-size: 40px;
 }
+
+.nav-menu .form-map .subtitle-form-map{
+  width: 90%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: #ffffff;
+  font-size: 20px;
+    padding-bottom: 2%;
+    border-bottom: 1px solid #ffffff;
+}
+
+.nav-menu .form-map .subtitle-form-map span{ font-weight: italic; font-size: 15px;}
+.nav-menu .form-map .form-input{ margin-bottom: 5%; }
+.nav-menu .form-map .form-input label{ font-size: 16px; color:#ffffff;}
 
 .nav-menu .form-map .btn-send{
   margin: auto;
