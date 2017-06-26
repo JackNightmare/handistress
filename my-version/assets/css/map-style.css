@@ -175,6 +175,10 @@
   float: left;
 }
 
+
+/*******************
+*** Type de lieu ***
+********************/
 .map-filter .map-filter-type{
   width: 45%;
   height: 100%;
@@ -192,5 +196,39 @@
   cursor: pointer;
 }
 
-
 .map-filter .map-filter-type .name-filter.filter-active{ background-color: rgba(255, 255, 255, 0.5); }
+
+/*****************
+*** Categories ***
+*****************/
+.map-filter .map-filter-categorie{
+  width: 50%;
+  height: 100%;
+  float: left;
+  display: block;
+}
+
+.map-filter .map-filter-categorie div{ float: left; }
+
+.map-filter .map-filter-categorie .title-categorie{
+  width: 25%;
+  height: 100%;
+  font-size: 23px;
+  padding-top: 22px;
+  text-align: center;
+  border-left: 1px solid #ffffff;
+  background-color: rgba(16, 124, 154, 0.5);
+}
+
+.map-filter .map-filter-categorie .see-categorie{ width: 75%; height: 100%; }
+.map-filter .map-filter-categorie .see-categorie .see-categorie-select{ height: 100%; width: 50%; }
+
+.map-filter .map-filter-categorie .see-categorie .see-categorie-select select{
+  width: 90%;
+  height: 100%;
+  font-size: 18px;
+  padding-left: 10%;
+  background-color: transparent;
+  border-left: 2px solid #ffffff;
+  color: #000000;
+}
