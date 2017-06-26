@@ -24,14 +24,14 @@
 			<div>
 				<label for="startPoint"><span class="icon-location"></span></label>
 				<div style="display:inline-block;">
-					<input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+					<input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
 				</div>
 			</div>
 
 			<div>
 				<label for="endPoint"><span class="icon-racing-flags"></span></label>
 				<div style="display:inline-block;">
-					<input id="endPoint" type="text" placeholder="point d'arrivé" ng-model='traceMap.end' uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+					<input id="endPoint" type="text" placeholder="point d'arrivé" ng-model='traceMap.end' uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
 				</div>
 			</div>
 
@@ -93,11 +93,11 @@
 			<div>
 				<label for="searchPoint"><span class="glyphicon glyphicon-search"></span></label>
 				<div style="display:inline-block;">
-					<input id="searchPoint" type="text" placeholder="Recherche" ng-model='searchMap.value' class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+					<input id="searchPoint" type="text" placeholder="Recherche" ng-model='searchMap.value' class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
 				</div>
 			</div>
 
-			<div class="subtitle-form-map"> Informations complémentaires <span>(optionnel)</span> </div>
+			<div class="subtitle-form-map"> Affiner la recherche <span>(optionnel)</span> </div>
 			
 			<div class="form-select">
 				<select name="select" style="color: #000000; width: 75%; text-align: center; padding-left: 20%; margin-bottom: 10%;">
@@ -155,7 +155,7 @@
 				<label class="label-slide" for="searchmarker-hightPavement">Trottoir haut</label>
 			</div>
 
-			<input class="btn btn-send" type="submit" type="submit" value="Rechercher">
+			<input class="btn btn-send" type="submit" type="submit" value="Lancer la recherche">
 		</form>
 	</div>
 </nav>
