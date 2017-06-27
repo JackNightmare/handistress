@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope, $sce , Marker, Testpourmoi, filterFilter, leafletData, leafletMarkerEvents ){
+app.controller('mapController', function($scope, $sce , Marker, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
 
@@ -507,8 +507,8 @@ app.controller('mapController', function($scope, $sce , Marker, Testpourmoi, fil
 		$scope.markers = {};
 		allMarkers = [];
 
-		/** on recntre le zoom **/
-		$scope.center.zoom = 15;
+		// /** on recntre le zoom **/
+		// $scope.center.zoom = 15;
 
 		/** Si on clique alors que le filtre est actif, on le désactive et plus rien n'est sur la carte **/
 		if($scope.filter == 1){
