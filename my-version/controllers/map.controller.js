@@ -626,13 +626,85 @@ app.controller('mapController', function($scope, $sce , Marker, Testpourmoi, fil
 		else{
 			$scope.filter = 2;
 
-			valueTest = valueTest == 'allMarkers' ? 'placesMarkers' : 'allMarkers' ;
+			$scope.getAllMarkers = Marker.getPlacesMarkers()
+				.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 
-			console.log(valueTest);
+					iconColor = 'white'; // couleur de l'icon par default
+					for(key in markers){
+						switch(markers[key].typePlaces) {
+							case "Ecole":
+								iconMarker = ' icon-school';
+								colorMarker = 'lightgray';
+								break;
+							case "Metro":
+								iconMarker = ' icon-subway';
+								colorMarker = 'darkgreen';
+								break;
+							case "Gare":
+								iconMarker = ' icon-subway';
+								colorMarker = 'darkpurple';
+								break;
+							case "Aéroport":
+								iconMarker = ' icon-airplane';
+								colorMarker = 'lightblue';
+								break;
+							case "Restaurant":
+								iconMarker = ' icon-restaurant';
+								colorMarker = 'darkblue';
+								break;
+							case "Boutique":
+								iconMarker = ' icon-cart';
+								colorMarker = 'darkred';
+								break;
+							case "Loisir":
+								iconMarker = ' icon-dice';
+								colorMarker = 'orange';
+								break;
+							case "Parking":
+								iconMarker = ' icon-local_parking';
+								colorMarker = 'blue';
+								break;
+							case "Administration":
+								iconMarker = ' icon-newspaper';
+								colorMarker = 'gray';
+								break;
+							case "Hébergement":
+								iconMarker = ' icon-bed';
+								colorMarker = 'cadetblue';
+								break;
+							default :
+								iconMarker = ' icon-access';
+								colorMarker = 'lightgray';
+								iconColor = 'black';
+								break;
+						}
 
-			$scope.premier = Testpourmoi.test(valueTest)
-				.then(function(data){
-					console.log(data);
+						if(markers[key].typePlaces == "NULL"){ 
+							markerMessage = "Accès - "+markers[key].nameMarker;
+						}
+						else{
+							markerMessage = markers[key].typePlaces+" - "+markers[key].nameMarker;
+						}
+
+						markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
+
+						value = {
+							lat: parseFloat(markers[key].latitude),
+							lng: parseFloat(markers[key].longitude) ,
+							message: markerMessage,
+							enable : markerEnable,
+							icon: {
+								type: 'awesomeMarker',
+								icon : iconMarker,
+								iconColor : iconColor,
+								markerColor: colorMarker
+							}
+						}	
+						allMarkers.push(value);
+					}
+					$scope.markers = allMarkers;
+				}, function(msg){ // Ici action en cas d'erreur
+					console.log(msg);
 				});
 		}
 	}
