@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope, $sce , Marker, filterFilter, leafletData, leafletMarkerEvents ){
+app.controller('mapController', function($scope, $sce , Marker, Testpourmoi, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
 
@@ -20,7 +20,7 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
 
-
+	var valueTest = '';
 
 	/****************************************
 	*** Mise en place de la carte leaflet ***
@@ -615,8 +615,7 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
-
-		/* On le vide obligatoirement les markers */
+ 		/* On le vide obligatoirement les markers */
 		$scope.markers = {};
 		allMarkers = [];
 
@@ -626,84 +625,15 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 		}
 		else{
 			$scope.filter = 2;
-			
-			$scope.getAllMarkers = Marker.getPlacesMarkers()
-			.then(function(markers){
-				console.log('markers retour');
-				console.log(markers);
-				/* Ici on definit les variables pour les markers */
-				iconColor = 'white';
-				for(key in markers){
-					switch(markers[key].typePlaces) {
-						case "Ecole":
-							iconMarker = ' icon-school';
-							colorMarker = 'lightgray';
-							break;
-						case "Metro":
-							iconMarker = ' icon-subway';
-							colorMarker = 'darkgreen';
-							break;
-						case "Gare":
-							iconMarker = ' icon-subway';
-							colorMarker = 'darkpurple';
-							break;
-						case "Aéroport":
-							iconMarker = ' icon-airplane';
-							colorMarker = 'lightblue';
-							break;
-						case "Restaurant":
-							iconMarker = ' icon-restaurant';
-							colorMarker = 'darkblue';
-							break;
-						case "Boutique":
-							iconMarker = ' icon-cart';
-							colorMarker = 'darkred';
-							break;
-						case "Loisir":
-							iconMarker = ' icon-dice';
-							colorMarker = 'orange';
-							break;
-						case "Parking":
-							iconMarker = ' icon-local_parking';
-							colorMarker = 'blue';
-							break;
-						case "Administration":
-							iconMarker = ' icon-newspaper';
-							colorMarker = 'gray';
-							break;
-						case "Hébergement":
-							iconMarker = ' icon-bed';
-							colorMarker = 'cadetblue';
-							break;
-						default :
-							iconMarker = ' icon-access';
-							colorMarker = 'lightgray';
-							iconColor = 'black';
-							break;
-					}
 
-					markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+markers[key].handicapGantry+"/"+markers[key].exitNumber+"/"+markers[key].informationOffice+"/"+markers[key].subwayLine;
-				
-					value = {
-						lat: parseFloat(markers[key].latitude),
-						lng: parseFloat(markers[key].longitude) ,
-						message: markers[key].typePlaces+" - "+markers[key].nameMarker,
-						enable : markerEnable,
-						icon: {
-							type: 'awesomeMarker',
-							icon : iconMarker,
-							iconColor : iconColor,
-							markerColor: colorMarker
-						}
-					}
-					/* On mets dans le tableau les informations du marker créé */
-					allMarkers.push(value);
-				}
-				
-				$scope.markers = allMarkers;
-			}, function(msg){
-				console.log(msg); // Ici action en cas d'erreur
-			});
+			valueTest = valueTest == 'allMarkers' ? 'placesMarkers' : 'allMarkers' ;
+
+			console.log(valueTest);
+
+			$scope.premier = Testpourmoi.test(valueTest)
+				.then(function(data){
+					console.log(data);
+				});
 		}
 	}
 
