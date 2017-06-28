@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope, $sce , Marker, filterFilter, leafletData, leafletMarkerEvents ){
+app.controller('mapController', function($scope, $sce, $http, Marker, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
 
@@ -56,11 +56,22 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 	/**********************************************
 	*** Mise en place des markers au chargement ***
 	***********************************************/
+
+	$http.get('json/listMarkers.json')
+		.success(function(data){
+			/** Définition de la liste de markers **/
+			$scope.markersList = data;
+		})
+		.error(function(msg){
+			console.log('erreur chargement des markers ' + msg);
+		});
+
+
+	/** Creation des markers au chargement de la page **/
 	$scope.getAllMarkers = Marker.getAllMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
-			/** Définition de la liste de markers **/
-			$scope.markersList = markers;
 			
+
 			/** variables pour définitions des couleurs et icones des markers **/
 			iconColor = 'white'; // couleur de l'icon par default
 
@@ -190,7 +201,7 @@ app.controller('mapController', function($scope, $sce , Marker, filterFilter, le
 
 
 			/** Variable de retour pour la Popin  **/
-			$scope.descriptionPopin = markerDescription
+			$scope.descriptionPopin = markerDescription;
 			$scope.descriptionExit = markerDescriptionExit;
 
 			/** Controle des toilets **/

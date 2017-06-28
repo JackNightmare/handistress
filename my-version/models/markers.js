@@ -56,7 +56,6 @@ app.factory('Marker', function($http, $q, $filter){
 					deferred.reject('une erreurs lors du chargement des markers');
 				});
 			return deferred.promise;
-
 		}
 	}
 
