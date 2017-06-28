@@ -33,6 +33,13 @@
 
 
 /***********************
+*** Si etape valider ***
+***********************/
+.form-zone .form-step .step-zone .step-done.done{ width: 100% }
+.form-zone .form-step .step-line .step-line-progress.done{ width: 100%; }
+
+
+/***********************
 *** Etape non validé ***
 ***********************/
 .form-zone .form-step { padding-bottom: 2%;}
@@ -83,12 +90,6 @@
 	padding: 10px;
 	position: absolute;
 }
-
-/***********************
-*** Si etape valider ***
-***********************/
-.step-done.done{ width: 100% !important; }
-.form-center .form-zone .form-step .step-line .step-line-progress.done{ width: 100%; }
 
 
 /*****************
