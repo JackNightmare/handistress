@@ -140,6 +140,8 @@
   padding-top: 2%;
 }
 
+.marker-information .marker-info-group:last-child{ border: none; }
+
 .marker-information .marker-info-group .info-title{
   font-size: 16px;
   color: #084056;
@@ -158,6 +160,43 @@
 
 .marker-information .marker-info-group .icon-checkbox-check{ color:#75cff0; font-size: 25px;}
 .marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 16%; font-size: 21px; }
+
+
+.marker-information .marker-info-group .subway-popin{
+  float: left;
+  margin-right: 5%;
+  border-radius: 50%;
+  padding-top: 5px;
+  width: 30px;
+  height: 30px;
+  color:#ffffff;
+  text-align: center;
+  font-family: arial, sans-serif;
+  font-style: normal;
+}
+
+
+.marker-information .marker-info-group .subway-popin.line1{ background-color: #ffcd00 ;}
+.marker-information .marker-info-group .subway-popin.line2{ background-color: #003ca6 ;}
+.marker-information .marker-info-group .subway-popin.line3{ background-color: #837902 ;}
+.marker-information .marker-info-group .subway-popin.line4{ background-color: #cf009e ;}
+.marker-information .marker-info-group .subway-popin.line5{ background-color: #ff7e2e ;}
+.marker-information .marker-info-group .subway-popin.line6{ background-color: #6eca97 ;}
+.marker-information .marker-info-group .subway-popin.line7{ background-color: #fa9aba; }
+.marker-information .marker-info-group .subway-popin.line8{ background-color: #e19bdf ;}
+.marker-information .marker-info-group .subway-popin.line9{ background-color: #b6bd00 ;}
+.marker-information .marker-info-group .subway-popin.line10{ background-color: #c9910d ;}
+.marker-information .marker-info-group .subway-popin.line11{ background-color: #704b1c ;}
+.marker-information .marker-info-group .subway-popin.line12{ background-color: #007852 ;}
+.marker-information .marker-info-group .subway-popin.line13{ background-color: #6ec4e8 ;}
+.marker-information .marker-info-group .subway-popin.line14{ background-color: #62259d ;}
+
+.marker-information .marker-info-group .subway-popin.lineRER { width: 60px; border-radius: 5px;}
+.marker-information .marker-info-group .subway-popin.lineRER.A { background-color: #D1302F; }
+.marker-information .marker-info-group .subway-popin.lineRER.B { background-color: #427DBD; }
+.marker-information .marker-info-group .subway-popin.lineRER.C { background-color: #FCD946; }
+.marker-information .marker-info-group .subway-popin.lineRER.D { background-color: #5E9620; }
+.marker-information .marker-info-group .subway-popin.lineRER.E { background-color: #BD76A1; }
 
 /*************************************
 *** Style pour le filtre de la map ***

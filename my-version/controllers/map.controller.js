@@ -56,7 +56,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/**********************************************
 	*** Mise en place des markers au chargement ***
 	***********************************************/
-
 	/** Creation de la liste pour recherche **/
 	$http.get('json/listMarkers.json')
 		.success(function(data){
@@ -146,17 +145,17 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				/** On insert dans le tableau **/
 				allMarkers.push(value);
 			}
+
 			/** On definit les markers sur la carte **/
 			$scope.markers = allMarkers;
 
-		}, function(msg){ // Ici action en cas d'erreur
-			console.log(msg);
+		}, function(msg){ 
+			console.log('erreur get all markers '+msg);
 		});
 
 	/************************************
 	*** Action directement sur la map ***
 	************************************/
-	
 	/** Drag sur la map **/
 	$scope.$on('leafletDirectiveMap.drag', function(){
 		// console.log($scope.center.lat); // On get la latitude
@@ -179,7 +178,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 			/** Mise en place des informations pour la popin **/
 			$scope.titlePopin = markerType != "NULL" ? markerType+" - "+markerTitle : "Accès - "+markerTitle;
-
 			markerDescription = informations[2] != "" ? informations[2] : "Pas de description générale";
 			
 
@@ -202,7 +200,10 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 			/** Variable de retour pour la Popin  **/
 			$scope.descriptionPopin = markerDescription;
+			$scope.descriptionPopin = $sce.trustAsHtml($scope.descriptionPopin);
+
 			$scope.descriptionExit = markerDescriptionExit;
+			$scope.descriptionExit = $sce.trustAsHtml($scope.descriptionExit);
 
 			/** Controle des toilets **/
 			if(markerType != "Metro" && markerType != "Parking" && markerType != "NULL" ){
@@ -236,6 +237,8 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 			$scope.markerSeeMetro = informations[0] == "Metro" ? true : false;
 
 			if($scope.markerSeeMetro){
+				
+				/**Mise en place des sorties **/
 				allSortie = markerSortie.split(';');
 				$scope.allExitPopin = '';
 
@@ -245,11 +248,20 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 						$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
 					}
 				});
-
 				$scope.allExitPopin = $sce.trustAsHtml($scope.allExitPopin);
 
+				allSubway = markerSubway.split(' ** ');
+				$scope.linesMetros = '';
+
+				allSubway.forEach(function(element){
+					if(element !=""){
+						$scope.linesMetros += "<span class='subway-popin line"+element+"'>"+element+"</span>";
+					}
+				});
+				$scope.linesMetros = $sce.trustAsHtml($scope.linesMetros);
+
 				$scope.office = markerOffice == "1" ? true : false ;
-				$scope.linesMetros = markerSubway;
+				$scope.markerSeeToilet = false;
 			}
 		}
 	});
@@ -260,7 +272,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/*************************************
 	*** Action se situant dans le menu ***
 	*************************************/
-	
 	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 
@@ -504,7 +515,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/**********************************
 	*** Fonction filtre de la carte ***
 	**********************************/
-
 	/** Ouverture du filtre **/
 	$scope.actionFilter = function(){
 		$scope.openFilter = $scope.openFilter == true ? false : true ;

@@ -172,7 +172,8 @@
 			<div class="marker-informations">
 				<div class="marker-info-group">
 					<div class="info-title">Description</div>
-					<p> {{ descriptionPopin }}  <br> {{ descriptionExit }}</p>
+					<p> {{ descriptionPopin }}</p>
+					<p ng-bind-html="descriptionExit"></p>
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeToilet">
 					<div class="info-title">Toilettes Adaptés 
@@ -200,7 +201,7 @@
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeMetro">
 					<div class="info-title">Ligne de metro</div>
-					<p> {{ linesMetros }}  </p>
+					<p ng-bind-html="linesMetros"></p>
 				</div>
 			</div>
 		</div>
