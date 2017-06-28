@@ -51,9 +51,9 @@
 .form-zone .form-step .step-zone .step-done{
 	top: 0;
 	left: 0;
-  width: 0%;
-  position: absolute;
-  height: 100%;
+	width: 0%;
+	position: absolute;
+	height: 100%;
 	background-color: #155f8b;
 }
 
@@ -87,7 +87,7 @@
 /***********************
 *** Si etape valider ***
 ***********************/
-.form-center .form-zone .form-step .step-zone .step-done.done{ width: 100%; }
+.step-done.done{ width: 100% !important; }
 .form-center .form-zone .form-step .step-line .step-line-progress.done{ width: 100%; }
 
 
