@@ -57,6 +57,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	*** Mise en place des markers au chargement ***
 	***********************************************/
 
+	/** Creation de la liste pour recherche **/
 	$http.get('json/listMarkers.json')
 		.success(function(data){
 			/** Définition de la liste de markers **/
@@ -66,11 +67,9 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 			console.log('erreur chargement des markers ' + msg);
 		});
 
-
 	/** Creation des markers au chargement de la page **/
 	$scope.getAllMarkers = Marker.getAllMarkers()
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
-			
 
 			/** variables pour définitions des couleurs et icones des markers **/
 			iconColor = 'white'; // couleur de l'icon par default
@@ -157,6 +156,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/************************************
 	*** Action directement sur la map ***
 	************************************/
+	
 	/** Drag sur la map **/
 	$scope.$on('leafletDirectiveMap.drag', function(){
 		// console.log($scope.center.lat); // On get la latitude
@@ -260,6 +260,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/*************************************
 	*** Action se situant dans le menu ***
 	*************************************/
+	
 	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 
@@ -782,6 +783,4 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				});
 		}
 	}
-
-
 });
