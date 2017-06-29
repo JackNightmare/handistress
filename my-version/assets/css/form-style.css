@@ -91,10 +91,9 @@
 	position: absolute;
 }
 
-
-/***
-*** Execption pour date Picker ***
-*/
+/********************************
+*** Execption pour DatePicker ***
+********************************/
 .md-datepicker-input-container{
     width: 45%;
     background-color: rgba(16, 17, 17, 0.5);
@@ -120,7 +119,9 @@
 	text-decoration: underline;
 }
 
-.form-zone .form-input { margin-bottom: 2%; }
+.form-zone .md-block { width: 50%; margin:auto; }
+.form-zone .form-input { margin-bottom: 2%;}
+
 .form-zone .form-input .label-slide{
 	color: #155f8b;
 	width: 20%;
@@ -128,14 +129,14 @@
 	cursor: pointer;
 }
 
-.form-zone .form-input input, select, textarea{
+.form-zone .form-input input, select, textarea, .form-zone .md-block input, select, textarea{
 	border: none;
 	color: #ffffff;
 	text-align: center;
 	background-color: rgba(16, 17, 17, 0.5);
 }
 
-.form-zone .form-input input[type="text"], input[type="email"], input[type="password"], select, textarea{
+.form-zone .form-input input[type="text"], .form-zone .form-input input[type="email"], .form-zone .form-input input[type="password"], .form-zone .form-input select, .form-zone .form-input textarea{
 	width: 50%;
 	height: 30px;
 }
@@ -147,13 +148,14 @@
 	text-align: left;
 }
 
-
-.form-zone .form-input .input-hover{
+.form-zone .form-input .input-hover, .form-zone .md-block .input-hover{
 	width: 0%;
 	height: 2px;
 	margin-left: 25%;
 	background-color: #155f8b;
 }
+
+.form-zone .md-block .input-hover{ margin-left: 0px; margin-top: 30px; }
 
 .form-zone .form-input .form-question {
 	font-size: 15px;
@@ -164,14 +166,17 @@
 }
 
 .form-zone .form-input .form-question span {font-family: arial;}
+.form-zone .form-input label{ cursor: pointer; font-size: 18px; }
 .form-zone .form-input .form-radio{ color: #0b4a6f; }
 .form-zone .form-input .form-radio input{ margin-left: 5px; }
+
 
 
 /**********************
 *** Hover sur input ***
 **********************/
 .form-zone .form-input:hover .input-hover{width: 50%;}
+.form-zone .md-block:hover .input-hover{width: 100%;}
 
 /************************
 *** checkbox to slide ***

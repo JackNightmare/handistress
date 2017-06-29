@@ -43,30 +43,37 @@
 				<form ng-submit="signUp()">
 					<div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
 						<div class="step-title"> Informations Générales </div>
-						<div class="form-input">
-							<input ng-model="register.firstname" type="text" placeholder="Prenom" required>
+						
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Prénom</label>
+							<input ng-model="register.firstname" type="text" required>
 							<div class="input-hover"></div>
-						</div>
+						</md-input-container>
 
-						<div class="form-input">
-							<input ng-model="register.lastname" type="text" placeholder="Nom" required>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Nom</label>
+							<input ng-model="register.lastname" type="text" required>
 							<div class="input-hover"></div>
-						</div>
+						</md-input-container>
 
-						<div class="form-input">
-							<input ng-model="register.email" type="email" placeholder="Email" required>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Email</label>
+							<input ng-model="register.email" type="email" required>
 							<div class="input-hover"></div>
-						</div>
+						</md-input-container>
 
-						<div class="form-input">
-							<input ng-model="register.pwd" type="password" placeholder="Mot de passe" required>
-							<div class="input-hover"></div>
-						</div>
 
-						<div class="form-input">
-							<input ng-model="register.pwd2" type="password" placeholder="Confirmer mot de passe" required>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Mot de passe</label>
+							<input ng-model="register.pwd" type="password" required>
 							<div class="input-hover"></div>
-						</div>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Confirmer mot de passe</label>
+							<input ng-model="register.pwd2" type="password" required>
+							<div class="input-hover"></div>
+						</md-input-container>
 
 						<div class="form-input" style="height:20px;">
 							<div class="form-question"> Votre date de naissance : </div>
