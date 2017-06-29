@@ -92,6 +92,21 @@
 }
 
 
+/***
+*** Execption pour date Picker ***
+*/
+.md-datepicker-input-container{
+    width: 45%;
+    background-color: rgba(16, 17, 17, 0.5);
+} 
+
+.md-datepicker-input{
+	width: 100%;
+    position: relative;
+    top: 4px;
+    background-color: rgba(16, 17, 17, 0) !important;
+}
+
 /*****************
 *** Zone input ***
 *****************/

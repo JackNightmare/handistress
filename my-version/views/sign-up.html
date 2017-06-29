@@ -68,10 +68,13 @@
 							<div class="input-hover"></div>
 						</div>
 
-						<div class="form-input">
-							<input ng-model="register.birthDate" type="text" placeholder="jj/mm/yyyy" required>
-							<div class="input-hover"></div>
+						<div class="form-input" style="height:20px;">
+							<div class="form-question"> Votre date de naissance : </div>
 						</div>
+
+						<div class="form-input">
+							<md-datepicker ng-model="register.birthDate" md-current-view="year" md-open-on-focus style="width:50%;"></md-datepicker>
+						</div>				
 
 						<div class="form-input">
 							<div class="form-question"> Avez-vous un handicape physique <span>?</span> </div>
@@ -82,7 +85,9 @@
 								<input id="handicapNo" ng-model="register.handicap" ng-click="controleUserHandicapFalse()" type= "radio" name="handicap" value="non" required>
 							</div>
 						</div>
+
 					</div>
+
 
 					<div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
 						<div class="step-title"> Accéssibilité </div>

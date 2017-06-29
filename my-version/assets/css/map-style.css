@@ -164,12 +164,13 @@
 
 .marker-information .marker-info-group .subway-popin{
   float: left;
-  margin-right: 5%;
-  border-radius: 50%;
-  padding-top: 5px;
   width: 30px;
   height: 30px;
   color:#ffffff;
+  margin-top: 5px;
+  margin-right: 5%;
+  padding-top: 5px;
+  border-radius: 50%;
   text-align: center;
   font-family: arial, sans-serif;
   font-style: normal;

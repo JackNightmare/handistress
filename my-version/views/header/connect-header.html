@@ -33,7 +33,7 @@
 
 <!-- Zone bouton de connexion et d'inscription -->
 <div class="row connect-button">
-  <div class="col-xs-12 col-md-11 col-lg-11">
+  <div ng-if="userData == null" class="col-xs-12 col-md-11 col-lg-11">
     <a href="sign-up">
       <button ng-if="boutonInscription" type="button" class="btn btn-connect btn-signUp">Inscription</button>
     </a>

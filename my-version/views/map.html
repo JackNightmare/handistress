@@ -35,54 +35,56 @@
 				</div>
 			</div>
 
-			<div class="subtitle-form-map"> Informations accéssibilités </div>
+			<div ng-if="userData == null">
+				<div class="subtitle-form-map"> Informations accéssibilités </div>
 
-			<div class="form-input">
-				<label class="check-slide">
-					<input ng-model="traceMap.stairs" type="checkbox" id="tracemap-stairs"/>
-					<div class="slider round"></div>
-				</label>
-				<label class="label-slide" for="tracemap-stairs">Escalier</label>
-			</div>
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.stairs" type="checkbox" id="tracemap-stairs"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-stairs">Escalier</label>
+				</div>
 
-			<div class="form-input">
-				<label class="check-slide">
-					<input ng-model="traceMap.escalators" type="checkbox" id="tracemap-escalators"/>
-					<div class="slider round"></div>
-				</label>
-				<label class="label-slide" for="tracemap-escalators">Escalator</label>
-			</div>
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.escalators" type="checkbox" id="tracemap-escalators"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-escalators">Escalator</label>
+				</div>
 
-			<div class="form-input">
-				<label class="check-slide">
-					<input ng-model="traceMap.flatEscalators" type="checkbox" id="tracemap-flatEscalators"/>
-					<div class="slider round"></div>
-				</label>
-				<label class="label-slide" for="tracemap-flatEscalators">Escalator plat</label>
-			</div>
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.flatEscalators" type="checkbox" id="tracemap-flatEscalators"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-flatEscalators">Escalator plat</label>
+				</div>
 
-			<div class="form-input">
-				<label class="check-slide">
-					<input ng-model="traceMap.elevator" type="checkbox" id="tracemap-elevator"/>
-					<div class="slider round"></div>
-				</label>
-				<label class="label-slide" for="tracemap-elevator">Ascenseur</label>
-			</div>
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.elevator" type="checkbox" id="tracemap-elevator"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-elevator">Ascenseur</label>
+				</div>
 
-			<div class="form-input">
-				<label class="check-slide">
-					<input ng-model="traceMap.flatPavement" type="checkbox" id="tracemap-flatPavement"/>
-					<div class="slider round"></div>
-				</label>
-				<label class="label-slide" for="tracemap-flatPavement">Trottoir plat</label>
-			</div>
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.flatPavement" type="checkbox" id="tracemap-flatPavement"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-flatPavement">Trottoir plat</label>
+				</div>
 
-			<div class="form-input">
-				<label class="check-slide">
-					<input ng-model="traceMap.hightPavement" type="checkbox" id="tracemap-hightPavement"/>
-					<div class="slider round"></div>
-				</label>
-				<label class="label-slide" for="tracemap-hightPavement">Trottoir haut</label>
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.hightPavement" type="checkbox" id="tracemap-hightPavement"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-hightPavement">Trottoir haut</label>
+				</div>
 			</div>
 			
 			<input class="btn btn-send" type="submit" value="Tracer l'itinéraire">
