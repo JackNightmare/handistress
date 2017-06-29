@@ -11,7 +11,7 @@ app.controller('addmarkerController', function($scope, $http, $rootScope){
   $scope.formPlace = true; // Par defaut, le formulaire d'ajout lieu sera visible
 
   /** Variable pour gestion des étapes **/
-  $scope.step = 1; // Ppar defaut, nous sommes à l'étape numéro 1
+  $scope.step = 1; // Par defaut, nous sommes à l'étape numéro 1
   $scope.valuePreviousStep = false;
   $scope.valueNextStep = true;
   $scope.sendForm = false;
@@ -20,13 +20,13 @@ app.controller('addmarkerController', function($scope, $http, $rootScope){
   /** Variable pour envoie ajout de marker **/
   $scope.markerAccess = {
     type : 2,
-    access : 1,
+    access : "null",
     entitled : '',
     description: ''
   }
   $scope.markerPlace = {
     type : 1,
-    place: 2,
+    place: "null",
     entitled: '',
     description: '',
     access: [],
