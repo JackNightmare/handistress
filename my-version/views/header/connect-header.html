@@ -10,15 +10,27 @@
         <div class="connect-zone-title"> Connexion à <b>Handistress</b> </div>
 
         <form ng-submit="signIn()">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input ng-model="xxx.email" type="email" required>
+            <div class="input-hover"></div>
+          </md-input-container>
+          
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Mote de passe</label>
+            <input ng-model="xxx.pwd" type="password" required>
+            <div class="input-hover"></div>
+          </md-input-container>
 
-          <div class="form-input">
+          <!-- <div class="form-input">
             <input ng-model="xxx.email" type="email" placeholder="Email" required>
             <div class="input-hover"></div>
-          </div>
-          <div class="form-input">
+          </div> -->
+         <!--  <div class="form-input">
             <input ng-model="xxx.pwd" type="password" placeholder="Mot de passe" required>
             <div class="input-hover"></div>
-          </div>
+          </div> -->
+          
           <div class="connect-link">
             <a href="sign-up"> se créer un compte <span>?</span></a>
           </div>
