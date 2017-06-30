@@ -188,8 +188,13 @@
 					</div>
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeGantry">
-					<div class="info-title">Portiques pour handicapé 
+					<div class="info-title">Portiques pour handicapés 
 						<span ng-class="{'icon-checkbox-check': gantry == true, 'icon-checkbox-unchecked' : gantry == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title"> Accessible aux handicapés 
+						<span ng-class="{'icon-checkbox-check': subwayHandicap == true, 'icon-checkbox-unchecked' : subwayHandicap == false}"></span>
 					</div>
 				</div>
 				<div class="marker-info-group" ng-if="markerSeeMetro">

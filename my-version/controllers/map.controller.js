@@ -243,12 +243,22 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				$scope.allExitPopin = '';
 
 				allSortie.forEach(function(element) {
-					if(element != ""){
+					if(element != "" ){
 						infoSortie = element.split(' ** ');
-						$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
+
+						if(element.search('unique') != '-1'){
+							$scope.allExitPopin += "Ne dispose que d'une sortie";
+						}
+						else{
+							$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
+						}
 					}
 				});
 				$scope.allExitPopin = $sce.trustAsHtml($scope.allExitPopin);
+
+				/** Permet de savoir si le metro est accessible aux handicapés **/
+				$scope.subwayHandicap = markerSortie.search('true') != '-1' ? true : false ;
+				console.log($scope.subwayHandicap);
 
 				allSubway = markerSubway.split(' ** ');
 				$scope.linesMetros = '';
