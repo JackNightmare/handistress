@@ -22,6 +22,8 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
 
+
+	$scope.searchMapSelect = "allTypePlace"; // Definis la valeur de base du select de recherche
 	$scope.selectTypePlace = "allTypePlace"; // Definis la valeur de base pour le select type categorie lieu
 	$scope.selectTypeAccess = "allTypeAccess"; // Definis la valeur de base pour le select type categorie accès
 
@@ -301,11 +303,16 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		$scope.filter = 0;
 		allMarkers = [];
 
+
+		/** Ok c'est pour moi **/
+		console.log("value du escaliers -> "+$scope.traceMap.stairs);
+		console.log("value du escalators -> "+$scope.traceMap.escalators);
+
 		/** On verifie qu'on a bien trouvé des informations pour les deux **/
 		if(startPoint.length > 0 && endPoint.length > 0){
 			/** On dit que l'itinéraire est tracé **/
 			$scope.currentTrace = true;
-				
+			
 			/** Mise en place des markers de départ et d'arrivé **/
 			valueStart = {
 				lat: parseFloat(startPoint[0]['latitude']),
@@ -401,6 +408,13 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** couleur de base des icones **/
 		iconColor = 'white';
 
+		/** 
+		A checker mais si le select == allTypePlace et les input checkbox == undefined, 
+		la recherche ne se fait que sur la barre de recherche 
+		**/
+		console.log("value du select -> "+$scope.searchMapSelect);
+		console.log("value du escaliers -> "+$scope.searchMap.stairs);
+		console.log("value du escalators -> "+$scope.searchMap.escalators);
 		/** Api de recherche  **/
 		$scope.getAllMarkers = Marker.searchMarkers( $scope.searchMap.value)
 			.then(function(markers){
@@ -749,6 +763,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		}
 	}
 
+	/** Permet de voir les markers de type accès **/
 	$scope.seeAccess = function(){
 		/** On supprime tous ce qui ne devrait pas apparaitre lors d'une recherche **/
 		$scope.openPopin = false; // On cache la popin si ouverte
@@ -807,6 +822,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		}
 	}
 
+	/** Permet de voir un type de markers de type lieu **/
 	$scope.typePlace = function(){
 		$scope.filter = 0;
 
@@ -902,6 +918,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		});
 	}
 
+	/** Permet de voir un type de markers de type accès **/
 	$scope.typeAccess = function(){
 		$scope.filter = 0;
 
