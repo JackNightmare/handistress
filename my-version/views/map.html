@@ -229,17 +229,30 @@
 		<div class="title-categorie"> Categorie : </div>
 		<div class="see-categorie">
 			<div class="see-categorie-select">
-				<select>
-					<option>Tout les lieux</option>
-					<option>test</option>
-					<option>test</option>
+				<select ng-model="selectTypePlace" ng-change="typePlace()">
+					<option value="allTypePlace">Tout les lieux</option>
+					<option value="2">Ecoles</option>
+					<option value="3">Metro</option>
+					<option value="4">Gare</option>
+					<option value="5">Aéroport</option>
+					<option value="6">Restaurant</option>
+					<option value="7">Boutique</option>
+					<option value="8">Loisir</option>
+					<option value="9">Parking</option>
+					<option value="10">Administration</option>
+					<option value="11">Hébergement</option>
 				</select>
 			</div>
 			<div class="see-categorie-select">
-				<select>
-					<option>Tout les accès</option>
-					<option>test</option>
-					<option>test</option>
+				<select ng-model="selectTypeAccess" ng-change="typeAccess()">
+					<option value="allTypeAccess">Tout les accès</option>
+					<option value="1"> Escalier </option>
+					<option value="2"> Escalator </option>
+					<option value="3"> Escalator plat </option>
+					<option value="4"> Ascenseur </option>
+					<option value="5"> Rampe </option>
+					<option value="6"> Trottoir plat </option>
+					<option value="7"> Trottoir haut </option>
 				</select>
 			</div>
 		</div>

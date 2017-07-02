@@ -22,6 +22,9 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
 
+	$scope.selectTypePlace = "allTypePlace"; // Definis la valeur de base pour le select type categorie lieu
+	$scope.selectTypeAccess = "allTypeAccess"; // Definis la valeur de base pour le select type categorie accès
+
 	/****************************************
 	*** Mise en place de la carte leaflet ***
 	****************************************/
@@ -802,5 +805,153 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 					console.log(msg);
 				});
 		}
+	}
+
+	$scope.typePlace = function(){
+		$scope.filter = 0;
+
+		/** On supprime tous ce qui ne devrait pas apparaitre lors d'une recherche **/
+		$scope.openPopin = false; // On cache la popin si ouverte
+		$scope.currentTrace = false; // L'itinéraire tracé est faux
+
+		/** On supprime l'itinéraire si existe  **/
+		if($scope.routing != ''){
+			$scope.routing.setWaypoints([]);
+			$scope.routing.hide();
+			$scope.routing = '';
+		}
+
+		/* On vide tout sur la carte */
+		delete $scope.markers.value;
+		$scope.markers = {};
+		allMarkers = [];
+
+		$scope.getAllMarkers = Marker.getTypePlace($scope.selectTypePlace)
+			.then(function(markers){
+				/** Parcours de la réponse **/
+				for(key in markers){
+					switch(markers[key].typePlaces) {
+						case "Ecole":
+							iconMarker = ' icon-school';
+							colorMarker = 'lightgray';
+							break;
+						case "Metro":
+							iconMarker = ' icon-subway';
+							colorMarker = 'darkgreen';
+							break;
+						case "Gare":
+							iconMarker = ' icon-subway';
+							colorMarker = 'darkpurple';
+							break;
+						case "Aéroport":
+							iconMarker = ' icon-airplane';
+							colorMarker = 'lightblue';
+							break;
+						case "Restaurant":
+							iconMarker = ' icon-restaurant';
+							colorMarker = 'darkblue';
+							break;
+						case "Boutique":
+							iconMarker = ' icon-cart';
+							colorMarker = 'darkred';
+							break;
+						case "Loisir":
+							iconMarker = ' icon-dice';
+							colorMarker = 'orange';
+							break;
+						case "Parking":
+							iconMarker = ' icon-local_parking';
+							colorMarker = 'blue';
+							break;
+						case "Administration":
+							iconMarker = ' icon-newspaper';
+							colorMarker = 'gray';
+							break;
+						default :
+							iconMarker = ' icon-bed';
+							colorMarker = 'cadetblue';
+							break;
+					}
+
+					/** Ternaire pour definir messsage de la popin **/
+					markerMessage = markers[key].typePlaces == "NULL" ? "Accès - "+markers[key].nameMarker : markers[key].typePlaces+" - "+markers[key].nameMarker ;
+
+					/** Information générale du markers pour afficher dans la popin **/
+					markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
+
+					/** Mise en place du marker avec toute les informations **/
+					value = {
+						lat: parseFloat(markers[key].latitude),
+						lng: parseFloat(markers[key].longitude),
+						message: markerMessage,
+						enable : markerEnable,
+						icon: {
+							type: 'awesomeMarker',
+							icon : iconMarker,
+							iconColor : 'white',
+							markerColor: colorMarker
+						}
+					}
+
+					/** On mets dans le tableau les informations du marker créé **/
+					allMarkers.push(value);
+				}
+				$scope.markers = allMarkers;
+			}, function(msg){
+				console.log(msg);
+		});
+	}
+
+	$scope.typeAccess = function(){
+		$scope.filter = 0;
+
+		/** On supprime tous ce qui ne devrait pas apparaitre lors d'une recherche **/
+		$scope.openPopin = false; // On cache la popin si ouverte
+		$scope.currentTrace = false; // L'itinéraire tracé est faux
+
+		/** On supprime l'itinéraire si existe  **/
+		if($scope.routing != ''){
+			$scope.routing.setWaypoints([]);
+			$scope.routing.hide();
+			$scope.routing = '';
+		}
+
+		/* On vide tout sur la carte */
+		delete $scope.markers.value;
+		$scope.markers = {};
+		allMarkers = [];
+
+		$scope.getAllMarkers = Marker.getTypeAccess($scope.selectTypeAccess)
+			.then(function(markers){
+
+				/** Parcours de la réponse **/
+				for(key in markers){
+					/** Ternaire pour definir messsage de la popin **/
+					markerMessage = "Accès - "+markers[key].nameMarker;
+
+					/** Information générale du markers pour afficher dans la popin **/
+					markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
+
+					/** Mise en place du marker avec toute les informations **/
+					value = {
+						lat: parseFloat(markers[key].latitude),
+						lng: parseFloat(markers[key].longitude),
+						message: markerMessage,
+						enable : markerEnable,
+						icon: {
+							type: 'awesomeMarker',
+							icon : ' icon-access',
+							iconColor : 'lightgray',
+							markerColor: 'black'
+						}
+					}
+
+					/** On mets dans le tableau les informations du marker créé **/
+					allMarkers.push(value);
+				}
+				$scope.markers = allMarkers;
+			}, function(msg){
+				console.log(msg);
+		});
 	}
 });
