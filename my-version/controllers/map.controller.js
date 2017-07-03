@@ -21,6 +21,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	$scope.currentTrace = false; // Permet de dire si l'itinéraire est tracé ou pas 
 
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
+	$scope.countExit = 0; // Permet de définir une valeur de base pour le nombre sortie des metro, qu'on affichera ensuite sur la carte
 
 
 	$scope.searchMapSelect = "allTypePlace"; // Definis la valeur de base du select de recherche
@@ -238,14 +239,28 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				$scope.markerSeeGantry = false;
 			}
 
+			/** Permet de supprimer les markers de sorties si metro **/
+			if($scope.markerSeeMetro){
+				console.log(allMarkers);
+				for(var clean = 1; clean <= $scope.countExit; clean++){
+					allMarkers.splice(-1,1);
+				}
+				console.log(allMarkers);
+				$scope.countExit = 0;
+			}
+			
 			/** Controle pour le metro **/
 			$scope.markerSeeMetro = informations[0] == "Metro" ? true : false;
 
+
 			if($scope.markerSeeMetro){
 				
+				/** Variable pour savoir si on est rentré dans une variable de type metro **/
+
 				/**Mise en place des sorties **/
 				allSortie = markerSortie.split(';');
 				$scope.allExitPopin = '';
+
 
 				allSortie.forEach(function(element) {
 					if(element != "" ){
@@ -255,7 +270,21 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 							$scope.allExitPopin += "Ne dispose que d'une sortie";
 						}
 						else{
+							$scope.countExit ++;
 							$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
+
+							value = {
+								lat: parseFloat(infoSortie[2]),
+								lng: parseFloat(infoSortie[3]) ,
+								message: "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1],
+								icon: {
+									type: 'awesomeMarker',
+									icon : 'glyphicon-log-out',
+									iconColor : '',
+									markerColor: 'lightgreen'
+								}
+							}
+							allMarkers.push(value);
 						}
 					}
 				});
@@ -263,7 +292,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 				/** Permet de savoir si le metro est accessible aux handicapés **/
 				$scope.subwayHandicap = markerSortie.search('true') != '-1' ? true : false ;
-				console.log($scope.subwayHandicap);
 
 				allSubway = markerSubway.split(' ** ');
 				$scope.linesMetros = '';
