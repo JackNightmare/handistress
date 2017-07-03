@@ -273,6 +273,10 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 							$scope.countExit ++;
 							$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
 
+							/** On verifie si la sortie est accessible pour attribuer la bonne couleur **/
+							console.log(infoSortie[0]+" --> "+infoSortie[4]);
+							colorAccessExit = infoSortie[4].search('true') != '-1' ? 'lightgreen' : 'lightred' ;
+
 							value = {
 								lat: parseFloat(infoSortie[2]),
 								lng: parseFloat(infoSortie[3]) ,
@@ -281,7 +285,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 									type: 'awesomeMarker',
 									icon : 'glyphicon-log-out',
 									iconColor : '',
-									markerColor: 'lightgreen'
+									markerColor: colorAccessExit
 								}
 							}
 							allMarkers.push(value);
