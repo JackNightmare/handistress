@@ -1,4 +1,4 @@
-app.controller('addmarkerController', function($scope, $http){
+app.controller('addmarkerController', function($scope, $http, $rootScope){
   // Permet d'afficher ou pas le bouton d'inscription et corriger couleur de la connexion
   $scope.boutonInscription = true;
   $scope.colorSignIn = true;
@@ -10,8 +10,8 @@ app.controller('addmarkerController', function($scope, $http){
   $scope.formAccess = false;
   $scope.formPlace = true; // Par defaut, le formulaire d'ajout lieu sera visible
 
-  /** Variable pour gestion des étapes **/
-  $scope.step = 1; // Ppar defaut, nous sommes à l'étape numéro 1
+  /** Variable pour gestion des Ã©tapes **/
+  $scope.step = 1; // Par defaut, nous sommes Ã  l'Ã©tape numÃ©ro 1
   $scope.valuePreviousStep = false;
   $scope.valueNextStep = true;
   $scope.sendForm = false;
@@ -20,13 +20,13 @@ app.controller('addmarkerController', function($scope, $http){
   /** Variable pour envoie ajout de marker **/
   $scope.markerAccess = {
     type : 2,
-    access : 1,
+    access : "null",
     entitled : '',
     description: ''
   }
   $scope.markerPlace = {
     type : 1,
-    place: 2,
+    place: "null",
     entitled: '',
     description: '',
     access: [],
@@ -62,22 +62,22 @@ app.controller('addmarkerController', function($scope, $http){
   ********************************/
   // Permet d'afficher le formulaire de lieu
   $scope.seePlaceForm = function(){
-    $scope.formAccess = false; // false car ne doit pas être afficher
-    $scope.formPlace = true; // true car doit être afficher
+    $scope.formAccess = false; // false car ne doit pas Ãªtre afficher
+    $scope.formPlace = true; // true car doit Ãªtre afficher
   }
 
-  // Permet d'afficher le formulaire d'accès
+  // Permet d'afficher le formulaire d'accÃ¨s
   $scope.seeAccessForm = function(){
-    $scope.formAccess = true; // true car doit être afficher
-    $scope.formPlace = false; // false car ne doit pas être afficher
+    $scope.formAccess = true; // true car doit Ãªtre afficher
+    $scope.formPlace = false; // false car ne doit pas Ãªtre afficher
   }
 
-  // Permet d'accéder aux étapes de l'ajout de lieu
+  // Permet d'accÃ©der aux Ã©tapes de l'ajout de lieu
   $scope.nextStep = function(){
     $scope.step ++;
-    $scope.valuePreviousStep = true; // Possibilité de retourner en arriere
+    $scope.valuePreviousStep = true; // PossibilitÃ© de retourner en arriere
     if($scope.step == 3){
-        $scope.valueNextStep = false; // Il n'y a plus d'étape après, on met donc à false
+        $scope.valueNextStep = false; // Il n'y a plus d'Ã©tape aprÃ¨s, on met donc Ã  false
         $scope.sendForm = true; // On peut envoyer le formulaire
     }
   }
@@ -85,15 +85,15 @@ app.controller('addmarkerController', function($scope, $http){
   $scope.previousStep = function(){
     $scope.step --;
 
-    // Si etape 1, le previous est forcement à false
+    // Si etape 1, le previous est forcement Ã  false
     if($scope.step == 1){
       $scope.valuePreviousStep = false;
     }
 
-    // Si on est a l'étape 2
+    // Si on est a l'Ã©tape 2
     if($scope.step == 2){
-      $scope.valueNextStep = true; // On revient de l'étape 3, donc il faut repasser la valueNextStep à true
-      $scope.sendForm = false; // Il est impossible à l'étape 2 d'envoyer le formulaire
+      $scope.valueNextStep = true; // On revient de l'Ã©tape 3, donc il faut repasser la valueNextStep Ã  true
+      $scope.sendForm = false; // Il est impossible Ã  l'Ã©tape 2 d'envoyer le formulaire
     }
   }
 
@@ -102,29 +102,29 @@ app.controller('addmarkerController', function($scope, $http){
   /*****************************************************
   *** Envoie des formulaire pour ajouter des markers ***
   *****************************************************/
-  // Ajout d'un marker de type accès
+  // Ajout d'un marker de type accÃ¨s
   $scope.addAccess = function(){
     var data = angular.copy($scope.markerAccess);
 
     data.token = $rootScope.readCookie('handistress_user');
-	
-	$geolocation.getCurrentPosition().then(function(location) {
-		data.lat = location.coords.latitude;
-		data.lng = location.coords.longitude;
-		
-		$http({
-			method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/markers/add.php',
-			headers: {
-			  'Content-Type': undefined
-			},
-			data: data
-    }).then(function successCallback(response) {
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
-		});
-	});
+
+    $geolocation.getCurrentPosition().then(function(location) {
+      data.lat = location.coords.latitude;
+      data.lng = location.coords.longitude;
+
+      $http({
+        method: 'POST',
+        url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+        headers: {
+          'Content-Type': undefined
+        },
+        data: data
+      }).then(function successCallback(response) {
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log(response);
+      });
+    });
   }
 
   // Ajout d'un marker de type lieu
@@ -134,21 +134,21 @@ app.controller('addmarkerController', function($scope, $http){
     data.token = $rootScope.readCookie('handistress_user');
 
     $geolocation.getCurrentPosition().then(function(location) {
-		data.lat = location.coords.latitude;
-		data.lng = location.coords.longitude;
-		
-		$http({
-			method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/markers/add.php',
-			headers: {
-				'Content-Type': undefined
-			},
-			data: data
-		}).then(function successCallback(response) {
-			console.log(response);
-		}, function errorCallback(response) {
-			console.log(response);
-		});
-	});
+      data.lat = location.coords.latitude;
+      data.lng = location.coords.longitude;
+
+      $http({
+        method: 'POST',
+        url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+        headers: {
+          'Content-Type': undefined
+        },
+        data: data
+      }).then(function successCallback(response) {
+        console.log(response);
+      }, function errorCallback(response) {
+        console.log(response);
+      });
+    });
   }
 });

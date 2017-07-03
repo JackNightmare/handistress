@@ -3,9 +3,9 @@
 <nav class="nav-menu not-open">
 	<button class="nav-menu-button"></button>
 	<ul class="nav-menu-link">
-		<li><a href="#/"> <i class="icon-home"></i></a></li>
-		<li> <a href="#/map"><i class="icon-map"></i></a></li>
-		<li class="page-active"> <a href="#/add-marker"><i class="icon-add-marker"></i></a></li>
+		<li><a href=" "> <i class="icon-home"></i></a></li>
+		<li> <a href="map"><i class="icon-map"></i></a></li>
+		<li class="page-active"> <a href="add-marker"><i class="icon-add-marker"></i></a></li>
 	</ul>
 </nav>
 
@@ -21,11 +21,11 @@
         </div>
 
         <div ng-if="formAccess" class="form-add-zone">
-          <div class="form-title">Ajouter un accès </div>
+          <div class="form-title">Ajouter un accès</div>
           <form ng-submit="addAccess()">
-            <div class="form-input">
-              <select ng-model="markerAccess.access">
-                <option selected="true" disabled="disabled" value="null">Choisir type d'accès</option>
+            <div class="form-input select-zone">
+              <select ng-model="markerAccess.access" requir>
+                <option disabled="disabled" value="null" selected>Choisir type d'accès</option>
                 <option value="1">Escalier</option>
                 <option value="2">Escalator</option>
                 <option value="3">Escalator plat</option>
@@ -35,11 +35,20 @@
                 <option value="7">Trottoir haut</option>
               </select>
             </div>
-            <div class="form-input">
-              <input ng-model="markerAccess.entitled" type="text" placeholder="Nom de l'accès"/>
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Nom de l'accès</label>
+              <input ng-model="markerAccess.entitled" type="text" required>
               <div class="input-hover"></div>
-            </div>
+            </md-input-container>
+
+            <!-- <div class="form-input">
+              <input ng-model="markerAccess.entitled" type="text" placeholder="Nom de l'accès" required/>
+              <div class="input-hover"></div>
+            </div> -->
+
             <div class="form-input">
+              <div class="form-question"> Description de l'accès </div>
               <textarea ng-model="markerAccess.description" placeholder="Description de l'accès"></textarea>
             </div>
             <input class="btn btn-send" type="submit" value="Enregistrer"/>
@@ -51,9 +60,9 @@
 
           <form ng-submit="addPlace()">
             <div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
-              <div class="form-input">
+              <div class="form-input select-zone">
                 <select ng-model="markerPlace.place">
-                  <option selected="true" disabled="disabled" value="null">Choisir type de lieu</option>
+                  <option disabled="disabled" value="null" selected>Choisir type de lieu</option>
                   <option value="2">Ecoles</option>
                   <option value="3">Metro</option>
                   <option value="4">Gare</option>
@@ -66,11 +75,15 @@
                   <option value="11">Hébergement</option>
                 </select>
               </div>
-              <div class="form-input">
-                <input ng-model="markerPlace.entitled" type="text" placeholder="nom du lieu"/>
+              
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Nom du lieu</label>
+                <input ng-model="markerPlace.entitled" type="text" required>
                 <div class="input-hover"></div>
-              </div>
+              </md-input-container>
+
               <div class="form-input">
+                <div class="form-question"> Description du lieu </div>
                 <textarea ng-model="markerPlace.description" placeholder="Description du lieu"></textarea>
               </div>
             </div>
@@ -127,6 +140,7 @@
 
             <div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
               <div class="form-input">
+                <div class="form-question"> Description des entrées / sorties </div>
                 <textarea ng-model="markerPlace.complements.accessEnterExit" placeholder="Description des entrées et des sorties"></textarea>
               </div>
 
@@ -169,7 +183,6 @@
               <div class="form-input">
                 <input ng-model="markerPlace.complements.subwayLine" type="text" placeholder="Numero de ligne Metro">
               </div>
-
             </div>
           </form>
 

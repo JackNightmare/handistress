@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" ng-app="HandiStress">
 	<head>
-		<base href="/">
+		<base href="/annuel/">
 
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -13,6 +13,9 @@
 
 		<title> Second Angular </title>
 
+		<!-- style angular -->
+		<link rel='stylesheet prefetch' href='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css'>
+		
 		<!-- style markers -->
 		<link href="assets/css/librairies/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link href="assets/css/librairies/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -34,15 +37,18 @@
 
 	</head>
 
-	<body class="form-center">
+	<body>
 
 		<div ng-view></div>
 
 		<!-- Angular JS -->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
-
-		<!-- Permet de gérer les routes -->
-		<script src="https://code.angularjs.org/1.2.32/angular-route.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js'></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js'></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js'></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js'></script>
+		
+		<script src="https://code.angularjs.org/1.5.2/angular-route.min.js"></script> <!-- Permet de gérer les routes -->
 
 		<!-- Map Leaflet -->
 		<script src="assets/js/leaflet.js"></script>

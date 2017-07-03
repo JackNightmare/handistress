@@ -1,4 +1,4 @@
-app.controller('headerController', function($scope){
+app.controller('headerController', function($scope, $rootScope){
 	
 	/****************************************
 	*** Variables globales pour le Header ***
