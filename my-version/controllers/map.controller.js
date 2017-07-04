@@ -8,7 +8,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	allMarkers = []; // Variable pour markers
 	$scope.markersList = ''; // Variable contenant la liste des markers existant, permettant la mise place de la recherche ou tracer l'itinéraire
 
-
 	$scope.openFilter = false; // Permet de savoir si le filtre est ouvert ou pas
 	$scope.filter = 1; // Pour activer le type de filtre, all markers actuellement
 
@@ -171,7 +170,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/** Clique sur un marker pour ouvrir un popin à gauche **/
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
 
-		// console.log(args.model.enable);
 		if($scope.currentTrace == false && args.model.enable != undefined){
 			
 			/** Permet de fermer la popup sur la carte **/
@@ -208,32 +206,27 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 			markerOffice = informations[8];
 			markerSubway = informations[9];
 
-
 			/** Variable de retour pour la Popin  **/
-			$scope.descriptionPopin = markerDescription;
-			$scope.descriptionPopin = $sce.trustAsHtml($scope.descriptionPopin);
+			$scope.descriptionPopin = $sce.trustAsHtml(markerDescription);
+			// $scope.descriptionExit = $sce.trustAsHtml(markerDescriptionExit);
+			$scope.descriptionExit = markerType != "NULL" ? $sce.trustAsHtml(markerDescriptionExit) : "" ;
 
-			$scope.descriptionExit = markerDescriptionExit;
-			$scope.descriptionExit = $sce.trustAsHtml($scope.descriptionExit);
 
 			/** Controle des toilets **/
 			if(markerType != "Metro" && markerType != "Parking" && markerType != "NULL" ){
 				$scope.markerSeeToilet = true;
-
 				$scope.toilet = markerToilet == 'null' || markerToilet == "0" ? false : true ; 
 			}
 
 			/** Controle des equipements**/
 			if(markerType != "NULL" ){
 				$scope.markerSeeEquipment = true;
-				
 				$scope.equipment = markerEquipment== 'null' || markerEquipment == "0" ? false : true ;
 			}
 
 			/** Controle sur portique handicape **/
 			if(markerType != "NULL" ){
 				$scope.markerSeeGantry = true;
-				
 				$scope.gantry = markerGantry== 'null' || markerGantry == "0" ? false : true ;
 			}
 
@@ -246,22 +239,18 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 			/** Permet de supprimer les markers de sorties si metro **/
 			if($scope.markerSeeMetro){
-				console.log(allMarkers);
 				for(var clean = 1; clean <= $scope.countExit; clean++){
 					allMarkers.splice(-1,1);
 				}
-				console.log(allMarkers);
 				$scope.countExit = 0;
 			}
 			
 			/** Controle pour le metro **/
 			$scope.markerSeeMetro = informations[0] == "Metro" ? true : false;
 
-
 			if($scope.markerSeeMetro){
 				
 				/** Variable pour savoir si on est rentré dans une variable de type metro **/
-
 				/**Mise en place des sorties **/
 				allSortie = markerSortie.split(';');
 				$scope.allExitPopin = '';
@@ -279,7 +268,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 							$scope.allExitPopin += "Sortie n° "+infoSortie[0]+" - "+ infoSortie[1]+"<br>";
 
 							/** On verifie si la sortie est accessible pour attribuer la bonne couleur **/
-							console.log(infoSortie[0]+" --> "+infoSortie[4]);
 							colorAccessExit = infoSortie[4].search('true') != '-1' ? 'lightgreen' : 'lightred' ;
 
 							value = {
@@ -302,16 +290,18 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				/** Permet de savoir si le metro est accessible aux handicapés **/
 				$scope.subwayHandicap = markerSortie.search('true') != '-1' ? true : false ;
 
+				/** Definis les lignes de metros present à cet endroit **/
 				allSubway = markerSubway.split(' ** ');
 				$scope.linesMetros = '';
 
-				allSubway.forEach(function(element){
-					if(element !=""){
-						$scope.linesMetros += "<span class='subway-popin line"+element+"'>"+element+"</span>";
+				for(key in allSubway){
+					if(allSubway[key] !=""){
+						$scope.linesMetros += "<span class='subway-popin line"+allSubway[key]+"'>"+allSubway[key]+"</span>";
 					}
-				});
+				}
 				$scope.linesMetros = $sce.trustAsHtml($scope.linesMetros);
 
+				/** On regarde si il y a un bureau d'information **/
 				$scope.office = markerOffice == "1" ? true : false ;
 				$scope.markerSeeToilet = false;
 			}
@@ -339,13 +329,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		delete $scope.markers.value;
 		$scope.filter = 0;
 		allMarkers = [];
-
-		/** tableau de test pour itinéraire optimisé **/
-		testMarker = [
-			{"lat":48.86635, "lng": 2.33753}
-		]
-
-		console.log(testMarker);
 
 		/** On verifie qu'on a bien trouvé des informations pour les deux **/
 		if(startPoint.length > 0 && endPoint.length > 0){
@@ -405,6 +388,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				/** Appel à l'api MAP box pour le routing leaflet **/
 				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
 
+				
 				/** Définition des valeurs pour le routing **/
 				$scope.routing = L.Routing.control({
 					waypoints: [
@@ -418,20 +402,73 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 					language : 'fr',
 				});
 				
-				$scope.routing.on('routeselected', function(e) {
-					var route = e.route;
-					coordinatesTrace = route.coordinates;
-					coordinatesTrace.forEach(function(infoGeo){
-						testMarker.forEach(function(infoAccess){
-							if(infoGeo.lat == infoAccess.lat){
-								console.log("trouvé");
-							};
-						});
-					});
-				});
+
+				/** tableau de test pour itinéraire optimisé **/
+				forbiddenAccess = [
+					{"lat":48.86635, "lng": 2.33753}
+				];
 				
+				/** TO DO - Recuperer la liste des accès au quel l'utilisateur ne peut accèder **/
+				/** utiliser les apis correspondantes **/
+				stairsAccess = Marker.getAccessMarkers()
+					.then(function(accessStairs){
+						for(key in accessStairs){
+							coordinateAccess = {"lat" : parseFloat(accessStairs.latitude), "lng" : parseFloat(accessStairs.longitude) }
+							forbiddenAccess.push(coordinateAccess);
+						}
+					})
+
+
+				/** Tableau pour optimiser les routes **/
+				$scope.optimizationRoute = [];
+
+				/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
+				$scope.routing.on('routeselected', function(element) {
+					/** Objet route **/
+					var route = element.route;
+					coordinatesTrace = route.coordinates;
+					
+					for(keyCoordinate in coordinatesTrace ){
+						for(keyAccess in forbiddenAccess){
+							/** On parse en string pour faciliter la recherche **/
+							latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
+							latAccess = String(forbiddenAccess[keyAccess].lat);
+							
+							/** On regarde si on a un accès interdit dans la route basique **/
+							if(latCoordinate.search(latAccess) != "-1"){
+								$scope.optimizationRoute.push(L.latLng(48.866636,2.337372));
+							}
+						}
+					}
+
+					/** suppression des doublons **/
+					saveLastInfoCoord = {"lat": "", "lng":""};
+					$scope.optimizationRoute = $scope.optimizationRoute.filter(function(currentCoord){
+						if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){
+							deleteCoord = false;
+						}
+						else{
+							deleteCoord = true;
+						}
+						
+						/** on attrribue le dernier element à la variable de sauvegarde **/
+						saveLastInfoCoord = currentCoord;
+
+						/** on retourne la valeur pour nettoyer le code **/
+						return deleteCoord;
+					});
+
+					$scope.optimizationRoute.unshift(L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])));
+					$scope.optimizationRoute.push(L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])));
+				});
+
+				setTimeout(function(){
+					$scope.routing.setWaypoints($scope.optimizationRoute);
+				}, 500);
+
 				/** On ajoute le routing à la carte **/
 				$scope.routing.addTo(map);
+				
 			});
 		}
 	}
