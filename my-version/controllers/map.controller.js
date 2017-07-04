@@ -18,6 +18,8 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	
 	$scope.routing = ''; // Variable contenant l'itinéraire
 	$scope.currentTrace = false; // Permet de dire si l'itinéraire est tracé ou pas 
+	$scope.optimizationRoute = []; // Tableau pour optimiser les routes si besoin
+
 
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
 	$scope.countExit = 0; // Permet de définir une valeur de base pour le nombre sortie des metro, qu'on affichera ensuite sur la carte
@@ -372,9 +374,10 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 			*** Version with OSRM ***
 			************************/
 			leafletData.getMap().then(function(map){
-				/** Permet d'effacer l'ancien itinéraire et d'en tracer un nouveau **/
+				/** Permet d'effacer l'asncien itinéraire et d'en tracer un nouveau **/
 				if($scope.routing != ''){
 					$scope.routing.setWaypoints([]);
+					$scope.optimizationRoute = [];
 					$scope.routing.hide();
 					$scope.routing = '';
 				}
@@ -388,12 +391,10 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				/** Appel à l'api MAP box pour le routing leaflet **/
 				mapboxRouter = L.Routing.mapbox('pk.eyJ1IjoiamFjazE5IiwiYSI6ImNqMms1MGpueTAwMDMyd2x1bHoyMWducXEifQ.2jAcRq_NIGBIaNM3oHNhWg', optionRouting);
 
-				
-				/** Définition des valeurs pour le routing **/
+				/** Définition des valeurs pour le routing de base **/
 				$scope.routing = L.Routing.control({
 					waypoints: [
 						L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])),
-						// L.latLng(48.866636,2.337372), // Test itinéraire optimisé
 						L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude']))
 					],
 					createMarker: function(){ return null; },
@@ -402,6 +403,13 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 					language : 'fr',
 				});
 				
+				console.log("lat debut-> "+startPoint[0]['latitude']);
+				console.log("lat fin -> "+endPoint[0]['latitude']);
+
+
+				/*******************************************************
+				*** Debut optimisation Itinéraire à Optimiser à fond ***
+				*******************************************************/
 
 				/** tableau de test pour itinéraire optimisé **/
 				forbiddenAccess = [
@@ -416,18 +424,14 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 							coordinateAccess = {"lat" : parseFloat(accessStairs.latitude), "lng" : parseFloat(accessStairs.longitude) }
 							forbiddenAccess.push(coordinateAccess);
 						}
-					})
-
-
-				/** Tableau pour optimiser les routes **/
-				$scope.optimizationRoute = [];
+					});
 
 				/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
 				$scope.routing.on('routeselected', function(element) {
 					/** Objet route **/
 					var route = element.route;
 					coordinatesTrace = route.coordinates;
-					
+
 					for(keyCoordinate in coordinatesTrace ){
 						for(keyAccess in forbiddenAccess){
 							/** On parse en string pour faciliter la recherche **/
@@ -463,6 +467,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				});
 
 				setTimeout(function(){
+					console.log($scope.optimizationRoute);
 					$scope.routing.setWaypoints($scope.optimizationRoute);
 				}, 500);
 
@@ -483,6 +488,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.optimizationRoute = [];
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
@@ -645,6 +651,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.optimizationRoute = [];
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
@@ -759,6 +766,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.optimizationRoute = [];
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
@@ -860,6 +868,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.optimizationRoute = [];
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
@@ -921,6 +930,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.optimizationRoute = [];
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
@@ -1017,6 +1027,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		/** On supprime l'itinéraire si existe  **/
 		if($scope.routing != ''){
 			$scope.routing.setWaypoints([]);
+			$scope.optimizationRoute = [];
 			$scope.routing.hide();
 			$scope.routing = '';
 		}
