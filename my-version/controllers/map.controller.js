@@ -410,6 +410,14 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 					show: true,
 					language : 'fr',
 				});
+				
+				$scope.routing.on('routeselected', function(e) {
+					var route = e.route;
+					coordinatesTrace = route.coordinates;
+					console.log(coordinatesTrace);
+				});
+				
+				// console.log($scope.routing.routes);
 
 				/** On ajoute le routing à la carte **/
 				$scope.routing.addTo(map);
