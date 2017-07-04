@@ -340,6 +340,13 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		$scope.filter = 0;
 		allMarkers = [];
 
+		/** tableau de test pour itinéraire optimisé **/
+		testMarker = [
+			{"lat":48.86635, "lng": 2.33753}
+		]
+
+		console.log(testMarker);
+
 		/** On verifie qu'on a bien trouvé des informations pour les deux **/
 		if(startPoint.length > 0 && endPoint.length > 0){
 			/** On dit que l'itinéraire est tracé **/
@@ -414,11 +421,15 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 				$scope.routing.on('routeselected', function(e) {
 					var route = e.route;
 					coordinatesTrace = route.coordinates;
-					console.log(coordinatesTrace);
+					coordinatesTrace.forEach(function(infoGeo){
+						testMarker.forEach(function(infoAccess){
+							if(infoGeo.lat == infoAccess.lat){
+								console.log("trouvé");
+							};
+						});
+					});
 				});
 				
-				// console.log($scope.routing.routes);
-
 				/** On ajoute le routing à la carte **/
 				$scope.routing.addTo(map);
 			});
