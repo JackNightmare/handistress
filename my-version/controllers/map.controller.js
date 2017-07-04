@@ -170,13 +170,18 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 
 	/** Clique sur un marker pour ouvrir un popin à gauche **/
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
-		
-		/** On recupere les informations contenu dans le markers **/ 
-		informations = args.model.enable.split('/');
 
-		if($scope.currentTrace == false){
+		// console.log(args.model.enable);
+		if($scope.currentTrace == false && args.model.enable != undefined){
+			
+			/** Permet de fermer la popup sur la carte **/
+			leafletData.getMap().then(function(map){ map.closePopup(); });
+
 			/** On ouvre la popin **/
 			$scope.openPopin = true;
+
+			/** On recupere les informations contenu dans le markers **/ 
+			informations = args.model.enable.split('/');
 
 			/** titre pour la popin **/
 			markerType = informations[0];
@@ -334,11 +339,6 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		delete $scope.markers.value;
 		$scope.filter = 0;
 		allMarkers = [];
-
-
-		/** Ok c'est pour moi **/
-		console.log("value du escaliers -> "+$scope.traceMap.stairs);
-		console.log("value du escalators -> "+$scope.traceMap.escalators);
 
 		/** On verifie qu'on a bien trouvé des informations pour les deux **/
 		if(startPoint.length > 0 && endPoint.length > 0){
