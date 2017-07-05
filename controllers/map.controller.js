@@ -62,6 +62,29 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	*** Mise en place des markers au chargement ***
 	***********************************************/
 	/** Creation de la liste pour recherche **/
+	$scope.searchByName = function (search) {
+		var data = {
+			search: search
+		};
+		
+		return $http({
+				method: 'POST',
+				url: 'https://www.api.benpedia.com/handistress/markers/searchByName.php',
+				headers: {
+					'Content-Type': undefined
+				},
+				data: data
+			}).then(function successCallback(response) {
+				var markers = [];
+				angular.forEach(response.data, function(item) {
+					markers.push(item);
+				});
+				return markers;
+			}, function errorCallback(response) {
+				console.log(response);
+			});
+	};
+	
 	$http.get('json/listMarkers.json')
 		.success(function(data){
 			/** Définition de la liste de markers **/
@@ -72,9 +95,9 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		});
 
 	/** Creation des markers au chargement de la page **/
-	$scope.getAllMarkers = Marker.getAllMarkers()
+	$scope.getAllMarkers = Marker.getAllMarkers($scope.center.lat, $scope.center.lng, 0.01)
 		.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
-
+			
 			/** variables pour définitions des couleurs et icones des markers **/
 			iconColor = 'white'; // couleur de l'icon par default
 
@@ -577,7 +600,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 			$scope.filter = 1;
 
 			/** Ici on charge la fonction dans le models **/
-			$scope.getAllMarkers = Marker.getAllMarkers()
+			$scope.getAllMarkers = Marker.getAllMarkers($scope.center.lat, $scope.center.lng, 0.01)
 				.then(function(markers){
 					/* Ici on definit les variables pour les markers */
 					iconColor = 'white';
@@ -687,7 +710,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		else{
 			$scope.filter = 2;
 
-			$scope.getAllMarkers = Marker.getPlacesMarkers()
+			$scope.getAllMarkers = Marker.getPlacesMarkers($scope.center.lat, $scope.center.lng, 0.01)
 				.then(function(markers){					
 					/** Parcours de la réponse **/
 					for(key in markers){
@@ -787,7 +810,7 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 		else{
 			$scope.filter = 3;
 
-			$scope.getAllMarkers = Marker.getAccessMarkers()
+			$scope.getAllMarkers = Marker.getAccessMarkers($scope.center.lat, $scope.center.lng, 0.01)
 				.then(function(markers){
 
 					/** Parcours de la réponse **/

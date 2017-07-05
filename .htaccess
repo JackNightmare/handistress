@@ -2,6 +2,10 @@ Options +FollowSymLinks
 
 <ifModule mod_rewrite.c>
     RewriteEngine On
+	
+	RewriteCond %{SERVER_PORT} 80
+	RewriteRule ^(.*)$ https://www.benpedia.com/$1 [L,R=301]
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} !index

@@ -1,4 +1,4 @@
-var app = angular.module('HandiStress', ['ngRoute', 'leaflet-directive', 'ui.bootstrap', 'ngMaterial', 'ngAnimate']);
+var app = angular.module('HandiStress', ['ngRoute', 'leaflet-directive', 'ui.bootstrap', 'ngMaterial', 'ngAnimate', 'ngGeolocation']);
 
 app.config(function($routeProvider, $locationProvider){
 	$routeProvider

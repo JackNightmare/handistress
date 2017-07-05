@@ -1,4 +1,4 @@
-app.controller('addmarkerController', function($scope, $http, $rootScope){
+app.controller('addmarkerController', function($scope, $http, $rootScope, $geolocation){
   // Permet d'afficher ou pas le bouton d'inscription et corriger couleur de la connexion
   $scope.boutonInscription = true;
   $scope.colorSignIn = true;
@@ -50,7 +50,7 @@ app.controller('addmarkerController', function($scope, $http, $rootScope){
 			'Content-Type': undefined
 		}
     }).then(function successCallback(response) {
-		console.log(response);
+		// console.log(response);
 		
 		$scope.listAccess = response.data;
 	}, function errorCallback(response) {
@@ -106,7 +106,7 @@ app.controller('addmarkerController', function($scope, $http, $rootScope){
   $scope.addAccess = function(){
     var data = angular.copy($scope.markerAccess);
 
-    data.token = $rootScope.readCookie('handistress_user');
+    data.token = $rootScope.readCookie('handistress_token_connection');
 
     $geolocation.getCurrentPosition().then(function(location) {
       data.lat = location.coords.latitude;
@@ -130,8 +130,8 @@ app.controller('addmarkerController', function($scope, $http, $rootScope){
   // Ajout d'un marker de type lieu
   $scope.addPlace = function(){
     var data = angular.copy($scope.markerPlace);
-
-    data.token = $rootScope.readCookie('handistress_user');
+	console.log(data);
+    data.token = $rootScope.readCookie('handistress_token_connection');
 
     $geolocation.getCurrentPosition().then(function(location) {
       data.lat = location.coords.latitude;
