@@ -466,12 +466,8 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 					/** suppression des doublons **/
 					saveLastInfoCoord = {"lat": "", "lng":""};
 					$scope.optimizationRoute = $scope.optimizationRoute.filter(function(currentCoord){
-						if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){
-							deleteCoord = false;
-						}
-						else{
-							deleteCoord = true;
-						}
+						if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){ deleteCoord = false; }
+						else{ deleteCoord = true; }
 						
 						/** on attrribue le dernier element à la variable de sauvegarde **/
 						saveLastInfoCoord = currentCoord;
@@ -484,8 +480,10 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 					$scope.optimizationRoute.push(L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])));
 				});
 
+				/** Petit temps de latence afin que les variables soit bien mise a jour **/
 				setTimeout(function(){
 					console.log($scope.findForbidenAcces);
+					console.log($scope.optimizationRoute);
 					if($scope.findForbidenAcces)
 						$scope.routing.setWaypoints($scope.optimizationRoute);
 				}, 500);
