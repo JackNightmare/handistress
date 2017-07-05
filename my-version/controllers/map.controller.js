@@ -419,7 +419,9 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 					language : 'fr',
 				});
 
+				/** Tableau de base des accès interdis **/
 				forbiddenAccess = [ {"lat":48.86635, "lng": 2.33753} ];
+
 				/** Ici controle du formulaire et mise en place du tableau avec les accès interdits **/
 				/** si les accès sont à false, on ajoute les données dans le tableau **/
 				// $scope.traceMap.stairs = "test";
@@ -429,7 +431,6 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 				// $scope.traceMap.hightPavement = "test";
 				// $scope.traceMap.flatPavement = "test";
 
-				/** TO DO - Recuperer la liste des accès au quel l'utilisateur ne peut accèder **/
 				/** utiliser les apis correspondantes **/
 				stairsAccess = Marker.getAccessMarkers()
 					.then(function(accessStairs){
@@ -439,11 +440,14 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 						}
 					});
 
+				$scope.findForbidenAcces = false;
+				
 				/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
 				$scope.routing.on('routeselected', function(element) {
 					/** Objet route **/
 					var route = element.route;
 					coordinatesTrace = route.coordinates;
+
 
 					for(keyCoordinate in coordinatesTrace ){
 						for(keyAccess in forbiddenAccess){
@@ -453,6 +457,7 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 							
 							/** On regarde si on a un accès interdit dans la route basique **/
 							if(latCoordinate.search(latAccess) != "-1"){
+								$scope.findForbidenAcces = true;
 								$scope.optimizationRoute.push(L.latLng(48.866636,2.337372));
 							}
 						}
@@ -480,10 +485,11 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 				});
 
 				setTimeout(function(){
-					console.log($scope.optimizationRoute);
-					$scope.routing.setWaypoints($scope.optimizationRoute);
+					console.log($scope.findForbidenAcces);
+					if($scope.findForbidenAcces)
+						$scope.routing.setWaypoints($scope.optimizationRoute);
 				}, 500);
-				
+
 
 				/** On ajoute le routing à la carte **/
 				$scope.routing.addTo(map);				
