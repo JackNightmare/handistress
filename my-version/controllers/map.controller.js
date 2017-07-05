@@ -429,6 +429,62 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 				// $scope.traceMap.hightPavement = "test";
 				// $scope.traceMap.flatPavement = "test";
 
+				/** TO DO - Recuperer la liste des accès au quel l'utilisateur ne peut accèder **/
+				/** utiliser les apis correspondantes **/
+				stairsAccess = Marker.getAccessMarkers()
+					.then(function(accessStairs){
+						for(key in accessStairs){
+							coordinateAccess = {"lat" : parseFloat(accessStairs.latitude), "lng" : parseFloat(accessStairs.longitude) }
+							forbiddenAccess.push(coordinateAccess);
+						}
+					});
+
+				/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
+				$scope.routing.on('routeselected', function(element) {
+					/** Objet route **/
+					var route = element.route;
+					coordinatesTrace = route.coordinates;
+
+					for(keyCoordinate in coordinatesTrace ){
+						for(keyAccess in forbiddenAccess){
+							/** On parse en string pour faciliter la recherche **/
+							latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
+							latAccess = String(forbiddenAccess[keyAccess].lat);
+							
+							/** On regarde si on a un accès interdit dans la route basique **/
+							if(latCoordinate.search(latAccess) != "-1"){
+								$scope.optimizationRoute.push(L.latLng(48.866636,2.337372));
+							}
+						}
+					}
+
+					/** suppression des doublons **/
+					saveLastInfoCoord = {"lat": "", "lng":""};
+					$scope.optimizationRoute = $scope.optimizationRoute.filter(function(currentCoord){
+						if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){
+							deleteCoord = false;
+						}
+						else{
+							deleteCoord = true;
+						}
+						
+						/** on attrribue le dernier element à la variable de sauvegarde **/
+						saveLastInfoCoord = currentCoord;
+
+						/** on retourne la valeur pour nettoyer le code **/
+						return deleteCoord;
+					});
+
+					$scope.optimizationRoute.unshift(L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])));
+					$scope.optimizationRoute.push(L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])));
+				});
+
+				setTimeout(function(){
+					console.log($scope.optimizationRoute);
+					$scope.routing.setWaypoints($scope.optimizationRoute);
+				}, 500);
+				
+
 				/** On ajoute le routing à la carte **/
 				$scope.routing.addTo(map);				
 			});
