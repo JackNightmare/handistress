@@ -1,4 +1,4 @@
-app.controller('mapController', function($scope, $sce, $http, Marker, filterFilter, leafletData, leafletMarkerEvents ){
+app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker, filterFilter, leafletData, leafletMarkerEvents ){
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
 
@@ -20,10 +20,8 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	$scope.currentTrace = false; // Permet de dire si l'itinéraire est tracé ou pas 
 	$scope.optimizationRoute = []; // Tableau pour optimiser les routes si besoin
 
-
 	$scope.openPopin = false // Permet de définir si on ouvre ou pas la popin d'information
 	$scope.countExit = 0; // Permet de définir une valeur de base pour le nombre sortie des metro, qu'on affichera ensuite sur la carte
-
 
 	$scope.searchMapSelect = "allTypePlace"; // Definis la valeur de base du select de recherche
 	$scope.selectTypePlace = "allTypePlace"; // Definis la valeur de base pour le select type categorie lieu
@@ -319,9 +317,27 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 	/** Tracer des itinéraire  **/
 	$scope.traceMap = function(){
 
+		/** On definis le niveau de l'accès, soit par ses informations de compte, soit par le formulaire si pas de compte **/
+		if($rootScope.userData){
+			$scope.traceMap.stairs = $rootScope.userData.accessStairs;
+			$scope.traceMap.escalators = $rootScope.userData.accessEscalator;
+			$scope.traceMap.flatEscalators = $rootScope.userData.accessFlatEscalator;
+			$scope.traceMap.elevator = $rootScope.userData.accessElevator;
+			$scope.traceMap.hightPavement = $rootScope.userData.accessHightPavement;
+			$scope.traceMap.flatPavement = $rootScope.userData.accessPavement;
+		}
+		else{
+			$scope.traceMap.stairs = $scope.traceMap.stairs == undefined ? false : $scope.traceMap.stairs ;
+			$scope.traceMap.escalators = $scope.traceMap.escalators == undefined ? false : $scope.traceMap.escalators ;
+			$scope.traceMap.flatEscalators = $scope.traceMap.flatEscalators == undefined ? false : $scope.traceMap.flatEscalators ;
+			$scope.traceMap.elevator = $scope.traceMap.elevator == undefined ? false : $scope.traceMap.elevator ;
+			$scope.traceMap.hightPavement = $scope.traceMap.hightPavement == undefined ? false : $scope.traceMap.hightPavement ;
+			$scope.traceMap.flatPavement = $scope.traceMap.flatPavement == undefined ? false : $scope.traceMap.flatPavement ;
+		}
+
 		/** On recupere les valeurs du formulaires **/
 		startPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.start.nameMarker}, true );
-		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end.nameMarker}, true );
+		endPoint = filterFilter($scope.markersList, { 'nameMarker': $scope.traceMap.end.nameMarker}, true );		
 
 		/** On cache la popin si ouverte **/
 		$scope.openPopin = false;
@@ -402,78 +418,19 @@ app.controller('mapController', function($scope, $sce, $http, Marker, filterFilt
 					show: true,
 					language : 'fr',
 				});
-				
-				console.log("lat debut-> "+startPoint[0]['latitude']);
-				console.log("lat fin -> "+endPoint[0]['latitude']);
 
-
-				/*******************************************************
-				*** Debut optimisation Itinéraire à Optimiser à fond ***
-				*******************************************************/
-
-				/** tableau de test pour itinéraire optimisé **/
-				forbiddenAccess = [
-					{"lat":48.86635, "lng": 2.33753}
-				];
-				
-				/** TO DO - Recuperer la liste des accès au quel l'utilisateur ne peut accèder **/
-				/** utiliser les apis correspondantes **/
-				stairsAccess = Marker.getAccessMarkers()
-					.then(function(accessStairs){
-						for(key in accessStairs){
-							coordinateAccess = {"lat" : parseFloat(accessStairs.latitude), "lng" : parseFloat(accessStairs.longitude) }
-							forbiddenAccess.push(coordinateAccess);
-						}
-					});
-
-				/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
-				$scope.routing.on('routeselected', function(element) {
-					/** Objet route **/
-					var route = element.route;
-					coordinatesTrace = route.coordinates;
-
-					for(keyCoordinate in coordinatesTrace ){
-						for(keyAccess in forbiddenAccess){
-							/** On parse en string pour faciliter la recherche **/
-							latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
-							latAccess = String(forbiddenAccess[keyAccess].lat);
-							
-							/** On regarde si on a un accès interdit dans la route basique **/
-							if(latCoordinate.search(latAccess) != "-1"){
-								$scope.optimizationRoute.push(L.latLng(48.866636,2.337372));
-							}
-						}
-					}
-
-					/** suppression des doublons **/
-					saveLastInfoCoord = {"lat": "", "lng":""};
-					$scope.optimizationRoute = $scope.optimizationRoute.filter(function(currentCoord){
-						if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){
-							deleteCoord = false;
-						}
-						else{
-							deleteCoord = true;
-						}
-						
-						/** on attrribue le dernier element à la variable de sauvegarde **/
-						saveLastInfoCoord = currentCoord;
-
-						/** on retourne la valeur pour nettoyer le code **/
-						return deleteCoord;
-					});
-
-					$scope.optimizationRoute.unshift(L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])));
-					$scope.optimizationRoute.push(L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])));
-				});
-
-				setTimeout(function(){
-					console.log($scope.optimizationRoute);
-					$scope.routing.setWaypoints($scope.optimizationRoute);
-				}, 500);
+				forbiddenAccess = [ {"lat":48.86635, "lng": 2.33753} ];
+				/** Ici controle du formulaire et mise en place du tableau avec les accès interdits **/
+				/** si les accès sont à false, on ajoute les données dans le tableau **/
+				// $scope.traceMap.stairs = "test";
+				// $scope.traceMap.escalators = "test";
+				// $scope.traceMap.flatEscalators = "test";
+				// $scope.traceMap.elevator = "test";
+				// $scope.traceMap.hightPavement = "test";
+				// $scope.traceMap.flatPavement = "test";
 
 				/** On ajoute le routing à la carte **/
-				$scope.routing.addTo(map);
-				
+				$scope.routing.addTo(map);				
 			});
 		}
 	}
