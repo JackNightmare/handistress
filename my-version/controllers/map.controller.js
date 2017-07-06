@@ -454,6 +454,7 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 
 				/** On enleve la dernière virgule pour split plus efficament **/
 				typeToSearch = typeToSearch.slice(0, -1);
+		
 
 				searchForbidAccess = Marker.searchForbiddenAccess(typeToSearch)
 						.then(function(findForbiddenAccess){
@@ -479,11 +480,15 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 										latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
 										latAccess = String(forbiddenAccess[keyAccess].lat);
 
-										console.log(latCoordinate +" - "+latAccess)
+										lngCoordinate = String(coordinatesTrace[keyCoordinate].lng)
+										lngAccess = String(forbiddenAccess[keyAccess].lng);
+
 
 										/** On regarde si on a un accès interdit dans la route basique **/
-										if(latCoordinate.search(latAccess) != "-1"){
+										if(latCoordinate.search(latAccess) != "-1" && lngCoordinate.search(lngAccess) != "-1" ){
 											$scope.findForbidenAcces = true;
+											console.log("comparaison -> "+latCoordinate + " + "+  +" = "+forbiddenAccess[keyAccess].newlat);
+											console.log("comparaison -> "+lngCoordinate + " + "+  +" = "+forbiddenAccess[keyAccess].newlng);
 											$scope.optimizationRoute.push(L.latLng(forbiddenAccess[keyAccess].newlat, forbiddenAccess[keyAccess].newlng));
 										}
 									}
