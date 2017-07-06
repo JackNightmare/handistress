@@ -483,12 +483,12 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 										lngCoordinate = String(coordinatesTrace[keyCoordinate].lng)
 										lngAccess = String(forbiddenAccess[keyAccess].lng);
 
+										console.log(latCoordinate+' - '+latAccess);
+										console.log(lngCoordinate+' - '+lngAccess);
 
 										/** On regarde si on a un accès interdit dans la route basique **/
 										if(latCoordinate.search(latAccess) != "-1" && lngCoordinate.search(lngAccess) != "-1" ){
 											$scope.findForbidenAcces = true;
-											console.log("comparaison -> "+latCoordinate + " + "+  +" = "+forbiddenAccess[keyAccess].newlat);
-											console.log("comparaison -> "+lngCoordinate + " + "+  +" = "+forbiddenAccess[keyAccess].newlng);
 											$scope.optimizationRoute.push(L.latLng(forbiddenAccess[keyAccess].newlat, forbiddenAccess[keyAccess].newlng));
 										}
 									}
