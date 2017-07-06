@@ -41,6 +41,16 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
     }
   }
   
+  $scope.subwayLines = [{value: ''}];
+  
+  $scope.addSL = function () {
+	  $scope.subwayLines.push({value: ''});
+  };
+  
+  $scope.removeSL = function (index) {
+	  $scope.subwayLines.splice(index, 1);
+  };
+  
 	$scope.listAccess == [];
   
 	$http({
@@ -100,10 +110,49 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 
 
   /*****************************************************
+  *** Liste de droite ***
+  *****************************************************/
+  $scope.markersProx = [];
+  
+  $geolocation.getCurrentPosition().then(function(location) {
+      var lat = location.coords.latitude;
+      var lng = location.coords.longitude;
+
+      var data = {
+			lat: lat,
+			lng: lng,
+			rayon: 0.005,
+			includePlaces: [1,2,3,4,5,6,7,8,9,10,11],
+			excludePlaces: []
+		};
+		
+		$http({
+				method: 'POST',
+				url: 'https://www.api.benpedia.com/handistress/markers/getInZone.php',
+				headers: {
+					'Content-Type': undefined
+				},
+				data: data
+			}).then(function successCallback(response) {
+				$scope.markersProx = response.data;
+			}, function errorCallback(response) {
+				console.log('une erreurs lors du chargement des markers');
+			});
+    });
+  
+  /*****************************************************
+  *** Edition marker ***
+  *****************************************************/
+  
+  $scope.openMarker = function (id) {
+	  console.log(id);
+  };
+  
+  /*****************************************************
   *** Envoie des formulaire pour ajouter des markers ***
   *****************************************************/
   // Ajout d'un marker de type accès
-  $scope.addAccess = function(){
+  $scope.addAccess = function(){	  
     var data = angular.copy($scope.markerAccess);
 
     data.token = $rootScope.readCookie('handistress_token_connection');
@@ -129,6 +178,13 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 
   // Ajout d'un marker de type lieu
   $scope.addPlace = function(){
+	  for (var i=0; i<$scope.subwayLines.length; i++) {
+		if (i == 0)
+			$scope.markerPlace.complements.subwayLine = $scope.subwayLines[i].value + '';
+		else
+			$scope.markerPlace.complements.subwayLine = $scope.markerPlace.complements.subwayLine + '**' + $scope.subwayLines[i].value;
+	  }
+	  
     var data = angular.copy($scope.markerPlace);
 	console.log(data);
     data.token = $rootScope.readCookie('handistress_token_connection');

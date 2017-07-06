@@ -181,8 +181,16 @@
               </div>
 
               <div class="form-input">
+				Lignes de métro:
+				<div ng-repeat="line in subwayLines track by $index">
+					<input ng-model="line.value" type="text" placeholder="Numero de ligne Metro"> <span ng-click="removeSL($index)">X</span>
+				</div>
+				<span ng-click="addSL()">Ajouter une ligne</span>
+			  </div>
+			  
+              <!-- <div class="form-input">
                 <input ng-model="markerPlace.complements.subwayLine" type="text" placeholder="Numero de ligne Metro">
-              </div>
+              </div> -->
             </div>
 
 			  <input ng-if="valuePreviousStep" ng-click="previousStep()" class="btn btn-step" type="button" value="Etape Précédente">
@@ -198,74 +206,6 @@
 <div class="info-odl-markers">
   <div class="info-marker-title"> Voici les marqueurs dejà indiqué dans un rayon de 400 m</div>
   <div class="list-marker">
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Test </div>
-    <div class="info-marker"> Testd </div>
+    <div ng-click="openMarker(marker.markerId)" ng-repeat="marker in markersProx" class="info-marker">{{marker.nameMarker}}<br />{{marker.descriptionMarker}}</div>
   </div>
 </div>
