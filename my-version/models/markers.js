@@ -84,7 +84,29 @@ app.factory('Marker', function($http, $q, $filter){
 					deferred.reject('une erreurs lors du chargement des markers');
 				});
 			return deferred.promise;
-		}
+		},
+		searchForbiddenAccess : function(type){
+			deferred = $q.defer();
+			$http.get('json/forbiddenAccess.json') // Mettre l'api pour tout charger
+				.success(function(data, status){
+					infoReturn = [];
+					allType = type.split(",");
+					
+					for(key in data){
+						for(keyType in allType){
+							if(data[key]['type'].search(allType[keyType]) != '-1'){
+								infoReturn.push(data[key]);
+							}
+						}
+					}
+					factory.markers = infoReturn;
+					deferred.resolve(factory.markers);
+				})
+				.error(function(data, status){
+					deferred.reject('une erreurs lors du chargement des markers');
+				});
+			return deferred.promise;
+		},
 	}
 
 	return factory;

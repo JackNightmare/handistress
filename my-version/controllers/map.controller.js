@@ -323,16 +323,18 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 			$scope.traceMap.escalators = $rootScope.userData.accessEscalator;
 			$scope.traceMap.flatEscalators = $rootScope.userData.accessFlatEscalator;
 			$scope.traceMap.elevator = $rootScope.userData.accessElevator;
-			$scope.traceMap.hightPavement = $rootScope.userData.accessHightPavement;
+			$scope.traceMap.ramp = $rootScope.userData.accessRamp;
 			$scope.traceMap.flatPavement = $rootScope.userData.accessPavement;
+			$scope.traceMap.hightPavement = $rootScope.userData.accessHightPavement;
 		}
 		else{
 			$scope.traceMap.stairs = $scope.traceMap.stairs == undefined ? false : $scope.traceMap.stairs ;
 			$scope.traceMap.escalators = $scope.traceMap.escalators == undefined ? false : $scope.traceMap.escalators ;
 			$scope.traceMap.flatEscalators = $scope.traceMap.flatEscalators == undefined ? false : $scope.traceMap.flatEscalators ;
 			$scope.traceMap.elevator = $scope.traceMap.elevator == undefined ? false : $scope.traceMap.elevator ;
-			$scope.traceMap.hightPavement = $scope.traceMap.hightPavement == undefined ? false : $scope.traceMap.hightPavement ;
+			$scope.traceMap.ramp = $scope.traceMap.ramp == undefined ? false : $scope.traceMap.ramp ;
 			$scope.traceMap.flatPavement = $scope.traceMap.flatPavement == undefined ? false : $scope.traceMap.flatPavement ;
+			$scope.traceMap.hightPavement = $scope.traceMap.hightPavement == undefined ? false : $scope.traceMap.hightPavement ;
 		}
 
 		/** On recupere les valeurs du formulaires **/
@@ -419,66 +421,91 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 					language : 'fr',
 				});
 
+				// forbiddenAccess = [ {"lat":48.86635, "lng": 2.33753} ]; // test
 				/** Tableau de base des accès interdis **/
-				forbiddenAccess = [ {"lat":48.86635, "lng": 2.33753} ];
+				forbiddenAccess = [];
+				typeToSearch = '';
 
-				/** Ici controle du formulaire et mise en place du tableau avec les accès interdits **/
-				/** si les accès sont à false, on ajoute les données dans le tableau **/
-				// $scope.traceMap.stairs = "test";
-				// $scope.traceMap.escalators = "test";
-				// $scope.traceMap.flatEscalators = "test";
-				// $scope.traceMap.elevator = "test";
-				// $scope.traceMap.hightPavement = "test";
-				// $scope.traceMap.flatPavement = "test";
-
-				/** utiliser les apis correspondantes **/
-				stairsAccess = Marker.getAccessMarkers()
-					.then(function(accessStairs){
-						for(key in accessStairs){
-							coordinateAccess = {"lat" : parseFloat(accessStairs.latitude), "lng" : parseFloat(accessStairs.longitude) }
-							forbiddenAccess.push(coordinateAccess);
-						}
-					});
-
+				/** Variable pour définir si un accès interdit à été trouvé ou pas **/
 				$scope.findForbidenAcces = false;
+
+				/** On regarde les type d'accès à chercher **/
+				if($scope.traceMap.stairs == false)
+					typeToSearch+="1,";
+
+				if($scope.traceMap.escalators == false)
+					typeToSearch+="2,";
+
+				if($scope.traceMap.flatEscalators == false)
+					typeToSearch+="3,";
+
+				if($scope.traceMap.elevator == false)
+					typeToSearch+="4,";
+
+				if($scope.traceMap.ramp == false)
+					typeToSearch+="5,";
+
+				if($scope.traceMap.flatPavement == false)
+					typeToSearch+="6,";
+
+				if($scope.traceMap.hightPavement == false)
+					typeToSearch+="7,";
 				
-				/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
-				$scope.routing.on('routeselected', function(element) {
-					/** Objet route **/
-					var route = element.route;
-					coordinatesTrace = route.coordinates;
 
+				/** On enleve la dernière virgule pour split plus efficament **/
+				typeToSearch = typeToSearch.slice(0, -1);
 
-					for(keyCoordinate in coordinatesTrace ){
-						for(keyAccess in forbiddenAccess){
-							/** On parse en string pour faciliter la recherche **/
-							latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
-							latAccess = String(forbiddenAccess[keyAccess].lat);
-							
-							/** On regarde si on a un accès interdit dans la route basique **/
-							if(latCoordinate.search(latAccess) != "-1"){
-								$scope.findForbidenAcces = true;
-								$scope.optimizationRoute.push(L.latLng(48.866636,2.337372));
+				searchForbidAccess = Marker.searchForbiddenAccess(typeToSearch)
+						.then(function(findForbiddenAccess){
+							for(key in findForbiddenAccess){
+								coordinateAccess = {
+									"lat" : parseFloat(findForbiddenAccess[key].latitude), 
+									"lng" : parseFloat(findForbiddenAccess[key].longitude),
+									"newlat" : parseFloat(findForbiddenAccess[key].newLat),
+									"newlng" : parseFloat(findForbiddenAccess[key].newLong),
+								}
+								forbiddenAccess.push(coordinateAccess);
 							}
-						}
-					}
 
-					/** suppression des doublons **/
-					saveLastInfoCoord = {"lat": "", "lng":""};
-					$scope.optimizationRoute = $scope.optimizationRoute.filter(function(currentCoord){
-						if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){ deleteCoord = false; }
-						else{ deleteCoord = true; }
-						
-						/** on attrribue le dernier element à la variable de sauvegarde **/
-						saveLastInfoCoord = currentCoord;
+							/** On recupere ici les informations de la route pour voir les coordonnées gps et vérifier si un de nos accès y est **/
+							$scope.routing.on('routeselected', function(element) {
+								/** Objet route **/
+								var route = element.route;
+								coordinatesTrace = route.coordinates;
 
-						/** on retourne la valeur pour nettoyer le code **/
-						return deleteCoord;
-					});
+								for(keyCoordinate in coordinatesTrace ){
+									for(keyAccess in forbiddenAccess){
+										/** On parse en string pour faciliter la recherche **/
+										latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
+										latAccess = String(forbiddenAccess[keyAccess].lat);
 
-					$scope.optimizationRoute.unshift(L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])));
-					$scope.optimizationRoute.push(L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])));
-				});
+										console.log(latCoordinate +" - "+latAccess)
+
+										/** On regarde si on a un accès interdit dans la route basique **/
+										if(latCoordinate.search(latAccess) != "-1"){
+											$scope.findForbidenAcces = true;
+											$scope.optimizationRoute.push(L.latLng(forbiddenAccess[keyAccess].newlat, forbiddenAccess[keyAccess].newlng));
+										}
+									}
+								}
+
+								/** suppression des doublons **/
+								saveLastInfoCoord = {"lat": "", "lng":""};
+								$scope.optimizationRoute = $scope.optimizationRoute.filter(function(currentCoord){
+									if(saveLastInfoCoord.lat == currentCoord.lat && saveLastInfoCoord.lng == currentCoord.lng){ deleteCoord = false; }
+									else{ deleteCoord = true; }
+
+									/** on attrribue le dernier element à la variable de sauvegarde **/
+									saveLastInfoCoord = currentCoord;
+
+									/** on retourne la valeur pour nettoyer le code **/
+									return deleteCoord;
+								});
+
+								$scope.optimizationRoute.unshift(L.latLng(parseFloat(startPoint[0]['latitude']), parseFloat(startPoint[0]['longitude'])));
+								$scope.optimizationRoute.push(L.latLng(parseFloat(endPoint[0]['latitude']), parseFloat(endPoint[0]['longitude'])));
+							});
+						});				
 
 				/** Petit temps de latence afin que les variables soit bien mise a jour **/
 				setTimeout(function(){
