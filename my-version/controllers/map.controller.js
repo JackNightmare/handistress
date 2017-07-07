@@ -478,10 +478,10 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 									for(keyAccess in forbiddenAccess){
 										/** On parse en string pour faciliter la recherche **/
 										latCoordinate = String(coordinatesTrace[keyCoordinate].lat);
-										latAccess = String(forbiddenAccess[keyAccess].lat);
+										latAccess = String(forbiddenAccess[keyAccess].lat).substring(0,6);
 
-										lngCoordinate = String(coordinatesTrace[keyCoordinate].lng)
-										lngAccess = String(forbiddenAccess[keyAccess].lng);
+										lngCoordinate = String(coordinatesTrace[keyCoordinate].lng);
+										lngAccess = String(forbiddenAccess[keyAccess].lng).substring(0,5);
 
 										console.log(latCoordinate+' - '+latAccess);
 										console.log(lngCoordinate+' - '+lngAccess);
