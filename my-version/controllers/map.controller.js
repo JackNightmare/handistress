@@ -171,9 +171,6 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 	$scope.$on('leafletDirectiveMarker.click', function(event, args){
 
 		if($scope.currentTrace == false && args.model.enable != undefined){
-			
-			/** Permet de fermer la popup sur la carte **/
-			leafletData.getMap().then(function(map){ map.closePopup(); });
 
 			/** On ouvre la popin **/
 			$scope.openPopin = true;
@@ -249,7 +246,9 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 			$scope.markerSeeMetro = informations[0] == "Metro" ? true : false;
 
 			if($scope.markerSeeMetro){
-				
+				/** Permet de fermer la popup sur la carte **/
+				leafletData.getMap().then(function(map){ map.closePopup(); });
+
 				/** Variable pour savoir si on est rentré dans une variable de type metro **/
 				/**Mise en place des sorties **/
 				allSortie = markerSortie.split(';');
