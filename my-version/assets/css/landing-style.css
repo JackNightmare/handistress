@@ -79,14 +79,21 @@
 
 .landing-header .landing-access .landing-access-button:hover{ background-color: rgba(36, 113, 162, 1); }
 
-.landing-header .landing-next-section{
-	width: 100%;
-    margin-top: 15px;
+
+/*****************************
+*** Accès nouvelle section ***
+*****************************/
+
+.landing-next-section{
+	left: 50%;
+    margin-top:-3%;
     position: absolute;
     text-align: center;
 }
 
-.landing-header .landing-next-section a{
+.landing-next-section a{
+	position: relative; 
+	left: -50%;
 	width: 90px;
 	height: 90px;
 	margin: auto;
@@ -101,10 +108,10 @@
 }
 
 
-.landing-header .landing-next-section a .glyphicon{	font-size: 45px; }
+.landing-next-section a .glyphicon{	font-size: 45px; }
 
 
-.landing-header .landing-next-section .next-section-top{
+.landing-next-section .next-section-top{
 	-webkit-transform: translate(-0%, -150%);
 	-ms-transform: translate(-0%, -150%);
 	transform: translate(-0%, -150%);
@@ -112,7 +119,7 @@
 	transition: all .6s cubic-bezier(.12, .79, .38, .99);
 }
 
-.landing-header .landing-next-section .next-section{
+.landing-next-section .next-section{
 	-webkit-transform: translate(0%, -65%);
 	-ms-transform: translate(0%, -65%);
 	transform: translate(0%, -65%);
@@ -121,12 +128,12 @@
 }
 
 
-.landing-header .landing-next-section a:hover{
+.landing-next-section a:hover{
 	background-color: rgba(34, 90, 137, 1);
 	border: 2px solid rgba(255, 255, 255, 1);
 }
-.landing-header .landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
-.landing-header .landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
+.landing-next-section a:hover .next-section-top{ transform: translate(-0%, 45%); }
+.landing-next-section a:hover .next-section{ transform: translate(-0%, 110%); }
 
 /*****************************
 *** Section 1 Landing Page ***
@@ -350,12 +357,13 @@
 .landing-section3-information{ margin-top: 2%; padding-bottom: 2%; }
 
 .landing-section3-information .section3-map-marker{
-	width: 300px;
-    height: 300px;
+	width: 350px;
+    height: 350px;
     margin: auto;
     border-radius: 50%;
     background-size: cover;
     background-position: center center;
+    border:10px solid #55aece;
     background-image: url(../img/markers.png);
 }
 

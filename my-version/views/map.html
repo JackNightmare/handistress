@@ -24,14 +24,14 @@
 			<div>
 				<label for="startPoint"><span class="icon-location"></span></label>
 				<div style="display:inline-block;">
-					<input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" ng-required="true" uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
+					<input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" ng-required="true" uib-typeahead="markers as markers.nameMarker for markers in searchByName($viewValue) | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="3" typeahead-wait-ms="200" autocomplete="off">
 				</div>
 			</div>
 
 			<div>
 				<label for="endPoint"><span class="icon-racing-flags"></span></label>
 				<div style="display:inline-block;">
-					<input id="endPoint" type="text" placeholder="point d'arrivé" ng-model="traceMap.end" ng-required="true" uib-typeahead="marker as marker.nameMarker for marker in markersList | filter: $viewValue | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
+					<input id="endPoint" type="text" placeholder="point d'arrivé" ng-model="traceMap.end" ng-required="true" uib-typeahead="markers as markers.nameMarker for markers in searchByName($viewValue) | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="3" typeahead-wait-ms="200" autocomplete="off">
 				</div>
 			</div>
 
