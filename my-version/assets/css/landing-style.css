@@ -1,11 +1,15 @@
 /*********************************
 *** Style général Landing Page ***
 *********************************/
+body{
+	background-image: none;
+	background-color: #ffffff;
+}
+
 
 /** Titre des session **/
 .landing-section-entitle{
 	text-align: center;
-	font-size: 30px;
 	color:#ffffff;
 	padding-top: 2%;
 }
@@ -50,12 +54,9 @@
 .landing-header .landing-access .landing-access-line .glyphicon:last-child{ margin-bottom: -4px; }
 
 .landing-header .landing-access .landing-access-info{
-	font-size: 18px;
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
-
-.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 35px;}
 .landing-header .landing-access .landing-access-info p { margin-top: 5%; }
 
 .landing-header .landing-access .landing-access-logo {
@@ -73,7 +74,6 @@
 	color:#ffffff;
 	width: 75%;
 	margin-top: 10%;
-	font-size: 30px;
 	transition-duration: 0.5s;
 }
 
@@ -140,7 +140,6 @@
 *****************************/
 
 .landing-section1{
-	height: 45vh;
 	color: #ffffff;
 	text-align: center;
 	background-color: #225A89;
@@ -153,14 +152,11 @@
 	width: 50%;
 	margin: auto;
 	font-style: italic;
-	font-size: 18px;
 	margin-bottom: 4%;
 }
 
 .landing-section1 .landing-section1-statistics .statistics-graph{
 	position: relative;
-	width: 190px;
-	height: 190px;
 	margin: auto;
 	overflow: hidden;
 	text-align: center;
@@ -214,19 +210,13 @@
     z-index: 12;
     width: 90%;
     height: 90%;
-	font-size: 22px;
-    margin-top: 10px;
-    margin-left: 10px;
 	padding-top: 25%;
     position: absolute;
     border-radius: 50%;
 	background-color: #7A9EB8;
 }
 
-.landing-section1 .landing-section1-statistics .statistics-graph .graph-information span{
-	display: inline-block;
-	font-size: 16px;
-}
+.landing-section1 .landing-section1-statistics .statistics-graph .graph-information span{ display: inline-block; }
 
 
 /* Animation rapide pour graphique */
@@ -265,7 +255,7 @@
 	background-image: url('../img/trace-section.jpg');
 }
 
-.landing-section2 .landing-section-entitle{ color: #225a89; padding-top: 7%; padding-bottom: 10%; }
+.landing-section2 .landing-section-entitle{ color: #225a89; padding-bottom: 10%; }
 .landing-section2 .section-entitle-line { background-color: #225a89; }
 
 .trace-line span{
@@ -322,19 +312,15 @@
 .landing-section2-information .section2-zone-text{
 	width: 80%;
     color: #000308;
-    font-size: 16px;
     margin: auto;
     margin-left: 30%;
-    line-height: 30px;
     padding-left: 10px;
     border-radius: 2px;
     padding-right: 10px;
     background-color: rgba(6, 119, 142, 0.3);
 }
 
-.landing-section2-information .section2-zone-text strong{ font-size: 18px; }
-
-.landing-section2-information .section2-zone-text span{ font-style: italic; font-size: 13px; }
+.landing-section2-information .section2-zone-text span{ font-style: italic; }
 
 .landing-section2-information .section2-map-trace{
     width: 100%;
@@ -349,10 +335,6 @@
 *** Section 3 Landing Page ***
 *****************************/
 .landing-section3{ background-color: #106192; }
-
-/*.landing-section3 .landing-section-entitle{ color: #225a89; }
-.landing-section3 .section-entitle-line { background-color: #106192; }*/
-
 
 .landing-section3-information{ margin-top: 2%; padding-bottom: 2%; }
 
@@ -387,4 +369,36 @@ footer{ background-color: #edf1f3; }
 
 /****************************
 *** Style spécifique size ***
-***************************
+***************************/
+
+/*******************************
+*** Superieur ou egal à 1140 ***
+*******************************/
+@media (min-width: 1140px) {
+	/** Général pour toute les section **/
+	.landing-section-entitle{ font-size: 30px; }
+
+	/** Section header **/
+	.landing-header .landing-access .landing-access-info{ font-size: 18px;}
+	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 35px;}
+	.landing-header .landing-access .landing-access-button{ font-size: 27px; }
+
+	/** Section 1 **/
+	.landing-section1{ height: 45vh; }
+	.landing-section1 .landing-section1-statistics p{ font-size: 18px; }
+	.landing-section1 .landing-section1-statistics .statistics-graph{ width: 190px; height: 190px; }
+	.landing-section1 .landing-section1-statistics .statistics-graph .graph-information{
+		font-size: 22px;
+		margin-top: 10px;
+		margin-left: 10px;
+	}
+
+	.landing-section1 .landing-section1-statistics .statistics-graph .graph-information span{ font-size: 16px; }
+
+
+	/** Section 2 **/
+	.landing-section2 .landing-section-entitle{ padding-top: 7%; }
+	.landing-section2-information .section2-zone-text{ font-size: 16px; line-height: 30px; }
+	.landing-section2-information .section2-zone-text strong{ font-size: 18px; }
+	.landing-section2-information .section2-zone-text span{ font-size: 13px; }
+}
