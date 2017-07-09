@@ -234,8 +234,7 @@
 
 <div class="map-filter" ng-class="{'filter-open' : (openFilter == true) }">
 	<button ng-click="actionFilter()">
-		<span></span>
-		<span></span>
+		<span class = "glyphicon" ng-class="{'glyphicon-menu-left': openFilter == false, 'glyphicon-menu-right' : openFilter == true}"></span>
 	</button>
 	<div class="map-filter-type">
 		<div class="name-filter" ng-click="seeAll()" ng-class="{'filter-active' : (filter == 1) }">Tout voir</div>
