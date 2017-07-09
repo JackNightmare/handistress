@@ -339,8 +339,6 @@ body{
 .landing-section3-information{ margin-top: 2%; padding-bottom: 2%; }
 
 .landing-section3-information .section3-map-marker{
-	width: 350px;
-    height: 350px;
     margin: auto;
     border-radius: 50%;
     background-size: cover;
@@ -352,8 +350,6 @@ body{
 .landing-section3-information .section3-zone-text{
     color: #ffffff;
     margin-top: 5%;
-    font-size: 16px;
-    line-height: 30px;
     padding-left: 10px;
     padding-right: 10px;
     border-top: 3px solid #b0eaff;
@@ -401,4 +397,47 @@ footer{ background-color: #edf1f3; }
 	.landing-section2-information .section2-zone-text{ font-size: 16px; line-height: 30px; }
 	.landing-section2-information .section2-zone-text strong{ font-size: 18px; }
 	.landing-section2-information .section2-zone-text span{ font-size: 13px; }
+
+	/** Section 3 **/
+	.landing-section3-information .section3-map-marker{ width: 350px; height: 350px; }
+	.landing-section3-information .section3-zone-text{ font-size: 16px; line-height: 30px; }
+}
+
+
+@media (min-width: 992px) and (max-width: 1140px) {
+/** Général pour toute les section **/
+	.landing-section-entitle{ font-size: 23px; }
+
+	/** Section header **/
+	.landing-header .landing-access .landing-access-info{ font-size: 17px;}
+	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 25px;}
+	.landing-header .landing-access .landing-access-button{ font-size: 20px; }
+
+	/** Section 1 **/
+	.landing-section1{ height: 35vh; }
+	.landing-section1 .landing-section1-statistics p{ font-size: 14px; }
+	.landing-section1 .landing-section1-statistics .statistics-graph{ width: 150px; height: 150px; }
+	.landing-section1 .landing-section1-statistics .statistics-graph .graph-information{
+		font-size: 15px;
+		margin-top: 8px;
+		margin-left: 7px;
+	}
+
+	.landing-section1 .landing-section1-statistics .statistics-graph .graph-information span{ font-size: 12px; }
+
+
+	/** Section 2 **/
+	.landing-section2 .landing-section-entitle{ padding-top: 7%; }
+	.landing-section2-information .section2-zone-text{ font-size: 14px; line-height: 25px; width: 100%; }
+	.landing-section2-information .section2-zone-text strong{ font-size: 16px; }
+	.landing-section2-information .section2-zone-text span{ font-size: 12px; }
+
+	/** Section 3 **/
+	.landing-section3-information .section3-map-marker{ width: 300px; height: 300px; }
+	.landing-section3-information .section3-zone-text{ font-size: 14px; line-height: 20px; }
+}
+
+
+@media (min-width: 768px) and (max-width: 992px){
+
 }
