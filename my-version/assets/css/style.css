@@ -82,17 +82,13 @@ li{ list-style: none; }
 ****************************************/
 .connect-button{
   position: absolute;
-  width: 37%;
   margin-top: 1%;
   z-index: 20;
   right: 0;
-  margin-right: 5%;
 }
 
 .connect-button .btn-connect{
-  font-size: 16px;
   border-radius: 0px;
-  width: 160px;
   background-color: transparent;
 }
 
@@ -269,3 +265,42 @@ li{ list-style: none; }
 .nav-menu.open .nav-menu-button span:nth-child(1){transform: rotate(-45deg) translate(-7px, 8px)}
 .nav-menu.open .nav-menu-button span:nth-child(2){opacity: 0;}
 .nav-menu.open .nav-menu-button span:nth-child(3){transform: rotate(45deg) translate(-7px, -11px); }
+
+
+
+/****************************
+*** Style spécifique size ***
+***************************/
+
+/*******************************
+*** Superieur ou egal à 1140 ***
+*******************************/
+@media (min-width: 1140px) {
+  /** Bouton de connexion **/
+  .connect-button{ width: 45%; margin-right:0; }
+  .connect-button .btn-connect{ font-size: 16px; width: 160px; }
+}
+
+@media (min-width: 992px) and (max-width: 1139px) {
+  /** Bouton de connexion **/
+  .connect-button{ width: 45%; margin-right:0; }
+  .connect-button .btn-connect{ font-size: 16px; width: 40%; }
+}
+
+
+@media (min-width:768px) and (max-width: 991px) {
+  .connect-button{width: 65%; left: 20%; }
+  .connect-button .btn-connect{ font-size: 16px; width: 160px; }
+}
+
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .connect-button{ width: 75%; left: 14%; }
+  .connect-button .btn-connect{ font-size: 16px; width: 160px; }
+} 
+
+
+@media (max-width: 575px) {
+  .connect-button{ width: 85%; left: 10%; }
+  .connect-button .btn-connect{ font-size: 16px; width: 130px; }
+} 

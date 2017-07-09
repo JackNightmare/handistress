@@ -17,7 +17,6 @@ body{
 .landing-section-entitle span{ font-family: arial; }
 
 .landing-section-entitle .section-entitle-line{
-	width: 60%;
 	height: 1px;
 	margin: auto;
 	margin-top: 3%;
@@ -371,7 +370,7 @@ footer{ background-color: #edf1f3; }
 @media (min-width: 1140px) {
 	/** Général pour toute les section **/
 	.landing-section-entitle{ font-size: 30px; }
-	.landing-header .landing-access .landing-access-line{ width: 100%; }
+	.landing-section-entitle .section-entitle-line{ width: 60%; }
 	
 	/** Section header **/
 	.landing-header .landing-access .landing-access-line{ width: 100%; }
@@ -403,10 +402,10 @@ footer{ background-color: #edf1f3; }
 	.landing-section3-information .section3-zone-text{ font-size: 16px; line-height: 30px; }
 }
 
-
-@media (min-width: 992px) and (max-width: 1140px) {
+@media (min-width: 992px) and (max-width: 1139px) {
 	/** Général pour toute les section **/
 	.landing-section-entitle{ font-size: 23px; }
+	.landing-section-entitle .section-entitle-line{ width: 60%; }
 
 	/** Section header **/
 	.landing-header .landing-access .landing-access-line{ width: 100%; }
@@ -438,12 +437,13 @@ footer{ background-color: #edf1f3; }
 	.landing-section3-information .section3-zone-text{ font-size: 14px; line-height: 20px; }
 }
 
-
-@media (min-width: 768px) and (max-width: 992px){
+@media (min-width: 768px) and (max-width: 991px){
 	/** Général pour toute les section **/
 	.landing-section-entitle{ font-size: 25px; }
+	.landing-section-entitle .section-entitle-line{ width: 45%; }
 
 	/** Section header **/
+	.landing-header .landing-access {padding-top: 15%; }
 	.landing-header .landing-access .landing-access-line{ width: 60%; margin: auto;}
 	.landing-header .landing-access .landing-access-info{ font-size: 18px; width:45%; margin: auto; }
 	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 30px;}
@@ -466,5 +466,72 @@ footer{ background-color: #edf1f3; }
 
 	/** Section 3 **/
 	.landing-section3-information .section3-map-marker{ width: 300px; height: 300px; }
-	.landing-section3-information .section3-zone-text{ font-size: 14px; line-height: 20px; }
+	.landing-section3-information .section3-zone-text{
+		font-size: 17px;
+		line-height: 25px;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto; 
+	}
+}
+
+@media (min-width: 576px) and (max-width: 767px){
+	/** Général pour toute les section **/
+	.landing-section-entitle{ font-size: 25px; }
+	.landing-section-entitle .section-entitle-line{ width: 45%; }
+
+	/** Section header **/
+	.landing-header .landing-access {padding-top: 15%; }
+	.landing-header .landing-access .landing-access-line{ width: 60%; margin: auto;}
+	.landing-header .landing-access .landing-access-info{ font-size: 18px; width:65%; margin: auto; }
+	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 30px;}
+	.landing-header .landing-access .landing-access-button{ font-size: 25px; width: 50%; }
+	.landing-header .landing-access .landing-access-logo{ display: none; }
+
+	/** Bouton next **/
+	.landing-next-section{ display: none; }
+
+	/** Section 1 **/
+	.landing-section1{ display: none; }
+
+	/** Section 2 **/
+	.landing-section2 .trace-line { display: none; }
+	.landing-section2 .landing-section-entitle{ padding-top: 7%; }
+	.landing-section2-information .section2-zone-text{ font-size: 18px; line-height: 30px; width: 90%; margin-left: 0; margin: auto; }
+	.landing-section2-information .section2-zone-text strong{ font-size: 16px; }
+	.landing-section2-information .section2-zone-text span{ font-size: 12px; }
+	.landing-section2-information .section2-map-trace{ width: 90%; margin: auto; margin-top: 5%; }
+
+	/** Section 3 **/
+	.landing-section3-information .section3-map-marker{ width: 300px; height: 300px; }
+	.landing-section3-information .section3-zone-text{
+		font-size: 17px;
+		line-height: 25px;
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto; 
+	}
+}
+
+@media (max-width: 575px){
+	/** Section header **/
+	.landing-header .landing-access {padding-top: 35%; }
+	.landing-header .landing-access .landing-access-line{ width: 80%; margin: auto;}
+	.landing-header .landing-access .landing-access-info{ font-size: 18px; width:80%; margin: auto; }
+	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 25px;}
+	.landing-header .landing-access .landing-access-button{ font-size: 20px; width: 60%; }
+	.landing-header .landing-access .landing-access-logo{ display: none; }
+
+
+	/** Bouton next **/
+	.landing-next-section{ display: none; }
+
+	/** Section 1 **/
+	.landing-section1{ display: none; }
+
+	/** Section 2 **/
+	.landing-section2 { display: none; }
+
+	/** Section 3 **/
+	.landing-section3 { display: none;}
 }
