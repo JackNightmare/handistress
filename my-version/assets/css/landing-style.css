@@ -42,7 +42,6 @@ body{
 	text-align: center;
 }
 
-.landing-header .landing-access .landing-access-line{ width: 100%; }
 .landing-header .landing-access .landing-access-line:first-child{ border-top: 2px solid #ffffff }
 .landing-header .landing-access .landing-access-line:nth-child(3){ border-bottom: 2px solid #ffffff }
 
@@ -66,13 +65,13 @@ body{
 	background-color: rgba(8, 149, 158, 0.4);;
 	margin: auto;
 	margin-top: 10%;
-	padding-top: 6%
+	padding-top: 6%;
+	visibility:hidden;
 }
 
 .landing-header .landing-access .landing-access-button{
 	background-color: rgba(33, 87, 131, 0.6);
 	color:#ffffff;
-	width: 75%;
 	margin-top: 10%;
 	transition-duration: 0.5s;
 }
@@ -310,7 +309,6 @@ body{
 .landing-section2-information { padding-bottom: 2%; }
 
 .landing-section2-information .section2-zone-text{
-	width: 80%;
     color: #000308;
     margin: auto;
     margin-left: 30%;
@@ -373,11 +371,13 @@ footer{ background-color: #edf1f3; }
 @media (min-width: 1140px) {
 	/** Général pour toute les section **/
 	.landing-section-entitle{ font-size: 30px; }
-
+	.landing-header .landing-access .landing-access-line{ width: 100%; }
+	
 	/** Section header **/
+	.landing-header .landing-access .landing-access-line{ width: 100%; }
 	.landing-header .landing-access .landing-access-info{ font-size: 18px;}
 	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 35px;}
-	.landing-header .landing-access .landing-access-button{ font-size: 27px; }
+	.landing-header .landing-access .landing-access-button{ font-size: 27px; width: 75%; }
 
 	/** Section 1 **/
 	.landing-section1{ height: 45vh; }
@@ -394,7 +394,7 @@ footer{ background-color: #edf1f3; }
 
 	/** Section 2 **/
 	.landing-section2 .landing-section-entitle{ padding-top: 7%; }
-	.landing-section2-information .section2-zone-text{ font-size: 16px; line-height: 30px; }
+	.landing-section2-information .section2-zone-text{ font-size: 16px; line-height: 30px; width: 80%; }
 	.landing-section2-information .section2-zone-text strong{ font-size: 18px; }
 	.landing-section2-information .section2-zone-text span{ font-size: 13px; }
 
@@ -405,13 +405,14 @@ footer{ background-color: #edf1f3; }
 
 
 @media (min-width: 992px) and (max-width: 1140px) {
-/** Général pour toute les section **/
+	/** Général pour toute les section **/
 	.landing-section-entitle{ font-size: 23px; }
 
 	/** Section header **/
+	.landing-header .landing-access .landing-access-line{ width: 100%; }
 	.landing-header .landing-access .landing-access-info{ font-size: 17px;}
 	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 25px;}
-	.landing-header .landing-access .landing-access-button{ font-size: 20px; }
+	.landing-header .landing-access .landing-access-button{ font-size: 20px; width: 75%; }
 
 	/** Section 1 **/
 	.landing-section1{ height: 35vh; }
@@ -439,5 +440,31 @@ footer{ background-color: #edf1f3; }
 
 
 @media (min-width: 768px) and (max-width: 992px){
+	/** Général pour toute les section **/
+	.landing-section-entitle{ font-size: 25px; }
 
+	/** Section header **/
+	.landing-header .landing-access .landing-access-line{ width: 60%; margin: auto;}
+	.landing-header .landing-access .landing-access-info{ font-size: 18px; width:45%; margin: auto; }
+	.landing-header .landing-access .landing-access-info .access-info-title{ font-size: 30px;}
+	.landing-header .landing-access .landing-access-button{ font-size: 25px; width: 35%; }
+	.landing-header .landing-access .landing-access-logo{ display: none; }
+
+	/** Bouton next **/
+	.landing-next-section{ display: none; }
+
+	/** Section 1 **/
+	.landing-section1{ display: none; }
+
+	/** Section 2 **/
+	.landing-section2 .trace-line { display: none; }
+	.landing-section2 .landing-section-entitle{ padding-top: 7%; }
+	.landing-section2-information .section2-zone-text{ font-size: 18px; line-height: 30px; width: 90%; margin-left: 0; margin: auto; }
+	.landing-section2-information .section2-zone-text strong{ font-size: 16px; }
+	.landing-section2-information .section2-zone-text span{ font-size: 12px; }
+	.landing-section2-information .section2-map-trace{ width: 90%; margin: auto; margin-top: 5%; }
+
+	/** Section 3 **/
+	.landing-section3-information .section3-map-marker{ width: 300px; height: 300px; }
+	.landing-section3-information .section3-zone-text{ font-size: 14px; line-height: 20px; }
 }

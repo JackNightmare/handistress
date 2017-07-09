@@ -126,32 +126,61 @@ app.factory('Marker', function($http, $q, $filter){
 				});
 			return deferred.promise;
 		},
-		getTypePlace : function(theTypePlace){
-			/** On recupere la valeur qui correspond à l'id **/
-			console.log(theTypePlace);
+		getTypePlace : function(lat, lng, rayon, theTypePlace){
+
 			deferred = $q.defer();
-			$http.get('json/placesMarkers.json') // Mettre l'api pour tout charger
-				.success(function(data, status){
-					factory.markers = data;
+
+			/** On recupere la valeur qui correspond à l'id **/
+			var data = {
+				lat: lat,
+				lng: lng,
+				rayon: rayon,
+				includePlaces: [theTypePlace],
+				excludePlaces: []
+			};
+			
+			$http({
+					method: 'POST',
+					url: 'https://www.api.benpedia.com/handistress/markers/getInZone.php',
+					headers: {
+						'Content-Type': undefined
+					},
+					data: data
+				}).then(function successCallback(response) {
+					factory.markers = response.data;
 					deferred.resolve(factory.markers);
-				})
-				.error(function(data, status){
+				}, function errorCallback(response) {
 					deferred.reject('une erreurs lors du chargement des markers');
 				});
+			
 			return deferred.promise;
 		},
-		getTypeAccess : function(theTypeAccess){
-			/** On recupere la valeur qui correspond à l'id **/
-			console.log(theTypeAccess);
+		getTypeAccess : function(lat, lng, rayon, theTypeAccess){
 			deferred = $q.defer();
-			$http.get('json/accessMarkers.json') // Mettre l'api pour tout charger
-				.success(function(data, status){
-					factory.markers = data;
+			
+			/** On recupere la valeur qui correspond à l'id **/
+			var data = {
+				lat: lat,
+				lng: lng,
+				rayon: rayon,
+				includePlaces: [theTypeAccess],
+				excludePlaces: []
+			};
+			
+			$http({
+					method: 'POST',
+					url: 'https://www.api.benpedia.com/handistress/markers/getInZone.php',
+					headers: {
+						'Content-Type': undefined
+					},
+					data: data
+				}).then(function successCallback(response) {
+					factory.markers = response.data;
 					deferred.resolve(factory.markers);
-				})
-				.error(function(data, status){
+				}, function errorCallback(response) {
 					deferred.reject('une erreurs lors du chargement des markers');
 				});
+			
 			return deferred.promise;
 		},
 		searchForbiddenAccess : function(type){
