@@ -24,7 +24,7 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 	$scope.countExit = 0; // Permet de définir une valeur de base pour le nombre sortie des metro, qu'on affichera ensuite sur la carte
 
 	$scope.searchMapSelect = "allTypePlace"; // Definis la valeur de base du select de recherche
-	$scope.selectTypePlace = "allTypePlace"; // Definis la valeur de base pour le select type categorie lieu
+	$scope.selectTypePlace = "2,3,4,5,6,7,8,9,10,11"; // Definis la valeur de base pour le select type categorie lieu
 	$scope.selectTypeAccess = "allTypeAccess"; // Definis la valeur de base pour le select type categorie accès
 
 	/****************************************
@@ -186,8 +186,6 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 	************************************/
 	/** Drag sur la map **/
 	$scope.$on('leafletDirectiveMap.dragend', function(){
-		
-
 
 		/** On verifie que si l'itinéraire est tracè pour l'afficher **/
 		if( $scope.currentTrace == false){
@@ -829,6 +827,9 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 		$scope.markers = {};
 		allMarkers = [];
 
+		/** On attribue la valeur tout les lieux et tout les accès **/
+		$scope.selectTypePlace = "2,3,4,5,6,7,8,9,10,11";
+		$scope.selectTypeAccess = "allTypeAccess";
 
 		/** Si on clique alors que le filtre est actif, on le désactive et plus rien n'est sur la carte **/
 		if($scope.filter == 1){
@@ -939,6 +940,10 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 			$scope.routing = '';
 		}
 
+		/** On attribue la valeur tout les lieux pour etre sur et supprime la valeur d'accès **/
+		$scope.selectTypePlace = "2,3,4,5,6,7,8,9,10,11";
+		$scope.selectTypeAccess = "";
+
 		/* On vide tout sur la carte */
 		delete $scope.markers.value;
 		$scope.markers = {};
@@ -1046,6 +1051,10 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 		$scope.markers = {};
 		allMarkers = [];
 
+		/** On attribue la valeur tous les accès pour etre sur et supprime la valeur de lieu **/
+		$scope.selectTypePlace = "";
+		$scope.selectTypeAccess = "allTypeAccess";
+
 		if($scope.filter == 3){
 			$scope.filter = 0;
 		}
@@ -1107,6 +1116,12 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 		delete $scope.markers.value;
 		$scope.markers = {};
 		allMarkers = [];
+
+
+		/** Petit controle pour affecter le type de filtre**/
+		$scope.filter = $scope.selectTypePlace== "2,3,4,5,6,7,8,9,10,11" ? 2 : 0 ;
+		$scope.selectTypeAccess = "";
+
 
 		$scope.getAllMarkers = Marker.getTypePlace($scope.center.lat, $scope.center.lng, 0.01, $scope.selectTypePlace)
 			.then(function(markers){
@@ -1205,6 +1220,10 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 		$scope.markers = {};
 		allMarkers = [];
 
+		/** Petit controle de la valeur pour appliquer le filtre **/
+		$scope.filter = $scope.selectTypeAccess == "allTypeAccess" ? 3 : 0 ;
+		$scope.selectTypePlace = "";
+		
 		$scope.getAllMarkers = Marker.getTypeAccess($scope.center.lat, $scope.center.lng, 0.01, $scope.selectTypeAccess)
 			.then(function(markers){
 
