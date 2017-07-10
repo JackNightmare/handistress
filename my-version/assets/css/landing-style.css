@@ -534,4 +534,6 @@ footer{ background-color: #edf1f3; }
 
 	/** Section 3 **/
 	.landing-section3 { display: none;}
+
+	footer{ height: 75px; }
 }
