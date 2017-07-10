@@ -1,0 +1,212 @@
+<div ng-include="'views/header/connect-header.html'" ng-controller="headerController"></div>
+
+<nav class="nav-menu not-open">
+	<button class="nav-menu-button"></button>
+	<ul class="nav-menu-link">
+		<li><a href=" "> <i class="icon-home"></i></a></li>
+		<li><a href="map"><i class="icon-map"></i></a></li>
+		<li ng-if="userData != null"><a href="add-marker"><i class="icon-add-marker"></i></a></li>
+		<li class="page-active"><a href="profile"><i class="glyphicon glyphicon-user"></i></a></li>
+	</ul>
+</nav>
+
+<section>
+	<div class="row">
+		<div class="col-xs-1 col-md-2 col-lg-2"></div>
+		<div class="col-xs-10 col-md-8 col-lg-8 text-center">
+			<div class="form-zone">
+				<div class="form-title">Mon compte</div>
+				<div class="form-step">
+					<div class="step-zone">
+						<div class="step-done done"></div>
+						<div class="step-number step-one">1</div>
+					</div>
+
+					<span class="step-line">
+						<span class="step-line-progress" ng-class="{'done' : (step >= 2) }"></span>
+					</span>
+
+					<div class="step-zone">
+						<div class="step-done" ng-class="{'done' : (step >= 2) }"></div>
+						<div class="step-number step-two">2</div>
+					</div>
+
+					<span class="step-line">
+						<span class="step-line-progress" ng-class="{'done' : (step == 3) }"></span>
+					</span>
+
+					<div class="step-zone">
+						<div class="step-done" ng-class="{'done' : (step == 3) }"></div>
+						<div class="step-number step-three">3</div>
+					</div>
+				</div>
+
+				<form ng-submit="edit()">
+					<div class="form-number-step" ng-class="{'current-step' : (step == 1) }">
+						<div class="step-title"> Informations Générales </div>
+						
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Prénom</label>
+							<input ng-model="register.firstname" type="text" required>
+							<div class="input-hover"></div>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Nom</label>
+							<input ng-model="register.lastname" type="text" required>
+							<div class="input-hover"></div>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Email</label>
+							<input ng-model="register.email" type="email" readonly>
+							<div class="input-hover"></div>
+						</md-input-container>
+
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Mot de passe</label>
+							<input ng-model="register.pwd" type="password" required>
+							<div class="input-hover"></div>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Confirmer mot de passe</label>
+							<input ng-model="register.pwd2" type="password" required>
+							<div class="input-hover"></div>
+						</md-input-container>
+
+						<div class="form-input" style="height:20px;">
+							<div class="form-question"> Votre date de naissance : </div>
+						</div>
+
+						<div class="form-input">
+							<md-datepicker ng-model="register.birthDate" md-current-view="year" md-open-on-focus style="width:50%;"></md-datepicker>
+						</div>				
+
+						<div class="form-input">
+							<div class="form-question"> Avez-vous un handicape physique <span>?</span> </div>
+							<div class="form-radio">
+								<label for="handicapYes">Oui</label>
+								<input id="handicapYes" ng-model="register.handicap" ng-click="controleUserHandicapTrue()" type= "radio" name="handicap" value="oui" required>
+								<label for="handicapNo">Non</label>
+								<input id="handicapNo" ng-model="register.handicap" ng-click="controleUserHandicapFalse()" type= "radio" name="handicap" value="non" required>
+							</div>
+						</div>
+
+					</div>
+
+
+					<div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
+						<div class="step-title"> Accéssibilité </div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-stairs">Les Escaliers</label>
+							<label class="check-slide">
+								<input ng-model="register.accessStairs" type="checkbox" id="signup-stairs">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-escalators">Les Escalators</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessEscalator" id="signup-escalators"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-flatEscalators">Escalators Plat</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessFlatEscalator" id="signup-flatEscalators"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-ramp">Rampe</label>
+							<label class="check-slide">
+								<input type="checkbox" ng-model="register.accessRamp" id="signup-ramp"/>
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-elevator">Ascenseur</label>
+							<label class="check-slide">
+								<input ng-model="register.accessElevator" type="checkbox" id="signup-elevator">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-flatPavement">Trottoir Plat</label>
+							<label class="check-slide">
+								<input ng-model="register.accessPavement" type="checkbox" id="signup-flatPavement">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="signup-hightPavement">Trottoir Haut</label>
+							<label class="check-slide">
+								<input ng-model="register.accessHightPavement" type="checkbox" id="signup-hightPavement">
+								<div class="slider round"></div>
+							</label>
+						</div>
+					</div>
+
+					<div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
+						<div class="step-title"> Equipements </div>
+						<div class="form-input">
+							<label class="label-slide" for="crutch">Béquille</label>
+							<label class="check-slide">
+								<input ng-model="equipments.crutch" type="checkbox" id="crutch">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="manualWheelchair">Fauteuil Roulant Manuel</label>
+							<label class="check-slide">
+								<input ng-model="equipments.manualWheelchair" type="checkbox" id="manualWheelchair">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="electricWheelchair">Fauteuil Roulant Électrique</label>
+							<label class="check-slide">
+								<input ng-model="equipments.electricWheelchair" type="checkbox" id="electricWheelchair">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="cane">Canne</label>
+							<label class="check-slide">
+								<input ng-model="equipments.cane" type="checkbox" id="cane">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+						<div class="form-input">
+							<label class="label-slide" for="walker">Déambulateur</label>
+							<label class="check-slide">
+								<input ng-model="equipments.walker" type="checkbox" id="walker">
+								<div class="slider round"></div>
+							</label>
+						</div>
+
+					</div>
+
+					<input ng-if="valuePreviousStep" ng-click="previousStep()" class="btn btn-step" type="button" value="Etape Précédente">
+					<input ng-if="userHandicap && valueNextStep" ng-click="nextStep()" class="btn btn-step" type="button" value="Etape Suivante">
+					<input ng-if="sendForm" class="btn btn-send" type="submit" value="Modifier">
+				</form>
+			</div>
+		</div>
+		<div class="col-xs-1 col-md-2 col-lg-2"></div>
+	</div>
+<section>

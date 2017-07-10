@@ -18,6 +18,10 @@ app.config(function($routeProvider, $locationProvider){
 			templateUrl : 'views/sign-up.html',
 			controller  : 'signupController'
 		})
+		.when('/profile', {
+			templateUrl : 'views/profile.html',
+			controller  : 'profileController'
+		})
 		.otherwise({redirectTo: '/'});
 
 		$locationProvider.html5Mode(true);
@@ -88,5 +92,7 @@ app.run(['$rootScope', '$window', '$location', '$http', function($rootScope, $wi
 		$rootScope.eraseCookie('handistress_token_connection');
 		
 		$rootScope.userData = null;
+		
+		$window.location.href = '/map';
 	};
 }]);

@@ -693,13 +693,6 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 				access.push($scope.listAccess[i].id);
 		}
 		
-		/** 
-		A checker mais si le select == allTypePlace et les input checkbox == undefined, 
-		la recherche ne se fait que sur la barre de recherche 
-		**/
-		console.log("value du select -> "+$scope.searchMapSelect);
-		console.log("value du escaliers -> "+$scope.searchMap.stairs);
-		console.log("value du escalators -> "+$scope.searchMap.escalators);
 		/** Api de recherche  **/
 		$scope.getAllMarkers = Marker.searchMarkers($scope.searchMap.value, $scope.searchMapSelect, access)
 			.then(function(markers){
@@ -785,10 +778,12 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 				}
 				
 				/** on recentre la carte sur les dernieres coordonnées géographique trouvés  **/
-				$scope.center.lat = searchLat;
-				$scope.center.lng = searchLng;
-				$scope.center.zoom = 14;
-
+				if (markers.length != 0) {
+					$scope.center.lat = searchLat;
+					$scope.center.lng = searchLng;
+					$scope.center.zoom = 13;
+				}
+				
 				/** Résultat de la recheche sur la carte **/
 				$scope.markers = allMarkers;
 			},

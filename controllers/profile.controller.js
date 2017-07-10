@@ -1,5 +1,5 @@
-app.controller('signupController', function($scope, $rootScope, $http){
-  // Permet d'afficher ou pas le bouton d'inscription
+app.controller('profileController', function($scope, $rootScope, $http, $window){
+	// Permet d'afficher ou pas le bouton d'inscription
   $scope.boutonInscription = false;
   $scope.colorSignIn = true;
 
@@ -9,26 +9,26 @@ app.controller('signupController', function($scope, $rootScope, $http){
   /** variables pour affichage du formulaire **/
   $scope.step = 1; // L'étape du formulaire par defaut et 1
   $scope.valuePreviousStep = false; // Pat defaut, il n'y a pas d'étape précédente
-  $scope.userHandicap = false; // On lui dit que l'utilisateur est considerer non handicapé par defaut
-  $scope.valueNextStep = false; // Par defaut, on lui dit qu'il n'y a pas d'étape suivante
-  $scope.sendForm = true; // Par defaut, on peut envoyer le formulaire
+  $scope.userHandicap = ($rootScope.userData.handicap == "0") ? false : true;
+  $scope.valueNextStep = ($rootScope.userData.handicap == "0") ? false : true;
+  $scope.sendForm = ($rootScope.userData.handicap == "0") ? true : false;
 
   /** variables pour enregistrement d'un user **/
   $scope.register = {
-    firstname : '',
-    lastname : '',
-    email : '',
+    firstname : $rootScope.userData.firstname,
+    lastname : $rootScope.userData.lastname,
+    email : $rootScope.userData.email,
     pwd : '',
     pwd2 : '',
-    birthDate : new Date(),
-    handicap : "non",
-    accessStairs: false,
-  	accessEscalator: false,
-  	accessFlatEscalator: false,
-  	accessRamp: false,
-  	accessElevator: false,
-  	accessPavement: false,
-  	accessHightPavement: false,
+    birthDate : $rootScope.userData.birthDate,
+    handicap : ($rootScope.userData.handicap == "0") ? "non" : "oui",
+    accessStairs: ($rootScope.userData.accessStairs == "1") ? true : false,
+  	accessEscalator: ($rootScope.userData.accessEscalator == "1") ? true : false,
+  	accessFlatEscalator: ($rootScope.userData.accessFlatEscalator == "1") ? true : false,
+  	accessRamp: ($rootScope.userData.accessRamp == "1") ? true : false,
+  	accessElevator: ($rootScope.userData.accessElevator == "1") ? true : false,
+  	accessPavement: ($rootScope.userData.accessPavement == "1") ? true : false,
+  	accessHightPavement: ($rootScope.userData.accessHightPavement == "1") ? true : false,
     equipments: []
   }
 
@@ -39,11 +39,19 @@ app.controller('signupController', function($scope, $rootScope, $http){
     cane : false,
     walker : false
   }
+  console.log($rootScope.userData.equipments);
+  for (var i=0; i<$rootScope.userData.equipments.length; i++) {
+	  if ($rootScope.userData.equipments[i].idEquipment == 1) $scope.equipments.crutch = true;
+	  if ($rootScope.userData.equipments[i].idEquipment == 2) $scope.equipments.manualWheelchair = true;
+	  if ($rootScope.userData.equipments[i].idEquipment == 3) $scope.equipments.electricWheelchair = true;
+	  if ($rootScope.userData.equipments[i].idEquipment == 4) $scope.equipments.cane = true;
+	  if ($rootScope.userData.equipments[i].idEquipment == 5) $scope.equipments.walker = true;
+  }
 
   /***************************
   *** Envoie du formulaire ***
   ***************************/
-  $scope.signUp = function(){
+  $scope.edit = function(){	
     if($scope.equipments.crutch) $scope.register.equipments.push(1);
     if($scope.equipments.manualWheelchair) $scope.register.equipments.push(2);
     if($scope.equipments.electricWheelchair) $scope.register.equipments.push(3);
@@ -51,11 +59,12 @@ app.controller('signupController', function($scope, $rootScope, $http){
     if($scope.equipments.walker) $scope.register.equipments.push(5);
 	
 	var data = angular.copy($scope.register);
+	data.id = $rootScope.userData.id;
     data.handicap = (data.handicap == "oui") ? true : false;
 
     $http({
       method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/users/register.php',
+			url: 'https://www.api.benpedia.com/handistress/users/edit.php',
 			headers: {
 			  'Content-Type': undefined
 			},
@@ -63,6 +72,7 @@ app.controller('signupController', function($scope, $rootScope, $http){
     }).then(function successCallback(response) {
 		if (response.data.code == 200) {
 			$rootScope.connectionUser(response.data.token, response.data.data);
+			$window.location.href = '/map';
 		} else {}
 	}, function errorCallback(response) {
 		console.log(response);
@@ -112,10 +122,4 @@ app.controller('signupController', function($scope, $rootScope, $http){
       $scope.sendForm = false; // Il est impossible à l'étape 2 d'envoyer le formulaire
     }
   }
-
-
-  /*
-  *** test ***
-  */
-
 });
