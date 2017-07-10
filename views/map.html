@@ -72,6 +72,14 @@
 
 				<div class="form-input">
 					<label class="check-slide">
+						<input ng-model="traceMap.ramp" type="checkbox" id="tracemap-ramp"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-ramp">Rampe Handicapé</label>
+				</div>
+
+				<div class="form-input">
+					<label class="check-slide">
 						<input ng-model="traceMap.flatPavement" type="checkbox" id="tracemap-flatPavement"/>
 						<div class="slider round"></div>
 					</label>
@@ -103,8 +111,7 @@
 			
 			<div class="form-select">
 				<select ng-model="searchMapSelect">
-					<option value="allTypePlace" selected>Tous types de lieux</option> 
-					<option value="noTypePlace" selected>Aucun type de lieux</option> 
+					<option value="2,3,4,5,6,7,8,9,10,11" selected>Tous types de lieux</option>
 					<option value="2">Ecoles</option>
 					<option value="3">Metro</option>
 					<option value="4">Gare</option>
@@ -117,8 +124,16 @@
 					<option value="11">Hébergement</option>
 				</select>
 			</div>
-
-			<div class="form-input">
+			
+			<div ng-repeat="item in listAccess" class="form-input">
+				<label class="check-slide">
+					<input ng-model="item.checked" type="checkbox" id="searchmarker-{{item.id}}" />
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-{{item.id}}">{{item.entitled}}</label>
+			</div>
+			
+			<!-- <div class="form-input">
 				<label class="check-slide">
 					<input ng-model="searchMap.stairs" type="checkbox" id="searchmarker-stairs"/>
 					<div class="slider round"></div>
@@ -164,7 +179,7 @@
 					<div class="slider round"></div>
 				</label>
 				<label class="label-slide" for="searchmarker-hightPavement">Trottoir haut</label>
-			</div>
+			</div> -->
 
 			<input class="btn btn-send" type="submit" type="submit" value="Lancer la recherche">
 		</form>
@@ -226,8 +241,7 @@
 
 <div class="map-filter" ng-class="{'filter-open' : (openFilter == true) }">
 	<button ng-click="actionFilter()">
-		<span></span>
-		<span></span>
+		<span class = "glyphicon" ng-class="{'glyphicon-menu-left': openFilter == false, 'glyphicon-menu-right' : openFilter == true}"></span>
 	</button>
 	<div class="map-filter-type">
 		<div class="name-filter" ng-click="seeAll()" ng-class="{'filter-active' : (filter == 1) }">Tout voir</div>
@@ -239,7 +253,7 @@
 		<div class="see-categorie">
 			<div class="see-categorie-select">
 				<select ng-model="selectTypePlace" ng-change="typePlace()">
-					<option value="allTypePlace">Tout les lieux</option>
+					<option value="2,3,4,5,6,7,8,9,10,11">Tous les lieux</option>
 					<option value="2">Ecoles</option>
 					<option value="3">Metro</option>
 					<option value="4">Gare</option>
@@ -254,7 +268,7 @@
 			</div>
 			<div class="see-categorie-select">
 				<select ng-model="selectTypeAccess" ng-change="typeAccess()">
-					<option value="allTypeAccess">Tout les accès</option>
+					<option value="allTypeAccess">Tous les accès</option>
 					<option value="1"> Escalier </option>
 					<option value="2"> Escalator </option>
 					<option value="3"> Escalator plat </option>

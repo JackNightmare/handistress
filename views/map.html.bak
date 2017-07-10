@@ -1,0 +1,269 @@
+<div ng-include="'views/header/connect-header.html'" ng-controller="headerController"></div>
+
+<nav class="nav-menu " ng-class="{'not-open':closeMenu == true, 'open':openMenu==true}">
+	<button class="nav-menu-button" ng-click="actionMenu()">
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+
+	<ul ng-if="closeMenu" class="nav-menu-link">
+		<li><a href=" "> <i class="icon-home"></i></a></li>
+		<li class="page-active"> <a href="map"><i class="icon-map"></i></a></li>
+		<li> <a href="add-marker"><i class="icon-add-marker"></i></a></li>
+	</ul>
+
+	<div ng-if="openMenu">
+		<div class="switch-form-map">
+			<button ng-click="formTrace()" ng-class="{'form-active' : (activeTrace == true)}" class="form-active"> Tracer itinéraire</button>
+			<button ng-click="formSearch()" ng-class="{'form-active' : (activeSearch == true)}" >Recherche </button>
+		</div>
+
+		<form class="form-map" ng-if='activeTrace' ng-submit="traceMap()">
+			<div class="title-form-map"> Informations de votre trajet </div>
+			<div>
+				<label for="startPoint"><span class="icon-location"></span></label>
+				<div style="display:inline-block;">
+					<input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" ng-required="true" uib-typeahead="markers as markers.nameMarker for markers in searchByName($viewValue) | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="3" typeahead-wait-ms="200" autocomplete="off">
+				</div>
+			</div>
+
+			<div>
+				<label for="endPoint"><span class="icon-racing-flags"></span></label>
+				<div style="display:inline-block;">
+					<input id="endPoint" type="text" placeholder="point d'arrivé" ng-model="traceMap.end" ng-required="true" uib-typeahead="markers as markers.nameMarker for markers in searchByName($viewValue) | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="3" typeahead-wait-ms="200" autocomplete="off">
+				</div>
+			</div>
+
+			<div ng-if="userData == null">
+				<div class="subtitle-form-map"> Informations accéssibilités </div>
+
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.stairs" type="checkbox" id="tracemap-stairs"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-stairs">Escalier</label>
+				</div>
+
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.escalators" type="checkbox" id="tracemap-escalators"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-escalators">Escalator</label>
+				</div>
+
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.flatEscalators" type="checkbox" id="tracemap-flatEscalators"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-flatEscalators">Escalator plat</label>
+				</div>
+
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.elevator" type="checkbox" id="tracemap-elevator"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-elevator">Ascenseur</label>
+				</div>
+
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.flatPavement" type="checkbox" id="tracemap-flatPavement"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-flatPavement">Trottoir plat</label>
+				</div>
+
+				<div class="form-input">
+					<label class="check-slide">
+						<input ng-model="traceMap.hightPavement" type="checkbox" id="tracemap-hightPavement"/>
+						<div class="slider round"></div>
+					</label>
+					<label class="label-slide" for="tracemap-hightPavement">Trottoir haut</label>
+				</div>
+			</div>
+			
+			<input class="btn btn-send" type="submit" value="Tracer l'itinéraire">
+		</form>
+
+		<form class="form-map" ng-if='activeSearch' ng-submit="searchMap()">
+			<div class="title-form-map"> Recherche d'un lieu </div>
+			<div>
+				<label for="searchPoint"><span class="glyphicon glyphicon-search"></span></label>
+				<div style="display:inline-block;">
+					<input id="searchPoint" type="text" placeholder="Recherche" ng-model='searchMap.value' class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
+				</div>
+			</div>
+
+			<div class="subtitle-form-map"> Affiner la recherche <span>(optionnel)</span> </div>
+			
+			<div class="form-select">
+				<select ng-model="searchMapSelect">
+					<option value="allTypePlace" selected>Tous types de lieux</option> 
+					<option value="noTypePlace" selected>Aucun type de lieux</option> 
+					<option value="2">Ecoles</option>
+					<option value="3">Metro</option>
+					<option value="4">Gare</option>
+					<option value="5">Aéroport</option>
+					<option value="6">Restaurant</option>
+					<option value="7">Boutique</option>
+					<option value="8">Loisir</option>
+					<option value="9">Parking</option>
+					<option value="10">Administration</option>
+					<option value="11">Hébergement</option>
+				</select>
+			</div>
+
+			<div class="form-input">
+				<label class="check-slide">
+					<input ng-model="searchMap.stairs" type="checkbox" id="searchmarker-stairs"/>
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-stairs">Escalier</label>
+			</div>
+
+			<div class="form-input">
+				<label class="check-slide">
+					<input ng-model="searchMap.escalators" type="checkbox" id="searchmarker-escalators"/>
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-escalators">Escalator</label>
+			</div>
+
+			<div class="form-input">
+				<label class="check-slide">
+					<input ng-model="searchMap.flatEscalators" type="checkbox" id="searchmarker-flatEscalators"/>
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-flatEscalators">Escalator plat</label>
+			</div>
+
+			<div class="form-input">
+				<label class="check-slide">
+					<input ng-model="searchMap.elevator" type="checkbox" id="searchmarker-elevator"/>
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-elevator">Ascenseur</label>
+			</div>
+
+			<div class="form-input">
+				<label class="check-slide">
+					<input ng-model="searchMap.flatPavement" type="checkbox" id="searchmarker-flatPavement"/>
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-flatPavement">Trottoir plat</label>
+			</div>
+
+			<div class="form-input">
+				<label class="check-slide">
+					<input ng-model="searchMap.hightPavement" type="checkbox" id="searchmarker-hightPavement"/>
+					<div class="slider round"></div>
+				</label>
+				<label class="label-slide" for="searchmarker-hightPavement">Trottoir haut</label>
+			</div>
+
+			<input class="btn btn-send" type="submit" type="submit" value="Lancer la recherche">
+		</form>
+	</div>
+</nav>
+
+<leaflet center="center" tiles="tiles" defaults="defaults" event-broadcast="events" markers="markers" height="100%" width="100%" class="map-center"></leaflet>
+
+
+<div class="marker-information" ng-if="openPopin">
+	<div class="row">
+		<div class="col-md-12 col-lg-12"> 
+			<div class="marker-title"> {{ titlePopin }} 
+				<span class="glyphicon glyphicon-remove" ng-click="closePopin()"></span>
+			</div>
+			<div class="marker-informations">
+				<div class="marker-info-group">
+					<div class="info-title">Description</div>
+					<p> {{ descriptionPopin }}</p>
+					<p ng-bind-html="descriptionExit"></p>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeToilet">
+					<div class="info-title">Toilettes Adaptés 
+						<span ng-class="{'icon-checkbox-check': toilet == true, 'icon-checkbox-unchecked' : toilet == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeEquipment">
+					<div class="info-title">Equipements Adaptés 
+						<span ng-class="{'icon-checkbox-check': equipment == true, 'icon-checkbox-unchecked' : equipment == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeGantry">
+					<div class="info-title">Portiques pour handicapés 
+						<span ng-class="{'icon-checkbox-check': gantry == true, 'icon-checkbox-unchecked' : gantry == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title"> Accessible aux handicapés 
+						<span ng-class="{'icon-checkbox-check': subwayHandicap == true, 'icon-checkbox-unchecked' : subwayHandicap == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title"> Les sorties de métros </div>
+					<p ng-bind-html="allExitPopin"></p>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title">Bureau d'information  
+						<span ng-class="{'icon-checkbox-check': office == true, 'icon-checkbox-unchecked' : office == false}"></span>
+					</div>
+				</div>
+				<div class="marker-info-group" ng-if="markerSeeMetro">
+					<div class="info-title">Ligne de metro</div>
+					<p ng-bind-html="linesMetros"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="map-filter" ng-class="{'filter-open' : (openFilter == true) }">
+	<button ng-click="actionFilter()">
+		<span></span>
+		<span></span>
+	</button>
+	<div class="map-filter-type">
+		<div class="name-filter" ng-click="seeAll()" ng-class="{'filter-active' : (filter == 1) }">Tout voir</div>
+		<div class="name-filter" ng-click="seePlace()" ng-class="{'filter-active' : (filter == 2) }">Lieux</div>
+		<div class="name-filter" ng-click="seeAccess()" ng-class="{'filter-active' : (filter == 3) }">Accès</div>
+	</div>
+	<div class="map-filter-categorie">
+		<div class="title-categorie"> Categorie : </div>
+		<div class="see-categorie">
+			<div class="see-categorie-select">
+				<select ng-model="selectTypePlace" ng-change="typePlace()">
+					<option value="allTypePlace">Tout les lieux</option>
+					<option value="2">Ecoles</option>
+					<option value="3">Metro</option>
+					<option value="4">Gare</option>
+					<option value="5">Aéroport</option>
+					<option value="6">Restaurant</option>
+					<option value="7">Boutique</option>
+					<option value="8">Loisir</option>
+					<option value="9">Parking</option>
+					<option value="10">Administration</option>
+					<option value="11">Hébergement</option>
+				</select>
+			</div>
+			<div class="see-categorie-select">
+				<select ng-model="selectTypeAccess" ng-change="typeAccess()">
+					<option value="allTypeAccess">Tout les accès</option>
+					<option value="1"> Escalier </option>
+					<option value="2"> Escalator </option>
+					<option value="3"> Escalator plat </option>
+					<option value="4"> Ascenseur </option>
+					<option value="5"> Rampe </option>
+					<option value="6"> Trottoir plat </option>
+					<option value="7"> Trottoir haut </option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>

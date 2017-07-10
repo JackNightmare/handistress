@@ -218,6 +218,11 @@
   float: left;
 }
 
+.map-filter button span{
+  font-size: 50px;
+  color: #ffffff;
+}
+
 /**********************
 *** Filtre map fermé ***
 ***********************/

@@ -24,15 +24,9 @@
           <div class="form-title">Ajouter un accès</div>
           <form ng-submit="addAccess()">
             <div class="form-input select-zone">
-              <select ng-model="markerAccess.access" requir>
+              <select ng-model="markerAccess.access" required>
                 <option disabled="disabled" value="null" selected>Choisir type d'accès</option>
-                <option value="1">Escalier</option>
-                <option value="2">Escalator</option>
-                <option value="3">Escalator plat</option>
-                <option value="4">Ascenseur</option>
-                <option value="5">Rampe</option>
-                <option value="6">Trottoir plat</option>
-                <option value="7">Trottoir haut</option>
+                <option ng-repeat="access in listAccess" value="{{access.id}}">{{access.entitled}}</option>
               </select>
             </div>
 
@@ -89,7 +83,15 @@
             </div>
 
             <div class="form-number-step" ng-class="{'current-step' : (step == 2) }">
-              <div class="form-input">
+				<div ng-repeat="access in listAccess" class="form-input">
+					<label class="label-slide" for="addmarker-escalators">{{access.entitled}}</label>
+					<label class="check-slide">
+						<input ng-model="access.checked" type="checkbox" id="addmarker-escalators"/>
+						<div class="slider round"></div>
+					</label>
+				</div>
+			
+              <!-- <div class="form-input">
                 <label class="label-slide" for="addmarker-stairs">Escalier</label>
                 <label class="check-slide">
                   <input ng-model="markerTypeAccess.stairs" type="checkbox" id="addmarker-stairs"/>
@@ -135,7 +137,7 @@
                   <input ng-model="markerTypeAccess.hightPavement" type="checkbox" id="addmarker-hightPavement"/>
                   <div class="slider round"></div>
                 </label>
-              </div>
+              </div> -->
             </div>
 
             <div class="form-number-step" ng-class="{'current-step' : (step == 3) }">
@@ -177,7 +179,22 @@
               </div>
 
               <div class="form-input">
-                <input ng-model="markerPlace.complements.exitNumber" type="text" placeholder="Numero de sortie Metro">
+				Sorties:
+				<div class="row" ng-repeat="line in listExits track by $index">
+					<div class="col-sm-2">
+						<input ng-model="line.number" type="text" placeholder="Numero" style="width: 100%;">
+					</div>
+					<div class="col-sm-10">
+						<input ng-model="line.address" type="text" placeholder="Addresse" style="width: 100%;">
+					</div>
+					<div class="col-sm-10">
+						<label>Accès handicapé <input ng-model="line.handicap" type="checkbox"></label>
+					</div>
+					<div class="col-sm-2">
+						<span ng-click="removeLE($index)">X</span>
+					</div>
+				</div>
+				<span ng-click="addLE()">Ajouter une ligne</span>
               </div>
 
               <div class="form-input">
@@ -195,7 +212,12 @@
 
 			  <input ng-if="valuePreviousStep" ng-click="previousStep()" class="btn btn-step" type="button" value="Etape Précédente">
 						<input ng-if="valueNextStep" ng-click="nextStep()" class="btn btn-step" type="button" value="Etape Suivante">
-			  <input ng-if="sendForm" class="btn btn-send" type="submit" value="Enregistrer"/>
+			  <input ng-if="sendForm && addOrEdit == 'add'" class="btn btn-send" type="submit" value="Enregistrer"/>
+			  <input ng-if="sendForm && addOrEdit == 'edit'" class="btn btn-send" type="submit" value="Modifier"/>
+			  <span ng-if="addOrEdit == 'edit'">
+				<br />
+				<input ng-click="cancelEdit()" class="btn btn-step" type="button" value="Annuler"/>
+			  </span>
 			</form>
         </div>
       </div>

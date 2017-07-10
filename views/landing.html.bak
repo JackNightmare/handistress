@@ -1,0 +1,199 @@
+<div ng-include="'views/header/connect-header.html'" ng-controller="headerController"></div>
+
+<header class="landing-header">
+	<div class="row landing-access">
+		<div class="col-md-7 col-lg-7"></div>
+
+		<div class="col-md-4 col-lg-4">
+
+			<div class="landing-access-line">
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+			</div>
+
+			<div class="landing-access-info">
+				<span class="access-info-title">
+					Découvrez <strong>Handistress</strong>
+				</span>
+				<p>
+					Handistress est une carte qui adapte votre itinéraire selon votre
+					niveau de mobilité et vous propose le trajet le
+					plus optimisé pour vous
+				</p>
+			</div>
+
+			<div class="landing-access-line">
+				<span class="glyphicon glyphicon-triangle-top"></span>
+			</div>
+
+
+			<div class="landing-access-logo">
+				Logo
+			</div>
+
+			<a href="map">
+				<button type="button" class="btn landing-access-button"> Tracer votre itinéraire </button>
+			</a>
+		</div>
+
+		<div class="col-md-1 col-lg-1"></div>
+	</div>
+
+	<div class="row landing-next-section">
+			<div class="col-md-5 col-lg-5"></div>
+			<div class="col-md-2 col-lg-2">
+				<a href="" ng-click="scrollSection('section1')">
+					<span class="glyphicon glyphicon-menu-down next-section-top" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-menu-down next-section" aria-hidden="true"></span>
+				</a>
+			</div>
+			<div class="col-md-5 col-lg-5"></div>
+		</div>
+
+</header>
+
+<section id="section1" class="landing-section1">
+	<div class="row landing-section-entitle">
+		<div class="col-md-1 col-lg-1"></div>
+
+		<div class="col-md-4 col-lg-4">
+			Pourquoi <strong>Handistress</strong> <span>?</span>
+			<div class="section-entitle-line"></div>
+		</div>
+
+		<div class="col-md-7 col-lg-7"></div>
+	</div>
+
+	<div class="row landing-section1-statistics">
+		<div class="col-md-4 col-lg-4">
+			<p>12 millions de personnes handicapées en France</p>
+			<div class="statistics-graph">
+				<div class="graph-part-1"></div>
+				<div class="graph-part-2"></div>
+				<div class="graph-information">
+					20 %
+					<span>information complémentaire</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-lg-4">
+			<p>12 millions de personnes handicapées en France</p>
+			<div class="statistics-graph">
+				<div class="graph-part-1"></div>
+				<div class="graph-part-2"></div>
+				<div class="graph-information">
+					20 %
+					<span>information complémentaire</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 col-lg-4">
+			<p>12 millions de personnes handicapées en France</p>
+			<div class="statistics-graph">
+				<div class="graph-part-1"></div>
+				<div class="graph-part-2"></div>
+				<div class="graph-information">
+					20 %
+					<span>information complémentaire</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<section id="section2" class="landing-section2">
+	<div class="row landing-section-entitle">
+		<div class="col-md-4 col-lg-4 trace-line trace-1">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+		<div class="col-md-4 col-lg-4">
+			Tracer un itinéraire Optimisé
+			<div class="section-entitle-line"></div>
+		</div>
+		<div class="col-md-4 col-lg-4 trace-line trace-2">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+
+	<div class="row landing-section2-information">
+		<div class="col-md-1 col-lg-1">
+			<div class="trace-line trace-3">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<div class="trace-line trace-4">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-lg-4">
+			<div class="section2-zone-text">
+				<p>
+					<strong>Handistress</strong> vous permet de tracer des itinéraires prenant en compte votre handicape.<br>
+				<p/>
+				<p>
+					Pour cela, vous devez renseigner les accès auxquels vous pouvez accèder <span>(escaliers, ascensseurs, escalators ...)</span>. L'application calculera alors le meilleur chemin pour vous.
+				</p>
+				<p>
+					Vous pouvez à tout moment changer les informations vous concernant, ce qui impactera les futurs itinéraires
+				</p>
+			</div>
+		</div>
+		<div class="col-md-1 col-lg-1"></div>
+		<div class="col-md-5 col-lg-5">
+			<div class="section2-map-trace"></div>
+		</div>
+		<div class="col-md-1 col-lg-1"></div>
+	</div>
+</section>
+
+<section id="section3" class="landing-section3">
+	<div class="row landing-section-entitle">
+		<div class="col-md-4 col-lg-4"></div>
+		<div class="col-md-4 col-lg-4">
+			Ajouter des lieux et des accès
+			<div class="section-entitle-line"></div>
+		</div>
+		<div class="col-md-4 col-lg-4"></div>
+	</div>
+
+	<div class="row landing-section3-information">
+		<div class="col-md-1 col-lg-1"></div>
+		<div class="col-md-5 col-lg-5">
+			<div class="section3-map-marker"></div>
+		</div>
+		<div class="col-md-5 col-lg-5">
+			<div class="section3-zone-text">
+				<p>
+					Avec <strong>Handistress</strong>, vous pouvez contribuer aux informations présentes sur la carte. Nous utilisons votre position géographiques afin d'enregister les markers sur la carte.
+				<p/>
+				<p>
+					Vous pouvez ajouter un marker de type "Lieu" (restaurant, ecoles, boutiques ... ). Ces markers demandent de nombreuses informations afin de connaitre aux mieux l'accessibilité du lieu en question. Nous demandons donc de renseigner des informations générales comme le type de lieu, le nom et une description, mais en plus de cela, les accès s'y trouvant (escaliers, ascenseurs ...) et des informations complémentaires tel que des descriptions des entrées et sorties, si il y a des toilettes adaptés etc... 
+				</p>
+				<p>
+					Il est aussi possible de créer de marker de type "Accès" (escaliers, escalators, rampes ...). Ces derniers permettent de référencer les accès se situant dans les rues. Ces derniers ne demandent très peu d'information, juste un nom et une description en plus du type d'accès. 
+				</p>
+			</div>
+		</div>
+		<div class="col-md-1 col-lg-1"></div>
+	</div>
+</section>
+
+<footer> Footer </footer>
