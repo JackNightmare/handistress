@@ -163,13 +163,13 @@ app.factory('Marker', function($http, $q, $filter){
 				lat: lat,
 				lng: lng,
 				rayon: rayon,
-				includePlaces: [theTypeAccess],
-				excludePlaces: []
+				includeAccess: [theTypeAccess],
+				excludeAccess: []
 			};
 			
 			$http({
 					method: 'POST',
-					url: 'https://www.api.benpedia.com/handistress/markers/getInZone.php',
+					url: 'https://www.api.benpedia.com/handistress/markers/getAccessInZone.php',
 					headers: {
 						'Content-Type': undefined
 					},

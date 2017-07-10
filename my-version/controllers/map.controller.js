@@ -369,7 +369,7 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 				allSortie = markerSortie.split(';');
 				$scope.allExitPopin = '';
 
-				console.log(allSortie);
+
 
 				allSortie.forEach(function(element) {
 					if(element != "" ){
