@@ -56,6 +56,10 @@ app.controller('headerController', function($scope, $rootScope, $http){
 	*** Fonction pour ouvrir le menu responsive ***
 	**********************************************/
 	$scope.openMenuResponsive = function(){
+		/** ferme le menu classique obligatoire **/
+		$scope.openMenu = false;
+		$scope.closeMenu = true;
+
 		$scope.responsiveMenuOpen = $scope.responsiveMenuOpen == false ? true : false ;
 	}
 });
