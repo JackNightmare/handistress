@@ -12,16 +12,20 @@
         <form ng-submit="signIn()">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Email</label>
-            <input ng-model="login.email" type="email" required>
+            <input ng-model="login.email" type="email" ng-style="{'border': empty.email ? '2px solid #dd2c00' : 'none'}">
             <div class="input-hover"></div>
           </md-input-container>
           
           <md-input-container class="md-block" flex-gt-sm>
             <label>Mote de passe</label>
-            <input ng-model="login.pwd" type="password" required>
+            <input ng-model="login.pwd" type="password" ng-style="{'border': empty.pwd ? '2px solid #dd2c00' : 'none'}">
             <div class="input-hover"></div>
           </md-input-container>
-
+		
+		<div ng-if="showMessageConnectionError" style="color: #dd2c00; font-size: 16px; font-weight: bold;">
+			{{messageConnectionError}}
+		</div>
+		
           <!-- <div class="form-input">
             <input ng-model="xxx.email" type="email" placeholder="Email" required>
             <div class="input-hover"></div>

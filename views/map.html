@@ -16,7 +16,7 @@
 
 	<div ng-if="openMenu">
 		<div class="switch-form-map">
-			<button ng-click="formTrace()" ng-class="{'form-active' : (activeTrace == true)}" class="form-active"> Tracer itinéraire</button>
+			<button ng-click="formTrace()" ng-class="{'form-active' : (activeTrace == true)}"> Tracer itinéraire</button>
 			<button ng-click="formSearch()" ng-class="{'form-active' : (activeSearch == true)}" >Recherche </button>
 		</div>
 
@@ -104,7 +104,7 @@
 			<div>
 				<label for="searchPoint"><span class="glyphicon glyphicon-search"></span></label>
 				<div style="display:inline-block;">
-					<input id="searchPoint" type="text" placeholder="Recherche" ng-model='searchMap.value' class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0">
+					<input id="searchPoint" type="text" placeholder="Recherche" ng-model='searchMap.value' class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0" required>
 				</div>
 			</div>
 

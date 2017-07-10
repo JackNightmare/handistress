@@ -47,13 +47,13 @@
 						
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Prénom</label>
-							<input ng-model="register.firstname" type="text" required>
+							<input ng-model="register.firstname" type="text" ng-style="{'border': empty.firstname ? '2px solid #dd2c00' : 'none'}">
 							<div class="input-hover"></div>
 						</md-input-container>
 
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Nom</label>
-							<input ng-model="register.lastname" type="text" required>
+							<input ng-model="register.lastname" type="text" ng-style="{'border': empty.lastname ? '2px solid #dd2c00' : 'none'}">
 							<div class="input-hover"></div>
 						</md-input-container>
 
@@ -66,13 +66,13 @@
 
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Mot de passe</label>
-							<input ng-model="register.pwd" type="password" required>
+							<input ng-model="register.pwd" type="password" ng-style="{'border': empty.pwd ? '2px solid #dd2c00' : 'none'}">
 							<div class="input-hover"></div>
 						</md-input-container>
 
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Confirmer mot de passe</label>
-							<input ng-model="register.pwd2" type="password" required>
+							<input ng-model="register.pwd2" type="password" ng-style="{'border': empty.pwd2 ? '2px solid #dd2c00' : 'none'}">
 							<div class="input-hover"></div>
 						</md-input-container>
 

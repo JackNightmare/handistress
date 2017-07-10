@@ -44,6 +44,14 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
     }
   }
   
+  $scope.empty = {
+	  access: false,
+	  entitled: false,
+	  description: false,
+	  place: false,
+	  accessEnterExit: false
+  };
+  
   $scope.subwayLines = [{value: ''}];
   
   $scope.addSL = function () {
