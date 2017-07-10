@@ -2,7 +2,10 @@ app.controller('signupController', function($scope, $rootScope, $http){
   // Permet d'afficher ou pas le bouton d'inscription
   $scope.boutonInscription = false;
   $scope.colorSignIn = true;
-
+  
+  // Permet d'afficher le menu responsive
+  $scope.menuResponsive = true;
+  
   /******************************************
   *** Varibales globales pour inscription ***
   ******************************************/

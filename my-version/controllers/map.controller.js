@@ -2,6 +2,9 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
 
+	// Permet d'afficher le menu responsive
+	$scope.menuResponsive = true;
+	
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***
 	*****************************************************/

@@ -1,20 +1,14 @@
 app.controller('landingController', function($scope, $location, $anchorScroll){
 
+	// Permet d'afficher ou pas le bouton d'inscription
+	$scope.boutonInscription = true;
 
+	// Permet d'afficher le menu responsive
+	$scope.menuResponsive = false;
 
-  // Permet d'afficher ou pas le bouton d'inscription
-
-  $scope.boutonInscription = true;
-
-
-
-  $scope.scrollSection = function(idSection){
-
-     $location.hash(idSection);
-
-     $anchorScroll();
-
-  }
-
+	$scope.scrollSection = function(idSection){
+		$location.hash(idSection);
+		$anchorScroll();
+	}
 });
 

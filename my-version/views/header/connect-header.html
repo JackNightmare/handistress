@@ -48,3 +48,16 @@
   </div>
   <div class="col-md-1 col-lg-1"></div>
 </div>
+
+
+<!-- Pour le responsive -->
+<nav ng-if="menuResponsive" class="nav-menu-mobile" ng-class="{'not-open': responsiveMenuOpen == false, 'open' : responsiveMenuOpen == true}">
+  <button ng-click="openMenuResponsive()">
+    <span class="glyphicon" ng-class="{'glyphicon-align-justify': responsiveMenuOpen == false, 'glyphicon-menu-up' : responsiveMenuOpen == true}"></span>
+  </button>
+  <ul class="nav-menu-link">
+    <li><a href=" "> <i class="icon-home"></i> Accueil</a></li>
+    <li><a href="map"><i class="icon-map"></i> Carte</a></li>
+    <li><a href="add-marker"><i class="icon-add-marker"></i> Ajout de Marker </a></li>
+  </ul>
+</nav>

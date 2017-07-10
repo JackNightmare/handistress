@@ -3,6 +3,10 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
   $scope.boutonInscription = true;
   $scope.colorSignIn = true;
 
+  // Permet d'afficher le menu responsive
+  $scope.menuResponsive = true;
+
+
   /**********************************************
   *** Varibales globales pour ajout de marker ***
   **********************************************/
