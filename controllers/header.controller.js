@@ -4,7 +4,8 @@ app.controller('headerController', function($scope, $rootScope, $http, $timeout)
 	*** Variables globales pour le Header ***
 	****************************************/
 	$scope.activeFilter = false;
-	$scope.responsiveMenuOpen = false;
+	$rootScope.responsiveMenuOpen = false;
+	$rootScope.closeResponsiveFormMenu = true;
 
 	/*****************************************************
 	*** Ici il faut mettre le bousin pour se connecter ***
@@ -86,6 +87,31 @@ app.controller('headerController', function($scope, $rootScope, $http, $timeout)
 	*** Fonction pour ouvrir le menu responsive ***
 	**********************************************/
 	$scope.openMenuResponsive = function(){
-		$scope.responsiveMenuOpen = $scope.responsiveMenuOpen == false ? true : false ;
+		$rootScope.responsiveMenuOpen = $rootScope.responsiveMenuOpen == false ? true : false ;
+
+		/** Si fermeture du menu manuellement, tout repasse au valeur d'origine **/
+		if($rootScope.responsiveMenuOpen == false){
+			$rootScope.traceResponsiveForm = false;
+			$rootScope.searchResponsiveForm = false;
+			$rootScope.closeResponsiveFormMenu = true;
+		}
+	}
+
+	$scope.responsiveTrace = function(){
+		// Ouverture du formulaire correspondant
+		$rootScope.traceResponsiveForm = true;
+		// Fermeture au cas ou du formulaire search
+		$rootScope.searchResponsiveForm = false;
+		// On cache la navigation
+		$rootScope.closeResponsiveFormMenu = false;
+	}
+
+	$scope.responsiveSearch = function(){
+		// Ouverture du formulaire correspondant
+		$rootScope.searchResponsiveForm = true;
+		// Fermeture au cas ou du formulaire trace
+		$rootScope.traceResponsiveForm = false;
+		// On cache la navigation
+		$rootScope.closeResponsiveFormMenu = false;
 	}
 });

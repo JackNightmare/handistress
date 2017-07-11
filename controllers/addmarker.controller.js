@@ -5,6 +5,7 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 
   // Permet d'afficher le menu responsive
   $scope.menuResponsive = true;
+  $scope.mapPage = false;
 
   /**********************************************
   *** Varibales globales pour ajout de marker ***
@@ -216,7 +217,7 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 			},
 			data: data
 		}).then(function successCallback(response) {
-			console.log(response.data);
+			// console.log(response.data);
 			
 			var data = response.data;
 			
@@ -266,6 +267,15 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 				
 				if (splitedExitNumber.length == 0) {
 					$scope.listExits = [{number: '', address: '', handicap: false}];
+				} else if (splitedExitNumber.length == 1) {
+					if (splitedExitNumber[0] == "unique ** false") {
+						$scope.listExits = [{number: '', address: '', handicap: false}];
+					} else if (splitedExitNumber[0] == "unique ** true") {
+						$scope.listExits = [{number: '', address: '', handicap: true}];
+					} else {
+						var exit = splitedExitNumber[0].split(' ** ');
+						$scope.listExits = [{number: exit[0], address: exit[1], handicap: (exit[4] == "true") ? true : false}];
+					}
 				} else {
 					$scope.listExits = [];
 					for (var i=0; i<splitedExitNumber.length; i++) {
@@ -453,14 +463,21 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 		  data.lat = location.coords.latitude;
 		  data.lng = location.coords.longitude;
 		  
-		  for (var i=0; i<$scope.listExits.length; i++) {
-			if (i == 0)
-				$scope.markerPlace.complements.exitNumber = $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
-			else
-				$scope.markerPlace.complements.exitNumber = $scope.markerPlace.complements.exitNumber + ';' + $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
+		  if ($scope.listExits.length == 1 && ($scope.listExits[0].number == '' || $scope.listExits[0].number == undefined) && ($scope.listExits[0].address == '' || $scope.listExits[0].address == undefined)) {
+			  if (!$scope.listExits[0].handicap)
+				  data.complements.exitNumber = "unique ** false";
+			  else
+				data.complements.exitNumber = "unique ** true";
+		  } else {
+			  for (var i=0; i<$scope.listExits.length; i++) {
+				if (i == 0)
+					$scope.markerPlace.complements.exitNumber = $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
+				else
+					$scope.markerPlace.complements.exitNumber = $scope.markerPlace.complements.exitNumber + ';' + $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
+			  }
+			  
+			  data.complements.exitNumber = angular.copy($scope.markerPlace.complements.exitNumber);
 		  }
-		  
-		  data.complements.exitNumber = angular.copy($scope.markerPlace.complements.exitNumber);
 		  
 		  if ($scope.addOrEdit == 'add') {
 			  $http({

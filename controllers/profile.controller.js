@@ -6,6 +6,7 @@ app.controller('profileController', function($scope, $rootScope, $http, $window,
 
 	// Permet d'afficher le menu responsive
 	$scope.menuResponsive = true;
+	$scope.mapPage = false;
 
 
 

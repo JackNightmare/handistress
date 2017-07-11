@@ -47,6 +47,10 @@
               <textarea ng-model="markerAccess.description" placeholder="Description de l'accès" ng-style="{'border': empty.description ? '2px solid #dd2c00' : 'none'}"></textarea>
             </div>
             <input class="btn btn-send" type="submit" value="Enregistrer"/>
+			<span ng-if="addOrEdit == 'edit'">
+				<br />
+				<input ng-click="cancelEdit()" class="btn btn-step" type="button" value="Annuler"/>
+			  </span>
           </form>
         </div>
 
@@ -192,7 +196,7 @@
 						<label>Accès handicapé <input ng-model="line.handicap" type="checkbox"></label>
 					</div>
 					<div class="col-sm-2">
-						<span ng-click="removeLE($index)">X</span>
+						<span ng-if="listExits.length != 1" ng-click="removeLE($index)">X</span>
 					</div>
 				</div>
 				<span ng-click="addLE()">Ajouter une ligne</span>
@@ -201,7 +205,7 @@
               <div class="form-input">
 				Lignes de métro:
 				<div ng-repeat="line in subwayLines track by $index">
-					<input ng-model="line.value" type="text" placeholder="Numero de ligne Metro"> <span ng-click="removeSL($index)">X</span>
+					<input ng-model="line.value" type="text" placeholder="Numero de ligne Metro"> <span ng-if="subwayLines.length != 1" ng-click="removeSL($index)">X</span>
 				</div>
 				<span ng-click="addSL()">Ajouter une ligne</span>
 			  </div>
