@@ -125,7 +125,6 @@ li{ list-style: none; }
 .form-zone.connect-zone{
   background-color: rgba(255, 255, 255, 1);
   border-radius: 5px;
-  margin-top: 25%;
 }
 
 .form-zone.connect-zone button{
@@ -173,8 +172,6 @@ li{ list-style: none; }
 
 .form-zone.connect-zone .connect-link span{ font-family: arial; }
 
-.form-zone.connect-zone .btn-send{ height: 40px; }
-
 
 /*************************
 *** Menu de navigation ***
@@ -190,11 +187,9 @@ li{ list-style: none; }
   /*transition: all 2s;*/
 }
 
-.nav-menu ul{
-  padding: 0;
-}
+.nav-menu ul{ padding: 0; }
 
-/** Menu non ouvert **/
+/** Menu non ouvert desktop **/
 .nav-menu.not-open{
   width: 5%;
   background-color: rgba(73, 141, 161, 0.8);
@@ -211,7 +206,6 @@ li{ list-style: none; }
 
 .nav-menu.not-open .nav-menu-button span{
   height: 5px;
-  width: 60px;
   margin: auto;
   display: block;
   margin-top: 20%;
@@ -223,7 +217,6 @@ li{ list-style: none; }
   width: 100%;
   text-align: center;
   margin-bottom: 25%;
-  font-size: 40px;
 }
 
 .nav-menu.not-open .nav-menu-link li.page-active{ border-left: 3px solid #ffffff; background-color:rgba(255,255,255,0.4);}
@@ -234,7 +227,7 @@ li{ list-style: none; }
   text-decoration: none;
 }
 
-/** Menu ouvert **/
+/** Menu ouvert desktop **/
 .nav-menu.open{
   width: 20%;
   background-color: rgba(73, 141, 161, 0.95);
@@ -248,6 +241,7 @@ li{ list-style: none; }
   position: relative;
   background-color: transparent;
 }
+
 .nav-menu.open .nav-menu-button span{
   height: 5px;
   width: 50px;
@@ -257,16 +251,65 @@ li{ list-style: none; }
   background: #000000;
 }
 
-
 .nav-menu.open .nav-menu-button span:nth-child(1){transform: rotate(-45deg) translate(-7px, 8px)}
 .nav-menu.open .nav-menu-button span:nth-child(2){opacity: 0;}
 .nav-menu.open .nav-menu-button span:nth-child(3){transform: rotate(45deg) translate(-7px, -11px); }
 
 
 
-/****************************
-*** Style spécifique size ***
-***************************/
+/** Menu mobile general **/
+.nav-menu-mobile button{
+  width: 60px;
+  height: 60px;
+  margin-top: 1%;
+  margin-left: 2%;
+  margin-bottom: 1%;
+  border-radius: 50%;
+  border: 2px solid #155f8b;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-menu-mobile button span{ font-size: 35px; }
+.nav-menu-mobile {
+  width: 100%;
+  z-index: 10;
+  bottom: inherit;
+  position: absolute;
+  background-color: #155f8b;
+}
+
+
+/** Menu mobile non ouvert **/
+.nav-menu-mobile.not-open { height: 0; }
+.nav-menu-mobile.not-open .nav-menu-link{display: none; }
+
+/** Menu mobile ouvert **/
+.nav-menu-mobile.open{ height: auto; }
+.nav-menu-mobile.open .nav-menu-link{
+  padding: 0;
+  display: block;
+  font-size: 20px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.nav-menu-mobile.open .nav-menu-link li{
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: #155f8b;
+  border-top: 1px solid #ffffff;
+}
+
+.nav-menu-mobile.open .nav-menu-link a{ color:#ffffff; }
+.nav-menu-mobile.open .nav-menu-link li:hover { background-color: #ffffff; }
+.nav-menu-mobile.open .nav-menu-link a:hover li{ color:#155f8b; text-decoration: none; }
+
+
+/*
+*
+* Style spécifique size *
+*
+*/
 
 /*******************************
 *** Superieur ou egal à 1140 ***
@@ -275,28 +318,93 @@ li{ list-style: none; }
   /** Bouton de connexion **/
   .connect-button{ width: 45%; margin-right:0; }
   .connect-button .btn-connect{ font-size: 16px; width: 160px; }
+
+
+  /** responsive formulaire de connexion **/
+  .form-zone.connect-zone{ margin-top: 25%; width: 80%; }
+  .form-zone.connect-zone .connect-zone-title{ font-size: 30px; }
+  .form-zone.connect-zone .btn-send{ height: 40px; width: 30%; font-size: 18px; }
+
+  /** responsive menu non ouvert **/
+  .nav-menu.not-open .nav-menu-link li{ font-size: 40px; }
+  .nav-menu.not-open .nav-menu-button span{ width: 100%; }
+
+  /** responsive menu mobile non ouvert **/
+  .nav-menu-mobile{ display: none; }
+
+  /** responsive desktop ouvert **/
+  .nav-menu.open{ width: 25%; }
 }
 
 @media (min-width: 992px) and (max-width: 1139px) {
   /** Bouton de connexion **/
   .connect-button{ width: 45%; margin-right:0; }
   .connect-button .btn-connect{ font-size: 16px; width: 40%; }
-}
 
+
+  /** responsive formulaire de connexion **/
+  .form-zone.connect-zone{ margin-top: 25%; width: 100%; }
+  .form-zone.connect-zone .connect-zone-title{ font-size: 30px; }
+  .form-zone.connect-zone .btn-send{ height: 40px; width: 30%; font-size: 18px; }
+
+  /** responsive menu desktop non ouvert **/
+  .nav-menu.not-open .nav-menu-link li{ font-size: 30px; }
+  .nav-menu.not-open .nav-menu-button span{ width: 100%; }
+
+  /** responsive menu mobile non ouvert **/
+  .nav-menu-mobile{ display: none; }
+
+  /** responsive desktop ouvert **/
+  .nav-menu.open{ width: 25%; }
+}
 
 @media (min-width:768px) and (max-width: 991px) {
+  /** Bouton de connexion **/
   .connect-button{width: 65%; left: 20%; }
   .connect-button .btn-connect{ font-size: 16px; width: 160px; }
+
+
+  /** responsive formulaire de connexion **/
+  .form-zone.connect-zone{ margin-top: 20%; width: 80%; }
+  .form-zone.connect-zone .connect-zone-title{ font-size: 30px; }
+  .form-zone.connect-zone .btn-send{ height: 40px; width: 30%; font-size: 18px; }
+
+  /** responsive menu non ouvert **/
+  .nav-menu.open { display: none; }
+  .nav-menu.not-open { display: none; }
 }
 
-
 @media (min-width: 576px) and (max-width: 767px) {
+  /** Bouton de connexion **/
   .connect-button{ width: 75%; left: 14%; }
   .connect-button .btn-connect{ font-size: 16px; width: 160px; }
-} 
 
+
+  /** responsive formulaire de connexion **/
+  .form-zone.connect-zone{ margin-top: 20%; width: 100%; }
+  .form-zone.connect-zone .connect-zone-title{ font-size: 30px; }
+  .form-zone.connect-zone .btn-send{ height: 40px; width: 30%; font-size: 18px; }
+
+
+  /** responsive menu non ouvert **/
+  .nav-menu.open { display: none; }
+  .nav-menu.not-open { display: none; }
+} 
 
 @media (max-width: 575px) {
+  /** Bouton de connexion **/
   .connect-button{ width: 85%; left: 10%; }
   .connect-button .btn-connect{ font-size: 16px; width: 40%; }
-} 
+
+
+  /** responsive formulaire de connexion **/
+  .form-zone.connect-zone{ margin-top: 20%; width: 100%; }
+  .form-zone.connect-zone .connect-zone-title{ font-size: 20px; }
+  .form-zone.connect-zone .btn-send{ height: 40px; width: 40%; font-size: 17px; }
+  .form-zone.connect-zone .connect-link { font-size: 12px; }
+
+
+  /** responsive menu non ouvert **/
+  .nav-menu.open { display: none; }
+  .nav-menu.not-open { display: none; }
+}

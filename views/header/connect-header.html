@@ -24,17 +24,7 @@
 		
 		<div ng-if="showMessageConnectionError" style="color: #dd2c00; font-size: 16px; font-weight: bold;">
 			{{messageConnectionError}}
-		</div>
-		
-          <!-- <div class="form-input">
-            <input ng-model="xxx.email" type="email" placeholder="Email" required>
-            <div class="input-hover"></div>
-          </div> -->
-         <!--  <div class="form-input">
-            <input ng-model="xxx.pwd" type="password" placeholder="Mot de passe" required>
-            <div class="input-hover"></div>
-          </div> -->
-          
+		</div>          
           <div class="connect-link">
             <a href="sign-up"> se créer un compte <span>?</span></a>
           </div>
@@ -61,3 +51,16 @@
   </div>
   <div class="col-md-1 col-lg-1"></div>
 </div>
+
+<!-- Pour le responsive -->
+<nav ng-if="menuResponsive" class="nav-menu-mobile" ng-class="{'not-open': responsiveMenuOpen == false, 'open' : responsiveMenuOpen == true}">
+  <button ng-click="openMenuResponsive()">
+    <span class="glyphicon" ng-class="{'glyphicon-align-justify': responsiveMenuOpen == false, 'glyphicon-menu-up' : responsiveMenuOpen == true}"></span>
+  </button>
+  
+  <ul class="nav-menu-link">
+    <a href=" "><li><i class="icon-home"></i> Accueil</li></a>
+    <a href="map"><li><i class="icon-map"></i> Carte</li></a>
+    <a href="add-marker"><li><i class="icon-add-marker"></i> Ajout de Marker</li></a>
+  </ul>
+</nav>

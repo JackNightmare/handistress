@@ -24,79 +24,66 @@
 
 .nav-menu .switch-form-map button {
 	width: 45%;
-  font-size: 16px;
   padding-top: 2%;
   font-style: italic;
   padding-bottom: 2%;
-  margin-bottom: 30px;
   border: 1px solid #368093;
   background-color: rgba(236, 236, 236, 0.3);
 }
 .nav-menu .switch-form-map button.form-active{ background-color: #155f8b;}
 
-.nav-menu .form-map{ padding-left: 5%; }
+.form-map{ padding-left: 5%; }
 
-.nav-menu .form-map .title-form-map{
+.form-map .title-form-map{
   width: 90%;
   color: #ffffff;
-  font-size: 18px;
   padding-bottom: 2%;
   border-bottom: 1px solid #ffffff;
 }
 
-.nav-menu .form-map label{ color: #75cff0; font-size: 40px; }
-.nav-menu .form-map label span{ position: relative; top: 10px; }
+.form-map label{ color: #75cff0; }
+.form-map label span{ position: relative; top: 10px; }
 
-.nav-menu .form-map .form-text{
-  width: 100%;
+.form-map .form-text{
   border: none;
-  margin-left: 15px;
   border-radius: 0;
   border-bottom: 2px solid #155f8b;
   background-color: rgba(255, 255, 255, 0.5) !important;
 }    
 
-.nav-menu .form-map .subtitle-form-map{
+.form-map .subtitle-form-map{
   width: 90%;
   margin-top: 5%;
   margin-bottom: 5%;
   color: #ffffff;
-  font-size: 18px;
   padding-bottom: 2%;
   border-bottom: 1px solid #ffffff;
 }
-.nav-menu .form-map .subtitle-form-map span{ font-weight: italic; font-size: 15px;}
+.form-map .subtitle-form-map span{ font-weight: italic; font-size: 15px;}
 
-.nav-menu .form-map select{
+.form-map select{
   color: #000000;
   width: 95%;
   padding-left: 20%;
-  font-size: 16px;
   margin-bottom: 10%;
-  height: 35px;
   background-color: rgba(255,255,255,0.5);
-
 }
 
-.nav-menu .form-map .form-input{ margin-bottom: 5%;}
-.nav-menu .form-map .form-input label{
-  font-size: 16px;
+.form-map .form-input label{
   color: #ffffff;
   margin-left: 10%;
   cursor: pointer;
 }
 
-.nav-menu .form-map .btn-send{
+.form-map .btn-send{
   margin: auto;
   display: block;
   width: 85%;
   color: #ffffff;
   border: 1px solid #297184;
   background-color: #19607d;
-  font-size: 20px;
   font-style: italic;
   box-shadow: 5px 4px 11px rgba(0, 0, 0, 0.4);
-  margin-top: 20px;
 }
 
 /**********************************
@@ -105,11 +92,7 @@
 .marker-information{
   position: absolute;
   z-index: 200;
-  right: 2%;
-  top: 25%;
   background: rgba(255, 255, 255, 0.8);
-  width: 20%;
-  height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -117,7 +100,6 @@
 .marker-information .row{ margin-right: -15px; margin-left: -15px; }
 
 .marker-information .marker-title{
-  font-size: 18px;
   color: #ffffff;
   padding-top: 2%;
   padding-bottom: 2%;
@@ -127,48 +109,25 @@
 
 .marker-information .marker-title span{
   float: right;
-  margin-right: 3%;
-  font-size: 15px;
   cursor: pointer;
+  margin-left: -30%;
+  margin-right: 2%;
 }
 
-.marker-information .marker-info-group{
-  margin-bottom: 5%;
-  padding-left: 5%;
-  border-bottom: 1px solid #0f8dbb;
-  padding-bottom: 4%;
-  padding-top: 2%;
-}
+.marker-information .marker-info-group{ padding-left: 5%; border-bottom: 1px solid #0f8dbb; }
+.marker-information .marker-info-group:last-child{ border: none; margin-bottom: 5%; }
 
-.marker-information .marker-info-group:last-child{ border: none; }
-
-.marker-information .marker-info-group .info-title{
-  font-size: 16px;
-  color: #084056;
-}
-
-.marker-information .marker-info-group p{
-  font-size: 15px;
-  font-style: italic;
-  padding-right: 5%;
-}
-
-.marker-information .marker-info-group span{
-  float: right;
-  margin-right: 15%;
-}
-
+.marker-information .marker-info-group .info-title{ color: #084056; }
+.marker-information .marker-info-group p{ font-style: italic; }
 .marker-information .marker-info-group .icon-checkbox-check{ color:#75cff0; font-size: 25px;}
-.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; margin-right: 16%; font-size: 21px; }
+.marker-information .marker-info-group .icon-checkbox-unchecked{ color:#3296bb; font-size: 21px; }
 
 
 .marker-information .marker-info-group .subway-popin{
-  float: left;
   width: 30px;
   height: 30px;
   color:#ffffff;
   margin-top: 5px;
-  margin-right: 5%;
   padding-top: 5px;
   border-radius: 50%;
   text-align: center;
@@ -206,7 +165,6 @@
   position: absolute;
   bottom: 3%;
   right: 4%;
-  height: 75px;
   background-color: rgba(16, 124, 154, 0.5);
 }
 
@@ -234,7 +192,6 @@
 /************************
 *** Filtre map ouvert ***
 ************************/
-.map-filter.filter-open{ width: 59%; }
 .map-filter.filter-open button{ width: 10%; }
 
 
@@ -275,8 +232,6 @@
 .map-filter.filter-open .map-filter-categorie .title-categorie{
   width: 30%;
   height: 100%;
-  font-size: 23px;
-  padding-top: 22px;
   text-align: center;
   border-left: 1px solid #ffffff;
   background-color: rgba(16, 124, 154, 0.5);
@@ -288,9 +243,156 @@
 .map-filter.filter-open .map-filter-categorie .see-categorie .see-categorie-select select{
   width: 100%;
   height: 100%;
-  font-size: 18px;
   padding-left: 10%;
   background-color: transparent;
   border-left: 2px solid #ffffff;
   color: #000000;
+}
+
+
+/****************************
+*** Style spécifique size ***
+****************************/
+
+@media (min-width: 1140px) {
+  /** Formulaire du menu **/
+  .nav-menu .form-map .form-input{ margin-bottom: 1%;}
+  .nav-menu .form-map label{ font-size: 35px; }
+  .nav-menu .form-map .form-input label{ font-size: 15px; }
+  .nav-menu .switch-form-map button {font-size: 13px; margin-bottom: 10%; }
+  .nav-menu .form-map select{ font-size: 16px; height: 35px; }
+  .nav-menu .form-map .form-text{ width: 95%; font-size: 15px; }
+  .nav-menu .form-map .title-form-map{ font-size: 17px; }
+  .nav-menu .form-map .btn-send{ font-size: 20px; margin-top: 20px; }
+  .nav-menu .form-map .subtitle-form-map{ font-size: 16px; }
+
+  /** Popin des markers **/
+  .marker-information{ right: 2%; top: 25%; width: 25%; height: 50%; }
+  .marker-information .marker-title{ font-size: 18px; }
+  .marker-information .marker-title span {font-size: 15px; }
+  .marker-information .marker-info-group { padding-bottom: 4%; padding-top: 4%; }
+  .marker-information .marker-info-group .info-title{ font-size: 16px; }
+  .marker-information .marker-info-group p{ font-size: 15px; padding-right: 5%; }
+  .marker-information .marker-info-group span{ float: right; margin-right: 15%; }
+  .marker-information .marker-info-group .icon-checkbox-check{ font-size: 25px;}
+  .marker-information .marker-info-group .icon-checkbox-unchecked{ margin-right: 16%; font-size: 20px; }
+  .marker-information .marker-info-group .subway-popin{ float: left; margin-right: 5%; }
+
+  /** Filtre markers **/
+  .map-filter{ height: 75px; }
+  .map-filter.filter-open{ width: 59%; }
+  .map-filter.filter-open .map-filter-categorie .title-categorie{ font-size: 23px; padding-top: 22px; }
+  .map-filter.filter-open .map-filter-categorie .see-categorie .see-categorie-select select{ font-size: 18px; }
+}
+
+@media (min-width: 992px) and (max-width: 1139px) {
+  /** Formulaire du menu **/
+  .nav-menu .form-map .form-input{ margin-bottom: 1%;}
+  .nav-menu .form-map label{ font-size: 35px; }
+  .nav-menu .form-map .form-input label{ font-size: 15px; }
+  .nav-menu .switch-form-map button {font-size: 13px; margin-bottom: 10%; }
+  .nav-menu .form-map select{ font-size: 16px; height: 35px; }
+  .nav-menu .form-map .form-text{ width: 95%; font-size: 15px; }
+  .nav-menu .form-map .title-form-map{ font-size: 17px; }
+  .nav-menu .form-map .btn-send{ font-size: 20px; margin-top: 20px; }
+  .nav-menu .form-map .subtitle-form-map{ font-size: 16px; }
+
+  /** Popin des markers **/
+  .marker-information{ right: 2%; top: 25%; width: 30%; height: 50%; }
+  .marker-information .marker-title{ font-size: 18px; }
+  .marker-information .marker-title span {font-size: 15px; }
+  .marker-information .marker-info-group { padding-bottom: 4%; padding-top: 4%; }
+  .marker-information .marker-info-group .info-title{ font-size: 16px; }
+  .marker-information .marker-info-group p{ font-size: 15px; padding-right: 5%; }
+  .marker-information .marker-info-group span{ float: right; margin-right: 15%; }
+  .marker-information .marker-info-group .icon-checkbox-check{ font-size: 25px;}
+  .marker-information .marker-info-group .icon-checkbox-unchecked{ margin-right: 16%; font-size: 20px; }
+  .marker-information .marker-info-group .subway-popin{ float: left; margin-right: 5%; }
+
+  /** Filtre markers **/
+  .map-filter{ height: 70px; }
+  .map-filter.filter-open{ width: 70%; }
+  .map-filter.filter-open .map-filter-categorie .title-categorie{ font-size: 23px; padding-top: 22px; }
+  .map-filter.filter-open .map-filter-categorie .see-categorie .see-categorie-select select{ font-size: 16px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  /** Popin des markers **/
+  .marker-information{ bottom: 0; width: 100%; height: 40%; text-align: center; }
+  .marker-information .marker-title{ font-size: 18px; padding-top: 1%; padding-bottom: 1%; }
+  .marker-information .marker-title span {font-size: 25px; }
+  .marker-information .marker-info-group{ padding-bottom: 2%; padding-top: 2%; }
+  .marker-information .marker-info-group .info-title{ font-size: 20px; }
+  .marker-information .marker-info-group p{ font-size: 17px; padding-right:0; }
+  .marker-information .marker-info-group .subway-popin{ display: block; margin: auto; margin-bottom: 2%; }
+
+  /** Tracer itinéraire **/
+  .leaflet-routing-container{
+    overflow-y: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+  }
+
+  .leaflet-routing-alt { max-height: none; }
+
+  /** Filtre markers **/
+  .map-filter{ display: none; }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+  /** Popin des markers **/
+  .marker-information{ bottom: 0; width: 100%; height: 40%; text-align: center; }
+  .marker-information .marker-title{ font-size: 18px; padding-top: 1%; padding-bottom: 1%; }
+  .marker-information .marker-title span {font-size: 25px; }
+  .marker-information .marker-info-group{ padding-bottom: 2%; padding-top: 2%; }
+  .marker-information .marker-info-group .info-title{ font-size: 20px; }
+  .marker-information .marker-info-group p{ font-size: 17px; padding-right:0; }
+  .marker-information .marker-info-group .subway-popin{ display: block; margin: auto; margin-bottom: 2%; }
+
+  /** Tracer itinéraire **/
+  .leaflet-routing-container{
+    overflow-y: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+  }
+
+  .leaflet-routing-alt { max-height: none; }
+
+  /** Filtre markers **/
+  .map-filter{ display: none; }
+}
+
+@media (max-width: 575px) {
+
+  /** Popin des markers **/
+  .marker-information{ bottom: 0; width: 100%; height: 40%; text-align: center; }
+  .marker-information .marker-title{ font-size: 18px; padding-top: 1%; padding-bottom: 1%; }
+  .marker-information .marker-title span {font-size: 25px; }
+  .marker-information .marker-info-group{ padding-bottom: 2%; padding-top: 2%; }
+  .marker-information .marker-info-group .info-title{ font-size: 20px; }
+  .marker-information .marker-info-group p{ font-size: 17px; padding-right:0; }
+  .marker-information .marker-info-group .subway-popin{ display: block; margin: auto; margin-bottom: 2%; }
+
+  /** Tracer itinéraire **/
+  .leaflet-routing-container{
+    overflow-y: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+  }
+
+  .leaflet-routing-alt { max-height: none; }
+
+  /** Filtre markers **/
+  .map-filter{ display: none; }
 }

@@ -4,7 +4,7 @@ app.controller('headerController', function($scope, $rootScope, $http, $timeout)
 	*** Variables globales pour le Header ***
 	****************************************/
 	$scope.activeFilter = false;
-
+	$scope.responsiveMenuOpen = false;
 
 	/*****************************************************
 	*** Ici il faut mettre le bousin pour se connecter ***
@@ -81,4 +81,11 @@ app.controller('headerController', function($scope, $rootScope, $http, $timeout)
 				});
 		}
 	};
+
+	/**********************************************
+	*** Fonction pour ouvrir le menu responsive ***
+	**********************************************/
+	$scope.openMenuResponsive = function(){
+		$scope.responsiveMenuOpen = $scope.responsiveMenuOpen == false ? true : false ;
+	}
 });

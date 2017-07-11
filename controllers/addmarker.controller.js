@@ -1,7 +1,10 @@
-app.controller('addmarkerController', function($scope, $http, $rootScope, $geolocation){
+app.controller('addmarkerController', function($scope, $http, $rootScope, $geolocation, $timeout, $window){
   // Permet d'afficher ou pas le bouton d'inscription et corriger couleur de la connexion
   $scope.boutonInscription = true;
   $scope.colorSignIn = true;
+
+  // Permet d'afficher le menu responsive
+  $scope.menuResponsive = true;
 
   /**********************************************
   *** Varibales globales pour ajout de marker ***
@@ -105,11 +108,38 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 
   // Permet d'accéder aux étapes de l'ajout de lieu
   $scope.nextStep = function(){
-    $scope.step ++;
-    $scope.valuePreviousStep = true; // Possibilité de retourner en arriere
-    if($scope.step == 3){
-        $scope.valueNextStep = false; // Il n'y a plus d'étape après, on met donc à false
-        $scope.sendForm = true; // On peut envoyer le formulaire
+	  if ($scope.formPlace && $scope.step == 1 && ($scope.markerPlace.place == 'null' || $scope.markerPlace.entitled == '' || $scope.markerPlace.description == '' || $scope.markerPlace.place == undefined || $scope.markerPlace.entitled == undefined || $scope.markerPlace.description == undefined)) {
+
+		if ($scope.markerPlace.place == 'null') {
+			$scope.empty.place = true;			
+
+			$timeout( function () {
+				$scope.empty.place = false;
+			}, 2000);
+		}
+		
+		if ($scope.markerPlace.entitled == '' || $scope.markerPlace.entitled == undefined) {
+			$scope.empty.entitled = true;			
+
+			$timeout( function () {
+				$scope.empty.entitled = false;
+			}, 2000);
+		}
+		
+		if ($scope.markerPlace.description == '' || $scope.markerPlace.description == undefined) {
+			$scope.empty.description = true;			
+
+			$timeout( function () {
+				$scope.empty.description = false;
+			}, 2000);
+		}
+	  } else {
+		$scope.step ++;
+		$scope.valuePreviousStep = true; // Possibilité de retourner en arriere
+		if($scope.step == 3){
+			$scope.valueNextStep = false; // Il n'y a plus d'étape après, on met donc à false
+			$scope.sendForm = true; // On peut envoyer le formulaire
+		}
     }
   }
 
@@ -305,91 +335,164 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
   *** Envoie des formulaire pour ajouter des markers ***
   *****************************************************/
   // Ajout d'un marker de type accès
-  $scope.addAccess = function(){	  
-    var data = angular.copy($scope.markerAccess);
+  $scope.addAccess = function(){
+	  if ($scope.formAccess && ($scope.markerAccess.access == 'null' || $scope.markerAccess.entitled == '' || $scope.markerAccess.description == '' || $scope.markerAccess.access == undefined || $scope.markerAccess.entitled == undefined || $scope.markerAccess.description == undefined)) {
+		  
+		  if ($scope.markerAccess.access == 'null' || $scope.markerAccess.access == undefined) {
+			$scope.empty.access = true;			
 
-    data.token = $rootScope.readCookie('handistress_token_connection');
+			$timeout( function () {
+				$scope.empty.access = false;
+			}, 2000);
+		}
+		
+		if ($scope.markerAccess.entitled == '' || $scope.markerAccess.entitled == undefined) {
+			$scope.empty.entitled = true;			
 
-    $geolocation.getCurrentPosition().then(function(location) {
-      data.lat = location.coords.latitude;
-      data.lng = location.coords.longitude;
+			$timeout( function () {
+				$scope.empty.entitled = false;
+			}, 2000);
+		}
+		
+		if ($scope.markerAccess.description == '' || $scope.markerAccess.description == undefined) {
+			$scope.empty.description = true;			
 
-      $http({
-        method: 'POST',
-        url: 'https://www.api.benpedia.com/handistress/markers/add.php',
-        headers: {
-          'Content-Type': undefined
-        },
-        data: data
-      }).then(function successCallback(response) {
-        console.log(response);
-      }, function errorCallback(response) {
-        console.log(response);
-      });
-    });
+			$timeout( function () {
+				$scope.empty.description = false;
+			}, 2000);
+		}
+		
+	  } else {
+		var data = angular.copy($scope.markerAccess);
+
+		data.token = $rootScope.readCookie('handistress_token_connection');
+
+		$geolocation.getCurrentPosition().then(function(location) {
+		  data.lat = location.coords.latitude;
+		  data.lng = location.coords.longitude;
+
+		  // $http({
+			// method: 'POST',
+			// url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+			// headers: {
+			  // 'Content-Type': undefined
+			// },
+			// data: data
+		  // }).then(function successCallback(response) {
+			// console.log(response);
+			// $window.location.href = '/map';
+		  // }, function errorCallback(response) {
+			// console.log(response);
+		  // });
+		  
+		  if ($scope.addOrEdit == 'add') {
+			  $http({
+				method: 'POST',
+				url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+				headers: {
+				  'Content-Type': undefined
+				},
+				data: data
+			  }).then(function successCallback(response) {
+				console.log(response);
+				$window.location.href = '/map';
+			  }, function errorCallback(response) {
+				console.log(response);
+			  });
+		  } else if ($scope.addOrEdit == 'edit') {
+			  data.id = angular.copy($scope.idToEdit);
+			  $http({
+				method: 'POST',
+				url: 'https://www.api.benpedia.com/handistress/markers/edit.php',
+				headers: {
+				  'Content-Type': undefined
+				},
+				data: data
+			  }).then(function successCallback(response) {
+				console.log(response);
+				$window.location.href = '/map';
+			  }, function errorCallback(response) {
+				console.log(response);
+			  });
+		  }
+		});
+	  }
   }
 
   // Ajout d'un marker de type lieu
   $scope.addPlace = function(){
-	  for (var i=0; i<$scope.subwayLines.length; i++) {
-		if (i == 0)
-			$scope.markerPlace.complements.subwayLine = $scope.subwayLines[i].value + '';
-		else
-			$scope.markerPlace.complements.subwayLine = $scope.markerPlace.complements.subwayLine + ' ** ' + $scope.subwayLines[i].value;
-	  }
+	  if ($scope.formPlace && ($scope.markerPlace.complements.accessEnterExit == '' || $scope.markerPlace.complements.accessEnterExit == undefined)) {
 
-	$scope.markerPlace.access = [];
-	
-	for (var i=0; i<$scope.listAccess.length; i++) {
-		if ($scope.listAccess[i].checked)
-			$scope.markerPlace.access.push($scope.listAccess[i].id);
-	}	
-	  
-    var data = angular.copy($scope.markerPlace);
-	
-    data.token = $rootScope.readCookie('handistress_token_connection');
+		if ($scope.markerPlace.accessEnterExit == '' || $scope.markerPlace.accessEnterExit == undefined) {
+			$scope.empty.accessEnterExit = true;			
 
-    $geolocation.getCurrentPosition().then(function(location) {
-      data.lat = location.coords.latitude;
-      data.lng = location.coords.longitude;
-	  
-	  for (var i=0; i<$scope.listExits.length; i++) {
-		if (i == 0)
-			$scope.markerPlace.complements.exitNumber = $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
-		else
-			$scope.markerPlace.complements.exitNumber = $scope.markerPlace.complements.exitNumber + ';' + $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
+			$timeout( function () {
+				$scope.empty.accessEnterExit = false;
+			}, 2000);
+		}
+	  } else {
+		  for (var i=0; i<$scope.subwayLines.length; i++) {
+			if (i == 0)
+				$scope.markerPlace.complements.subwayLine = $scope.subwayLines[i].value + '';
+			else
+				$scope.markerPlace.complements.subwayLine = $scope.markerPlace.complements.subwayLine + ' ** ' + $scope.subwayLines[i].value;
+		  }
+
+		$scope.markerPlace.access = [];
+		
+		for (var i=0; i<$scope.listAccess.length; i++) {
+			if ($scope.listAccess[i].checked)
+				$scope.markerPlace.access.push($scope.listAccess[i].id);
+		}	
+		  
+		var data = angular.copy($scope.markerPlace);
+		
+		data.token = $rootScope.readCookie('handistress_token_connection');
+
+		$geolocation.getCurrentPosition().then(function(location) {
+		  data.lat = location.coords.latitude;
+		  data.lng = location.coords.longitude;
+		  
+		  for (var i=0; i<$scope.listExits.length; i++) {
+			if (i == 0)
+				$scope.markerPlace.complements.exitNumber = $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
+			else
+				$scope.markerPlace.complements.exitNumber = $scope.markerPlace.complements.exitNumber + ';' + $scope.listExits[i].number + ' ** ' + $scope.listExits[i].address + ' ** ' + data.lat + ' ** ' + data.lng + ' ** ' + $scope.listExits[i].handicap;
+		  }
+		  
+		  data.complements.exitNumber = angular.copy($scope.markerPlace.complements.exitNumber);
+		  
+		  if ($scope.addOrEdit == 'add') {
+			  $http({
+				method: 'POST',
+				url: 'https://www.api.benpedia.com/handistress/markers/add.php',
+				headers: {
+				  'Content-Type': undefined
+				},
+				data: data
+			  }).then(function successCallback(response) {
+				console.log(response);
+				$window.location.href = '/map';
+			  }, function errorCallback(response) {
+				console.log(response);
+			  });
+		  } else if ($scope.addOrEdit == 'edit') {
+			  data.id = angular.copy($scope.idToEdit);
+			  $http({
+				method: 'POST',
+				url: 'https://www.api.benpedia.com/handistress/markers/edit.php',
+				headers: {
+				  'Content-Type': undefined
+				},
+				data: data
+			  }).then(function successCallback(response) {
+				console.log(response);
+				$window.location.href = '/map';
+			  }, function errorCallback(response) {
+				console.log(response);
+			  });
+		  }
+		});
 	  }
-	  
-	  data.complements.exitNumber = angular.copy($scope.markerPlace.complements.exitNumber);
-	  
-	  if ($scope.addOrEdit == 'add') {
-		  $http({
-			method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/markers/add.php',
-			headers: {
-			  'Content-Type': undefined
-			},
-			data: data
-		  }).then(function successCallback(response) {
-			console.log(response);
-		  }, function errorCallback(response) {
-			console.log(response);
-		  });
-	  } else if ($scope.addOrEdit == 'edit') {
-		  data.id = angular.copy($scope.idToEdit);
-		  $http({
-			method: 'POST',
-			url: 'https://www.api.benpedia.com/handistress/markers/edit.php',
-			headers: {
-			  'Content-Type': undefined
-			},
-			data: data
-		  }).then(function successCallback(response) {
-			console.log(response);
-		  }, function errorCallback(response) {
-			console.log(response);
-		  });
-	  }
-    });
   }
 });

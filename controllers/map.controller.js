@@ -1,6 +1,9 @@
-app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker, filterFilter, leafletData, leafletMarkerEvents ){
+app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker, filterFilter, leafletData, leafletMarkerEvents, $timeout){
 	// Permet d'afficher ou pas le bouton d'inscription
 	$scope.boutonInscription = true;
+
+	// Permet d'afficher le menu responsive
+	$scope.menuResponsive = true;
 
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***
@@ -52,7 +55,7 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 		},
 		events: {
 			map: {
-				enable: ['click', 'dragend'], // Les evenements que nous souhaitons ecouté
+				enable: ['click', 'dragend', 'drag'], // Les evenements que nous souhaitons ecouté
 				logic: 'emit'
 			}
 		}
@@ -185,8 +188,12 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 	*** Action directement sur la map ***
 	************************************/
 	/** Drag sur la map **/
+	$scope.$on('leafletDirectiveMap.drag', function(){
+		$scope.openPopin = false;
+	});
+	
 	$scope.$on('leafletDirectiveMap.dragend', function(){
-
+		$scope.openPopin = false;
 		/** On verifie que si l'itinéraire est tracè pour l'afficher **/
 		if( $scope.currentTrace == false){
 			/** On vide les valeurs des markers **/
@@ -194,91 +201,93 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 			delete $scope.markers.value;
 			$scope.filter = 0;
 			allMarkers = [];
+			
+			$timeout(function () {
+				$scope.getAllMarkers = Marker.getAllMarkers($scope.center.lat, $scope.center.lng, 0.01)
+					.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
 
-			$scope.getAllMarkers = Marker.getAllMarkers($scope.center.lat, $scope.center.lng, 0.01)
-				.then(function(markers){ // Ici tout ce que nous devons faire en cas de succès
+						/** variables pour définitions des couleurs et icones des markers **/
+						iconColor = 'white'; // couleur de l'icon par default
 
-					/** variables pour définitions des couleurs et icones des markers **/
-					iconColor = 'white'; // couleur de l'icon par default
-
-					/** Parcours des retours **/
-					for(key in markers){
-						switch(markers[key].typePlaces) {
-							case "Ecole":
-								iconMarker = ' icon-school';
-								colorMarker = 'lightgray';
-								break;
-							case "Metro":
-								iconMarker = ' icon-subway';
-								colorMarker = 'darkgreen';
-								break;
-							case "Gare":
-								iconMarker = ' icon-subway';
-								colorMarker = 'darkpurple';
-								break;
-							case "Aéroport":
-								iconMarker = ' icon-airplane';
-								colorMarker = 'lightblue';
-								break;
-							case "Restaurant":
-								iconMarker = ' icon-restaurant';
-								colorMarker = 'darkblue';
-								break;
-							case "Boutique":
-								iconMarker = ' icon-cart';
-								colorMarker = 'darkred';
-								break;
-							case "Loisir":
-								iconMarker = ' icon-dice';
-								colorMarker = 'orange';
-								break;
-							case "Parking":
-								iconMarker = ' icon-local_parking';
-								colorMarker = 'blue';
-								break;
-							case "Administration":
-								iconMarker = ' icon-newspaper';
-								colorMarker = 'gray';
-								break;
-							case "Hébergement":
-								iconMarker = ' icon-bed';
-								colorMarker = 'cadetblue';
-								break;
-							default :
-								iconMarker = ' icon-access';
-								colorMarker = 'black';
-								iconColor = 'lightgray';
-								break;
-						}
-
-						/** Ternaire pour definir messsage de la popin **/
-						markerMessage = markers[key].typePlaces == "NULL" ? "Accès - "+markers[key].nameMarker : markers[key].typePlaces+" - "+markers[key].nameMarker ;
-
-						/** Information générale du markers pour afficher dans la popin **/
-						markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
-
-						/** Mise en place du markers courant **/
-						value = {
-							lat: parseFloat(markers[key].latitude),
-							lng: parseFloat(markers[key].longitude) ,
-							message: markerMessage,
-							enable : markerEnable,
-							icon: {
-								type: 'awesomeMarker',
-								icon : iconMarker,
-								iconColor : iconColor,
-								markerColor: colorMarker
+						/** Parcours des retours **/
+						for(key in markers){
+							switch(markers[key].typePlaces) {
+								case "Ecole":
+									iconMarker = ' icon-school';
+									colorMarker = 'lightgray';
+									break;
+								case "Metro":
+									iconMarker = ' icon-subway';
+									colorMarker = 'darkgreen';
+									break;
+								case "Gare":
+									iconMarker = ' icon-subway';
+									colorMarker = 'darkpurple';
+									break;
+								case "Aéroport":
+									iconMarker = ' icon-airplane';
+									colorMarker = 'lightblue';
+									break;
+								case "Restaurant":
+									iconMarker = ' icon-restaurant';
+									colorMarker = 'darkblue';
+									break;
+								case "Boutique":
+									iconMarker = ' icon-cart';
+									colorMarker = 'darkred';
+									break;
+								case "Loisir":
+									iconMarker = ' icon-dice';
+									colorMarker = 'orange';
+									break;
+								case "Parking":
+									iconMarker = ' icon-local_parking';
+									colorMarker = 'blue';
+									break;
+								case "Administration":
+									iconMarker = ' icon-newspaper';
+									colorMarker = 'gray';
+									break;
+								case "Hébergement":
+									iconMarker = ' icon-bed';
+									colorMarker = 'cadetblue';
+									break;
+								default :
+									iconMarker = ' icon-access';
+									colorMarker = 'black';
+									iconColor = 'lightgray';
+									break;
 							}
-						}
-						/** On insert dans le tableau **/
-						allMarkers.push(value);
-					}
 
-					/** On definit les markers sur la carte **/
-					$scope.markers = allMarkers;
-				}, function(msg){ 
-					console.log('erreur get all markers '+msg);
-				});
+							/** Ternaire pour definir messsage de la popin **/
+							markerMessage = markers[key].typePlaces == "NULL" ? "Accès - "+markers[key].nameMarker : markers[key].typePlaces+" - "+markers[key].nameMarker ;
+
+							/** Information générale du markers pour afficher dans la popin **/
+							markerEnable = markers[key].typePlaces+"/"+markers[key].nameMarker+"/"+markers[key].descriptionMarker+"/"+markers[key].accessEnterExit+"/"+markers[key].toiletAdapt+"/"+markers[key].equipmentAdapt+"/"+ markers[key].handicapGantry+"/"+ markers[key].exitNumber+"/"+ markers[key].informationOffice+"/"+ markers[key].subwayLine;
+
+							/** Mise en place du markers courant **/
+							value = {
+								lat: parseFloat(markers[key].latitude),
+								lng: parseFloat(markers[key].longitude) ,
+								message: markerMessage,
+								enable : markerEnable,
+								icon: {
+									type: 'awesomeMarker',
+									icon : iconMarker,
+									iconColor : iconColor,
+									markerColor: colorMarker
+								}
+							}
+							/** On insert dans le tableau **/
+							allMarkers.push(value);
+						}
+
+						/** On definit les markers sur la carte **/
+						$scope.markers = allMarkers;
+					}, function(msg){ 
+						console.log('erreur get all markers '+msg);
+					});
+			}, 200);
 		}
 	});
 
