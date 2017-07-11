@@ -206,7 +206,6 @@ li{ list-style: none; }
 
 .nav-menu.not-open .nav-menu-button span{
   height: 5px;
-  width: 60px;
   margin: auto;
   display: block;
   margin-top: 20%;
