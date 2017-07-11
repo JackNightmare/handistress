@@ -1,6 +1,6 @@
 <div ng-include="'views/header/connect-header.html'" ng-controller="headerController"></div>
 
-<nav class="nav-menu " ng-class="{'not-open':closeMenu == true, 'open':openMenu==true}">
+<nav class="nav-menu " ng-class="{'not-open':openMenu == false, 'open':openMenu==true}">
 	<button class="nav-menu-button" ng-click="actionMenu()">
 		<span></span>
 		<span></span>
@@ -75,7 +75,7 @@
 						<input ng-model="traceMap.ramp" type="checkbox" id="tracemap-ramp"/>
 						<div class="slider round"></div>
 					</label>
-					<label class="label-slide" for="tracemap-ramp">Rampe Handicapé</label>
+					<label class="label-slide" for="tracemap-ramp">Rampe</label>
 				</div>
 
 				<div class="form-input">
