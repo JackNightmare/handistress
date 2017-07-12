@@ -407,4 +407,4 @@ li{ list-style: none; }
   /** responsive menu non ouvert **/
   .nav-menu.open { display: none; }
   .nav-menu.not-open { display: none; }
-} 
+}

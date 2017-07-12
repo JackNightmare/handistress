@@ -5,6 +5,7 @@ app.controller('headerController', function($scope, $rootScope, $http){
 	****************************************/
 	$scope.activeFilter = false;
 	$scope.responsiveMenuOpen = false;
+	$scope.closeResponsiveFormMenu = true;
 
 	/*****************************************************
 	*** Ici il faut mettre le bousin pour se connecter ***
@@ -57,5 +58,32 @@ app.controller('headerController', function($scope, $rootScope, $http){
 	**********************************************/
 	$scope.openMenuResponsive = function(){
 		$scope.responsiveMenuOpen = $scope.responsiveMenuOpen == false ? true : false ;
+
+		/** Si fermeture du menu manuellement, tout repasse au valeur d'origine **/
+		if($scope.responsiveMenuOpen == false){
+			$scope.traceResponsiveForm = false;
+			$scope.searchResponsiveForm = false;
+			$scope.closeResponsiveFormMenu = true;
+		}
 	}
+
+	$scope.responsiveTrace = function(){
+		// Ouverture du formulaire correspondant
+		$scope.traceResponsiveForm = true;
+		// Fermeture au cas ou du formulaire search
+		$scope.searchResponsiveForm = false;
+		// On cache la navigation
+		$scope.closeResponsiveFormMenu = false;
+	}
+
+	$scope.responsiveSearch = function(){
+		// Ouverture du formulaire correspondant
+		$scope.searchResponsiveForm = true;
+		// Fermeture au cas ou du formulaire trace
+		$scope.traceResponsiveForm = false;
+		// On cache la navigation
+		$scope.closeResponsiveFormMenu = false;
+	}
+
+
 });

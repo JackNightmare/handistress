@@ -4,6 +4,7 @@ app.controller('mapController', function($scope, $rootScope, $sce, $http, Marker
 
 	// Permet d'afficher le menu responsive
 	$scope.menuResponsive = true;
+	$scope.mapPage = true;
 	
 	/*****************************************************
 	*** Variable globale pour fonctionnement de la map ***

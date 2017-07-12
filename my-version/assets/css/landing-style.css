@@ -170,14 +170,34 @@ body{
 	background-color: #19334A;
 	width: 100%;
 	height: 100%;
-	clip: rect(0px, 110px, 110px, 110px);
+	clip: rect(0px, 95px, 42px, 95px);
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph.graph1 .graph-part-1{
 	/* Animation */
 	-webkit-animation-delay: 1.2s;
 	-webkit-animation-duration: 0.3s;
-	-webkit-animation-name: right-slice;
+	-webkit-animation-name: slice-20;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+}
+.landing-section1 .landing-section1-statistics .statistics-graph.graph2 .graph-part-1{
+	/* Animation */
+	-webkit-animation-delay: 1.2s;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-name: slice-first-80;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph.graph3 .graph-part-1{
+	/* Animation */
+	-webkit-animation-delay: 1.2s;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-name: slice-7;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-fill-mode: forwards;
 }
@@ -194,10 +214,13 @@ body{
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
+}
+
+.landing-section1 .landing-section1-statistics .statistics-graph.graph2 .graph-part-2{
 	/* Animation */
 	-webkit-animation-delay: 1.5s;
 	-webkit-animation-duration: 0.3s;
-	-webkit-animation-name: left-slice;
+	-webkit-animation-name: slice-second-80;
 	-webkit-animation-iteration-count: 1;
 	-webkit-animation-timing-function: ease-out;
 	-webkit-animation-fill-mode: forwards;
@@ -218,27 +241,51 @@ body{
 
 
 /* Animation rapide pour graphique */
-@-webkit-keyframes right-slice {
+@-webkit-keyframes slice-20 {
   from {
-    clip: rect(0px, 110px, 110px, 110px);
+    clip: rect(0px, 95px, 42px, 95px);
   }
   50% {
-    clip: rect(0px, 220px, 110px, 110px);
+    clip: rect(0px, 190px, 95px, 95px);
   }
   to {
-    clip: rect(0px, 220px, 220px, 110px);
+    clip: rect(0px, 190px, 164px, 95px);
   }
 }
 
-@-webkit-keyframes left-slice {
+@-webkit-keyframes slice-7 {
   from {
-    clip: rect(110px, 110px, 220px, 110px);
+    clip: rect(0px, 95px, 42px, 95px);
   }
   50% {
-    clip: rect(110px, 110px, 220px, 0px);
+    clip: rect(0px, 135px, 42px, 95px);
   }
   to {
-    clip: rect(50px, 110px, 220px, 0px);
+    clip: rect(0px, 168px, 42px, 95px);
+  }
+}
+
+@-webkit-keyframes slice-first-80 {
+  from {
+    clip: rect(0px, 95px, 42px, 95px);
+  }
+  50% {
+    clip: rect(0px, 195px, 90px, 95px);
+  }
+  to {
+    clip: rect(0px, 195px, 195px, 95px);
+  }
+}
+
+@-webkit-keyframes slice-second-80 {
+  from {
+    clip: rect(0px, 95px, 190px, 95px);
+  }
+  50% {
+    clip: rect(150px, 95px, 190px, 0px);
+  }
+  to {
+    clip: rect(45px, 95px, 190px, 0px);
   }
 }
 

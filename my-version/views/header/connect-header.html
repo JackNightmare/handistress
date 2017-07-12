@@ -56,9 +56,125 @@
     <span class="glyphicon" ng-class="{'glyphicon-align-justify': responsiveMenuOpen == false, 'glyphicon-menu-up' : responsiveMenuOpen == true}"></span>
   </button>
   
-  <ul class="nav-menu-link">
+  <ul ng-if="closeResponsiveFormMenu" class="nav-menu-link">
     <a href=" "><li><i class="icon-home"></i> Accueil</li></a>
     <a href="map"><li><i class="icon-map"></i> Carte</li></a>
     <a href="add-marker"><li><i class="icon-add-marker"></i> Ajout de Marker</li></a>
+    <a ng-if="mapPage" href="#" ng-click="responsiveTrace()"><li> Formulaire Itinéraire <i class="glyphicon glyphicon-menu-right"></i></li></a>
+    <a ng-if="mapPage" href="#" ng-click="responsiveSearch()"><li> Formulaire Recherche <i class="glyphicon glyphicon-menu-right"></i></li></a>
   </ul>
+
+  <form class="form-map" ng-if="traceResponsiveForm" ng-submit="traceMap()">
+    <div class="title-form-map"> Informations de votre trajet </div>
+    <div style="text-align:center;">
+      <label for="startPoint"><span class="icon-location"></span></label>
+      <div style="display:inline-block;">
+        <input id="startPoint" type="text" placeholder="point de départ" ng-model="traceMap.start" ng-required="true" uib-typeahead="markers as markers.nameMarker for markers in searchByName($viewValue) | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="3" typeahead-wait-ms="200" autocomplete="off">
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <label for="endPoint"><span class="icon-racing-flags"></span></label>
+      <div style="display:inline-block;">
+        <input id="endPoint" type="text" placeholder="point d'arrivé" ng-model="traceMap.end" ng-required="true" uib-typeahead="markers as markers.nameMarker for markers in searchByName($viewValue) | limitTo: 15" class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="3" typeahead-wait-ms="200" autocomplete="off">
+      </div>
+    </div>
+
+    <div ng-if="userData == null">
+      <div class="subtitle-form-map"> Informations accéssibilités </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.stairs" type="checkbox" id="tracemap-stairs"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-stairs">Escalier</label>
+      </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.escalators" type="checkbox" id="tracemap-escalators"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-escalators">Escalator</label>
+      </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.flatEscalators" type="checkbox" id="tracemap-flatEscalators"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-flatEscalators">Escalator plat</label>
+      </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.elevator" type="checkbox" id="tracemap-elevator"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-elevator">Ascenseur</label>
+      </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.ramp" type="checkbox" id="tracemap-ramp"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-ramp">Rampe</label>
+      </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.flatPavement" type="checkbox" id="tracemap-flatPavement"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-flatPavement">Trottoir plat</label>
+      </div>
+
+      <div class="form-input">
+        <label class="check-slide">
+          <input ng-model="traceMap.hightPavement" type="checkbox" id="tracemap-hightPavement"/>
+          <div class="slider round"></div>
+        </label>
+        <label class="label-slide" for="tracemap-hightPavement">Trottoir haut</label>
+      </div>
+    </div>
+    <input class="btn btn-send" type="submit" value="Tracer l'itinéraire">
+  </form>
+
+  <form class="form-map" ng-if="searchResponsiveForm" ng-submit="searchMap()">
+    <div class="title-form-map"> Recherche d'un lieu </div>
+    <div>
+      <label for="searchPoint"><span class="glyphicon glyphicon-search"></span></label>
+      <div style="display:inline-block;">
+        <input id="searchPoint" type="text" placeholder="Recherche" ng-model='searchMap.value' class="form-control form-text" typeahead-show-hint="true" typeahead-min-length="0" required>
+      </div>
+    </div>
+
+    <div class="subtitle-form-map"> Affiner la recherche <span>(optionnel)</span> </div>
+    <div class="form-select">
+      <select ng-model="searchMapSelect">
+        <option value="2,3,4,5,6,7,8,9,10,11" selected>Tous types de lieux</option>
+        <option value="2">Ecoles</option>
+        <option value="3">Metro</option>
+        <option value="4">Gare</option>
+        <option value="5">Aéroport</option>
+        <option value="6">Restaurant</option>
+        <option value="7">Boutique</option>
+        <option value="8">Loisir</option>
+        <option value="9">Parking</option>
+        <option value="10">Administration</option>
+        <option value="11">Hébergement</option>
+      </select>
+    </div>
+
+    <div ng-repeat="item in listAccess" class="form-input">
+      <label class="check-slide">
+        <input ng-model="item.checked" type="checkbox" id="searchmarker-{{item.id}}" />
+        <div class="slider round"></div>
+      </label>
+      <label class="label-slide" for="searchmarker-{{item.id}}">{{item.entitled}}</label>
+    </div>
+    <input class="btn btn-send" type="submit" type="submit" value="Lancer la recherche">
+  </form>
 </nav>

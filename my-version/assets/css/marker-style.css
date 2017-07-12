@@ -2,19 +2,13 @@
 *** Liste des markers ***
 ************************/
 .info-odl-markers{
-  position: fixed;
   z-index: 50;
-  width: 20%;
-  right: 2%;
-  top: 12%;
-  bottom: 8%;
   border-radius: 5px;
   overflow: hidden;
   background-color: rgba(65, 184, 204, 0.75);
 }
 
 .info-odl-markers .info-marker-title{
-  font-size: 19px;
   color: #ffffff;
   padding-left: 15%;
   padding-right: 15%;
@@ -53,10 +47,10 @@
 *** Zone infos marker ***
 ************************/
 .info-odl-markers .list-marker .info-marker{
-  height: 12%;
   cursor: pointer;
   padding-left: 5%;
   padding-top: 2%;
+  border-bottom: 2%;
   border-bottom: 2px solid #0a486d;
   border-left: 10px solid #0a486d;
   background-color: rgba(255, 255, 255, 0.3);
@@ -64,5 +58,49 @@
 
 .info-odl-markers .list-marker .info-marker:hover{
   background-color: rgba(255, 255, 255, 0.8);
-  height: 15%;
+}
+
+
+@media (min-width: 1140px){
+  .info-odl-markers{
+    position: fixed;
+    width: 20%;
+    right: 2%;
+    top: 12%;
+    bottom: 8%;
+  }
+
+  .info-odl-markers .info-marker-title{ font-size: 17px; }
+  .info-odl-markers .list-marker .info-marker:hover{ height: 15%; }
+
+}
+@media (min-width: 992px) and (max-width: 1139px) {
+  .info-odl-markers{
+    position: fixed;
+    width: 20%;
+    right: 2%;
+    top: 12%;
+    bottom: 8%;
+  }
+
+  .info-odl-markers .info-marker-title{ font-size: 17px; }
+  .info-odl-markers .list-marker .info-marker:hover{ height: 15%; }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .info-odl-markers{ height: 300px; }
+
+  .info-odl-markers .info-marker-title{ font-size: 17px; }
+  .info-odl-markers .list-marker .info-marker:hover{ height: 30%; }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .info-odl-markers{ height: 300px; }
+
+  .info-odl-markers .info-marker-title{ font-size: 17px; }
+  .info-odl-markers .list-marker .info-marker:hover{ height: 30%; }
+}
+@media (max-width: 575px){
+  .info-odl-markers{ height: 300px; }
+
+  .info-odl-markers .info-marker-title{ font-size: 17px; }
+  .info-odl-markers .list-marker .info-marker:hover{ height: 30%; }
 }

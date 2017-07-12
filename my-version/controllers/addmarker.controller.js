@@ -5,7 +5,7 @@ app.controller('addmarkerController', function($scope, $http, $rootScope, $geolo
 
   // Permet d'afficher le menu responsive
   $scope.menuResponsive = true;
-
+  $scope.mapPage = false;
 
   /**********************************************
   *** Varibales globales pour ajout de marker ***

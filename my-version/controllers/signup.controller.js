@@ -5,6 +5,7 @@ app.controller('signupController', function($scope, $rootScope, $http){
   
   // Permet d'afficher le menu responsive
   $scope.menuResponsive = true;
+  $scope.mapPage = false;
   
   /******************************************
   *** Varibales globales pour inscription ***

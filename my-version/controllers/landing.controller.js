@@ -5,6 +5,7 @@ app.controller('landingController', function($scope, $location, $anchorScroll){
 
 	// Permet d'afficher le menu responsive
 	$scope.menuResponsive = false;
+	$scope.mapPage = false;
 
 	$scope.scrollSection = function(idSection){
 		$location.hash(idSection);
